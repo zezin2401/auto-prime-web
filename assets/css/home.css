@@ -12,10 +12,11 @@ body {
 
 
 :root {
-    --preto-opaco: rgba(0, 0, 0, 0.241);
+    --preto-opaco: rgba(0, 0, 0, 0.304);
     --preto: #000000;
     --branco: #FFFFFF;
     --azul-principal: #008CFF;
+    --azul-escuro: #00447C;
 }
 
 .botao-pesquisar {
@@ -35,6 +36,22 @@ body {
     color: var(--branco);
     font-size: 2.5rem;
     cursor: pointer;
+}
+
+.fa-user {
+    font-size: 31px;
+}
+
+.fa-cart-shopping {
+    font-size: 31px;
+}
+
+.fa-bag-shopping {
+    font-size: 31px;
+}
+
+.fa-dollar-sign {
+    font-size: 31px;
 }
 
 .pesquisa {
@@ -81,15 +98,165 @@ header img {
 
 h1 {
     margin-top: 55px;
-    margin-left: 80px;
+    margin-bottom: 10px;
+    margin-left: 75px;
 }
 
 .cards-container {
-    margin-right: 70px;
+    margin-right: 75px;
     margin-left: 75px;
-    display: flex;
     gap: 30px;
-    padding: 10rem;
+    padding: 30px;
     border: 2px solid var(--preto-opaco);
     border-radius: 10px;
+}
+
+.usuario {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.criado-em {
+    color: var(--preto-opaco);
+    font-weight: normal;
+    font-size: 18px;
+}
+
+.numero-info {
+    font-weight: bold;
+}
+
+.icone {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--preto-opaco);
+    border-radius: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.informacoes {
+    margin-top: 60px;
+    display: flex;
+    justify-content: space-around;
+    gap: 160px;
+}
+
+.info-segmento-usuarios {
+    margin-left: 40px;
+}
+
+.info-segmento-vendas {
+    margin-left: 50px;
+}
+
+.info-segmento-produtos {
+    margin-left: 39px;
+}
+
+.info-segmento-cashback {
+    margin-left: 32px;
+}
+
+.info-titulo {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.info-titulo p {
+    font-size: 25px;
+}
+
+.gerenciar {
+    color: var(--azul-principal);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.botoes {
+    display: flex;
+    margin-top: 23px;
+    margin-bottom: 23px;
+    justify-content: space-evenly;
+}
+
+.botao-gerenciar {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    background-color: var(--branco);
+    display: flex;
+    gap: 10px;
+    border: 2px solid var(--preto-opaco);
+    padding: 15px 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: var(--preto);
+    align-items: center;
+}
+
+.botao-gerenciar i {
+    color: var(--azul-principal);
+}
+
+.info-vendas {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 40px;
+}
+
+.vendedores {
+    margin-left: 75px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    width: 475px;
+    border: 2px solid var(--preto-opaco);
+    border-radius: 10px;
+}
+
+.vendas {
+    font-weight: bold;
+    color: var(--preto);
+}
+
+.vendedor {
+    padding: 10px;
+    border: 2px solid var(--preto-opaco);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.div-produtos {
+    display: flex;
+    gap: 14px;
+}
+
+.produtos {
+    margin-right: 75px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    padding: 20px;
+    width: 870px;
+    border: 2px solid var(--preto-opaco);
+    border-radius: 10px;
+}
+
+.produto {
+    border: 2px solid var(--preto-opaco);
+    border-radius: 10px;
+    padding: 8.5px;
+    height: 363px;
+}
+
+.preco {
+    color: var(--azul-escuro);
+    font-weight: bold
 }
