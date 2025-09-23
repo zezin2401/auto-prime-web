@@ -205,6 +205,7 @@ h1 {
     border-radius: 5px;
     color: var(--preto);
     align-items: center;
+    text-decoration: none;
 }
 
 .botao-gerenciar i {
