@@ -8,7 +8,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/editar.css">
-    <script src="assets/js/form.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 </head>
@@ -93,7 +92,7 @@
                     </div>
                     <div class="info-segmento-cashback">
                         <p class="numero-info">R$600,00</p>
-                        <a class="gerenciar" href="google.com">Gerenciar</a>
+                        <a class="gerenciar" href="cashback.html">Gerenciar</a>
                     </div>
                 </div>
 
@@ -117,33 +116,92 @@
 
             <div class="usuario-pt1">
 
-                <div class="foto">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="infos">
-                    <p>usuario@gmail.com</p>
-                    <h2 class="criado-em">Criado em: 22/09/2025</h2>
-                    <div class="status">Ativo</div>
+                <div class="separacao-usuario">
+
+                    <div class="usuario-pt2">
+
+                        <div class="foto">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <p>usuario@gmail.com</p>
+                        <h2 class="criado-em">Criado em: 22/09/2025</h2>
+
+                    </div>
+                    
+                    <div class="infos">
+                        <div class="status">Ativo</div>
+                    </div>
+
                 </div>
 
             </div>
 
-            <div class="container-fomulario">
+            <div class="container-formulario">
 
-                <form class="container-login" id="formLoginUsuario">
-                <div class="div-input">
-                    <label for="input-email">Email</label>
-                    <input name="email" id="input-email" type="text" required />
-                </div>
-                <div class="div-button-forgot-password">
-                    <div class="div-input">
-                        <label for="input-senha">Senha</label>
-                        <input name="senha_hash" type="password" id="input-senha" required />
+            <form class="container-login" id="formLoginUsuario">
+
+                <div class="div-container">
+
+                    <div class="div-container-1">
+
+                        <div class="div-nome">
+
+                            <label for="nome">Nome:</label>
+                            <input class="input-form" name="nome" type="text" required />
+
+                        </div>
+                        <div class="div-senha">
+
+                            <label for="senha">Senha:</label>
+                            <input class="input-form" name="senha" type="text" required />
+
+                        </div>
+
+                        <div class="div-cargo">
+
+                            <label for="Cargo">Cargo:</label>
+                            <select class="input-form" name="cargo">
+                                <option value="cliente">Cliente</option>
+                                <option value="vendedor">Vendedor</option>
+                                <option value="adm">ADM</option>
+                            </select>
+
+                        </div>
+
                     </div>
+
+                    <div class="div-container-2">
+
+                        <div class="div-email">
+
+                            <label for="email">Email:</label>
+                            <input class="input-form" name="email" type="email" required>
+
+                        </div>
+
+                        <div class="div-telefone">
+
+                            <label for="telefone">Telefone:</label>
+                            <input class="input-form" type="tel" name="telefone">
+
+                        </div>
+
+                        <div class="div-status">
+
+                            <label for="status">Status</label>
+                            <select class="input-form" name="status">
+                                <option value="Ativo">Ativo</option>
+                                <option value="Inativo">Inativo</option>
+                            </select>
+
+                        </div>
+
+                    </div>
+
                 </div>
+
                 <div class="divButtonSubmit">
-                    <button class="btn-acao" type="submit">Entrar</button>
-                    <p id="mensagemError"></p>
+                    <button class="btn-enviar" type="submit">Entrar</button>
                 </div>
             </form>
 

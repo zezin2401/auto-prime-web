@@ -16,10 +16,7 @@ body {
     --preto: #000000;
     --branco: #FFFFFF;
     --azul-principal: #008CFF;
-    --azul-claro: #E5F3FF;
     --azul-escuro: #00447C;
-    --verde: #1AAC5F;
-    --verde-claro: #D1FFE7;
 }
 
 .botao-pesquisar {
@@ -208,58 +205,4 @@ h1 {
 
 .botao-gerenciar i {
     color: var(--azul-principal);
-}
-
-.info-vendas {
-    display: flex;
-    justify-content: space-between;
-    margin-bottom: 40px;
-}
-
-.vendedores {
-    margin-left: 75px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 20px;
-    width: 475px;
-    border: 2px solid var(--preto-opaco);
-    border-radius: 10px;
-}
-
-.vendedor {
-    padding: 10px;
-    border: 2px solid var(--preto-opaco);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.div-produtos {
-    display: flex;
-    gap: 14px;
-}
-
-.produtos {
-    margin-right: 75px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-    padding: 20px;
-    width: 870px;
-    border: 2px solid var(--preto-opaco);
-    border-radius: 10px;
-}
-
-.produto {
-    border: 2px solid var(--preto-opaco);
-    border-radius: 10px;
-    padding: 8.5px;
-    height: 363px;
-}
-
-.preco {
-    color: var(--azul-escuro);
-    font-weight: bold
 }

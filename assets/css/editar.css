@@ -2,6 +2,7 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
+    transition: 0.3s;
 }
 
 body {
@@ -16,6 +17,7 @@ body {
     --preto: #000000;
     --branco: #FFFFFF;
     --azul-principal: #008CFF;
+    --azul-claro: #E5F3FF;
     --azul-escuro: #00447C;
     --verde: #1AAC5F;
     --verde-claro: #D1FFE7;
@@ -212,8 +214,11 @@ h1 {
 .container-edicao {
     margin-right: 75px;
     margin-left: 75px;
-    gap: 30px;
+    margin-bottom: 40px;
+    gap: 145px;
     display: flex;
+    justify-content: center;
+    align-items: center;
     padding: 30px;
     border: 2px solid var(--preto-opaco);
     border-radius: 10px;
@@ -221,8 +226,8 @@ h1 {
 
 .foto {
     display: flex;
-    width: 300px;
-    height: 300px;
+    width: 200px;
+    height: 200px;
     border: 2px solid var(--preto-opaco);
     border-radius: 200px;
     justify-content: center;
@@ -230,7 +235,33 @@ h1 {
 }
 
 .foto i {
-    font-size: 125px;
+    font-size: 100px;
+}
+
+.infos {
+    text-align: center;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.usuario-pt1 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+}
+
+.usuario-pt2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+}
+
+.separacao-usuario {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
 }
 
 .status {
@@ -246,75 +277,79 @@ h1 {
 .container-login {
     display: flex;
     flex-direction: column;
+    align-items: center;
     gap: 30px;
 }
 
-.div-input {
-    height: fit-content;
+.container-formulario {
+    margin-top: 24px;
+}
+
+.input-form {
+    border: 2px solid var(--preto-opaco);
+    border-radius: 5px;
+    padding: 5px;
+    width: 300px;
+    height: 35px;
+}
+
+label {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--preto);
+}
+
+.div-container {
+    display: flex;
+    gap: 30px;
+}
+
+.div-nome {
     display: flex;
     flex-direction: column;
-    position: relative;
-    width: 100%;
+}
 
-    & label {
-        font-size: 0.85rem;
-        color: var(--preto);
-        font-weight: 600;
-        position: absolute;
-        top: 50%;
-        transform: translateY(-50%);
-        left: 16px;
-        background: var(--cor-bg-sec);
-        width: fit-content;
-        transition: 0.3s;
-        z-index: 1;
-        padding: 0 4px;
+.div-senha {
+    display: flex;
+    flex-direction: column;
+}
 
-        &.active {
-            color: var(--preto-opaco);
-            top: 0;
-            font-size: 0.75rem;
-            z-index: 3;
-        }
-    }
+.div-email {
+    display: flex;
+    flex-direction: column;
+}
 
-    & input {
-        width: 100%;
-        padding: 12px;
-        font-size: 0.9rem;
-        border: 2px var(--preto) solid;
-        border-radius: 8px;
-        outline: none;
-        transition: 0.3s;
-        background: transparent;
-        z-index: 2;
+.div-telefone {
+    display: flex;
+    flex-direction: column;
+}
 
-        &:focus {
-            border: 2px var(--azul-principal) solid;
-        }
-    }
+.div-cargo {
+    display: flex;
+    flex-direction: column;
+}
 
-    &:focus-within label {
-        background-color: var(--branco);
-        padding: 5px;
-        color: var(--azul-principal);
-        top: 0;
-        font-size: 0.75rem;
-        z-index: 3;
-    }
+.div-status {
+    display: flex;
+    flex-direction: column;
+}
 
-    & i {
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        width: 22px;
-        position: absolute;
-        right: 20px;
-        top: 54%;
-        transform: translateY(-50%);
-        cursor: pointer;
-        z-index: 99;
-        font-size: 1.1rem;
-        color: var(--preto-opaco);
-    }
+.btn-enviar {
+    width: 630px;
+    height: 45px;
+    padding: 5px;
+    color: var(--branco);
+    font-family: 'Poppins', sans-serif;
+    font-size: 20px;
+    font-weight: bold;
+    border: none;
+    border-radius: 5px;
+    background-color: var(--azul-principal);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.btn-enviar:hover {
+    background-color: var(--azul-escuro);
 }

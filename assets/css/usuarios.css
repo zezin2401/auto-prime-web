@@ -17,7 +17,10 @@ body {
     --preto: #000000;
     --branco: #FFFFFF;
     --azul-principal: #008CFF;
+    --azul-claro: #E5F3FF;
     --azul-escuro: #00447C;
+    --verde: #1AAC5F;
+    --verde-claro: #D1FFE7;
 }
 
 .botao-pesquisar {
