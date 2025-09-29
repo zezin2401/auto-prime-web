@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciar Cashback</title>
+    <title>Gerenciar Vendas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -119,7 +119,7 @@
 
         </div>
 
-        <h2 class="titulo">Total acumulado</h2>
+        <h2 class="titulo">Total vendido</h2>
 
         <div class="informacoes-vendas">
 
@@ -280,7 +280,10 @@
             datasets: [{
                 label: 'N de vendas',
                 data: [200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000],
-                borderWidth: 1
+                borderWidth: 1,
+                backgroundColor: [
+                    '#008CFF'
+                ]
             }]
         },
         options: {

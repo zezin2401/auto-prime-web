@@ -212,9 +212,8 @@ h1 {
 }
 
 .titulo {
-    margin-left: 75px;
     font-size: 33px;
-    margin-bottom: 15px;
+    margin-bottom: 100px;
 }
 
 .capital {
@@ -229,10 +228,11 @@ h1 {
     height: 194px;
     padding: 25px;
     display: flex;
-    border: 2px solid var(--azul-principal);
-    background-color: var(--azul-claro);
     flex-direction: row-reverse;
     align-items: flex-end;
+    justify-content: space-between;
+    border: 2px solid var(--azul-principal);
+    background-color: var(--azul-claro);
 }
 
 .graficos-container {

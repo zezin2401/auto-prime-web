@@ -235,11 +235,11 @@ h1 {
     width: 658px;
     padding: 25px;
     display: flex;
-    border: 2px solid var(--azul-principal);
-    background-color: var(--azul-claro);
     flex-direction: row-reverse;
     align-items: flex-end;
     justify-content: space-between;
+    border: 2px solid var(--azul-principal);
+    background-color: var(--azul-claro);
 }
 
 .info-capital {
@@ -257,11 +257,11 @@ h1 {
     width: 661px;
     padding: 25px;
     display: flex;
-    border: 2px solid var(--verde);
-    background-color: var(--verde-claro);
     flex-direction: row-reverse;
     align-items: flex-end;
     justify-content: space-between;
+    border: 2px solid var(--verde);
+    background-color: var(--verde-claro);
 }
 
 .informacoes-vendas {
@@ -281,16 +281,16 @@ h1 {
     border: 2px solid var(--preto-opaco);
     border-radius: 10px;
     display: flex;
+    flex-direction: column;
+    align-items: center;
     padding: 10px;
     width: 662px;
     height: 485px;
-    flex-direction: column;
-    align-items: center;
 }
 
 .titulo-pizza {
     margin-top: 10px;
-    margin-left: 10px;
+    margin-right: 320px;
     font-size: 25px;
 }
 
