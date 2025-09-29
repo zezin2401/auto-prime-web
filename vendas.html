@@ -10,7 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/cashback.css">
+    <link rel="stylesheet" href="assets/css/vendas.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -36,7 +36,7 @@
     </section>
 
     <section class="main">
-        <h1>Gerenciar Cashback</h1>
+        <h1>Editar Usuário</h1>
         <div class="cards-container">
 
             <div class="usuario">
@@ -111,7 +111,8 @@
 
             <a href="vendas.html" class="botao-gerenciar"><i class="fa-solid fa-cart-shopping"></i>Gerenciar Vendas</a>
 
-            <a href="produtos.html" class="botao-gerenciar"><i class="fa-solid fa-bag-shopping"></i>Gerenciar Produtos</a>
+            <a href="produtos.html" class="botao-gerenciar"><i class="fa-solid fa-bag-shopping"></i>Gerenciar
+                Produtos</a>
 
             <a href="cashback.html" class="botao-gerenciar"><i class="fa-solid fa-dollar-sign"></i>Gerenciar
                 Cashback</a>
@@ -120,20 +121,30 @@
 
         <h2 class="titulo">Total acumulado</h2>
 
-        <div class="div-azul">
-            <h2 class="capital">R$: 5000,00</h2>
+        <div class="informacoes-vendas">
+
+            <div class="div-azul">
+                <h2 class="capital">R$: 500.000,00</h2>
+                <h2 class="info-capital">Capital arrecadado</h2>
+            </div>
+
+            <div class="div-verde">
+                <h2 class="qtd">400.000</h2>
+                <h2 class="info-qtd">Vendas efetuadas</h2>
+            </div>
+
         </div>
 
         <div class="graficos-container">
 
             <div class="grafico-pizza">
-                <h3 class="titulo-pizza">Total de cashback acumulado pelos vendedores</h3>
+                <h3 class="titulo-pizza">Marcas mais vendidas</h3>
 
                 <canvas id="Pizza"></canvas>
             </div>
 
             <div class="grafico-coluna">
-                <h3 class="titulo-coluna">Total de cashback acumulado mensalmente</h3>
+                <h3 class="titulo-coluna">Meta mensal</h3>
 
                 <canvas id="Coluna"></canvas>
             </div>
@@ -142,6 +153,8 @@
 
         <div class="vendedores">
 
+            <h3 class="maiores-compradores">Maiores compradores</h3>
+
             <div class="vendedor-linha">
 
                 <div class="vendedor-detalhes">
@@ -154,7 +167,7 @@
                             <p>usuario@gmail.com</p>
                         </div>
                         <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
+                            <p class="criado-em"><span class="negrito">Total: </span>500</p>
 
                             <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
                         </div>
@@ -176,7 +189,7 @@
                             <p>usuario@gmail.com</p>
                         </div>
                         <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
+                            <p class="criado-em"><span class="negrito">Total: </span>400</p>
 
                             <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
                         </div>
@@ -198,7 +211,7 @@
                             <p>usuario@gmail.com</p>
                         </div>
                         <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
+                            <p class="criado-em"><span class="negrito">Total: </span>300</p>
 
                             <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
                         </div>
@@ -220,7 +233,7 @@
                             <p>usuario@gmail.com</p>
                         </div>
                         <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
+                            <p class="criado-em"><span class="negrito">Total: </span>200</p>
 
                             <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
                         </div>
@@ -242,7 +255,7 @@
                             <p>usuario@gmail.com</p>
                         </div>
                         <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
+                            <p class="criado-em"><span class="negrito">Total: </span>100</p>
 
                             <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
                         </div>
@@ -255,8 +268,6 @@
         </div>
 
     </section>
-
-
 </body>
 
 <script>
@@ -286,16 +297,27 @@
     new Chart(ptx, {
         type: 'pie',
         data: {
-            labels: ['usuario@gmail.com', 'usuario@gmail.com', 'usuario@gmail.com', 'usuario@gmail.com', 'usuario@gmail.com'],
+            labels: ['Chevrolet', 'RAM', 'Fiat', 'Nissan', 'Honda', 'Toyota', 'Peugeot', 'Citroen', 'Jeep', 'Ford', 'Volkswagen', 'BYD', 'BMW', 'MINI', 'Hyundai', 'KIA'],
             datasets: [{
                 label: 'Vendedores mais populares',
-                data: [30, 10, 10, 20, 30],
+                data: [6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25],
                 backgroundColor: [
                     '#0073E6',
                     '#1AAC5F',
                     '#7D3AC1',
                     '#F2C200',
-                    '#E90039'
+                    '#E90039',
+                    '#E96500',
+                    '#00E9E9',
+                    '#E9008C',
+                    '#7800E9',
+                    '#00E913',
+                    '#0090E9',
+                    '#E100E9',
+                    '#E9A300',
+                    '#C2E900',
+                    '#00E994',
+                    '#2F00E9'
                 ],
                 borderWidth: 1
             }]
@@ -306,7 +328,7 @@
                     color: '#fff',          // cor do texto
                     font: {
                         weight: 'bold',
-                        size: 20,
+                        size: 15,
                         family: "Poppins, sans-serif"
                     },
                     formatter: (value, ctx) => {

@@ -2,7 +2,6 @@
     box-sizing: border-box;
     margin: 0;
     padding: 0;
-    transition: 0.3s;
 }
 
 body {
@@ -212,155 +211,140 @@ h1 {
     color: var(--azul-principal);
 }
 
-.container-edicao {
+.titulo {
+    margin-left: 75px;
+    font-size: 33px;
+    margin-bottom: 15px;
+}
+
+.qtd {
+    font-size: 45px;
+    margin-bottom: -15px;
+}
+
+.capital {
+    font-size: 45px;
+    margin-bottom: -15px;
+}
+
+.div-azul {
+    margin-left: 75px;
+    margin-right: 50px;
+    border-radius: 10px;
+    height: 194px;
+    width: 658px;
+    padding: 25px;
+    display: flex;
+    border: 2px solid var(--azul-principal);
+    background-color: var(--azul-claro);
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.info-capital {
+    margin-bottom: 115px;
+}
+
+.info-qtd {
+    margin-bottom: 115px;
+}
+
+.div-verde {
+    margin-right: 75px;
+    border-radius: 10px;
+    height: 194px;
+    width: 661px;
+    padding: 25px;
+    display: flex;
+    border: 2px solid var(--verde);
+    background-color: var(--verde-claro);
+    flex-direction: row-reverse;
+    align-items: flex-end;
+    justify-content: space-between;
+}
+
+.informacoes-vendas {
+    display: flex;
+    justify-content: space-between;
+}
+
+.graficos-container {
+    display: flex;
+    gap: 50px;
+    margin-bottom: 40px;
+}
+
+.grafico-pizza {
+    margin-top: 40px;
+    margin-left: 75px;
+    border: 2px solid var(--preto-opaco);
+    border-radius: 10px;
+    display: flex;
+    padding: 10px;
+    width: 662px;
+    height: 485px;
+    flex-direction: column;
+    align-items: center;
+}
+
+.titulo-pizza {
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 25px;
+}
+
+.titulo-coluna {
+    margin-top: 10px;
+    margin-left: 10px;
+    font-size: 25px;
+}
+
+.grafico-coluna {
+    margin-top: 40px;
+    margin-right: 75px;
+    border: 2px solid var(--preto-opaco);
+    border-radius: 10px;
+    width: 662px;
+    height: 485px;
+    padding: 10px;
+}
+
+#Pizza {
+    width: 410px !important;
+    height: 410px !important;
+}
+
+#Coluna {
+    height: 410px !important;
+}
+
+.maiores-compradores {
+    font-size: 25px;
+}
+
+.vendedores {
+    display: flex;
+    flex-direction: column;
     margin-right: 75px;
     margin-left: 75px;
     margin-bottom: 40px;
-    gap: 145px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    gap: 12px;
     padding: 30px;
     border: 2px solid var(--preto-opaco);
     border-radius: 10px;
 }
 
-.foto {
-    display: flex;
-    width: 200px;
-    height: 200px;
+.vendedor-detalhes {
+    padding: 10px;
     border: 2px solid var(--preto-opaco);
-    border-radius: 200px;
-    justify-content: center;
-    align-items: center;
-}
-
-.foto i {
-    font-size: 100px;
-}
-
-.infos {
-    text-align: center;
+    border-radius: 10px;
     display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.usuario-pt1 {
-    display: flex;
-    flex-direction: column;
     align-items: center;
     gap: 10px;
 }
 
-.usuario-pt2 {
+.info-vendedor {
     display: flex;
-    flex-direction: column;
-    align-items: center;
-}
-
-.separacao-usuario {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.status {
-    background-color: #1AAC5F;
-    color: #D1FFE7;
-    padding: 5px;
-    border-radius: 30px;
-    text-align: center;
-    width: 205px;
-    font-weight: bold;
-}
-
-.status-reverso {
-    background-color: #E90039;
-    color: #FFD0DC;
-    padding: 5px;
-    border-radius: 30px;
-    text-align: center;
-    width: 205px;
-    font-weight: bold;
-}
-
-.container-login {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: 30px;
-}
-
-.container-formulario {
-    margin-top: 24px;
-}
-
-.input-form {
-    border: 2px solid var(--preto-opaco);
-    border-radius: 5px;
-    padding: 5px;
-    width: 350px;
-    height: 49px;
-}
-
-label {
-    font-size: 20px;
-    font-weight: bold;
-    color: var(--preto);
-}
-
-.div-container {
-    display: flex;
-    gap: 30px;
-}
-
-.div-nome {
-    display: flex;
-    flex-direction: column;
-}
-
-.div-senha {
-    display: flex;
-    flex-direction: column;
-}
-
-.div-email {
-    display: flex;
-    flex-direction: column;
-}
-
-.div-telefone {
-    display: flex;
-    flex-direction: column;
-}
-
-.div-cargo {
-    display: flex;
-    flex-direction: column;
-}
-
-.div-status {
-    display: flex;
-    flex-direction: column;
-}
-
-.btn-enviar {
-    width: 730px;
-    height: 45px;
-    padding: 5px;
-    color: var(--branco);
-    font-family: 'Poppins', sans-serif;
-    font-size: 20px;
-    font-weight: bold;
-    border: none;
-    border-radius: 5px;
-    background-color: var(--azul-principal);
-    display: flex;
-    align-items: center;
-    justify-content: center;
-}
-
-.btn-enviar:hover {
-    background-color: var(--azul-escuro);
+    gap: 865px;
 }
