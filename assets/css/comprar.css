@@ -17,6 +17,7 @@ body {
     --preto: #000000;
     --branco: #FFFFFF;
     --azul-principal: #008CFF;
+    --azul-claro: #E5F3FF;
     --azul-escuro: #00447C;
 }
 
@@ -56,11 +57,17 @@ body {
 }
 
 .fa-plus {
-    color: var(--branco);
+    padding: 5px;
+    border-radius: 10px;
+    background-color: var(--azul-claro);
+    color: var(--azul-principal);
 }
 
 .fa-minus {
-    color: var(--branco);
+    padding: 5px;
+    border-radius: 10px;
+    background-color: var(--azul-claro);
+    color: var(--azul-principal);
 }
 
 .pesquisa {
@@ -100,8 +107,7 @@ header img {
 }
 
 h1 {
-    font-weight: normal;
-    color: var(--azul-escuro);
+    font-weight: 500;
     margin-top: -50px;
 }
 
@@ -124,7 +130,7 @@ h1 {
     display: flex;
     margin-left: 130px;
     margin-top: 30px;
-    gap: 21px;
+    gap: 30px;
 }
 
 .imagem-menor {
@@ -137,14 +143,24 @@ h1 {
     width: 105px;
 }
 
+.imagem-menor-azul {
+    padding: 5px;
+    border: 2px solid var(--azul-principal);
+    border-radius: 10px;
+}
+
+.imagem-menor-azul img {
+    width: 105px;
+}
+
 .imagem img {
-    width: 450px;
+    width: 480px;
 }
 
 .botao-compra {
     background-color: var(--azul-principal);
     padding: 5px;
-    width: 400px;
+    width: 450px;
     height: 80px;
     color: var(--branco);
     border: none;
@@ -153,6 +169,7 @@ h1 {
     font-weight: bold;
     font-size: 35px;
     margin-top: 65px;
+    cursor: pointer;
 }
 
 .botao-compra:hover {
@@ -160,21 +177,31 @@ h1 {
 }
 
 .preco {
+    background-color: var(--azul-claro);
+    padding: 5px;
+    border-radius: 15px;
+    width: 180px;
     color: var(--azul-escuro);
     font-size: 40px;
     font-weight: 600;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+}
+
+.sifrao {
+    font-size: 25px;
 }
 
 .acabamento-titulo {
     font-size: 30px;
     font-weight: 500;
-    color: var(--azul-escuro);
 }
 
 .titulo-qtd {
     font-size: 30px;
     font-weight: 500;
-    color: var(--azul-escuro);
 }
 
 .acabamento {
@@ -195,31 +222,33 @@ h1 {
     color: var(--azul-principal);
     font-weight: light;
     border: 2px solid var(--azul-principal);
-    border-radius: 5px;
+    border-radius: 10px;
 }
 
 .quantidade {
     display: flex;
+    width: 150px;
+    border-radius: 10px;
+    border: 2px solid var(--azul-principal);
 }
 
 .add {
-    background-color: var(--azul-principal);
+    background: none;
     padding: 15px;
-    border-radius: 5px 0px 0px 5px;
     border: none;
+    cursor: pointer;
 }
 
 .numero {
-    border: 2px solid var(--azul-principal);
     padding: 15px;
     width: 100px;
     text-align: center;
 }
 
 .menos {
-    background-color: var(--azul-principal);
+    background: none;
+    cursor: pointer;
     padding: 15px;
-    border-radius: 0px 5px 5px 0px;
     border: none;
 }
 
@@ -234,6 +263,45 @@ h1 {
     margin-top: 40px;
 }
 
+.descricao-titulo {
+    font-size: 30px;
+    font-weight: 500;
+    margin-bottom: 10px;
+    color: var(--azul-escuro);
+}
+
+.descricao-1 {
+    font-size: 20px;
+    color: var(--azul-escuro);
+}
+
+.descricao-2 {
+    font-size: 20px;
+    color: var(--azul-escuro);
+}
+
+.descricao-3 {
+    font-size: 20px;
+    color: var(--azul-escuro);
+}
+
+.vendendo {
+    margin-top: 20px;
+    display: flex;
+}
+
+.vendido-por {
+    font-weight: 500;
+    font-size: 20px;
+    color: var(--preto-opaco);
+}
+
+.samuel-silva {
+    font-weight: 500;
+    margin-left: 10px;
+    font-size: 20px;
+    color: var(--azul-principal);
+}
 
 
 
@@ -242,7 +310,7 @@ h1 {
     margin-left: 130px;
     margin-top: 40px;
     padding: 10px;
-    width: 535px;
+    width: 563px;
     border: 2px solid var(--preto-opaco);
     border-radius: 10px;
     display: flex;
