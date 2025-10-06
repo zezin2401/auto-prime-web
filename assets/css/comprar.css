@@ -160,8 +160,8 @@ h1 {
 .botao-compra {
     background-color: var(--azul-principal);
     padding: 5px;
-    width: 450px;
-    height: 80px;
+    width: 700px;
+    height: 85px;
     color: var(--branco);
     border: none;
     border-radius: 10px;
@@ -170,10 +170,19 @@ h1 {
     font-size: 35px;
     margin-top: 65px;
     cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 10px;
 }
 
 .botao-compra:hover {
     background-color: var(--azul-escuro);
+}
+
+.botao-compra i {
+    color: var(--branco);
+    background: none;
 }
 
 .preco {
