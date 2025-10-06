@@ -241,7 +241,7 @@ h1 {
 }
 
 .input-form {
-    width: 420px;
+    width: 600px;
     height: 40px;
     padding: 5px;
     font-size: 20px;
@@ -249,8 +249,12 @@ h1 {
     border: 2px solid var(--preto-opaco);
 }
 
+.input-form :placeholder-shown {
+    font-family: "Poppins", sans-serif;
+}
+
 .select-acabamento {
-    width: 420px;
+    width: 600px;
     height: 40px;
     padding: 5px;
     font-size: 20px;
@@ -259,7 +263,7 @@ h1 {
 }
 
 .select-marca {
-    width: 420px;
+    width: 600px;
     height: 40px;
     padding: 5px;
     font-size: 20px;
@@ -268,8 +272,8 @@ h1 {
 }
 
 .text-area-descricao {
-    width: 420px;
-    height: 270px;
+    width: 600px;
+    height: 305px;
     padding: 5px;
     font-size: 20px;
     border-radius: 5px;
@@ -277,8 +281,8 @@ h1 {
 }
 
 .foto {
-    width: 560px;
-    height: 370px;
+    width: 630px;
+    height: 405px;
     display: flex;
     padding: 5px;
     font-size: 15px;
@@ -307,7 +311,7 @@ h1 {
 }
 
 .input-form-preco {
-    width: 270px;
+    width: 305px;
     height: 40px;
     padding: 5px;
     font-size: 20px;
@@ -316,7 +320,7 @@ h1 {
 }
 
 .input-form-fabricacao {
-    width: 270px;
+    width: 308px;
     height: 40px;
     padding: 5px;
     font-size: 20px;
@@ -338,7 +342,7 @@ h1 {
 .btn-enviar {
     background-color: var(--azul-principal);
     padding: 12px;
-    width: 270px;
+    width: 305px;
     color: var(--branco);
     font-family: 'Poppins', sans-serif;
     font-size: 20px;
@@ -355,7 +359,7 @@ h1 {
 .btn-cancelar {
     background-color: #FFD0DC;
     padding: 10px;
-    width: 270px;
+    width: 305px;
     color: #E90039;
     font-family: 'Poppins', sans-serif;
     font-size: 20px;
@@ -370,3 +374,4 @@ h1 {
     color: #FFD0DC;
     border: 2px solid #E90039;
 }
+
