@@ -375,3 +375,346 @@ h1 {
     border: 2px solid #E90039;
 }
 
+@media (max-width: 1440px) {
+    .banner img {
+        width: 1290px;
+    }
+
+    .botoes {
+        justify-content: center;
+        gap: 47px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .banner img {
+        width: 875px;
+    }
+
+    .informacoes {
+        gap: 55px;
+    }
+
+    .botao-gerenciar {
+        font-size: 15px;
+    }
+
+    .botoes {
+        gap: 1px;
+    }
+
+    .foto {
+        width: 364px;
+    }
+
+    .input-form-fabricacao {
+        width: 364px;
+    }
+
+    .input-form-preco {
+        width: 364px;
+    }
+
+    .btn-enviar {
+        font-size: 16px;
+        width: 170px;
+    }
+
+    .btn-cancelar {
+        font-size: 16px;
+        width: 170px;
+    }
+
+    .preco-e-fabricacao {
+        flex-direction: column;
+        gap: 0px;
+    }
+
+    .div-container1 {
+        margin-left: 165px;
+    }
+
+    .input-form {
+        width: 400px;
+    }
+
+    .select-acabamento {
+        width: 400px;
+    }
+
+    .select-marca {
+        width: 400px;
+    }
+
+    .text-area-descricao {
+        width: 400px;
+        height: 308px;
+    }
+}
+
+@media (max-width: 768px) {
+    .informacoes {
+        flex-wrap: wrap;
+        gap: 62px;
+    }
+
+    .banner img {
+        width: 615px;
+    }
+
+    .botoes {
+        flex-wrap: wrap;
+        gap: 60px;
+    }
+
+    .botao-gerenciar {
+        font-size: 20px;
+    }
+
+    .cards-container {
+        display: flex;
+        gap: 0px;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .div-container {
+        flex-direction: column;
+    }
+
+    .foto {
+        width: 400px;
+    }
+
+    .input-form-fabricacao {
+        width: 400px;
+    }
+
+    .input-form-preco {
+        width: 400px;
+    }
+
+    .divbotoes {
+        gap: 60px;
+    }
+}
+
+@media (max-width: 426px) {
+    .container {
+        display: flex;
+        gap: 35px;
+        height: 5rem;
+        margin-right: 100px;
+        align-items: center;
+    }
+
+    .banner {
+        display: none;
+    }
+
+    h1 {
+        margin-left: 50px;
+    }
+
+    .botoes {
+        gap: 20px;
+    }
+    
+    .container {
+        margin-right: 0px;
+    }
+
+    .barra-pesquisar {
+        width: 20rem;
+    }
+
+    header {
+        flex-direction: column;
+    }
+
+    .cards-container {
+        margin-left: 35px;
+        margin-right: 35px;
+    }
+
+    .botao-gerenciar {
+        padding: 15px 55px;
+    }    
+
+    .container-edicao {
+        justify-content: normal;
+        margin-left: 35px;
+        margin-right: 35px;
+    }
+
+    .input-form {
+        width: 290px;
+    }
+
+    .select-acabamento {
+        width: 290px;
+    }
+
+    .select-marca {
+        width: 290px;
+    }
+
+    .text-area-descricao {
+        width: 290px;
+    }
+
+    .foto {
+        width: 290px;
+    }
+
+    .input-form-fabricacao {
+        width: 290px;
+    }
+
+    .input-form-preco {
+        width: 290px;
+    }
+
+    .divbotoes {
+        flex-direction: column;
+        gap: 20px;
+    }
+
+    .btn-enviar {
+        width: 290px;
+    }
+
+    .btn-cancelar {
+        width: 290px;
+    }
+}
+
+@media (max-width: 376px) {
+    .barra-pesquisar {
+        width: 16rem;
+    }
+
+    h1 {
+        margin-left: 65px;
+    }
+
+    .cards-container {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .container-edicao {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .input-form {
+        width: 290px;
+    }
+
+    .select-acabamento {
+        width: 290px;
+    }
+
+    .select-marca {
+        width: 290px;
+    }
+
+    .text-area-descricao {
+        width: 290px;
+    }
+
+    .foto {
+        width: 290px;
+    }
+
+    .input-form-fabricacao {
+        width: 290px;
+    }
+
+    .input-form-preco {
+        width: 290px;
+    }
+
+    .btn-enviar {
+        width: 290px;
+    }
+
+    .btn-cancelar {
+        width: 290px;
+    }
+
+    .div-input label {
+        font-size: 23px;
+    }
+}
+
+@media (max-width: 321px) {
+    .botao-pesquisar {
+        margin-left: -50px;
+        padding: 7px 10px;
+    }
+
+    .barra-pesquisar {
+        width: 15rem;
+    }
+
+    .container {
+        gap: 20px;
+    }
+
+    .usuario {
+        flex-direction: column;
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .botao-gerenciar {
+        padding: 15px 30px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
+
+    .input-form {
+        width: 240px;
+    }
+
+    .select-acabamento {
+        width: 240px;
+    }
+
+    .select-marca {
+        width: 240px;
+    }
+
+    .text-area-descricao {
+        width: 240px;
+    }
+
+    .foto {
+        width: 240px;
+    }
+
+    .input-form-fabricacao {
+        width: 240px;
+    }
+
+    .input-form-preco {
+        width: 240px;
+    }
+
+    .btn-enviar {
+        width: 240px;
+    }
+
+    .btn-cancelar {
+        width: 240px;
+    }
+
+}
