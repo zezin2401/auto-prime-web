@@ -121,166 +121,124 @@
         </div>
 
         <div class="container-edicao">
+    <!-- ... outras seções ... -->
 
-            <div class="usuario-pt1">
+    <div class="container-formulario">
+      <!-- importante: onsubmit chama a função com event -->
+      <form id="form-editar" onsubmit="editarUsuario(event)" action="">
+        <div class="div-container">
+          <div class="div-nome">
+            <label for="nome">Nome:</label>
+            <input class="input-form" name="nome" id="nome" type="text" required />
+          </div>
 
-                <div class="separacao-usuario">
+          <div class="container-chefe">
+            <div class="div-container-1">
+              <div class="div-senha">
+                <label for="senha">Senha:</label>
+                <input class="input-form" name="senha" id="senha" type="password" />
+              </div>
 
-                    <div class="usuario-pt2">
-
-                        <div class="foto">
-                            <i class="fa-solid fa-user"></i>
-                        </div>
-                        <p>usuario@gmail.com</p>
-                        <h2 class="criado-em">Criado em: 22/09/2025</h2>
-
-                    </div>
-
-                    <div class="infos">
-                        <div class="status">Ativo</div>
-                        <div class="status-reverso">Inativo</div>
-                    </div>
-
-                </div>
-
+              <div class="div-cargo">
+                <label for="cargo">Cargo:</label>
+                <select class="input-form" id="cargo" name="cargo">
+                  <option value="cliente">Cliente</option>
+                  <option value="vendedor">Vendedor</option>
+                  <option value="adm">ADM</option>
+                </select>
+              </div>
             </div>
 
-            <div class="container-formulario">
+            <div class="div-container-2">
+              <div class="div-email">
+                <label for="email">Email:</label>
+                <input class="input-form" id="email" name="email" type="email" required>
+              </div>
 
-                <form onsubmit="editarUsuario" action="">
-
-                    <div class="div-container">
-
-                        <div class="div-nome">
-
-                            <label for="nome">Nome:</label>
-                            <input class="input-form" name="nome" id="nome" type="text" required />
-
-                        </div>
-
-                        <div class="container-chefe">
-
-                            <div class="div-container-1">
-
-                                <div class="div-senha">
-
-                                    <label for="senha">Senha:</label>
-                                    <input class="input-form" name="senha" id="senha" type="text" required />
-
-                                </div>
-
-                                <div class="div-cargo">
-
-                                    <label for="cargo">Cargo:</label>
-
-                                    <select class="input-form" id="cargo" name="cargo">
-
-                                        <option value="cliente">Cliente</option>
-                                        <option value="vendedor">Vendedor</option>
-                                        <option value="adm">ADM</option>
-
-                                    </select>
-
-                                </div>
-
-                            </div>
-
-                            <div class="div-container-2">
-
-                                <div class="div-email">
-
-                                    <label for="email">Email:</label>
-                                    <input class="input-form" id="email" name="email" type="email" required>
-
-                                </div>
-
-                                <div class="div-status">
-
-                                    <label for="status">Status:</label>
-                                    <select class="input-form" name="selectstatus" id="status">
-
-                                        <option value="ativo">Ativo</option>
-                                        <option value="inativo">Inativo</option>
-
-                                    </select>
-
-                                </div>
-
-
-                            </div>
-
-                        </div>
-
-                    </div>
-
-                    <div class="divButtonSubmit">
-                        <button onsubmit="editarUsuario" class="btn-enviar">Enviar</button>
-                    </div>
-                </form>
-
+              <div class="div-status">
+                <label for="status">Status:</label>
+                <!-- valores legíveis; vamos mapear para 1/0 no JS -->
+                <select class="input-form" name="selectstatus" id="status">
+                  <option value="ativo">Ativo</option>
+                  <option value="inativo">Inativo</option>
+                </select>
+              </div>
             </div>
-
+          </div>
         </div>
-    </section>
 
+        <div class="divButtonSubmit">
+          <!-- botão precisa ser type="submit" -->
+          <button type="submit" class="btn-enviar">Editar</button>
+        </div>
+      </form>
+    </div>
+  </div>
 
-    <script>
-        function editarUsuario(event) {
-            event.preventDefault()
+  <script>
+    // Se você prefere event listener em vez de onsubmit no HTML, descomente:
+    // document.getElementById('form-editar').addEventListener('submit', editarUsuario);
 
-            const myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
+    async function editarUsuario(event) {
+      event.preventDefault();
 
-            const nome = document.getElementById("nome").value
+      // pegar valores do form
+      const nome = document.getElementById("nome").value.trim();
+      const senha = document.getElementById("senha").value;
+      const cargo = document.getElementById("cargo").value;
+      const email = document.getElementById("email").value.trim();
+      const status = document.getElementById("status").value; // "ativo" | "inativo"
 
-            const senha = document.getElementById("senha").value
+      // validação simples antes de enviar
+      if (!nome || !email) {
+        Swal.fire({ title: "Ops!", text: "Preencha nome e email", icon: "warning" });
+        return;
+      }
 
-            const cargo = document.getElementById("cargo").value
+      // mapear status para 1/0 conforme backend espera
+      const ativo = status === "ativo" ? 1 : 0;
 
-            const email = document.getElementById("email").value
+      // --- ATENÇÃO: ajuste o id_cadastro dinamicamente se precisar ---
+      // Aqui está hardcoded como você tinha. Se quiser, busco do URL ou dataset.
+      const id_cadastro = 3;
 
-            const raw = JSON.stringify({
-                "id_cadastro": 5,
-                "nome": nome,
-                "email": email,
-                "cargo": cargo,
-                "senha": senha
-            });
+      const payload = {
+        id_cadastro,
+        nome,
+        email,
+        cargo,
+        // só envie senha se ela foi preenchida (evita sobrescrever sem querer)
+        ...(senha ? { senha } : {}),
+        ativo
+      };
 
-            const requestOptions = {
-                method: "PUT",
-                headers: myHeaders,
-                body: raw,
-                redirect: "follow"
-            };
+      try {
+        const res = await fetch("http://192.168.1.132:5000/edit_cadastro", {
+          method: "PUT",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+          mode: "cors" // garante que o fetch tente CORS (backend precisa habilitar)
+        });
 
-            fetch("http://192.168.1.117:5000/edit_cadastro", requestOptions)
-                .then((response) => response.json())
-                .then((result) => {
+        // tenta ler JSON; backend retorna JSON mesmo em erro na nossa impl.
+        const data = await res.json().catch(() => null);
 
-                    // QUANDO DEU BOM
-
-                    Swal.fire({
-                        title: "Sucesso!",
-                        text: "Usuário editado com sucesso!",
-                        icon: "success"
-                    });
-
-                })
-                .catch((error) => {
-
-                    // QUANDO DEU RUIM DE MAIS
-
-                    Swal.fire({
-                        title: "ERRO!",
-                        text: "Falha ao editar o usuário!",
-                        icon: "error"
-                    });
-
-                });
+        if (!res.ok) {
+          // mostra mensagem de erro do backend se houver
+          const msg = data && (data.error || data.mensagem || data.detalle || JSON.stringify(data)) || `HTTP ${res.status}`;
+          Swal.fire({ title: "Erro", text: msg, icon: "error" });
+          return;
         }
 
-    </script>
+        Swal.fire({ title: "Sucesso!", text: data.mensagem || "Cadastro atualizado com sucesso!", icon: "success" });
+
+      } catch (err) {
+        // Erro de rede / CORS / JSON inválido
+        console.error("Erro fetch:", err);
+        Swal.fire({ title: "Ops!", text: "Erro de conexão (verifique backend / CORS)", icon: "error" });
+      }
+    }
+  </script>
 </body>
 
 </html>

@@ -464,17 +464,29 @@
 <script>
 
     function listaProdutos() {
-        const raw = "";
+
+        const myHeaders = new Headers();
+        myHeaders.append("Content-Type", "application/json");
+
+        const raw = JSON.stringify({
+            "id_cadastro": 3,
+            "nome": "João Silva",
+            "email": "joaopedro@gmail.com",
+            "cargo": "Administrador",
+            "senha": "novaSenha123@",
+            "ativo": 1
+        });
 
         const requestOptions = {
             method: "GET",
+            headers: myHeaders,
             body: raw,
             redirect: "follow"
         };
 
-        fetch("http://192.168.1.117:5000/produtos", requestOptions)
+        fetch("http://192.168.1.132:5000/produtos", requestOptions)
             .then((response) => response.json())
-            .then((result) => )
+            .then((result) => console.log(result))
             .catch((error) => console.error(error));
     }
 </script>
