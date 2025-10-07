@@ -247,7 +247,7 @@ h1 {
 }
 
 .usuario-pt1 {
-    display: flex;
+    display: none;
     flex-direction: column;
     align-items: center;
     gap: 10px;

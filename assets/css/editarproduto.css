@@ -311,7 +311,7 @@ h1 {
 }
 
 .input-form-preco {
-    width: 305px;
+    width: 630px;
     height: 40px;
     padding: 5px;
     font-size: 20px;
@@ -336,7 +336,7 @@ h1 {
 
 .divbotoes {
     display: flex;
-    gap: 23px;
+    gap: 20px;
 }
 
 .btn-enviar {

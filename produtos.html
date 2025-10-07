@@ -157,7 +157,8 @@
 
                             <button class="botao-deletar"><i class="fa-solid fa-trash"></i></button>
 
-                            <a href="editarproduto.html" class="botao-editar">Editar <i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="editarproduto.html" class="botao-editar">Editar <i
+                                    class="fa-solid fa-pen-to-square"></i></a>
 
                         </div>
 
@@ -171,7 +172,7 @@
 
                     <div class="info-produto">
 
-                        <p class="ponteira-titulo">Ponteira de Escapamento 
+                        <p class="ponteira-titulo">Ponteira de Escapamento
                             <br>
                             Rampage Diesel 2025...
                         </p>
@@ -197,7 +198,8 @@
 
                             <button class="botao-deletar"><i class="fa-solid fa-trash"></i></button>
 
-                            <a href="editarproduto.html" class="botao-editar">Editar <i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="editarproduto.html" class="botao-editar">Editar <i
+                                    class="fa-solid fa-pen-to-square"></i></a>
 
                         </div>
 
@@ -237,7 +239,8 @@
 
                             <button class="botao-deletar"><i class="fa-solid fa-trash"></i></button>
 
-                            <a href="editarproduto.html" class="botao-editar">Editar <i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="editarproduto.html" class="botao-editar">Editar <i
+                                    class="fa-solid fa-pen-to-square"></i></a>
 
                         </div>
 
@@ -277,7 +280,8 @@
 
                             <button class="botao-deletar"><i class="fa-solid fa-trash"></i></button>
 
-                            <a href="editarproduto.html" class="botao-editar">Editar <i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="editarproduto.html" class="botao-editar">Editar <i
+                                    class="fa-solid fa-pen-to-square"></i></a>
 
                         </div>
 
@@ -321,7 +325,8 @@
 
                             <button class="botao-deletar"><i class="fa-solid fa-trash"></i></button>
 
-                            <a href="editarproduto.html" class="botao-editar">Editar <i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="editarproduto.html" class="botao-editar">Editar <i
+                                    class="fa-solid fa-pen-to-square"></i></a>
 
                         </div>
 
@@ -335,7 +340,7 @@
 
                     <div class="info-produto">
 
-                        <p class="ponteira-titulo">Ponteira de Escapamento 
+                        <p class="ponteira-titulo">Ponteira de Escapamento
                             <br>
                             Rampage Diesel 2025...
                         </p>
@@ -361,7 +366,8 @@
 
                             <button class="botao-deletar"><i class="fa-solid fa-trash"></i></button>
 
-                            <a href="editarproduto.html" class="botao-editar">Editar <i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="editarproduto.html" class="botao-editar">Editar <i
+                                    class="fa-solid fa-pen-to-square"></i></a>
 
                         </div>
 
@@ -401,7 +407,8 @@
 
                             <button class="botao-deletar"><i class="fa-solid fa-trash"></i></button>
 
-                            <a href="editarproduto.html" class="botao-editar">Editar <i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="editarproduto.html" class="botao-editar">Editar <i
+                                    class="fa-solid fa-pen-to-square"></i></a>
 
                         </div>
 
@@ -441,7 +448,8 @@
 
                             <button class="botao-deletar"><i class="fa-solid fa-trash"></i></button>
 
-                            <a href="editarproduto.html" class="botao-editar">Editar <i class="fa-solid fa-pen-to-square"></i></a>
+                            <a href="editarproduto.html" class="botao-editar">Editar <i
+                                    class="fa-solid fa-pen-to-square"></i></a>
 
                         </div>
 
@@ -453,5 +461,22 @@
 
     </section>
 </body>
+<script>
+
+    function listaProdutos() {
+        const raw = "";
+
+        const requestOptions = {
+            method: "GET",
+            body: raw,
+            redirect: "follow"
+        };
+
+        fetch("http://192.168.1.117:5000/produtos", requestOptions)
+            .then((response) => response.json())
+            .then((result) => )
+            .catch((error) => console.error(error));
+    }
+</script>
 
 </html>

@@ -298,8 +298,28 @@ h2 {
     margin-left: 75px;
     display: flex;
     align-items: center;
+    justify-content: space-between;
     gap: 10px;
     margin-bottom: 23px;
+}
+
+.botao-add {
+    background-color: var(--azul-principal);
+    padding: 5px;
+    margin-right: 75px;
+    width: 230px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: var(--branco);
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.botao-add:hover {
+    background-color: var(--azul-escuro);
 }
 
 .todos-usuarios {
@@ -322,7 +342,7 @@ h2 {
 
 .info-usuario {
     display: flex;
-    gap: 131px;
+    justify-content: space-between;
 }
 
 .info-adm {
@@ -339,6 +359,12 @@ h2 {
     padding: 10px;
     border: 2px solid var(--preto-opaco);
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.sofie {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -361,4 +387,13 @@ h2 {
 
 .botao-editar:hover {
     background-color: var(--azul-escuro);
+}
+
+.separacao-nome-info {
+    width: 100%;
+}
+
+.informacoes-mais {
+    display: flex;
+    gap: 50px;
 }

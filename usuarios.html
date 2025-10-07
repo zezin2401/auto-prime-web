@@ -1,17 +1,21 @@
 <!DOCTYPE html>
 <html lang="pt-br" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciar Usuários</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
     <link rel="stylesheet" href="assets/css/usuarios.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 </head>
-<body>
-    
+
+<body onload="carregarUsuarios()">
+
     <header>
         <a href="home.html"><img src="assets/img/Ariel (1) 4.png" alt=""></a>
 
@@ -32,7 +36,7 @@
     <section class="main">
         <h1>Gerenciar Usuários</h1>
         <div class="cards-container">
-            
+
             <div class="usuario">
 
                 <div class="icone">
@@ -102,12 +106,14 @@
         <div class="botoes">
 
             <a href="usuarios.html" class="botao-gerenciar"><i class="fa-solid fa-user"></i>Gerenciar Usuários</a>
-            
+
             <a href="vendas.html" class="botao-gerenciar"><i class="fa-solid fa-cart-shopping"></i>Gerenciar Vendas</a>
 
-            <a href="produtos.html" class="botao-gerenciar"><i class="fa-solid fa-bag-shopping"></i>Gerenciar Produtos</a>
+            <a href="produtos.html" class="botao-gerenciar"><i class="fa-solid fa-bag-shopping"></i>Gerenciar
+                Produtos</a>
 
-            <a href="cashback.html" class="botao-gerenciar"><i class="fa-solid fa-dollar-sign"></i>Gerenciar Cashback</a>
+            <a href="cashback.html" class="botao-gerenciar"><i class="fa-solid fa-dollar-sign"></i>Gerenciar
+                Cashback</a>
 
         </div>
 
@@ -159,225 +165,85 @@
 
         <div class="total-usuarios">
 
-            <p class="todos-usuarios">Todos os usuários:</p>
+            <div class="sofie">
 
-            <h2>500</h2>
+                <p class="todos-usuarios">Todos os usuários:</p>
+
+                <h2 id="total">500</h2>
+
+            </div>
+
+            <a class="botao-add" href="adicionarusuarios.html"><i class="fa-solid fa-plus"></i> Adicionar Usuário</a>
 
         </div>
 
-        <div class="tabela">
-
-            <div class="usuario-linha">
-
-                <div class="usuario-detalhes">
-
-                <div class="icone">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="separacao-nome-info">
-                    <div class="nome">
-                        <p>usuario@gmail.com</p>
-                    </div>
-                    <div class="info-usuario">
-                        <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
-                        <p class="criado-em"><span class="negrito">Cargo: </span>Cliente</p>
-                        <p class="criado-em"><span class="negrito">Status: </span>Ativo</p>
-                        <p class="criado-em"><span class="negrito">Compras: </span>100</p>
-                    
-                        <a class="botao-editar" href="editar.html">Editar</a>
-                    </div>
-
-                </div>
-
-                </div>
-
-            </div>
-
-            <div class="usuario-linha">
-
-                <div class="usuario-detalhes">
-
-                <div class="icone">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="separacao-nome-info-vendedor">
-                    <div class="nome">
-                        <p>usuario@gmail.com</p>
-                    </div>
-                    <div class="info-vendedor">
-                        <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
-                        <p class="criado-em"><span class="negrito">Cargo: </span>Vendedor</p>
-                        <p class="criado-em"><span class="negrito">Status: </span>Ativo</p>
-                        <p class="criado-em"><span class="negrito">Compras: </span>100</p>
-                        <p class="criado-em"><span class="negrito">Vendas: </span>200</p>
-                    
-                        <a class="botao-editar" href="editar.html">Editar</a>
-                    </div>
-
-                </div>
-
-                </div>
-
-            </div>
-
-            <div class="usuario-linha">
-
-                <div class="usuario-detalhes">
-
-                <div class="icone">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="separacao-nome-info-adm">
-                    <div class="nome">
-                        <p>usuario@gmail.com</p>
-                    </div>
-                    <div class="info-adm">
-                        <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
-                        <p class="criado-em"><span class="negrito">Cargo: </span>ADM</p>
-                        <p class="criado-em"><span class="negrito">Status: </span>Ativo</p>
-                        <p class="criado-em"><span class="negrito">Compras: </span>100</p>
-                    
-                        <a class="botao-editar" href="editar.html">Editar</a>
-                    </div>
-
-                </div>
-
-                </div>
-
-            </div>
-
-            <div class="usuario-linha">
-
-                <div class="usuario-detalhes">
-
-                <div class="icone">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="separacao-nome-info">
-                    <div class="nome">
-                        <p>usuario@gmail.com</p>
-                    </div>
-                    <div class="info-usuario">
-                        <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
-                        <p class="criado-em"><span class="negrito">Cargo: </span>Cliente</p>
-                        <p class="criado-em"><span class="negrito">Status: </span>Ativo</p>
-                        <p class="criado-em"><span class="negrito">Compras: </span>100</p>
-                    
-                        <a class="botao-editar" href="editar.html">Editar</a>
-                    </div>
-
-                </div>
-
-                </div>
-
-            </div>
-
-            <div class="usuario-linha">
-
-                <div class="usuario-detalhes">
-
-                    <div class="icone">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="separacao-nome-info">
-                        <div class="nome">
-                            <p>usuario@gmail.com</p>
-                        </div>
-                        <div class="info-usuario">
-                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
-                            <p class="criado-em"><span class="negrito">Cargo: </span>Cliente</p>
-                            <p class="criado-em"><span class="negrito">Status: </span>Ativo</p>
-                            <p class="criado-em"><span class="negrito">Compras: </span>100</p>
-                        
-                            <a class="botao-editar" href="editar.html">Editar</a>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="usuario-linha">
-
-                <div class="usuario-detalhes">
-
-                <div class="icone">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="separacao-nome-info">
-                    <div class="nome">
-                        <p>usuario@gmail.com</p>
-                    </div>
-                    <div class="info-usuario">
-                        <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
-                        <p class="criado-em"><span class="negrito">Cargo: </span>Cliente</p>
-                        <p class="criado-em"><span class="negrito">Status: </span>Ativo</p>
-                        <p class="criado-em"><span class="negrito">Compras: </span>100</p>
-                    
-                        <a class="botao-editar" href="editar.html">Editar</a>
-                    </div>
-
-                </div>
-
-                </div>
-
-            </div>
-
-            <div class="usuario-linha">
-
-                <div class="usuario-detalhes">
-
-                <div class="icone">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="separacao-nome-info">
-                    <div class="nome">
-                        <p>usuario@gmail.com</p>
-                    </div>
-                    <div class="info-usuario">
-                        <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
-                        <p class="criado-em"><span class="negrito">Cargo: </span>Cliente</p>
-                        <p class="criado-em"><span class="negrito">Status: </span>Ativo</p>
-                        <p class="criado-em"><span class="negrito">Compras: </span>100</p>
-                    
-                        <a class="botao-editar" href="editar.html">Editar</a>
-                    </div>
-
-                </div>
-
-                </div>
-
-            </div>
-
-            <div class="usuario-linha">
-
-                <div class="usuario-detalhes">
-
-                <div class="icone">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="separacao-nome-info">
-                    <div class="nome">
-                        <p>usuario@gmail.com</p>
-                    </div>
-                    <div class="info-usuario">
-                        <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
-                        <p class="criado-em"><span class="negrito">Cargo: </span>Cliente</p>
-                        <p class="criado-em"><span class="negrito">Status: </span>Ativo</p>
-                        <p class="criado-em"><span class="negrito">Compras: </span>100</p>
-                    
-                        <a class="botao-editar" href="editar.html">Editar</a>
-                    </div>
-
-                </div>
-
-                </div>
-
-            </div>
+        <div class="tabela" id="listarUsuario">
 
         </div>
 
     </section>
 </body>
+
+<script>
+
+    function carregarUsuarios() {
+
+        const requestOptions = {
+            method: "GET",
+            redirect: "follow"
+        };
+
+        fetch("http://192.168.1.117:5000/cadastro", requestOptions)
+            .then((response) => response.json())
+            .then((result) => {
+
+                let cadastros = result.cadastro
+                let container = document.getElementById("listarUsuario")
+
+
+                let html = ""
+
+                cadastros.forEach(item => {
+                    html += `
+                        <div class="usuario-linha">
+
+                            <div class="usuario-detalhes">
+
+                                <div class="icone">
+                                    <i class="fa-solid fa-user"></i>
+                                </div>
+                                <div class="separacao-nome-info">
+                                    <div class="nome">
+                                        <p>${item.email}</p>
+                                    </div>
+                                    <div class="info-usuario">
+
+                                        <div class="informacoes-mais">
+
+                                            <p>Nome: <span class="negrito">${item.nome}</span></p>
+                                            <p>Cargo: <span class="negrito">${item.cargo}</span></p>
+                                            <p>Status: <span class="negrito">${item.ativo}</span></p>
+                                            
+                                        </div>
+
+                                        <a class="botao-editar" href="editar.html">Editar</a>
+                                        
+                                    </div>
+
+                                </div>
+
+                            </div>
+
+                        </div>
+                    `
+                });
+
+                container.innerHTML = html
+
+            })
+            .catch((error) => console.error(error));
+    }
+
+</script>
+
 </html>
