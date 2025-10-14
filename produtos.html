@@ -484,7 +484,7 @@
             redirect: "follow"
         };
 
-        fetch("http://192.168.1.132:5000/produtos", requestOptions)
+        fetch("http://192.168.1.127:5000/produtos", requestOptions)
             .then((response) => response.json())
             .then((result) => console.log(result))
             .catch((error) => console.error(error));

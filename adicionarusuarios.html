@@ -147,7 +147,7 @@
 
             <div class="container-formulario">
 
-                <form onsubmit="editarUsuario" action="">
+                <form id="formUsuario" action="">
 
                     <div class="div-container">
 
@@ -214,7 +214,7 @@
                     </div>
 
                     <div class="divButtonSubmit">
-                        <button onsubmit="editarUsuario" class="btn-enviar">Adicionar</button>
+                        <button type="submit" class="btn-enviar">Adicionar</button>
                     </div>
                 </form>
 
@@ -222,65 +222,81 @@
 
         </div>
     </section>
-
-
-    <script>
-        function editarUsuario(event) {
-            event.preventDefault()
-
-            const myHeaders = new Headers();
-            myHeaders.append("Content-Type", "application/json");
-
-            const nome = document.getElementById("nome").value
-
-            const senha = document.getElementById("senha").value
-
-            const cargo = document.getElementById("cargo").value
-
-            const email = document.getElementById("email").value
-
-            const raw = JSON.stringify({
-                "id_cadastro": 5,
-                "nome": nome,
-                "email": email,
-                "cargo": cargo,
-                "senha": senha
-            });
-
-            const requestOptions = {
-                method: "PUT",
-                headers: myHeaders,
-                body: raw,
-                redirect: "follow"
-            };
-
-            fetch("http://192.168.1.117:5000/edit_cadastro", requestOptions)
-                .then((response) => response.json())
-                .then((result) => {
-
-                    // QUANDO DEU BOM
-
-                    Swal.fire({
-                        title: "Sucesso!",
-                        text: "Usuário editado com sucesso!",
-                        icon: "success"
-                    });
-
-                })
-                .catch((error) => {
-
-                    // QUANDO DEU RUIM DE MAIS
-
-                    Swal.fire({
-                        title: "ERRO!",
-                        text: "Falha ao editar o usuário!",
-                        icon: "error"
-                    });
-
-                });
-        }
-
-    </script>
 </body>
+<script>
+    (function () {
+        const form = document.getElementById('formUsuario');
+        const nomeEl = document.getElementById('nome');
+        const emailEl = document.getElementById('email');
+        const cargoEl = document.getElementById('cargo');
+        const senhaEl = document.getElementById('senha');
+        const statusEl = document.getElementById('status'); // se for necessário enviar
+
+        // Ajuste a baseURL conforme seu backend
+        const BASE = 'http://192.168.1.127:5000';
+
+        form.addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            // coleta dados
+            const nome = nomeEl.value.trim();
+            const email = emailEl.value.trim();
+            const cargo = cargoEl.value.trim();
+            const senha = senhaEl.value;
+            const status = statusEl ? statusEl.value : null;
+
+            // validações simples (pode adaptar)
+            if (!nome || !email || !senha) {
+                Swal.fire('Erro', 'Preencha nome, email e senha.', 'warning');
+                return;
+            }
+
+            const url = `${BASE}/cadastro`;
+            const method = 'POST';
+
+            // corpo (para editar, inclui id_cadastro)
+            const bodyObj = { nome, email, cargo, senha };
+
+            // desabilita botão pra evitar double-submit
+            const btn = form.querySelector('button[type="submit"]');
+            btn.disabled = true;
+            btn.textContent = 'Enviando...';
+
+            try {
+                const res = await fetch(url, {
+                    method,
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(bodyObj),
+                });
+
+                const json = await res.json().catch(() => ({}));
+
+                if (res.ok) {
+                    // sucesso
+                    Swal.fire({
+                        title: 'Sucesso!',
+                        text: json.mensagem || 'Operação concluída.',
+                        icon: 'success'
+                    });
+                    // se quiser redirecionar ou limpar o form:
+                    // form.reset();
+                    // inputId.value = ''; // desmarca edição se era editar
+                } else {
+                    // erro: tenta mostrar a mensagem que o backend retornou
+                    const msg = json.error || json.mensagem || `Erro ${res.status}`;
+                    Swal.fire('Erro', msg, 'error');
+                }
+            } catch (err) {
+                console.error('Fetch error:', err);
+                Swal.fire('Erro', 'Não foi possível conectar ao servidor.', 'error');
+            } finally {
+                btn.disabled = false;
+                btn.textContent = 'Salvar';
+            }
+        });
+
+    })();
+</script>
+
 
 </html>

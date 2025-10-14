@@ -370,3 +370,226 @@ label {
 .btn-enviar:hover {
     background-color: var(--azul-escuro);
 }
+
+@media (max-width: 1440px) {
+    .banner img {
+        width: 1290px;
+    }
+
+    .botoes {
+        justify-content: center;
+        gap: 47px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .banner img {
+        width: 875px;
+    }
+
+    .informacoes {
+        gap: 55px;
+    }
+
+    .botao-gerenciar {
+        font-size: 15px;
+    }
+
+    .botoes {
+        gap: 1px;
+    }
+}
+
+@media (max-width: 768px) {
+    .informacoes {
+        flex-wrap: wrap;
+        gap: 62px;
+    }
+
+    .banner img {
+        width: 615px;
+    }
+
+    .botoes {
+        flex-wrap: wrap;
+        gap: 60px;
+    }
+
+    .botao-gerenciar {
+        font-size: 20px;
+    }
+
+    .cards-container {
+        display: flex;
+        gap: 0px;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .div-container {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        margin-bottom: 10px;
+    }
+
+    .div-nome .input-form {
+        width: 550px;
+    }
+
+    .container-chefe {
+        flex-direction: column;
+        gap: 0;
+    }
+
+    .input-form {
+        width: 550px;
+    }
+
+    .btn-enviar {
+        width: 550px;
+    }
+
+    .divButtonSubmit {
+        display: flex;
+        justify-content: center;
+    }
+}
+
+@media (max-width: 426px) {
+    .container {
+        display: flex;
+        gap: 35px;
+        height: 5rem;
+        margin-right: 100px;
+        align-items: center;
+    }
+
+    .banner {
+        display: none;
+    }
+
+    h1 {
+        margin-left: 50px;
+    }
+
+    .botoes {
+        gap: 20px;
+    }
+
+    .container {
+        margin-right: 0px;
+    }
+
+    .barra-pesquisar {
+        width: 20rem;
+    }
+
+    header {
+        flex-direction: column;
+    }
+
+    .cards-container {
+        margin-left: 35px;
+        margin-right: 35px;
+    }
+
+    .botao-gerenciar {
+        padding: 15px 55px;
+    }
+
+    .div-nome .input-form {
+        width: 325px;
+    }
+
+    .input-form {
+        width: 325px;
+    }
+
+    .container-edicao {
+        margin-left: 35px;
+        margin-right: 35px;
+    }
+
+    .btn-enviar {
+        width: 325px;
+    }
+}
+
+@media (max-width: 376px) {
+    .barra-pesquisar {
+        width: 16rem;
+    }
+
+    h1 {
+        margin-left: -10px;
+    }
+
+    .cards-container {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .div-nome .input-form {
+        width: 325px;
+    }
+
+    .input-form {
+        width: 325px;
+    }
+
+    .container-edicao {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+
+    .btn-enviar {
+        width: 325px;
+    }
+}
+
+@media (max-width: 321px) {
+    .botao-pesquisar {
+        margin-left: -50px;
+        padding: 7px 10px;
+    }
+
+    .barra-pesquisar {
+        width: 15rem;
+    }
+
+    .container {
+        gap: 20px;
+    }
+
+    .usuario {
+        flex-direction: column;
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .botao-gerenciar {
+        padding: 15px 30px;
+    }
+
+    h1 {
+        font-size: 25px;
+        text-align: center;
+    }
+
+    .div-nome .input-form {
+        width: 275px;
+    }
+
+    .input-form {
+        width: 275px;
+    }
+
+    .btn-enviar {
+        width: 275px;
+    }
+}
