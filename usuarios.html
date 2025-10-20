@@ -120,48 +120,31 @@
         <div class="cards-usuarios">
 
             <div class="card-cliente">
-
                 <h3>Clientes:</h3>
-
                 <div class="icon-numero">
-
                     <i class="fa-solid fa-user"></i>
-
-                    <p class="numero">266</p>
-
+                    <p class="numero" id="clientesCount">0</p>
                 </div>
-
             </div>
 
             <div class="card-vendedor">
-
                 <h3>Vendedores:</h3>
-
                 <div class="icon-numero">
-
                     <i class="fa-solid fa-cart-shopping"></i>
-
-                    <p class="numero">200</p>
-
+                    <p class="numero" id="vendedoresCount">0</p>
                 </div>
-
             </div>
 
             <div class="card-adm">
-
                 <h3>ADM's:</h3>
-
                 <div class="icon-numero">
-
                     <i class="fa-solid fa-user-tie"></i>
-
-                    <p class="numero">34</p>
-
+                    <p class="numero" id="admsCount">0</p>
                 </div>
-
             </div>
 
         </div>
+
 
         <div class="total-usuarios">
 
@@ -177,75 +160,161 @@
 
         </div>
 
-        <div class="tabela" id="listarUsuario">
+        <div class="tabela" id="listarUsuario"></div>
 
-        </div>
+        <div id="pagination" class="pagination"></div>
 
     </section>
 </body>
 
 <script>
-
     function carregarUsuarios() {
+        const requestOptions = { method: "GET", redirect: "follow" };
 
-        const requestOptions = {
-            method: "GET",
-            redirect: "follow"
-        };
-
-        fetch("http://192.168.1.127:5000/cadastro", requestOptions)
+        fetch("http://192.168.1.122:5000/cadastro", requestOptions)
             .then((response) => response.json())
             .then((result) => {
+                // array com todos os cadastros
+                const cadastros = result.cadastro || result || [];
+                // variáveis de paginação
+                const perPage = 11;
+                let currentPage = 1;
+                const totalPages = Math.max(1, Math.ceil(cadastros.length / perPage));
 
-                let cadastros = result.cadastro
-                let container = document.getElementById("listarUsuario")
-
-
-                let html = ""
-
+                // contadores por cargo (baseados na lista completa)
+                let clientes = 0, vendedores = 0, adms = 0;
                 cadastros.forEach(item => {
-                    html += `
-                        <div class="usuario-linha">
-
-                            <div class="usuario-detalhes">
-
-                                <div class="icone">
-                                    <i class="fa-solid fa-user"></i>
-                                </div>
-                                <div class="separacao-nome-info">
-                                    <div class="nome">
-                                        <p>${item.email}</p>
-                                    </div>
-                                    <div class="info-usuario">
-
-                                        <div class="informacoes-mais">
-
-                                            <p>Nome: <span class="negrito">${item.nome}</span></p>
-                                            <p>Cargo: <span class="negrito">${item.cargo}</span></p>
-                                            <p>Status: <span class="negrito">${item.ativo}</span></p>
-                                            
-                                        </div>
-
-                                        <a class="botao-editar" href="editar.html">Editar</a>
-                                        
-                                    </div>
-
-                                </div>
-
-                            </div>
-
-                        </div>
-                    `
+                    const cargo = (item.cargo || '').toString().toLowerCase().trim();
+                    if (["cliente", "clientes", "client"].includes(cargo)) clientes++;
+                    else if (["vendedor", "vendedores", "vendas", "seller", "sales"].includes(cargo)) vendedores++;
+                    else if (["adm", "admin", "administrador", "administradora", "administrador(a)"].includes(cargo)) adms++;
                 });
 
-                container.innerHTML = html
+                // atualiza cartões (contadores)
+                const fmt = (n) => n.toLocaleString('pt-BR');
+                const clientesEl = document.getElementById("clientesCount");
+                const vendedoresEl = document.getElementById("vendedoresCount");
+                const admsEl = document.getElementById("admsCount");
+                const totalEl = document.getElementById("total");
+                if (clientesEl) clientesEl.textContent = fmt(clientes);
+                if (vendedoresEl) vendedoresEl.textContent = fmt(vendedores);
+                if (admsEl) admsEl.textContent = fmt(adms);
+                if (totalEl) totalEl.textContent = fmt(cadastros.length);
 
+                // referências DOM
+                const container = document.getElementById("listarUsuario");
+                const paginationEl = document.getElementById("pagination");
+
+                // Renderiza uma página específica
+                function renderPage(page) {
+                    // limites
+                    if (page < 1) page = 1;
+                    if (page > totalPages) page = totalPages;
+                    currentPage = page;
+
+                    // fatia do array
+                    const start = (page - 1) * perPage;
+                    const end = start + perPage;
+                    const slice = cadastros.slice(start, end);
+
+                    // gera HTML da página atual
+                    let html = "";
+                    slice.forEach(item => {
+                        const raw = item.ativo;
+                        const isAtivo = (
+                            raw === 1 || raw === '1' ||
+                            raw === true || String(raw).toLowerCase() === 'true' ||
+                            String(raw).toLowerCase() === 'ativo'
+                        );
+                        const statusLabel = isAtivo ? "Ativo" : "Inativo";
+
+                        html += `
+                        <div class="usuario-linha">
+                            <div class="usuario-detalhes">
+                                <div class="icone"><i class="fa-solid fa-user"></i></div>
+                                <div class="separacao-nome-info">
+                                    <div class="nome"><p>${item.email || ''}</p></div>
+                                    <div class="info-usuario">
+                                        <div class="informacoes-mais">
+                                            <p>Nome: <span class="negrito">${item.nome || '-'}</span></p>
+                                            <p>Cargo: <span class="negrito">${item.cargo || '-'}</span></p>
+                                            <p>Status: <span class="status ${isAtivo ? 'ativo' : 'inativo'}">${statusLabel}</span></p>
+                                        </div>
+                                        <a class="botao-editar" href="editar.html?id=${item.id || item.id_cadastro || ''}">Editar</a>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                    });
+
+                    container.innerHTML = html;
+                    renderPaginationControls();
+                    // rolar pro topo da lista quando trocar página (opcional)
+                    container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+                }
+
+                // Renderiza os botões de paginação
+                function renderPaginationControls() {
+                    if (!paginationEl) return;
+                    // quando só 1 página, pode esconder os controles
+                    if (totalPages <= 1) {
+                        paginationEl.innerHTML = "";
+                        return;
+                    }
+
+                    let controls = '';
+
+                    // botão Anterior
+                    controls += `<button class="pg-btn" data-page="${Math.max(1, currentPage - 1)}" ${currentPage === 1 ? 'disabled' : ''}>‹ Anterior</button>`;
+
+                    // mostrar range de páginas; limitar para não poluir (ex.: mostrar 7 botões centrados)
+                    const maxButtons = 7;
+                    let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+                    let endPage = startPage + maxButtons - 1;
+                    if (endPage > totalPages) { endPage = totalPages; startPage = Math.max(1, endPage - maxButtons + 1); }
+
+                    if (startPage > 1) {
+                        controls += `<button class="pg-btn" data-page="1">1</button>`;
+                        if (startPage > 2) controls += `<span class="dots">…</span>`;
+                    }
+
+                    for (let p = startPage; p <= endPage; p++) {
+                        controls += `<button class="pg-btn ${p === currentPage ? 'active' : ''}" data-page="${p}">${p}</button>`;
+                    }
+
+                    if (endPage < totalPages) {
+                        if (endPage < totalPages - 1) controls += `<span class="dots">…</span>`;
+                        controls += `<button class="pg-btn" data-page="${totalPages}">${totalPages}</button>`;
+                    }
+
+                    controls += `<button class="pg-btn" data-page="${Math.min(totalPages, currentPage + 1)}" ${currentPage === totalPages ? 'disabled' : ''}>Próximo ›</button>`;
+
+                    paginationEl.innerHTML = controls;
+
+                    paginationEl.querySelectorAll('.pg-btn').forEach(btn => {
+                        btn.addEventListener('click', (e) => {
+                            const p = Number(btn.dataset.page);
+                            if (!isNaN(p)) renderPage(p);
+                        });
+                    });
+                }
+
+                renderPage(1);
             })
-            .catch((error) => console.error(error));
-
-            
+            .catch((error) => {
+                console.error(error);
+                const container = document.getElementById("listarUsuario");
+                if (container) container.innerHTML = '<p>Erro ao carregar usuários.</p>';
+                const ids = ["clientesCount", "vendedoresCount", "admsCount", "total"];
+                ids.forEach(id => { const el = document.getElementById(id); if (el) el.textContent = "0"; });
+            });
     }
 
+    document.addEventListener('DOMContentLoaded', carregarUsuarios);
 </script>
+
+
+
 
 </html>

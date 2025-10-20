@@ -1,245 +1,348 @@
-
 <!DOCTYPE html>
 <html lang="pt-br" dir="ltr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Usuário</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/editar.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Usuário</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link
+    href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
+  <link rel="stylesheet" href="assets/css/editar.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
 
 </head>
 
 <body>
-    <header>
-        <a href="home.html"><img src="assets/img/Ariel (1) 4.png" alt=""></a>
+  <header>
+    <a href="home.html"><img src="assets/img/Ariel (1) 4.png" alt=""></a>
 
-        <div class="container">
-            <search class="pesquisa">
-                <input class="barra-pesquisar" type="text" placeholder="Pesquisar na AutoPrime">
-                <button class="botao-pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </search>
+    <div class="container">
+      <search class="pesquisa">
+        <input class="barra-pesquisar" type="text" placeholder="Pesquisar na AutoPrime">
+        <button class="botao-pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
+      </search>
 
-            <i class="fa-solid fa-circle-user"></i>
-        </div>
-    </header>
-
-    <section class="banner">
-        <img src="assets/img/PONTEIRAS DE 1.png" alt="">
-    </section>
-
-    <section class="main">
-        <h1>Editar Usuário</h1>
-        <div class="cards-container">
-
-            <div class="usuario">
-
-                <div class="icone">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="info">
-                    <p>usuario@gmail.com</p>
-                    <h2 class="criado-em">Criado em: 22/09/2025</h2>
-                </div>
-
-            </div>
-
-            <div class="informacoes">
-
-                <div class="usuarios">
-
-                    <div class="info-titulo">
-                        <i class="fa-solid fa-user"></i>
-                        <p>Usuários</p>
-                    </div>
-                    <div class="info-segmento-usuarios">
-                        <p class="numero-info">500</p>
-                        <a class="gerenciar" href="usuarios.html">Gerenciar</a>
-                    </div>
-                </div>
-
-                <div class="usuarios">
-
-                    <div class="info-titulo">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <p>Vendas</p>
-                    </div>
-                    <div class="info-segmento-vendas">
-                        <p class="numero-info">400.000</p>
-                        <a class="gerenciar" href="vendas.html">Gerenciar</a>
-                    </div>
-                </div>
-
-                <div class="usuarios">
-
-                    <div class="info-titulo">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                        <p>Produtos</p>
-                    </div>
-                    <div class="info-segmento-produtos">
-                        <p class="numero-info">50.000</p>
-                        <a class="gerenciar" href="produtos.html">Gerenciar</a>
-                    </div>
-                </div>
-
-                <div class="usuarios">
-
-                    <div class="info-titulo">
-                        <i class="fa-solid fa-dollar-sign"></i>
-                        <p>Cashback</p>
-                    </div>
-                    <div class="info-segmento-cashback">
-                        <p class="numero-info">R$600,00</p>
-                        <a class="gerenciar" href="cashback.html">Gerenciar</a>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
-
-        <div class="botoes">
-
-            <a href="usuarios.html" class="botao-gerenciar"><i class="fa-solid fa-user"></i>Gerenciar Usuários</a>
-
-            <a href="vendas.html" class="botao-gerenciar"><i class="fa-solid fa-cart-shopping"></i>Gerenciar Vendas</a>
-
-            <a href="produtos.html" class="botao-gerenciar"><i class="fa-solid fa-bag-shopping"></i>Gerenciar
-                Produtos</a>
-
-            <a href="cashback.html" class="botao-gerenciar"><i class="fa-solid fa-dollar-sign"></i>Gerenciar
-                Cashback</a>
-
-        </div>
-
-        <div class="container-edicao">
-    <!-- ... outras seções ... -->
-
-    <div class="container-formulario">
-      <!-- importante: onsubmit chama a função com event -->
-      <form id="form-editar" onsubmit="editarUsuario(event)" action="">
-        <div class="div-container">
-          <div class="div-nome">
-            <label for="nome">Nome:</label>
-            <input class="input-form" name="nome" id="nome" type="text" required />
-          </div>
-
-          <div class="container-chefe">
-            <div class="div-container-1">
-              <div class="div-senha">
-                <label for="senha">Senha:</label>
-                <input class="input-form" name="senha" id="senha" type="password" />
-              </div>
-
-              <div class="div-cargo">
-                <label for="cargo">Cargo:</label>
-                <select class="input-form" id="cargo" name="cargo">
-                  <option value="cliente">Cliente</option>
-                  <option value="vendedor">Vendedor</option>
-                  <option value="adm">ADM</option>
-                </select>
-              </div>
-            </div>
-
-            <div class="div-container-2">
-              <div class="div-email">
-                <label for="email">Email:</label>
-                <input class="input-form" id="email" name="email" type="email" required>
-              </div>
-
-              <div class="div-status">
-                <label for="status">Status:</label>
-                <!-- valores legíveis; vamos mapear para 1/0 no JS -->
-                <select class="input-form" name="selectstatus" id="status">
-                  <option value="ativo">Ativo</option>
-                  <option value="inativo">Inativo</option>
-                </select>
-              </div>
-            </div>
-          </div>
-        </div>
-
-        <div class="divButtonSubmit">
-          <!-- botão precisa ser type="submit" -->
-          <button type="submit" class="btn-enviar">Editar</button>
-        </div>
-      </form>
+      <i class="fa-solid fa-circle-user"></i>
     </div>
-  </div>
+  </header>
 
-  <script>
-    // Se você prefere event listener em vez de onsubmit no HTML, descomente:
-    // document.getElementById('form-editar').addEventListener('submit', editarUsuario);
+  <section class="banner">
+    <img src="assets/img/PONTEIRAS DE 1.png" alt="">
+  </section>
 
-    async function editarUsuario(event) {
-      event.preventDefault();
+  <section class="main">
+    <h1>Editar Usuário</h1>
+    <div class="cards-container">
 
-      // pegar valores do form
-      const nome = document.getElementById("nome").value.trim();
-      const senha = document.getElementById("senha").value;
-      const cargo = document.getElementById("cargo").value;
-      const email = document.getElementById("email").value.trim();
-      const status = document.getElementById("status").value; // "ativo" | "inativo"
+      <div class="usuario">
 
-      // validação simples antes de enviar
-      if (!nome || !email) {
-        Swal.fire({ title: "Ops!", text: "Preencha nome e email", icon: "warning" });
-        return;
+        <div class="icone">
+          <i class="fa-solid fa-user"></i>
+        </div>
+        <div class="info">
+          <p>usuario@gmail.com</p>
+          <h2 class="criado-em">Criado em: 22/09/2025</h2>
+        </div>
+
+      </div>
+
+      <div class="informacoes">
+
+        <div class="usuarios">
+
+          <div class="info-titulo">
+            <i class="fa-solid fa-user"></i>
+            <p>Usuários</p>
+          </div>
+          <div class="info-segmento-usuarios">
+            <p class="numero-info">500</p>
+            <a class="gerenciar" href="usuarios.html">Gerenciar</a>
+          </div>
+        </div>
+
+        <div class="usuarios">
+
+          <div class="info-titulo">
+            <i class="fa-solid fa-cart-shopping"></i>
+            <p>Vendas</p>
+          </div>
+          <div class="info-segmento-vendas">
+            <p class="numero-info">400.000</p>
+            <a class="gerenciar" href="vendas.html">Gerenciar</a>
+          </div>
+        </div>
+
+        <div class="usuarios">
+
+          <div class="info-titulo">
+            <i class="fa-solid fa-bag-shopping"></i>
+            <p>Produtos</p>
+          </div>
+          <div class="info-segmento-produtos">
+            <p class="numero-info">50.000</p>
+            <a class="gerenciar" href="produtos.html">Gerenciar</a>
+          </div>
+        </div>
+
+        <div class="usuarios">
+
+          <div class="info-titulo">
+            <i class="fa-solid fa-dollar-sign"></i>
+            <p>Cashback</p>
+          </div>
+          <div class="info-segmento-cashback">
+            <p class="numero-info">R$600,00</p>
+            <a class="gerenciar" href="cashback.html">Gerenciar</a>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+
+    <div class="botoes">
+
+      <a href="usuarios.html" class="botao-gerenciar"><i class="fa-solid fa-user"></i>Gerenciar Usuários</a>
+
+      <a href="vendas.html" class="botao-gerenciar"><i class="fa-solid fa-cart-shopping"></i>Gerenciar Vendas</a>
+
+      <a href="produtos.html" class="botao-gerenciar"><i class="fa-solid fa-bag-shopping"></i>Gerenciar
+        Produtos</a>
+
+      <a href="cashback.html" class="botao-gerenciar"><i class="fa-solid fa-dollar-sign"></i>Gerenciar
+        Cashback</a>
+
+    </div>
+
+    <div class="container-edicao">
+      <!-- ... outras seções ... -->
+
+      <div class="container-formulario">
+        <!-- importante: onsubmit chama a função com event -->
+        <form id="form-editar" onsubmit="editarUsuario(event)" action="">
+          <div class="div-container">
+            <div class="div-nome">
+              <label for="nome">Nome:</label>
+              <input class="input-form" name="nome" id="nome" type="text" required />
+            </div>
+
+            <div class="container-chefe">
+              <div class="div-container-1">
+                <div class="div-senha">
+                  <label for="senha">Senha:</label>
+                  <input class="input-form" name="senha" id="senha" type="password" />
+                </div>
+
+                <div class="div-cargo">
+                  <label for="cargo">Cargo:</label>
+                  <select class="input-form" id="cargo" name="cargo">
+                    <option value="cliente">Cliente</option>
+                    <option value="vendedor">Vendedor</option>
+                    <option value="adm">ADM</option>
+                  </select>
+                </div>
+              </div>
+
+              <div class="div-container-2">
+                <div class="div-email">
+                  <label for="email">Email:</label>
+                  <input class="input-form" id="email" name="email" type="email" required>
+                </div>
+
+                <div class="div-status">
+                  <label for="status">Status:</label>
+                  <!-- valores legíveis; vamos mapear para 1/0 no JS -->
+                  <select class="input-form" name="selectstatus" id="status">
+                    <option value="ativo">Ativo</option>
+                    <option value="inativo">Inativo</option>
+                  </select>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <div class="divButtonSubmit">
+            <!-- botão precisa ser type="submit" -->
+            <button type="submit" class="btn-enviar">Editar</button>
+          </div>
+        </form>
+      </div>
+    </div>
+
+    <script>
+      /*
+        Script para editar usuário:
+        - Abra editar.html?id=<ID_DO_USUARIO>
+        - A página vai buscar os dados e preencher o formulário
+        - Ao enviar, manda PUT para /edit_cadastro com o id correto
+      */
+
+      // helper para SweetAlert curto
+      const alerta = (title, text, icon = 'info') => Swal.fire({ title, text, icon });
+
+      // pega param ?id=...
+      function getIdFromUrl() {
+        const params = new URLSearchParams(window.location.search);
+        return params.get('id');
       }
 
-      // mapear status para 1/0 conforme backend espera
-      const ativo = status === "ativo" ? 1 : 0;
+      // tenta buscar usuário por id de várias formas
+      async function fetchUsuarioPorId(id) {
+        const base = "http://192.168.1.122:5000";
 
-      // --- ATENÇÃO: ajuste o id_cadastro dinamicamente se precisar ---
-      // Aqui está hardcoded como você tinha. Se quiser, busco do URL ou dataset.
-      const id_cadastro = 3;
+        // 1) tenta endpoint direto /cadastro/{id}
+        try {
+          const res1 = await fetch(`${base}/cadastro/${id}`);
+          if (res1.ok) {
+            const j = await res1.json();
+            // ajusta caso venha em j.cadastro ou j.data
+            return j.cadastro || j.usuario || j || null;
+          }
+        } catch (e) {
+          // ignora e tenta a próxima estratégia
+        }
 
-      const payload = {
-        id_cadastro,
-        nome,
-        email,
-        cargo,
-        // só envie senha se ela foi preenchida (evita sobrescrever sem querer)
-        ...(senha ? { senha } : {}),
-        ativo
-      };
+        // 2) tenta buscar lista e filtrar localmente
+        try {
+          const res2 = await fetch(`${base}/cadastro`);
+          if (res2.ok) {
+            const j = await res2.json();
+            const arr = j.cadastro || j || [];
+            // procura por campos comuns: id, id_cadastro, _id
+            return arr.find(u =>
+              String(u.id) === String(id) ||
+              String(u.id_cadastro) === String(id) ||
+              String(u._id) === String(id)
+            ) || null;
+          }
+        } catch (e) {
+          console.error("Erro ao buscar lista de cadastro:", e);
+        }
 
-      try {
-        const res = await fetch("http://192.168.1.127:5000/edit_cadastro", {
-          method: "PUT",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-          mode: "cors" // garante que o fetch tente CORS (backend precisa habilitar)
-        });
+        return null;
+      }
 
-        // tenta ler JSON; backend retorna JSON mesmo em erro na nossa impl.
-        const data = await res.json().catch(() => null);
-
-        if (!res.ok) {
-          // mostra mensagem de erro do backend se houver
-          const msg = data && (data.error || data.mensagem || data.detalle || JSON.stringify(data)) || `HTTP ${res.status}`;
-          Swal.fire({ title: "Erro", text: msg, icon: "error" });
+      async function preencherFormulario() {
+        const id = getIdFromUrl();
+        if (!id) {
+          alerta("Erro", "Nenhum ID informado na URL. Abra esta página como editar.html?id=123", "error");
           return;
         }
 
-        Swal.fire({ title: "Sucesso!", text: data.mensagem || "Cadastro atualizado com sucesso!", icon: "success" });
+        // mostra carregando
+        Swal.showLoading();
 
-      } catch (err) {
-        // Erro de rede / CORS / JSON inválido
-        console.error("Erro fetch:", err);
-        Swal.fire({ title: "Ops!", text: "Erro de conexão (verifique backend / CORS)", icon: "error" });
+        const usuario = await fetchUsuarioPorId(id);
+
+        Swal.close();
+
+        if (!usuario) {
+          alerta("Erro", "Usuário não encontrado (ID: " + id + ")", "error");
+          return;
+        }
+
+        // mapeia campos do usuário para o formulário (adapte se nome dos campos for diferente)
+        document.getElementById("nome").value = usuario.nome || usuario.name || "";
+        document.getElementById("email").value = usuario.email || usuario.login || "";
+        // cargo pode vir com valores diferentes - padronize no select
+        const cargoVal = (usuario.cargo || "").toString().toLowerCase();
+        if (cargoVal.includes("cliente")) document.getElementById("cargo").value = "cliente";
+        else if (cargoVal.includes("vend")) document.getElementById("cargo").value = "vendedor";
+        else if (cargoVal.includes("adm") || cargoVal.includes("admin")) document.getElementById("cargo").value = "adm";
+        else document.getElementById("cargo").value = usuario.cargo || "cliente";
+
+        // status: backend pode usar 1/0 ou "ativo"/"inativo"
+        const ativoVal = (usuario.ativo !== undefined) ? usuario.ativo : (usuario.status || "");
+        if (String(ativoVal) === "1" || String(ativoVal).toLowerCase() === "true" || String(ativoVal).toLowerCase() === "ativo") {
+          document.getElementById("status").value = "ativo";
+        } else {
+          document.getElementById("status").value = "inativo";
+        }
+
+        // guarda o id real em um data attribute no form para usar no submit
+        const form = document.getElementById("form-editar");
+        form.dataset.idCadastro = usuario.id_cadastro || usuario.id || usuario._id || id;
       }
-    }
-  </script>
+
+      // lógica de envio (mantive a sua estrutura, mas usando id do formulário)
+      async function editarUsuario(event) {
+        event.preventDefault();
+
+        const form = document.getElementById("form-editar");
+        const id_cadastro = form.dataset.idCadastro;
+        if (!id_cadastro) {
+          alerta("Erro", "ID do usuário não definido. Recarregue a página.", "error");
+          return;
+        }
+
+        // pegar valores do form
+        const nome = document.getElementById("nome").value.trim();
+        const senha = document.getElementById("senha").value;
+        const cargo = document.getElementById("cargo").value;
+        const email = document.getElementById("email").value.trim();
+        const status = document.getElementById("status").value; // "ativo" | "inativo"
+
+        if (!nome || !email) {
+          alerta("Ops!", "Preencha nome e email", "warning");
+          return;
+        }
+
+        const ativo = status === "ativo" ? 1 : 0;
+
+        const payload = {
+          id_cadastro,
+          nome,
+          email,
+          cargo,
+          ...(senha ? { senha } : {}),
+          ativo
+        };
+
+        try {
+          const res = await fetch("http://192.168.1.122:5000/edit_cadastro", {
+            method: "PUT",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify(payload),
+            mode: "cors"
+          });
+
+          // tenta ler JSON mesmo se erro
+          const data = await res.json().catch(() => null);
+
+          if (!res.ok) {
+            const msg = data && (data.error || data.mensagem || data.message) || `HTTP ${res.status}`;
+            alerta("Erro", msg, "error");
+            return;
+          }
+
+          alerta("Sucesso", data.mensagem || "Cadastro atualizado com sucesso!", "success");
+
+          // opcional: redirecionar de volta para lista após 1.2s
+          setTimeout(() => {
+            window.location.href = "usuarios.html";
+          }, 1200);
+
+        } catch (err) {
+          console.error("Erro fetch:", err);
+          alerta("Ops!", "Erro de conexão (verifique backend / CORS).", "error");
+        }
+      }
+
+      // inicializa
+      document.addEventListener("DOMContentLoaded", () => {
+        preencherFormulario();
+
+        // se preferir, remova onsubmit do HTML e use o listener aqui:
+        // document.getElementById('form-editar').addEventListener('submit', editarUsuario);
+      });
+    </script>
+
 </body>
 
 </html>
