@@ -16,9 +16,9 @@ body {
     --preto-opaco: rgba(0, 0, 0, 0.304);
     --preto: #000000;
     --branco: #FFFFFF;
-    --azul-principal: #008CFF;
+    --azul-principal: rgb(0, 140, 255);
     --azul-claro: #E5F3FF;
-    --azul-escuro: #00447C;
+    --azul-escuro: #00447c;
     --verde: #1AAC5F;
     --verde-claro: #D1FFE7;
 }
@@ -141,6 +141,10 @@ h1 {
     align-items: center;
 }
 
+.icone i {
+    font-size: 30px;
+}
+
 .gerenciar {
     color: var(--azul-principal);
     font-weight: bold;
@@ -232,6 +236,11 @@ h1 {
     justify-content: space-between;
 }
 
+.card-cliente:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
 .card-vendedor {
     border: 2px solid var(--preto-opaco);
     padding: 10px;
@@ -241,6 +250,11 @@ h1 {
     border-radius: 5px;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.card-vendedor:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .card-adm {
@@ -253,6 +267,11 @@ h1 {
     border-radius: 5px;
     flex-direction: column;
     justify-content: space-between;
+}
+
+.card-adm:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 20px rgb(0, 140, 255, 0.4);
 }
 
 .card-adm i {
@@ -654,7 +673,7 @@ h2 {
 /* COR DE FUNDO ATIVO/INATIVO */
 
 .status {
-    padding: 4px 10px;
+    padding: 4px 7px;
     border-radius: 5px;
     font-weight: 600;
     color: white;

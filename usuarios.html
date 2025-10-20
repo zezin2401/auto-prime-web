@@ -138,7 +138,7 @@
             <div class="card-adm">
                 <h3>ADM's:</h3>
                 <div class="icon-numero">
-                    <i class="fa-solid fa-user-tie"></i>
+                    <i class="fa-solid fa-star"></i>
                     <p class="numero" id="admsCount">0</p>
                 </div>
             </div>
@@ -190,7 +190,6 @@
                     else if (["adm", "admin", "administrador", "administradora", "administrador(a)"].includes(cargo)) adms++;
                 });
 
-                // atualiza cartões (contadores)
                 const fmt = (n) => n.toLocaleString('pt-BR');
                 const clientesEl = document.getElementById("clientesCount");
                 const vendedoresEl = document.getElementById("vendedoresCount");
@@ -201,23 +200,19 @@
                 if (admsEl) admsEl.textContent = fmt(adms);
                 if (totalEl) totalEl.textContent = fmt(cadastros.length);
 
-                // referências DOM
                 const container = document.getElementById("listarUsuario");
                 const paginationEl = document.getElementById("pagination");
 
-                // Renderiza uma página específica
                 function renderPage(page) {
-                    // limites
+
                     if (page < 1) page = 1;
                     if (page > totalPages) page = totalPages;
                     currentPage = page;
 
-                    // fatia do array
                     const start = (page - 1) * perPage;
                     const end = start + perPage;
                     const slice = cadastros.slice(start, end);
 
-                    // gera HTML da página atual
                     let html = "";
                     slice.forEach(item => {
                         const raw = item.ativo;
@@ -228,10 +223,20 @@
                         );
                         const statusLabel = isAtivo ? "Ativo" : "Inativo";
 
+                        const cargoRaw = (item.cargo || '').toString().toLowerCase();
+                        let iconClass = "fa-user";
+                        if (cargoRaw.includes("adm") || cargoRaw.includes("admin") || cargoRaw.includes("administrador")) {
+                            iconClass = "fa-star";
+                        } else if (cargoRaw.includes("vend") || cargoRaw.includes("vendas") || cargoRaw.includes("seller")) {
+                            iconClass = "fa-cart-shopping";
+                        } else {
+                            iconClass = "fa-user";
+                        }
+
                         html += `
                         <div class="usuario-linha">
                             <div class="usuario-detalhes">
-                                <div class="icone"><i class="fa-solid fa-user"></i></div>
+                                <div class="icone"><i class="fa-solid ${iconClass}"></i></div>
                                 <div class="separacao-nome-info">
                                     <div class="nome"><p>${item.email || ''}</p></div>
                                     <div class="info-usuario">
@@ -313,6 +318,7 @@
 
     document.addEventListener('DOMContentLoaded', carregarUsuarios);
 </script>
+
 
 
 
