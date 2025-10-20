@@ -225,19 +225,56 @@ h1 {
     border-radius: 10px;
 }
 
-.foto {
+/* avatar no card esquerdo */
+.usuario-foto .foto {
+    width: 160px;
+    height: 160px;
+    border-radius: 50%;
+    border: 3px solid #e6e6e6;
     display: flex;
-    width: 200px;
-    height: 200px;
-    border: 2px solid var(--preto-opaco);
-    border-radius: 200px;
-    justify-content: center;
     align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    background: #fff;
+    margin: 0 auto 12px;
 }
 
-.foto i {
-    font-size: 100px;
+.usuario-foto .foto i {
+    font-size: 70px;
+    color: #000;
 }
+
+/* quando avatar carregado via <img> */
+.usuario-foto .avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+    border-radius: 50%;
+}
+
+/* badge de status */
+.usuario-foto .status {
+    display: inline-block;
+    padding: 8px 22px;
+    border-radius: 999px;
+    font-weight: 700;
+    color: #fff;
+    margin-top: 10px;
+}
+
+/* cores */
+.usuario-foto .status.ativo {
+    background-color: #1AAC5F;
+}
+
+/* verde */
+.usuario-foto .status.inativo {
+    background-color: #E90039;
+}
+
+/* vermelho */
+
 
 .infos {
     text-align: center;
@@ -259,10 +296,17 @@ h1 {
     align-items: center;
 }
 
-.separacao-usuario {
+#form-editar {
     display: flex;
-    flex-direction: column;
-    gap: 10px;
+    gap: 80px;
+}
+
+.nomeUsuario {
+    text-align: center;
+}
+
+.emailUsuario {
+    text-align: center;
 }
 
 .status {
@@ -447,7 +491,7 @@ label {
     .botoes {
         gap: 20px;
     }
-    
+
     .container {
         margin-right: 0px;
     }
@@ -467,7 +511,7 @@ label {
 
     .botao-gerenciar {
         padding: 15px 55px;
-    }    
+    }
 }
 
 @media (max-width: 376px) {
