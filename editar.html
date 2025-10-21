@@ -121,78 +121,98 @@
     </div>
 
     <div class="container-edicao">
-      <!-- ... outras seções ... -->
 
       <div class="container-formulario">
-        <!-- importante: onsubmit chama a função com event -->
+
         <form id="form-editar" onsubmit="editarUsuario(event)" action="">
+
+          <div class="usuario-foto">
+
+            <div class="foto">
+              <i class="fa-solid fa-user"></i>
+            </div>
+
+            <h3 class="nomeUsuario">Teste</h3>
+
+            <p class="emailUsuario">usuario@gmail.com</p>
+
+            <div class="status">Ativo</div>
+
+          </div>
+
           <div class="div-container">
+
             <div class="div-nome">
               <label for="nome">Nome:</label>
               <input class="input-form" name="nome" id="nome" type="text" required />
             </div>
 
             <div class="container-chefe">
+
               <div class="div-container-1">
+
                 <div class="div-senha">
                   <label for="senha">Senha:</label>
                   <input class="input-form" name="senha" id="senha" type="password" />
                 </div>
 
                 <div class="div-cargo">
+
                   <label for="cargo">Cargo:</label>
+
                   <select class="input-form" id="cargo" name="cargo">
                     <option value="cliente">Cliente</option>
                     <option value="vendedor">Vendedor</option>
                     <option value="adm">ADM</option>
                   </select>
+
                 </div>
+
               </div>
 
               <div class="div-container-2">
+
                 <div class="div-email">
+
                   <label for="email">Email:</label>
                   <input class="input-form" id="email" name="email" type="email" required>
+
                 </div>
 
                 <div class="div-status">
+
                   <label for="status">Status:</label>
+
                   <!-- valores legíveis; vamos mapear para 1/0 no JS -->
                   <select class="input-form" name="selectstatus" id="status">
                     <option value="ativo">Ativo</option>
                     <option value="inativo">Inativo</option>
                   </select>
+
                 </div>
+
               </div>
+
             </div>
+
+            <button type="submit" class="btn-enviar">Editar</button>
+
           </div>
 
-          <div class="divButtonSubmit">
-            <!-- botão precisa ser type="submit" -->
-            <button type="submit" class="btn-enviar">Editar</button>
-          </div>
         </form>
+
       </div>
+
     </div>
 
     <script>
-      /*
-        Script para editar usuário:
-        - Abra editar.html?id=<ID_DO_USUARIO>
-        - A página vai buscar os dados e preencher o formulário
-        - Ao enviar, manda PUT para /edit_cadastro com o id correto
-      */
-
-      // helper para SweetAlert curto
       const alerta = (title, text, icon = 'info') => Swal.fire({ title, text, icon });
 
-      // pega param ?id=...
       function getIdFromUrl() {
         const params = new URLSearchParams(window.location.search);
         return params.get('id');
       }
 
-      // tenta buscar usuário por id de várias formas
       async function fetchUsuarioPorId(id) {
         const base = "http://192.168.1.123:5000";
 
@@ -201,20 +221,18 @@
           const res1 = await fetch(`${base}/cadastro/${id}`);
           if (res1.ok) {
             const j = await res1.json();
-            // ajusta caso venha em j.cadastro ou j.data
             return j.cadastro || j.usuario || j || null;
           }
         } catch (e) {
           // ignora e tenta a próxima estratégia
         }
 
-        // 2) tenta buscar lista e filtrar localmente
+        // 2) busca lista e filtra
         try {
           const res2 = await fetch(`${base}/cadastro`);
           if (res2.ok) {
             const j = await res2.json();
             const arr = j.cadastro || j || [];
-            // procura por campos comuns: id, id_cadastro, _id
             return arr.find(u =>
               String(u.id) === String(id) ||
               String(u.id_cadastro) === String(id) ||
@@ -228,6 +246,41 @@
         return null;
       }
 
+      // Atualiza o card da esquerda (foto, nome, email, status)
+      function updateLeftCard(usuario) {
+        // elementos
+        const fotoEl = document.querySelector('.usuario-foto .foto');
+        const nomeEl = document.querySelector('.usuario-foto .nomeUsuario');
+        const emailEl = document.querySelector('.usuario-foto .emailUsuario');
+        const statusEl = document.querySelector('.usuario-foto .status');
+
+        // foto: se existir usuario.avatar usa <img>, senão ícone
+        if (usuario.avatar) {
+          // usa URL absoluta ou relativa que venha do backend
+          fotoEl.innerHTML = `<img src="${usuario.avatar}" alt="${usuario.nome || 'avatar'}" class="avatar-img">`;
+        } else {
+          fotoEl.innerHTML = `<i class="fa-solid fa-user"></i>`;
+        }
+
+        // nome/email
+        if (nomeEl) nomeEl.textContent = usuario.nome || usuario.name || '';
+        if (emailEl) emailEl.textContent = usuario.email || usuario.login || '';
+
+        // status: aceita 1/0, "1"/"0", true/false, "ativo"/"inativo"
+        const raw = usuario.ativo !== undefined ? usuario.ativo : usuario.status;
+        const isAtivo = (
+          raw === 1 || raw === '1' ||
+          raw === true || String(raw).toLowerCase() === 'true' ||
+          String(raw).toLowerCase() === 'ativo'
+        );
+
+        if (statusEl) {
+          statusEl.textContent = isAtivo ? 'Ativo' : 'Inativo';
+          statusEl.classList.remove('ativo', 'inativo');
+          statusEl.classList.add(isAtivo ? 'ativo' : 'inativo');
+        }
+      }
+
       async function preencherFormulario() {
         const id = getIdFromUrl();
         if (!id) {
@@ -235,11 +288,8 @@
           return;
         }
 
-        // mostra carregando
         Swal.showLoading();
-
         const usuario = await fetchUsuarioPorId(id);
-
         Swal.close();
 
         if (!usuario) {
@@ -247,17 +297,16 @@
           return;
         }
 
-        // mapeia campos do usuário para o formulário (adapte se nome dos campos for diferente)
+        // preenche inputs
         document.getElementById("nome").value = usuario.nome || usuario.name || "";
         document.getElementById("email").value = usuario.email || usuario.login || "";
-        // cargo pode vir com valores diferentes - padronize no select
+
         const cargoVal = (usuario.cargo || "").toString().toLowerCase();
         if (cargoVal.includes("cliente")) document.getElementById("cargo").value = "cliente";
         else if (cargoVal.includes("vend")) document.getElementById("cargo").value = "vendedor";
         else if (cargoVal.includes("adm") || cargoVal.includes("admin")) document.getElementById("cargo").value = "adm";
         else document.getElementById("cargo").value = usuario.cargo || "cliente";
 
-        // status: backend pode usar 1/0 ou "ativo"/"inativo"
         const ativoVal = (usuario.ativo !== undefined) ? usuario.ativo : (usuario.status || "");
         if (String(ativoVal) === "1" || String(ativoVal).toLowerCase() === "true" || String(ativoVal).toLowerCase() === "ativo") {
           document.getElementById("status").value = "ativo";
@@ -265,12 +314,14 @@
           document.getElementById("status").value = "inativo";
         }
 
-        // guarda o id real em um data attribute no form para usar no submit
+        // guarda id para submit
         const form = document.getElementById("form-editar");
         form.dataset.idCadastro = usuario.id_cadastro || usuario.id || usuario._id || id;
+
+        // atualiza o card à esquerda com os dados recebidos
+        updateLeftCard(usuario);
       }
 
-      // lógica de envio (mantive a sua estrutura, mas usando id do formulário)
       async function editarUsuario(event) {
         event.preventDefault();
 
@@ -281,12 +332,11 @@
           return;
         }
 
-        // pegar valores do form
         const nome = document.getElementById("nome").value.trim();
         const senha = document.getElementById("senha").value;
         const cargo = document.getElementById("cargo").value;
         const email = document.getElementById("email").value.trim();
-        const status = document.getElementById("status").value; // "ativo" | "inativo"
+        const status = document.getElementById("status").value;
 
         if (!nome || !email) {
           alerta("Ops!", "Preencha nome e email", "warning");
@@ -312,7 +362,6 @@
             mode: "cors"
           });
 
-          // tenta ler JSON mesmo se erro
           const data = await res.json().catch(() => null);
 
           if (!res.ok) {
@@ -321,12 +370,22 @@
             return;
           }
 
+          // sucesso: atualiza o card com os novos valores (refletir mudança imediata)
+          const usuarioAtualizado = {
+            id_cadastro,
+            nome,
+            email,
+            cargo,
+            ativo
+          };
+          // caso backend retorne avatar atualizada, poderia usar data.usuario/avatar. Aqui usamos o que temos.
+          updateLeftCard(usuarioAtualizado);
+
           alerta("Sucesso", data.mensagem || "Cadastro atualizado com sucesso!", "success");
 
-          // opcional: redirecionar de volta para lista após 1.2s
           setTimeout(() => {
             window.location.href = "usuarios.html";
-          }, 1200);
+          }, 900);
 
         } catch (err) {
           console.error("Erro fetch:", err);
@@ -334,14 +393,11 @@
         }
       }
 
-      // inicializa
       document.addEventListener("DOMContentLoaded", () => {
         preencherFormulario();
-
-        // se preferir, remova onsubmit do HTML e use o listener aqui:
-        // document.getElementById('form-editar').addEventListener('submit', editarUsuario);
       });
     </script>
+
 
 </body>
 
