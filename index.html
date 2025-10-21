@@ -1,0 +1,257 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
+    
+
+    <title>Home AutoPrime</title>
+    <link rel="stylesheet" href="assets/css/style.css">
+
+    <script src="assets/js/seguranca.js"></script>
+    <script src="assets/js/logout.js"></script>
+
+    <style>
+        /* Menu lateral oculto */
+        #sideMenu {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #222;
+            color: #f0f0f0;
+            box-shadow: -3px 0 8px rgba(0,0,0,0.6);
+            transition: right 0.3s ease, opacity 0.3s ease;
+            padding: 30px 25px;
+            font-family: 'Poppins', sans-serif;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+        }
+
+        #sideMenu.active {
+            right: 0;
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #sideMenu .closeBtn {
+            font-size: 28px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: right;
+            margin-bottom: 40px;
+            color: #f0f0f0;
+            user-select: none;
+            transition: color 0.2s ease;
+        }
+
+        #sideMenu .closeBtn:hover {
+            color: #ff4d4d;
+        }
+
+        #sideMenu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        #sideMenu ul li {
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        #sideMenu ul li a {
+            color: #f0f0f0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: block;
+        }
+
+        #sideMenu ul li a:hover {
+            background-color: #444;
+            color: #ff4d4d;
+        }
+
+        /* Cursor pointer no avatar */
+        .avatarheader img {
+            cursor: pointer;
+        }
+    </style>
+</head>
+
+<body>
+    <header>
+        <img class="logo" src="assets/img/Ariel.png">
+        <form>
+            <input class="input-header" type="text" placeholder="Buscar na AutoPrime">
+            <button class="header-btninput" type="submit" style="padding:8px; border:none; cursor:pointer;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 
+                    1.415-1.414l-3.85-3.85zm-5.242.656a5 
+                    5 0 1 1 0-10 5 5 0 0 1 0 10z" />
+                </svg>
+            </button>
+        </form>
+
+        <a class="avatarheader" href="#" id="avatarToggle"><img src="assets/img/login 3.png" alt="Avatar"></a>
+    </header>
+
+    <!-- Menu lateral -->
+    <nav id="sideMenu">
+        <div class="closeBtn" id="menuClose">&times;</div> <!-- Botão fechar -->
+        <ul>
+            <li><a href="#">Minha Conta</a></li>
+            <li><a href="#" id="logoutBtn">Logout</a></li> <!-- Botão logout -->
+        </ul>
+    </nav>
+
+    <section>
+        <div class="center" style="margin-top: 60px;">
+            <img class="banner1" src="assets/img/PONTEIRAS DE (1).png" alt="Banner">
+        </div>
+
+        <div class="d-flex center div-mae-marcas">
+            <div class="marcas">
+                <img class="carrostoyota" src="assets/img/toyota.png" alt="Toyota">
+            </div>
+
+            <div class="marcas">
+                <img class="carros" src="assets/img/chevrolot.png" alt="Chevrolet">
+            </div>
+
+            <div class="marcas">
+                <img class="carrosram" src="assets/img/ram.png" alt="Ram">
+            </div>
+
+            <div class="marcas">
+                <img class="carrosjeep" src="assets/img/jeep.png" alt="Jeep">
+            </div>
+
+            <div class="marcas">
+                <img class="carrosfiat" src="assets/img/fiat.png" alt="Fiat">
+
+            </div>
+
+            <div class="marcas">
+                <img class="carrosnissan" src="assets/img/nissan.png" alt="Nissan">
+
+            </div>
+        </div>
+
+    </section>
+
+    <section class="explorecatalogo-section">
+        <h3 class="center txt-catalogo">Explore nosso catálogo</h3>
+    </section>
+    <section class="background-cinza">
+        <div class="catalogo-section d-flex">
+            <div class="produto">
+                <img class="img-produto" src="assets/img/ponta 5.png" alt="Produto 1">
+                <h4 class="nome-produto">Ponteira de Escapamento Para Wolksvagem Fusca...</h4>
+                <p class="preco-produto">R$ 79,99</p>
+            </div>
+
+            <div class="produto">
+                <img class="img-produto" src="assets/img/ponta 5.png" alt="Produto 2">
+                <h4 class="nome-produto">Ponteira de Escapamento Para Wolksvagem Fusca...</h4>
+                <p class="preco-produto">R$ 79,99</p>
+            </div>
+
+            <div class="produto">
+                <img class="img-produto" src="assets/img/ponta 5.png" alt="Produto 3">
+                <h4 class="nome-produto">Ponteira de Escapamento Para Wolksvagem Fusca...</h4>
+                <p class="preco-produto">R$ 79,99</p>
+            </div>
+
+            <div class="produto">
+                <img class="img-produto" src="assets/img/ponta 5.png" alt="Produto 4">
+                <h4 class="nome-produto">Ponteira de Escapamento Para Wolksvagem Fusca...</h4>
+                <p class="preco-produto">R$ 79,99</p>
+            </div>
+        </div>
+
+
+    </section>
+    <section class="banner2" style="margin-top: -40px;">
+        <img class="banner2" src="assets/img/PONTEIRAS DE.png" alt="Banner 2">
+    </section>
+
+    <footer class="center" style="background-color: black;">
+        <img class="logo-footer" src="assets/img/Ariel.png" alt="Logo Footer">
+        <p class="p-cadastro2">AutoPrime © 2025 - Todos os direitos reservados</p>
+    </footer>
+
+    <script>
+        const avatarToggle = document.getElementById('avatarToggle');
+        const sideMenu = document.getElementById('sideMenu');
+        const menuClose = document.getElementById('menuClose');
+
+        avatarToggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            sideMenu.classList.add('active');
+        });
+
+        menuClose.addEventListener('click', function () {
+            sideMenu.classList.remove('active');
+        });
+    </script>
+
+        <script>
+        // Seleciona elementos do menu lateral
+        const avatarToggle = document.getElementById('avatarToggle');
+        const sideMenu = document.getElementById('sideMenu');
+        const menuClose = document.getElementById('menuClose');
+
+        // Abre menu lateral ao clicar no avatar
+        avatarToggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            sideMenu.classList.add('active');
+        });
+
+        // Fecha menu lateral ao clicar no X
+        menuClose.addEventListener('click', function () {
+            sideMenu.classList.remove('active');
+        });
+
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Função de logout
+        logoutBtn.addEventListener('click', function (e) {
+            e.preventDefault(); // Evita navegação do link
+
+            localStorage.clear(); // Limpa localStorage
+
+            // Mostra alerta de sucesso do logout
+            Swal.fire({
+                icon: 'success',
+                title: 'Logout realizado!',
+                text: 'Você será redirecionado para a página de login.',
+                confirmButtonText: 'Ok'
+            }).then(() => {
+                window.location.href = 'login.html'; // Redireciona para login
+            });
+        });
+    </script>
+
+
+</body>
+
+</html>

@@ -1,0 +1,795 @@
+* {
+    padding: 0;
+    margin: 0;
+    text-decoration: none;
+}
+
+/* Cadastro e login  */
+.card-cadastro {
+    height: 527px;
+    width: 374px;
+    background-color: #EEEEEE;
+    border-radius: 20px;
+    margin-top: 55px;
+}
+
+.card-login {
+    height: 380px;
+    width: 374px;
+    background-color: #EEEEEE;
+    border-radius: 20px;
+    margin-top: 55px;
+}
+
+.body-cadastro {
+    background-image: url(../img/525f9b9b708c597c880763f8c6fed21afc169bae\ \(1\).jpg);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.body-cadastroproduto {
+    background-image: url(../img/950f8187bccca7a7167f10522c16e492-1200x9000.png);
+    background-repeat: no-repeat;
+    background-size: cover;
+    background-position: center;
+}
+
+.center {
+    text-align: center;
+}
+
+.tit-cadastro {
+    font-family: Poppins;
+    color: #111111;
+    font-size: 20px;
+    font-weight: 600;
+    text-align: center;
+    padding-top: 40px;
+    margin-bottom: 30px;
+}
+
+.input-cadastro {
+    width: 314px;
+    height: 36px;
+    background-color: #FFFFFF;
+    color: #666666;
+    font-family: Poppins;
+    border-radius: 15px;
+    border: none;
+    padding-left: 15px;
+    margin-bottom: 38px;
+
+}
+
+.p-cadastro {
+    font-family: Poppins;
+    font-size: 14px;
+    margin-top: -18px;
+    color:#444444;
+    font-weight: 500;
+    margin-bottom: 19px;
+
+}
+
+.p-cadastro2 {
+    font-family: Poppins;
+    font-size: 14px;
+    color: #ffffff;
+    font-weight: 300;
+
+
+}
+
+footer{
+    background-color: black;
+    height: 230px;
+}
+
+.btn-cadastro {
+    width: 145px;
+    height: 36px;
+    font-family: "Poppins";
+    background-color: #008CFF;
+    color: white;
+    font-size: 16px;
+    font-weight: 600;
+    border: none;
+    border-radius: 9px;
+    margin-left: 115px;
+    margin-top: 15px;
+}
+
+.btn-cadastro:hover {
+    cursor: pointer;
+    background-color: #006dc7;
+}
+
+.sub-p {
+    font-family: Poppins;
+    color: white;
+    font-size: 14px;
+    margin-top: 35px;
+    font-weight: 500;
+    text-align: center;
+}
+
+.frase-cadastro {
+    font-family: Poppins;
+    color: white;
+    font-weight: bold;
+    font-size: 40px;
+    text-align: center;
+}
+
+.frase2-cadastro {
+    font-family: Poppins;
+    color: white;
+    font-weight: 500;
+    font-size: 36px;
+    text-align: center;
+}
+
+.div-mae-cadastro {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 150px;
+}
+
+.div-mae-login {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    gap: 200px;
+}
+
+.logo-cadastro {
+    width: 85px;
+    height: 85px;
+    position: absolute;
+    bottom: 630px;
+    right: 1400px;
+}
+
+/* ===========================
+   Responsivo específico p/ 325px
+   Cole ESTE BLOCO ao final do style.css
+   =========================== */
+@media (max-width: 325px) {
+  /* Esconder completamente o bloco de cima (logo + frases) */
+  .div-mae-login > div:first-child {
+    display: none;
+    visibility: hidden;
+    height: 0;
+    margin: 0;
+    padding: 0;
+  }
+
+  /* Centralizar somente o card e remover gaps enormes */
+  .div-mae-login {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 8px;            /* reduzido para não criar espaço extra */
+    padding: 12px;       /* evita que encoste na borda da tela */
+    height: 100vh;
+    box-sizing: border-box;
+    overflow-y: auto;
+  }
+
+  /* Ajustes do card para caber certinho */
+  .card-login,
+  .card-cadastro {
+    width: 100%;
+    max-width: 320px;    /* cabe bem em 325px */
+    margin-top: 0;
+    height: auto;        /* permite que o conteúdo quebre linhas naturalmente */
+    padding: 18px;
+    box-sizing: border-box;
+    border-radius: 14px;
+  }
+
+  /* Inputs ocupando largura total do card */
+  .input-cadastro {
+    width: 100%;
+    max-width: 100%;
+    box-sizing: border-box;
+    margin-bottom: 16px;
+    padding-left: 12px;
+    height: 40px;
+  }
+
+  /* Botão mais largo e fácil de clicar em mobile */
+  .btn-cadastro {
+    width: 100%;
+    max-width: 100%;
+    height: 44px;
+  }
+
+  /* Pequenos ajustes tipográficos para caber melhor */
+  .tit-cadastro { padding-top: 8px; font-size: 18px; }
+  .p-cadastro { margin-top: 6px; margin-bottom: 12px; font-size: 13px; }
+  .sub-p { margin-top: 12px; font-size: 13px; }
+
+  /* Esconder logo absoluto que quebra layout e garantir que não influencie */
+  .logo-cadastro {
+    display: none;
+    position: static;
+    bottom: auto;
+    right: auto;
+    width: auto;
+    height: auto;
+  }
+
+        /* Esconder logo absoluto que quebra layout e garantir que não influencie */
+
+
+  /* Ajuste do ícone de olho (de dentro do input) */
+  .password-container .toggle-password {
+    top: 20px;
+    right: 12px;
+    transform: translateY(-50%);
+    width: 20px;
+    height: 20px;
+  }
+}
+
+
+
+/* ===========================
+   Responsivo específico p/ 325px - Cadastro
+   =========================== */
+@media (max-width: 325px) {
+    /* Esconder apenas os textos do topo */
+    .div-mae-cadastro > div:first-child h2.frase-cadastro,
+    .div-mae-cadastro > div:first-child h2.frase2-cadastro {
+        display: none;
+    }
+
+    /* Centralizar logo acima do card */
+    .div-mae-cadastro > div:first-child img.logo-cadastro {
+        display: block;
+        margin: 0 auto 12px auto;
+        width: 70px;
+        height: 70px;
+    }
+
+    /* Centraliza card e ajusta layout */
+    .div-mae-cadastro {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        padding: 12px;
+        height: 100vh;
+        box-sizing: border-box;
+        overflow-y: auto;
+        margin: 0 auto; /* centraliza horizontalmente */
+    }
+
+    /* Card ajustado para caber na tela */
+    .card-cadastro {
+        width: 90%;       /* diminuiu um pouco para dar mais margem */
+        max-width: 300px; /* menor ainda que antes */
+        margin-top: 0;
+        height: auto;
+        padding: 18px;
+        box-sizing: border-box;
+        border-radius: 14px;
+        margin-left: 20px;
+    }
+
+    /* Inputs ocupando largura total do card */
+    .input-cadastro,
+    .input-cadastro select {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 16px;
+        padding-left: 12px;
+        height: 40px;
+    }
+
+    /* Botão mais largo para mobile */
+    .btn-cadastro {
+        width: 100%;
+        max-width: 100%;
+        height: 44px;
+    }
+
+    /* Ajustes tipográficos */
+    .tit-cadastro { padding-top: 8px; font-size: 18px; }
+    .p-cadastro { margin-top: 6px; margin-bottom: 12px; font-size: 13px; }
+    .sub-p { margin-top: 12px; font-size: 13px; text-align: center; }
+
+    /* Ajuste do ícone de olho dentro do input */
+    .password-container .toggle-password {
+        top: 22px;
+        right: 12px;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+    }
+}
+
+
+/* HEADER AQUI */
+
+header {
+    background-color: black;
+    display: flex;
+    height: 74px;
+}
+
+.logo {
+    width: 95px;
+    height: 95px;
+    position: absolute;
+    left: 30px;
+    top: -5px
+}
+
+.input-header {
+    width: 328px;
+    height: 38px;
+    border-radius: 25px;
+    background-color: white;
+    border: none;
+    color: #111111;
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 15px;
+    padding-left: 10px;
+    position: absolute;
+    right: 192px;
+    top: 16px;
+}
+
+.header-btninput{
+    height: 30px;
+    width: 61px;
+    border-radius: 25px;
+    position: absolute;
+    background-color: #008cff;
+    right: 195px;
+    top: 20px
+
+}
+
+.avatarheader {
+    width: 178px;
+    height: 30px;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+
+/* HOME */
+
+.banner1 {
+    width: 1423px;
+    height: 370px;
+    border-radius: 10px;
+}
+
+.marcas {
+    background-color: #EAEAEA;
+    width: 125px;
+    height: 125px;
+    border-radius: 60px;
+    display: grid;
+    place-items: center;
+}
+
+.d-flex {
+    display: flex;
+}
+
+.div-mae-marcas {
+    text-align: center;
+    gap: 50px;
+    justify-content: center;
+    margin-top: 50px;
+}
+
+.carros {
+    width: 90px;
+    height: 90px;
+}
+
+.carrosnissan {
+    width: 110px;
+    height: 94px;
+}
+
+.carrosfiat {
+    width: 120px;
+    height: 120px;
+}
+
+.carrosjeep {
+    width: 110px;
+    height: 51px;
+}
+
+.carrosram {
+    width: 81px;
+    height: 85px;
+}
+
+.carroschevrolet {
+    width: 110px;
+    height: 60px;
+}
+
+.carrostoyota {
+    width: 95px;
+    height: 78px;
+}
+
+.explorecatalogo-section {
+    background-color: black;
+    width: 100%;
+    height: 127px;
+    align-items: center;
+    margin-top: 75px;
+}
+
+.txt-catalogo {
+    font-family: Poppins;
+    color: white;
+    font-size: 38px;
+    font-weight: 500;
+    text-align: center;
+    padding-top: 37px;
+}
+
+.catalogo-section{
+    width: 100%;
+    height: 650px;
+    background-color: #CCCCCC;
+    gap: 27px;
+    justify-content: center;
+
+}
+
+.background-cinza {
+    background-color: #CCCCCC;
+}
+
+.produto {
+    width: 285px;
+    height: 396px;
+    background-color: white;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 43px;
+}
+
+.nome-produto {
+    font-family: Poppins;
+    color: #111111;
+    font-size: 17px;
+    font-weight: 500;
+    margin-top: 15px;
+    text-align: left;
+    padding-left: 18px;
+}
+
+.meus-produtos {
+    width: 305px;
+    height: 430px;
+    background-color: white;
+    text-align: center;
+    border-radius: 10px;
+    margin-top: 43px;
+    font-family: poppins;
+    font-weight: 400;
+    font-size: 16px;
+}
+
+
+
+.preco-produto {
+    font-family: Poppins;
+    color: #008CFF;
+    font-size: 20px;
+    font-weight: bold;
+    margin-top: 5px;
+    text-align: left;
+    padding-left: 18px;
+}
+
+.img-produto {
+    width: 245px;
+    height: 244px;
+    margin-top: 18px;
+}
+
+.paginacao {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    /* espaço entre os elementos */
+    font-size: 40px;
+    /* tamanho das setas e número */
+    color: #666;
+    /* cor das setas e número */
+    background: none;
+    /* fundo opcional */
+    height: 150px;
+    /* altura da área */
+    margin-top: -200px;
+    margin-bottom: 40px;
+
+}
+
+.seta {
+    cursor: pointer;
+    user-select: none;
+}
+
+.numero {
+    font-size: 32px;
+    font-weight: 600;
+    font-family: Poppins;
+}
+
+.banner2 {
+    width: 100%;
+    height: 375px;
+}
+
+.logo-footer {
+    width: 165px;
+    height: 165px;
+    padding-top: 30px;
+    margin-bottom: -30px;
+}
+
+
+
+/* SWEET ALERT */
+
+
+/* Container centralizado */
+div.swal2-container.swal2-center {
+    display: grid;
+    place-items: center;
+}
+
+/* Popup estilizado */
+div.swal2-container .swal2-popup {
+    display: grid;
+    place-self: center;
+    grid-template-columns: minmax(0, 100%);
+    width: var(--swal2-width, 400px); /* Largura padrão */
+    max-width: 90%;
+    padding: var(--swal2-padding, 2rem);
+    border: var(--swal2-border, none);
+    border-radius: var(--swal2-border-radius, 12px);
+    background: var(--swal2-background, #ffffff);
+    color: var(--swal2-color, #333333);
+    font-family: 'Poppins', sans-serif;
+    font-size: 1rem;
+    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    text-align: center;
+    animation: var(--swal2-show-animation, scale-in 0.3s ease-in-out);
+}
+
+/* Botão principal */
+.swal2-popup .swal2-confirm {
+    background-color: #008cff;
+    color: #ffffff;
+    font-weight: 500;
+    font-size: 1rem;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+}
+
+.swal2-popup .swal2-confirm:hover {
+    background-color: #006bbd;
+}
+
+/* Botão cancelar */
+.swal2-popup .swal2-cancel {
+    background-color: #e0e0e0;
+    color: #333;
+    font-weight: 500;
+    padding: 0.75rem 1.5rem;
+    border-radius: 8px;
+    border: none;
+    cursor: pointer;
+    margin-left: 0.5rem;
+    transition: background-color 0.2s ease;
+}
+
+.swal2-popup .swal2-cancel:hover {
+    background-color: #c0c0c0;
+}
+
+/* Animação de scale */
+@keyframes scale-in {
+    0% {
+        transform: scale(0.7);
+        opacity: 0;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 1;
+    }
+}
+
+/* Remove highlight no toque */
+[class^="swal2"] {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+}
+
+.btn-produto {
+    background-color: #008CFF;
+    color: white;
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 16px;
+    width: 252px;
+    height: 65px;
+    display: flex;
+    border-radius: 10px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin: 0 auto;
+
+}
+
+.btnedit-produto {
+    background-color: #008CFF;
+    color: white;
+    font-family: Poppins;
+    font-weight: 500;
+    font-size: 13px;
+    width: 122px;
+    height: 39px;
+    display: flex;
+    border-radius: 10px;
+    align-items: center;
+    text-align: center;
+    justify-content: center;
+    margin: 0 auto;
+
+}
+
+.div-btnproduto {
+    margin-top: 80px;
+}
+
+
+.div-cdtproduto {
+    width: 374px;
+    height: 630px;
+    background-color: #EEEEEE;
+    border-radius: 20px;
+    margin: 0 auto;
+    margin-top: 60px;
+}
+
+.p-produto {
+    font-size: 14px;
+    font-weight: 500;
+    font-family: Poppins;
+    color: #666666;
+    margin-top: -25px;
+
+}
+
+/* CSS: cole no seu stylesheet */
+.card-container {
+    display: flex;
+    gap: 18px;
+    align-items: center;
+    justify-content: space-between;
+    border: 1px solid #ddd;
+    border-radius: 10px;
+    padding: 18px;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+    width: 91%;
+    margin: 0 auto;
+}
+
+/* cada card */
+.card {
+    --accent: #111;
+    /* cor padrão do ícone / link */
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    /* conteúdo centralizado (icone+titulo) */
+    text-align: center;
+    padding: 8px 12px;
+    min-width: 0;
+
+    /* importante para truncar em flex */
+}
+
+/* estrutura topo (ícone + título na mesma linha) */
+.card-top {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    margin-bottom: 6px;
+}
+
+/* svg icone (usa currentColor) */
+.icon {
+    width: 22px;
+    height: 22px;
+    display: block;
+    color: var(--accent);
+    flex-shrink: 0;
+}
+
+/* título */
+.card h3 {
+    margin: 0;
+    font-size: 16px;
+    font-weight: 600;
+    color: #333;
+}
+
+/* valor */
+.value {
+    font-size: 15px;
+    font-weight: 700;
+    color: #222;
+    margin: 6px 0 8px;
+}
+
+/* link */
+.card a {
+    color: var(--accent);
+    text-decoration: none;
+    font-size: 13px;
+    font-weight: 700;
+}
+
+.card a:hover {
+    text-decoration: underline;
+}
+
+/* exemplos de acentuação por card */
+.card.vendas {
+    --accent: #007BFF;
+}
+
+/* azul */
+.card.cashback {
+    --accent: #0b8f4a;
+}
+
+/* verde (ajuste se quiser) */
+
+/* responsivo simples: empilha em telas pequenas */
+@media (max-width:720px) {
+    .card-container {
+        flex-wrap: wrap;
+    }
+
+    .card {
+        flex-basis: 48%;
+        margin-bottom: 12px;
+    }
+}
+
+@media (max-width:420px) {
+    .card {
+        flex-basis: 100%;
+    }
+}

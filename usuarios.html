@@ -138,7 +138,7 @@
             <div class="card-adm">
                 <h3>ADM's:</h3>
                 <div class="icon-numero">
-                    <i class="fa-solid fa-star"></i>
+                    <i class="fa-solid fa-gear"></i>
                     <p class="numero" id="admsCount">0</p>
                 </div>
             </div>
@@ -226,7 +226,7 @@
                         const cargoRaw = (item.cargo || '').toString().toLowerCase();
                         let iconClass = "fa-user";
                         if (cargoRaw.includes("adm") || cargoRaw.includes("admin") || cargoRaw.includes("administrador")) {
-                            iconClass = "fa-star";
+                            iconClass = "fa-gear";
                         } else if (cargoRaw.includes("vend") || cargoRaw.includes("vendas") || cargoRaw.includes("seller")) {
                             iconClass = "fa-cart-shopping";
                         } else {

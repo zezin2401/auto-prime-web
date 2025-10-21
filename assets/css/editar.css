@@ -223,6 +223,7 @@ h1 {
     padding: 30px;
     border-radius: 10px;
     background-color: rgb(241, 241, 241);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .usuario-foto {
@@ -235,6 +236,7 @@ h1 {
     border: 2px solid var(--preto-opaco);
     background-color: var(--branco);
     border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .usuario-foto .foto {
@@ -257,7 +259,7 @@ h1 {
 }
 
 .usuario-foto .foto i {
-    font-size: 90px;
+    font-size: 120px;
     color: #000;
 }
 
@@ -303,8 +305,8 @@ h1 {
     border: 2px solid var(--preto-opaco);
     background-color: var(--branco);
     border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
-
 
 .infos {
     text-align: center;
@@ -326,9 +328,42 @@ h1 {
     align-items: center;
 }
 
+h4 {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.div-container {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 #form-editar {
     display: flex;
+    flex-direction: column;
     gap: 40px;
+}
+
+#nome-texto {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+#email-texto {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+#cargo-texto {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+#status-texto {
+    font-weight: 500;
+    font-size: 20px;
 }
 
 .nomeUsuario {
@@ -357,6 +392,50 @@ h1 {
     padding: 5px;
     width: 350px;
     height: 49px;
+}
+
+.label-coisa {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--preto);
+    background-color: white;
+    padding: 5px;
+    margin-left: 10px;
+    position: absolute;
+    font-size: 15px;
+}
+
+.label-coisa-senha {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--preto);
+    background-color: white;
+    padding: 5px;
+    margin-left: 10px;
+    margin-top: -16px;
+    position: absolute;
+    font-size: 15px;
+}
+
+.input-form:focus {
+    border: 2px solid var(--azul-principal);
+    outline: none;
+}
+
+.div-nome:focus-within .label-coisa,
+.div-senha:focus-within .label-coisa-senha,
+.div-email:focus-within .label-coisa,
+.div-cargo:focus-within .label-coisa,
+.div-status:focus-within .label-coisa {
+  color: var(--azul-principal);
+}
+
+.div-nome:focus-within .input-form,
+.div-senha:focus-within .input-form,
+.div-email:focus-within .input-form,
+.div-cargo:focus-within .input-form,
+.div-status:focus-within .input-form {
+  border-color: var(--azul-principal);
 }
 
 label {
@@ -395,13 +474,30 @@ label {
 .div-cargo {
     display: flex;
     flex-direction: column;
-    margin-bottom: 25px;
 }
 
 .div-status {
     display: flex;
     flex-direction: column;
     margin-bottom: 25px;
+}
+
+.dados {
+    text-align: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    flex-wrap: wrap;
+    border: 2px solid var(--preto-opaco);
+    background-color: var(--branco);
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    padding: 10px;
+}
+
+.maisumcontainer {
+    display: flex;
+    gap: 90px;
 }
 
 .btn-enviar {
@@ -440,7 +536,17 @@ label {
     font-size: 20px;
 }
 
+.swal2-confirm {
+    background-color: var(--azul-principal);
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    width: 85px;
+    border-radius: 5px;
+}
 
+.swal2-confirm:hover {
+    background-color: var(--azul-escuro);
+}
 
 @media (max-width: 1440px) {
     .banner img {
@@ -616,6 +722,11 @@ label {
 
     .botoes {
         gap: 1px;
+    }
+
+    .maisumcontainer {
+        flex-direction: column;
+        gap: 40px;
     }
 }
 
@@ -673,6 +784,11 @@ label {
         display: flex;
         justify-content: center;
     }
+
+    .container-edicao {
+        margin-left: 30px;
+        margin-right: 30px;
+    }
 }
 
 @media (max-width: 426px) {
@@ -704,6 +820,10 @@ label {
         width: 20rem;
     }
 
+    h1 {
+        text-align: center;
+    }
+
     header {
         flex-direction: column;
     }
@@ -726,12 +846,20 @@ label {
     }
 
     .container-edicao {
-        margin-left: 35px;
-        margin-right: 35px;
+        background: none;
+        box-shadow: none;
     }
 
     .btn-enviar {
         width: 325px;
+    }
+
+    .maisumcontainer {
+        align-items: center;
+    }
+
+    .dados {
+        flex-direction: column;
     }
 }
 
@@ -764,6 +892,10 @@ label {
 
     .btn-enviar {
         width: 325px;
+    }
+
+    .div-container {
+        width: 360px;
     }
 }
 
@@ -810,5 +942,9 @@ label {
 
     .btn-enviar {
         width: 275px;
+    }
+
+    .div-container {
+        width: 300px;
     }
 }
