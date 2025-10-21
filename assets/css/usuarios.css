@@ -684,11 +684,11 @@ h2 {
 }
 
 .status.ativo {
-    background-color: #D1FFE7;
-    color: #1AAC5F;
+    background-color: #d7fee9;
+    color: #1aac5f;
 }
 
 .status.inativo {
-    background-color: #FFD0DC;
-    color: #E90039;
+    background-color: #ffd9de;
+    color: #e90039;
 }
