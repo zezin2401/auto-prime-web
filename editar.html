@@ -61,7 +61,7 @@
             <p>Usuários</p>
           </div>
           <div class="info-segmento-usuarios">
-            <p class="numero-info"></p>
+            <p class="numero-info">500</p>
             <a class="gerenciar" href="usuarios.html">Gerenciar</a>
           </div>
         </div>
@@ -238,7 +238,7 @@
       }
 
       async function fetchUsuarioPorId(id) {
-        const base = "http://192.168.1.123:5000";
+        const base = "http://192.168.1.113:5000";
 
         try {
           const res1 = await fetch(`${base}/cadastro/${id}`);
@@ -387,7 +387,7 @@
         };
 
         try {
-          const res = await fetch("http://192.168.1.123:5000/edit_cadastro", {
+          const res = await fetch("http://192.168.1.113:5000/edit_cadastro", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),

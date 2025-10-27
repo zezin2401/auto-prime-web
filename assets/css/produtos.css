@@ -232,7 +232,7 @@ h1 {
     border: 2px solid var(--preto-opaco);
     border-radius: 10px;
     padding: 8.5px;
-    height: 510px;
+    height: 515px;
     width: 282px;
 }
 
@@ -335,6 +335,18 @@ h1 {
 
 .titulo-1 {
     margin-bottom: -15px;
+}
+
+.swal2-confirm {
+    background-color: var(--azul-principal);
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    width: 85px;
+    border-radius: 5px;
+}
+
+.swal2-confirm:hover {
+    background-color: var(--azul-escuro);
 }
 
 .titulo-2 {

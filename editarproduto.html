@@ -11,6 +11,7 @@
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="assets/css/editarproduto.css">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 </head>
@@ -129,49 +130,84 @@
 
                             <div class="div-input">
 
-                                <label for="nome">Nome do produto:</label>
-                                <input placeholder="Ponteira..." class="input-form" name="nome" type="text" required />
+                                <div class="div-nome">
+
+                                    <div class="nome-e-dado"></div>
+
+                                    <label class="label-coisa" for="nome">Nome do produto:</label>
+
+                                    <input placeholder="Ponteira..." class="input-form" name="nome" type="text"
+                                        required />
+
+                                </div>
 
                             </div>
                             <div class="div-input">
 
-                                <label for="acabamento">Acabamento:</label>
-                                <select class="select-acabamento" name="acabamento">
-                                    <option value="Inox-Polido">Inox Polido</option>
-                                    <option value="Black-Piano">Black Piano</option>
-                                </select>
+                                <div class="div-acabamento">
 
-                            </div>
+                                    <div class="nome-e-dado">
 
-                            <div class="div-input">
+                                        <label class="label-coisa" for="acabamento">Acabamento:</label>
 
-                                <label for="marca">Marca:</label>
-                                <select class="select-marca" name="cargo">
-                                    <option value="bmw">BMW</option>
-                                    <option value="byd">BYD</option>
-                                    <option value="chevrolet">Chevrolet</option>
-                                    <option value="citroen">Citroen</option>
-                                    <option value="fiat">FIAT</option>
-                                    <option value="ford">Ford</option>
-                                    <option value="honda">Honda</option>
-                                    <option value="hyundai">Hyundai</option>
-                                    <option value="jeep">Jeep</option>
-                                    <option value="kia">KIA</option>
-                                    <option value="mini">MINI</option>
-                                    <option value="nissan">Nissan</option>
-                                    <option value="peugeot">Peugeot</option>
-                                    <option value="ram">RAM</option>
-                                    <option value="toyota">Toyota</option>
-                                    <option value="volkswagen">Volkswagen</option>
-                                </select>
+                                    </div>
+
+                                    <select class="select-acabamento" name="acabamento">
+                                        <option value="Inox-Polido">Inox Polido</option>
+                                        <option value="Black-Piano">Black Piano</option>
+                                    </select>
+
+                                </div>
 
                             </div>
 
                             <div class="div-input">
 
-                                <label for="descricao">Descrição:</label>
-                                <textarea class="text-area-descricao" name="descricao"
-                                    placeholder="Com esta ponteira..."></textarea>
+                                <div class="div-marca">
+
+                                    <div class="nome-e-dado">
+
+                                        <label class="label-coisa" for="marca">Marca:</label>
+
+                                    </div>
+
+                                    <select class="select-marca" name="marca">
+                                        <option value="bmw">BMW</option>
+                                        <option value="byd">BYD</option>
+                                        <option value="chevrolet">Chevrolet</option>
+                                        <option value="citroen">Citroen</option>
+                                        <option value="fiat">FIAT</option>
+                                        <option value="ford">Ford</option>
+                                        <option value="honda">Honda</option>
+                                        <option value="hyundai">Hyundai</option>
+                                        <option value="jeep">Jeep</option>
+                                        <option value="kia">KIA</option>
+                                        <option value="mini">MINI</option>
+                                        <option value="nissan">Nissan</option>
+                                        <option value="peugeot">Peugeot</option>
+                                        <option value="dodge">Dodge Ram</option>
+                                        <option value="toyota">Toyota</option>
+                                        <option value="volkswagen">Volkswagen</option>
+                                    </select>
+
+                                </div>
+
+                            </div>
+
+                            <div class="div-input">
+
+                                <div class="div-descricao">
+
+                                    <div class="nome-e-dado">
+
+                                        <label class="label-coisa" for="descricao">Descrição:</label>
+
+                                    </div>
+
+                                    <textarea class="text-area-descricao" name="descricao"
+                                        placeholder="Com esta ponteira..."></textarea>
+
+                                </div>
 
                             </div>
 
@@ -181,10 +217,19 @@
 
                             <div class="div-input">
 
-                                <label for="email">Foto:</label>
-                                <div class="foto"><i class="fa-solid fa-image"></i>Arraste a imagem até aqui ou clique
-                                    <a class="clique-aqui" href="editarproduto.html">aqui para procurar</a>
+                                <div class="div-foto">
+                                    <div class="nome-e-dado">
+                                        <label class="label-coisa" for="foto">Foto:</label>
+                                    </div>
+
+                                    <div class="foto" id="foto-preview">
+                                        <i class="fa-solid fa-image"></i>
+                                        <span>Arraste a imagem até aqui ou clique</span>
+                                        <input type="file" id="foto-input" accept="image/*" style="display:none">
+                                        <a class="clique-aqui" href="#" id="clique-procurar">aqui para procurar</a>
+                                    </div>
                                 </div>
+
 
                             </div>
 
@@ -194,9 +239,18 @@
 
                                     <div class="div-input">
 
-                                        <label for="preco">Preço:</label>
-                                        <input class="input-form-preco" type="number" name="preco"
-                                            placeholder="R$: 799,99">
+                                        <div class="div-preco">
+
+                                            <div class="nome-e-dado">
+
+                                                <label class="label-coisa" for="preco">Preço:</label>
+
+                                            </div>
+
+                                            <input class="input-form-preco" type="number" name="preco"
+                                                placeholder="R$: 799,99">
+
+                                        </div>
 
                                     </div>
 
@@ -223,5 +277,119 @@
     </section>
 
 </body>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        const fotoInput = document.getElementById('foto-input');
+        const fotoPreview = document.getElementById('foto-preview');
+        const cliqueProcurar = document.getElementById('clique-procurar');
+        const form = document.getElementById('formEdicaoProduto');
+
+        let selectedFile = null;
+        let serverImageName = null;
+
+        function renderPreview(src) {
+            fotoPreview.innerHTML = '';
+            const img = document.createElement('img');
+            img.src = src;
+            img.style.maxWidth = '100%';
+            img.style.maxHeight = '200px';
+            fotoPreview.appendChild(img);
+        }
+
+        // Carregar dados da URL
+        const params = new URLSearchParams(window.location.search);
+        const id = params.get('id');
+        if (!id) {
+            Swal.fire({ icon: "error", title: "Erro", text: "ID do produto não encontrado na URL." });
+            throw new Error("ID ausente na URL");
+        }
+
+        document.querySelector('input[name="nome"]').value = params.get('nome') || '';
+        document.querySelector('textarea[name="descricao"]').value = params.get('descricao') || '';
+        document.querySelector('input[name="preco"]').value = params.get('preco') || '';
+        document.querySelector('select[name="acabamento"]').value = params.get('acabamento') || '';
+        document.querySelector('select[name="marca"]').value = params.get('marca') || '';
+
+        if (params.get('imagem')) {
+            serverImageName = params.get('imagem');
+            renderPreview(`http://192.168.1.113:5000/static/imagens/${encodeURIComponent(serverImageName)}`);
+        }
+
+        // Upload de imagem
+        cliqueProcurar.addEventListener('click', (e) => {
+            e.preventDefault();
+            fotoInput.click();
+        });
+
+        fotoInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file || !file.type.startsWith('image/')) return;
+            selectedFile = file;
+            renderPreview(URL.createObjectURL(file));
+        });
+
+        fotoPreview.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fotoPreview.style.border = '2px dashed #3085d6';
+        });
+        fotoPreview.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            fotoPreview.style.border = '2px dashed #ccc';
+        });
+        fotoPreview.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fotoPreview.style.border = '2px dashed #ccc';
+            const file = e.dataTransfer.files[0];
+            if (!file || !file.type.startsWith('image/')) return;
+            selectedFile = file;
+            renderPreview(URL.createObjectURL(file));
+        });
+
+        // Submissão do formulário
+        form.addEventListener('submit', async function (e) {
+            e.preventDefault();
+
+            const formData = new FormData();
+            formData.append("nome", form.nome.value);
+            formData.append("descricao", form.descricao.value);
+            formData.append("preco", form.preco.value);
+            formData.append("acabamento", form.acabamento.value);
+            formData.append("marca", form.marca.value);
+
+            if (selectedFile) formData.append("imagem", selectedFile, selectedFile.name);
+
+            const token = localStorage.getItem("token");
+            if (!token) {
+                Swal.fire({ icon: "error", title: "Sem Autenticação", text: "Token não encontrado." });
+                return;
+            }
+
+            try {
+                const res = await fetch(`http://192.168.1.113:5000/produto/edit/${id}`, {
+                    method: "PUT",
+                    body: formData,
+                    headers: { "Authorization": "Bearer " + token }
+                });
+
+                if (!res.ok) {
+                    const errText = await res.text();
+                    throw new Error(errText || "Erro ao atualizar produto");
+                }
+
+                Swal.fire({
+                    title: "Produto atualizado!",
+                    icon: "success",
+                    confirmButtonText: "OK"
+                }).then(() => {
+                    window.location.href = "produtos.html";
+                });
+            } catch (err) {
+                Swal.fire({ icon: "error", title: "Erro", text: err.message });
+            }
+        });
+    });
+</script>
+
 
 </html>

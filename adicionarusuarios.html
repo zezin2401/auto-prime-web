@@ -152,10 +152,10 @@
                     <div class="div-container">
 
                         <div class="div-nome">
-
-                            <label for="nome">Nome:</label>
+                            <div class="nome-e-dado">
+                                <label class="label-coisa">Nome:</label>
+                            </div>
                             <input class="input-form" name="nome" id="nome" type="text" required />
-
                         </div>
 
                         <div class="container-chefe">
@@ -163,58 +163,51 @@
                             <div class="div-container-1">
 
                                 <div class="div-senha">
-
-                                    <label for="senha">Senha:</label>
-                                    <input class="input-form" name="senha" id="senha" type="text" required />
-
+                                    <label class="label-coisa-senha">Senha:</label>
+                                    <input class="input-form" name="senha" id="senha" type="password" />
                                 </div>
 
                                 <div class="div-cargo">
 
-                                    <label for="cargo">Cargo:</label>
-
-                                    <select class="input-form" id="cargo" name="cargo">
-
-                                        <option value="cliente">Cliente</option>
-                                        <option value="vendedor">Vendedor</option>
-                                        <option value="adm">ADM</option>
-
-                                    </select>
+                                    <div class="div-cargo">
+                                        <div class="nome-e-dado">
+                                            <label class="label-coisa">Cargo:</label>
+                                        </div>
+                                        <select class="input-form" id="cargo" name="cargo">
+                                            <option value="cliente">Cliente</option>
+                                            <option value="vendedor">Vendedor</option>
+                                            <option value="adm">ADM</option>
+                                        </select>
+                                    </div>
 
                                 </div>
-
                             </div>
 
                             <div class="div-container-2">
 
                                 <div class="div-email">
-
-                                    <label for="email">Email:</label>
+                                    <div class="nome-e-dado">
+                                        <label class="label-coisa">Email:</label>
+                                    </div>
                                     <input class="input-form" id="email" name="email" type="email" required>
-
                                 </div>
 
                                 <div class="div-status">
-
-                                    <label for="status">Status:</label>
+                                    <div class="nome-e-dado">
+                                        <label class="label-coisa">Status:</label>
+                                    </div>
                                     <select class="input-form" name="selectstatus" id="status">
-
                                         <option value="ativo">Ativo</option>
                                         <option value="inativo">Inativo</option>
-
                                     </select>
-
                                 </div>
-
 
                             </div>
 
                         </div>
 
-                    </div>
+                        <button type="submit" class="btn-enviar">Cadastrar</button>
 
-                    <div class="divButtonSubmit">
-                        <button type="submit" class="btn-enviar">Adicionar</button>
                     </div>
                 </form>
 
@@ -233,7 +226,7 @@
         const statusEl = document.getElementById('status'); // se for necessário enviar
 
         // Ajuste a baseURL conforme seu backend
-        const BASE = 'http://192.168.1.123:5000';
+        const BASE = 'http://192.168.1.113:5000';
 
         form.addEventListener('submit', async (event) => {
             event.preventDefault();

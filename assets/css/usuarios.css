@@ -460,6 +460,17 @@ h2 {
     cursor: default;
 }
 
+.swal2-confirm {
+    background-color: var(--azul-principal);
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    width: 85px;
+    border-radius: 5px;
+}
+
+.swal2-confirm:hover {
+    background-color: var(--azul-escuro);
+}
 
 @media (max-width: 1440px) {
     .banner img {

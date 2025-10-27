@@ -306,6 +306,9 @@ h1 {
     background-color: var(--branco);
     border-radius: 10px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
 }
 
 .infos {
@@ -332,12 +335,6 @@ h4 {
     display: flex;
     align-items: center;
     gap: 15px;
-}
-
-.div-container {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
 }
 
 #form-editar {
@@ -389,7 +386,7 @@ h4 {
     border: 2px solid var(--preto-opaco);
     border-radius: 5px;
     font-size: 20px;
-    padding: 5px;
+    padding: 15px;
     width: 350px;
     height: 49px;
 }
@@ -457,6 +454,9 @@ label {
 
 .div-nome .input-form {
     width: 730px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
 }
 
 .div-senha {
@@ -485,9 +485,8 @@ label {
 .dados {
     text-align: center;
     display: flex;
-    justify-content: space-around;
+    flex-direction: column;
     align-items: center;
-    flex-wrap: wrap;
     border: 2px solid var(--preto-opaco);
     background-color: var(--branco);
     border-radius: 10px;
@@ -769,7 +768,7 @@ label {
 
     .container-chefe {
         flex-direction: column;
-        gap: 0;
+        gap: 25px;
     }
 
     .input-form {
@@ -945,6 +944,6 @@ label {
     }
 
     .div-container {
-        width: 300px;
+        width: 335px;
     }
 }

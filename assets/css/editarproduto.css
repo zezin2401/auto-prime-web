@@ -234,48 +234,44 @@ h1 {
     flex-direction: column;
 }
 
-.div-input label {
-    color: var(--preto);
-    font-weight: bold;
-    font-size: 25px;
-}
-
 .input-form {
-    width: 600px;
-    height: 40px;
-    padding: 5px;
-    font-size: 20px;
-    border-radius: 5px;
     border: 2px solid var(--preto-opaco);
-}
-
-.input-form :placeholder-shown {
     font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    border-radius: 5px;
+    padding: 15px;
+    width: 600px;
+    height: 55px;
 }
 
 .select-acabamento {
-    width: 600px;
-    height: 40px;
-    padding: 5px;
-    font-size: 20px;
-    border-radius: 5px;
     border: 2px solid var(--preto-opaco);
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    border-radius: 5px;
+    padding: 15px;
+    width: 600px;
 }
 
 .select-marca {
-    width: 600px;
-    height: 40px;
-    padding: 5px;
-    font-size: 20px;
-    border-radius: 5px;
     border: 2px solid var(--preto-opaco);
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    border-radius: 5px;
+    padding: 15px;
+    width: 600px;
 }
 
 .text-area-descricao {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 17px;
     width: 600px;
-    height: 305px;
-    padding: 5px;
-    font-size: 20px;
+    height: 355px;
+    padding: 15px;;
     border-radius: 5px;
     border: 2px solid var(--preto-opaco);
 }
@@ -311,27 +307,91 @@ h1 {
 }
 
 .input-form-preco {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    border: 2px solid var(--preto-opaco);
+    border-radius: 5px;
+    padding: 15px;
     width: 630px;
+    height: 55px;
+}
+
+.input-form-fabricacao {
+    font-family: "Poppins", sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+    width: 308px;
     height: 40px;
     padding: 5px;
-    font-size: 20px;
     border-radius: 5px;
     border: 2px solid var(--preto-opaco);
 }
 
-.input-form-fabricacao {
-    width: 308px;
-    height: 40px;
-    padding: 5px;
+.label-coisa {
     font-size: 20px;
-    border-radius: 5px;
-    border: 2px solid var(--preto-opaco);
+    font-weight: bold;
+    color: var(--preto);
+    background-color: white;
+    padding: 5px;
+    margin-left: 10px;
+    margin-top: -15px;
+    position: absolute;
+    font-size: 15px;
+}
+
+.input-form:focus {
+    border: 2px solid var(--azul-principal);
+    outline: none;
+}
+
+.select-acabamento:focus {
+    border: 2px solid var(--azul-principal);
+    outline: none;
+}
+
+.select-marca:focus {
+    border: 2px solid var(--azul-principal);
+    outline: none;
+}
+
+.text-area-descricao:focus {
+    border: 2px solid var(--azul-principal);
+    outline: none;
+}
+.input-form-preco:focus {
+    border: 2px solid var(--azul-principal);
+    outline: none;
+}
+
+.div-nome:focus-within .label-coisa,
+.div-acabamento:focus-within .label-coisa,
+.div-marca:focus-within .label-coisa,
+.div-descricao:focus-within .label-coisa,
+.div-preco:focus-within .label-coisa,
+.div-foto:focus-within .label-coisa {
+    color: var(--azul-principal);
+}
+
+.div-nome:focus-within .input-form,
+.div-acabamento:focus-within .select-acabamento,
+.div-marca:focus-within .select-marca,
+.div-descricao:focus-within .text-area-descricao,
+.div-preco:focus-within .input-form-preco,
+.div-foto:focus-within .foto {
+    border-color: var(--azul-principal);
+}
+
+label {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--preto);
 }
 
 .container-final {
     display: flex;
     flex-direction: column;
-     gap: 40px;
+    gap: 40px;
 }
 
 .divbotoes {
@@ -373,6 +433,18 @@ h1 {
     background-color: #E90039;
     color: #FFD0DC;
     border: 2px solid #E90039;
+}
+
+.swal2-confirm {
+    background-color: var(--azul-principal);
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    width: 85px;
+    border-radius: 5px;
+}
+
+.swal2-confirm:hover {
+    background-color: var(--azul-escuro);
 }
 
 @media (max-width: 1440px) {
@@ -519,7 +591,7 @@ h1 {
     .botoes {
         gap: 20px;
     }
-    
+
     .container {
         margin-right: 0px;
     }
@@ -539,7 +611,7 @@ h1 {
 
     .botao-gerenciar {
         padding: 15px 55px;
-    }    
+    }
 
     .container-edicao {
         justify-content: normal;

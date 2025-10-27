@@ -221,8 +221,9 @@ h1 {
     justify-content: center;
     align-items: center;
     padding: 30px;
-    border: 2px solid var(--preto-opaco);
     border-radius: 10px;
+    background-color: rgb(241, 241, 241);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .foto {
@@ -263,6 +264,107 @@ h1 {
     display: flex;
     flex-direction: column;
     gap: 10px;
+}
+
+.nome-e-dado {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+h4 {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+#form-editar {
+    display: flex;
+    flex-direction: column;
+    gap: 40px;
+}
+
+#nome-texto {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+#email-texto {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+#cargo-texto {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+#status-texto {
+    font-weight: 500;
+    font-size: 20px;
+}
+
+.container-formulario {
+    margin-top: 24px;
+}
+
+.input-form {
+    border: 2px solid var(--preto-opaco);
+    border-radius: 5px;
+    font-size: 20px;
+    padding: 15px;
+    width: 350px;
+    height: 49px;
+}
+
+.label-coisa {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--preto);
+    background-color: white;
+    padding: 5px;
+    margin-left: 10px;
+    position: absolute;
+    font-size: 15px;
+}
+
+.label-coisa-senha {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--preto);
+    background-color: white;
+    padding: 5px;
+    margin-left: 10px;
+    margin-top: -16px;
+    position: absolute;
+    font-size: 15px;
+}
+
+.input-form:focus {
+    border: 2px solid var(--azul-principal);
+    outline: none;
+}
+
+.div-nome:focus-within .label-coisa,
+.div-senha:focus-within .label-coisa-senha,
+.div-email:focus-within .label-coisa,
+.div-cargo:focus-within .label-coisa,
+.div-status:focus-within .label-coisa {
+  color: var(--azul-principal);
+}
+
+.div-nome:focus-within .input-form,
+.div-senha:focus-within .input-form,
+.div-email:focus-within .input-form,
+.div-cargo:focus-within .input-form,
+.div-status:focus-within .input-form {
+  border-color: var(--azul-principal);
+}
+
+label {
+    font-size: 20px;
+    font-weight: bold;
+    color: var(--preto);
 }
 
 .status {
@@ -311,10 +413,20 @@ label {
     color: var(--preto);
 }
 
+.div-container {
+    padding: 30px;
+    border: 2px solid var(--preto-opaco);
+    background-color: var(--branco);
+    border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
 .container-chefe {
     display: flex;
     gap: 30px;
-    align-items: flex-end;
 }
 
 .div-nome {
@@ -325,6 +437,15 @@ label {
 
 .div-nome .input-form {
     width: 730px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
+}
+
+.input-form {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 600;
+    font-size: 17px;
 }
 
 .div-senha {

@@ -276,7 +276,7 @@
             redirect: "follow"
         };
 
-        fetch("http://192.168.1.123:5000/produtos", requestOptions)
+        fetch("http://192.168.1.113:5000/produtos", requestOptions)
             .then((response) => {
                 if (!response.ok) throw new Error("Erro ao buscar produtos");
                 return response.json(); // Converte resposta para JSON
@@ -293,7 +293,7 @@
                     console.log(produto);
                     produtosHTML += `
                         <div class="meus-produtos" data-id="${produto.id}">
-                            <img class="img-produto" src="http://192.168.1.123:5000/static/imagens/${produto.imagem}" alt="Produto 1">
+                            <img class="img-produto" src="http://192.168.1.113:5000/static/imagens/${produto.imagem}" alt="Produto 1">
                             <h5 class="nome-produto">${produto.nome}</h5>
                             <p class="preco-produto">R$ ${produto.preco}</p>
 
@@ -345,7 +345,7 @@
                     }
                 });
 
-                const response = await fetch(`http://192.168.1.123:5000/produto/${produtoId}`, {
+                const response = await fetch(`http://192.168.1.113:5000/produto/${produtoId}`, {
                     method: "DELETE",
                     headers: {
                         "Content-Type": "application/json",
