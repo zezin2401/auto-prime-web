@@ -227,7 +227,7 @@ h1 {
     align-items: center;
     justify-content: center;
     flex-wrap: wrap;
-    gap: 60px;
+    gap: 30px;
 }
 
 .produto {
@@ -235,7 +235,7 @@ h1 {
     border-radius: 10px;
     padding: 8.5px;
     height: 515px;
-    width: 330px;
+    width: 300px;
 }
 
 .preco-titulo {

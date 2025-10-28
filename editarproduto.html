@@ -228,8 +228,14 @@
                                         <input type="file" id="foto-input" accept="image/*" style="display:none">
                                         <a class="clique-aqui" href="#" id="clique-procurar">aqui para procurar</a>
                                     </div>
-                                </div>
 
+                                    <div class="selecionar-servidor">
+                                        <label for="imagem-servidor">Ou escolha uma imagem do servidor:</label>
+                                        <select id="imagem-servidor">
+                                            <option value="">-- Nenhuma --</option>
+                                        </select>
+                                    </div>
+                                </div>
 
                             </div>
 
@@ -346,6 +352,41 @@
             renderPreview(URL.createObjectURL(file));
         });
 
+        const fotoInput = document.getElementById('foto-input');
+        const fotoPreview = document.getElementById('foto-preview');
+
+        // Clique em qualquer lugar da div abre o input
+        fotoPreview.addEventListener('click', () => {
+            fotoInput.click();
+        });
+
+        // Upload de arquivo
+        fotoInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file || !file.type.startsWith('image/')) return;
+            selectedFile = file;
+            renderPreview(URL.createObjectURL(file));
+        });
+
+        // Mantém drag & drop
+        fotoPreview.addEventListener('dragover', (e) => {
+            e.preventDefault();
+            fotoPreview.style.border = '2px dashed #3085d6';
+        });
+        fotoPreview.addEventListener('dragleave', (e) => {
+            e.preventDefault();
+            fotoPreview.style.border = '2px dashed #ccc';
+        });
+        fotoPreview.addEventListener('drop', (e) => {
+            e.preventDefault();
+            fotoPreview.style.border = '2px dashed #ccc';
+            const file = e.dataTransfer.files[0];
+            if (!file || !file.type.startsWith('image/')) return;
+            selectedFile = file;
+            renderPreview(URL.createObjectURL(file));
+        });
+
+
         // Submissão do formulário
         form.addEventListener('submit', async function (e) {
             e.preventDefault();
@@ -390,6 +431,4 @@
         });
     });
 </script>
-
-
 </html>
