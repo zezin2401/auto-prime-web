@@ -13,7 +13,6 @@
     <link rel="stylesheet" href="assets/css/produtos.css">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 </head>
 
 <body>
@@ -39,7 +38,6 @@
         <div class="cards-container">
 
             <div class="usuario">
-
                 <div class="icone">
                     <i class="fa-solid fa-user"></i>
                 </div>
@@ -47,13 +45,10 @@
                     <p>usuario@gmail.com</p>
                     <h2 class="criado-em">Criado em: 22/09/2025</h2>
                 </div>
-
             </div>
 
             <div class="informacoes">
-
                 <div class="usuarios">
-
                     <div class="info-titulo">
                         <i class="fa-solid fa-user"></i>
                         <p>Usuários</p>
@@ -65,7 +60,6 @@
                 </div>
 
                 <div class="usuarios">
-
                     <div class="info-titulo">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <p>Vendas</p>
@@ -77,7 +71,6 @@
                 </div>
 
                 <div class="usuarios">
-
                     <div class="info-titulo">
                         <i class="fa-solid fa-bag-shopping"></i>
                         <p>Produtos</p>
@@ -89,7 +82,6 @@
                 </div>
 
                 <div class="usuarios">
-
                     <div class="info-titulo">
                         <i class="fa-solid fa-dollar-sign"></i>
                         <p>Cashback</p>
@@ -99,166 +91,257 @@
                         <a class="gerenciar" href="cashback.html">Gerenciar</a>
                     </div>
                 </div>
-
             </div>
 
         </div>
 
         <div class="botoes">
-
             <a href="usuarios.html" class="botao-gerenciar"><i class="fa-solid fa-user"></i>Gerenciar Usuários</a>
-
             <a href="vendas.html" class="botao-gerenciar"><i class="fa-solid fa-cart-shopping"></i>Gerenciar Vendas</a>
-
             <a href="produtos.html" class="botao-gerenciar"><i class="fa-solid fa-bag-shopping"></i>Gerenciar
                 Produtos</a>
-
             <a href="cashback.html" class="botao-gerenciar"><i class="fa-solid fa-dollar-sign"></i>Gerenciar
                 Cashback</a>
-
         </div>
 
         <div class="container-produtos">
-
             <h2 class="titulo-1">Produtos cadastrados</h2>
-
             <div class="pai-produtos">
-
-                <div class="div-produtos">
-
-                </div>
-
+                <div class="div-produtos"></div>
             </div>
-
+        </div>
     </section>
 </body>
+
 <script>
     (function () {
-        const BASE = 'http://192.168.1.113:5000';
+        const BASE = 'http://192.168.1.119:5000';
         const endpoint = `${BASE}/produtos`;
 
-        const produtosContainers = document.querySelectorAll('.div-produtos');
+        const container = document.querySelector('.div-produtos');
+        const paginationEl = document.getElementById('pagination-controls'); // ajuste se seu id for outro
+        const searchInput = document.querySelector('.barra-pesquisar');
+
+        // estado
+        let produtos = [];
+        const perPage = 6; // <- limite alterado para 6
+        let currentPage = 1;
+        let totalPages = 1;
+
+        function formataPreco(p) {
+            if (p == null || p === '') return 'R$0,00';
+            const num = Number(p);
+            if (isNaN(num)) return String(p);
+            return num.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
+        }
+
+        function buildImageSrc(p) {
+            const rawImg = (p.imagem || '').trim();
+            let imgSrc = 'http://192.168.1.119:5000';
+            if (rawImg !== '') {
+                if (/^https?:\/\//i.test(rawImg)) {
+                    imgSrc = rawImg;
+                } else {
+                    const filename = rawImg.split('/').pop();
+                    if (filename) {
+                        imgSrc = `${BASE}/static/imagens/${encodeURIComponent(filename)}`;
+                    } else {
+                        imgSrc = `${BASE}/static/imagens/${encodeURIComponent(rawImg)}`;
+                    }
+                }
+            }
+            return imgSrc;
+        }
+
+        function criarCardProduto(p) {
+            const card = document.createElement('div');
+            card.className = 'produto';
+
+            const img = document.createElement('img');
+            img.alt = (p.nome && String(p.nome)) || 'Produto';
+            img.width = 230; img.height = 230;
+            img.style.objectFit = 'cover';
+            img.style.display = 'block';
+            img.src = buildImageSrc(p);
+            img.onerror = function () { this.onerror = null; this.src = 'assets/img/placeholder-produto.png'; };
+
+            const info = document.createElement('div');
+            info.className = 'info-produto';
+
+            const titulo = document.createElement('p');
+            titulo.className = 'ponteira-titulo';
+            titulo.innerHTML = (p.nome || 'Produto sem nome') + '<br><span class="small-desc">' + (p.descricao || '') + '</span>';
+
+            const infoPreco = document.createElement('div');
+            infoPreco.className = 'info-preco';
+            const precoTitulo = document.createElement('p');
+            precoTitulo.className = 'preco-titulo';
+            precoTitulo.textContent = 'Preço:';
+            const precoValor = document.createElement('p');
+            precoValor.className = 'preco';
+            precoValor.textContent = formataPreco(p.preco);
+            infoPreco.appendChild(precoTitulo);
+            infoPreco.appendChild(precoValor);
+
+            const hr = document.createElement('hr');
+
+            const containerInfos = document.createElement('div');
+            containerInfos.className = 'container-informacoes-ponteira';
+
+            const marcaEl = document.createElement('div');
+            marcaEl.className = 'marca';
+            marcaEl.textContent = p.marca || '-';
+
+            const acabEl = document.createElement('div');
+            acabEl.className = 'acabamento';
+            acabEl.textContent = p.acabamento || '-';
+
+            containerInfos.appendChild(marcaEl);
+            containerInfos.appendChild(acabEl);
+
+            const botoes = document.createElement('div');
+            botoes.className = 'container-botoes-delete-edit';
+
+            const btnDelete = document.createElement('button');
+            btnDelete.className = 'botao-deletar';
+            btnDelete.innerHTML = '<i class="fa-solid fa-trash"></i>';
+            btnDelete.addEventListener('click', () => deletarProduto(p.id));
+
+            const linkEditar = document.createElement('a');
+            linkEditar.className = 'botao-editar';
+            linkEditar.innerHTML = 'Editar  <i class="fa-solid fa-pen-to-square"></i>';
+            const imagemQuery = encodeURIComponent(p.imagem || '');
+            linkEditar.href = `editarproduto.html?` +
+                `id=${encodeURIComponent(p.id || '')}` +
+                `&nome=${encodeURIComponent(p.nome || '')}` +
+                `&descricao=${encodeURIComponent(p.descricao || '')}` +
+                `&preco=${encodeURIComponent(p.preco || '')}` +
+                `&acabamento=${encodeURIComponent(p.acabamento || '')}` +
+                `&marca=${encodeURIComponent(p.marca || '')}` +
+                `&imagem=${imagemQuery}`;
+
+            botoes.appendChild(btnDelete);
+            botoes.appendChild(linkEditar);
+
+            info.appendChild(titulo);
+            info.appendChild(infoPreco);
+            info.appendChild(hr);
+            info.appendChild(containerInfos);
+            info.appendChild(botoes);
+
+            card.appendChild(img);
+            card.appendChild(info);
+
+            return card;
+        }
+
+        function renderPage(page = 1, items = null) {
+            if (!items) items = produtos;
+            totalPages = Math.max(1, Math.ceil(items.length / perPage));
+            if (page < 1) page = 1;
+            if (page > totalPages) page = totalPages;
+            currentPage = page;
+
+            const start = (page - 1) * perPage;
+            const end = start + perPage;
+            const slice = items.slice(start, end);
+
+            let html = '';
+            slice.forEach(p => {
+                const card = criarCardProduto(p);
+                container.appendChild(card);
+            });
+
+            if (slice.length === 0) {
+                container.innerHTML = '<p>Nenhum produto encontrado.</p>';
+            }
+
+            renderPaginationControls(items.length);
+            container.scrollIntoView({ behavior: 'smooth', block: 'start' });
+        }
+
+        function renderCurrentPageFrom(items) {
+            container.innerHTML = '';
+            renderPage(currentPage, items);
+        }
+
+        function renderPaginationControls(totalItems) {
+            if (!paginationEl) return;
+            if (totalItems === undefined) totalItems = produtos.length;
+            totalPages = Math.max(1, Math.ceil(totalItems / perPage));
+
+            if (totalPages <= 1) {
+                paginationEl.innerHTML = '';
+                return;
+            }
+
+            let controls = '';
+            controls += `<button class="pg-btn" data-page="${Math.max(1, currentPage - 1)}" ${currentPage === 1 ? 'disabled' : ''}>‹ Anterior</button>`;
+
+            const maxButtons = 7;
+            let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
+            let endPage = startPage + maxButtons - 1;
+            if (endPage > totalPages) { endPage = totalPages; startPage = Math.max(1, endPage - maxButtons + 1); }
+
+            if (startPage > 1) {
+                controls += `<button class="pg-btn" data-page="1">1</button>`;
+                if (startPage > 2) controls += `<span class="dots">…</span>`;
+            }
+
+            for (let p = startPage; p <= endPage; p++) {
+                controls += `<button class="pg-btn ${p === currentPage ? 'active' : ''}" data-page="${p}">${p}</button>`;
+            }
+
+            if (endPage < totalPages) {
+                if (endPage < totalPages - 1) controls += `<span class="dots">…</span>`;
+                controls += `<button class="pg-btn" data-page="${totalPages}">${totalPages}</button>`;
+            }
+
+            controls += `<button class="pg-btn" data-page="${Math.min(totalPages, currentPage + 1)}" ${currentPage === totalPages ? 'disabled' : ''}>Próximo ›</button>`;
+
+            paginationEl.innerHTML = controls;
+
+            paginationEl.querySelectorAll('.pg-btn').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const p = Number(btn.dataset.page);
+                    if (!isNaN(p)) {
+                        container.innerHTML = '';
+                        currentPage = p;
+                        const q = (searchInput && searchInput.value) ? searchInput.value.trim().toLowerCase() : '';
+                        if (q) {
+                            const filtrados = produtos.filter(pr => {
+                                const nome = (pr.nome || '').toString().toLowerCase();
+                                const marca = (pr.marca || '').toString().toLowerCase();
+                                const desc = (pr.descricao || '').toString().toLowerCase();
+                                return nome.includes(q) || marca.includes(q) || desc.includes(q);
+                            });
+                            renderPage(p, filtrados);
+                        } else {
+                            renderPage(p, produtos);
+                        }
+                    }
+                });
+            });
+        }
 
         async function buscaProdutos() {
             try {
-                const res = await fetch(endpoint, {
-                    method: 'GET',
-                    headers: { 'Accept': 'application/json' }
-                });
-
+                const res = await fetch(endpoint, { method: 'GET', headers: { 'Accept': 'application/json' } });
                 if (!res.ok) throw new Error('Erro na API: ' + res.status);
-
                 const data = await res.json();
-                const produtos = data.produtos || [];
+                produtos = data.produtos || data || [];
 
-                produtosContainers.forEach(c => c.innerHTML = '');
-
-                function formataPreco(p) {
-                    if (p == null || p === '') return 'R$0,00';
-                    const num = Number(p);
-                    if (isNaN(num)) return String(p);
-                    return num.toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' });
-                }
-
-                produtos.forEach((p) => {
-                    const card = document.createElement('div');
-                    card.className = 'produto';
-
-                    const img = document.createElement('img');
-                    img.alt = p.nome || 'Produto';
-
-                    img.src = p.imagem && p.imagem.trim() !== ''
-                        ? `${BASE}/static/imagens/${encodeURIComponent(p.imagem.split('/').pop())}`
-                        : 'assets/img/placeholder-produto.png';
-
-
-                    const info = document.createElement('div');
-                    info.className = 'info-produto';
-
-                    const titulo = document.createElement('p');
-                    titulo.className = 'ponteira-titulo';
-                    titulo.innerHTML = (p.nome || 'Produto sem nome') + '<br><span class="small-desc">' + (p.descricao || '') + '</span>';
-
-                    const infoPreco = document.createElement('div');
-                    infoPreco.className = 'info-preco';
-                    const precoTitulo = document.createElement('p');
-                    precoTitulo.className = 'preco-titulo';
-                    precoTitulo.textContent = 'Preço:';
-                    const precoValor = document.createElement('p');
-                    precoValor.className = 'preco';
-                    precoValor.textContent = formataPreco(p.preco);
-
-                    infoPreco.appendChild(precoTitulo);
-                    infoPreco.appendChild(precoValor);
-
-                    const hr = document.createElement('hr');
-
-                    const containerInfos = document.createElement('div');
-                    containerInfos.className = 'container-informacoes-ponteira';
-
-                    const marcaEl = document.createElement('div');
-                    marcaEl.className = 'marca';
-                    marcaEl.textContent = p.marca || '-';
-
-                    const acabEl = document.createElement('div');
-                    acabEl.className = 'acabamento';
-                    acabEl.textContent = p.acabamento || '-';
-
-                    containerInfos.appendChild(marcaEl);
-                    containerInfos.appendChild(acabEl);
-
-                    const botoes = document.createElement('div');
-                    botoes.className = 'container-botoes-delete-edit';
-
-                    const btnDelete = document.createElement('button');
-                    btnDelete.className = 'botao-deletar';
-                    btnDelete.innerHTML = '<i class="fa-solid fa-trash"></i>';
-                    btnDelete.addEventListener('click', () => deletarProduto(p.id));
-
-                    const linkEditar = document.createElement('a');
-                    linkEditar.className = 'botao-editar';
-                    linkEditar.innerHTML = 'Editar  <i class="fa-solid fa-pen-to-square"></i>';
-                    linkEditar.href = `editarproduto.html?` +
-                        `id=${encodeURIComponent(p.id)}` +
-                        `&nome=${encodeURIComponent(p.nome)}` +
-                        `&descricao=${encodeURIComponent(p.descricao)}` +
-                        `&preco=${encodeURIComponent(p.preco)}` +
-                        `&acabamento=${encodeURIComponent(p.acabamento)}` +
-                        `&marca=${encodeURIComponent(p.marca)}` +
-                        `&imagem=${encodeURIComponent(p.imagem)}`;
-
-
-                    botoes.appendChild(btnDelete);
-                    botoes.appendChild(linkEditar);
-
-                    info.appendChild(titulo);
-                    info.appendChild(infoPreco);
-                    info.appendChild(hr);
-                    info.appendChild(containerInfos);
-                    info.appendChild(botoes);
-
-                    card.appendChild(img);
-                    card.appendChild(info);
-
-                    let alvo = produtosContainers[0];
-                    if (produtosContainers.length > 1) {
-                        alvo = [...produtosContainers].reduce((a, b) =>
-                            a.children.length <= b.children.length ? a : b
-                        );
-                    }
-                    alvo.appendChild(card);
-                });
-
+                currentPage = 1;
+                container.innerHTML = '';
+                renderPage(1, produtos);
             } catch (err) {
                 console.error('Erro ao carregar produtos:', err);
-                if (produtosContainers[0]) {
-                    produtosContainers[0].innerHTML = '<p>Não foi possível carregar os produtos.</p>';
-                }
+                if (container) container.innerHTML = '<p>Não foi possível carregar os produtos.</p>';
+                if (paginationEl) paginationEl.innerHTML = '';
             }
         }
 
         async function deletarProduto(id) {
-            // Pergunta com SweetAlert
             const result = await Swal.fire({
                 title: 'Tem certeza?',
                 text: 'Deseja realmente excluir este produto?',
@@ -273,12 +356,7 @@
             if (!result.isConfirmed) return;
 
             try {
-                Swal.fire({
-                    title: 'Excluindo...',
-                    text: 'Aguarde enquanto o produto é removido.',
-                    allowOutsideClick: false,
-                    didOpen: () => Swal.showLoading()
-                });
+                Swal.fire({ title: 'Excluindo...', text: 'Aguarde enquanto o produto é removido.', allowOutsideClick: false, didOpen: () => Swal.showLoading() });
 
                 const myHeaders = new Headers();
                 myHeaders.append("Content-Type", "application/json");
@@ -292,12 +370,7 @@
                     ativo: 1
                 });
 
-                const requestOptions = {
-                    method: "DELETE",
-                    headers: myHeaders,
-                    body: raw,
-                    redirect: "follow"
-                };
+                const requestOptions = { method: "DELETE", headers: myHeaders, body: raw, redirect: "follow" };
 
                 const res = await fetch(`${BASE}/produto/${id}`, requestOptions);
 
@@ -305,24 +378,47 @@
 
                 if (!res.ok) throw new Error('Falha ao excluir');
 
-                await buscaProdutos();
+                produtos = produtos.filter(p => p.id !== id && String(p.id) !== String(id));
 
-                Swal.fire({
-                    title: 'Excluído!',
-                    text: 'O produto foi removido com sucesso.',
-                    icon: 'success',
-                    confirmButtonColor: '#3085d6'
-                });
+                const q = (searchInput && searchInput.value) ? searchInput.value.trim().toLowerCase() : '';
+                if (q) {
+                    const filtrados = produtos.filter(pr => {
+                        const nome = (pr.nome || '').toString().toLowerCase();
+                        const marca = (pr.marca || '').toString().toLowerCase();
+                        const desc = (pr.descricao || '').toString().toLowerCase();
+                        return nome.includes(q) || marca.includes(q) || desc.includes(q);
+                    });
+                    container.innerHTML = '';
+                    renderPage(currentPage, filtrados);
+                } else {
+                    container.innerHTML = '';
+                    renderPage(currentPage, produtos);
+                }
 
+                Swal.fire({ title: 'Excluído!', text: 'O produto foi removido com sucesso.', icon: 'success', confirmButtonColor: '#3085d6' });
             } catch (e) {
                 console.error('Erro ao deletar:', e);
-                Swal.fire({
-                    title: 'Erro!',
-                    text: 'Não foi possível excluir o produto.',
-                    icon: 'error',
-                    confirmButtonColor: '#d33'
-                });
+                Swal.fire({ title: 'Erro!', text: 'Não foi possível excluir o produto.', icon: 'error', confirmButtonColor: '#d33' });
             }
+        }
+
+        if (searchInput) {
+            searchInput.addEventListener('input', () => {
+                const q = searchInput.value.trim().toLowerCase();
+                container.innerHTML = '';
+                currentPage = 1;
+                if (!q) {
+                    renderPage(1, produtos);
+                    return;
+                }
+                const filtrados = produtos.filter(p => {
+                    const nome = (p.nome || '').toString().toLowerCase();
+                    const marca = (p.marca || '').toString().toLowerCase();
+                    const desc = (p.descricao || '').toString().toLowerCase();
+                    return nome.includes(q) || marca.includes(q) || desc.includes(q);
+                });
+                renderPage(1, filtrados);
+            });
         }
 
         document.addEventListener('DOMContentLoaded', buscaProdutos);

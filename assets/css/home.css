@@ -10,6 +10,115 @@ body {
     font-style: normal;
 }
 
+/* ---------- Mantém seu CSS original (assumo que já existe acima) ---------- */
+/* ---------- Regras só para telas muito pequenas (<= 322px) ---------- */
+@media (max-width: 322px) {
+
+    /* usamos flex no header APENAS aqui para reorganizar sem quebrar o design original */
+    header {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6px 8px;
+        height: 56px;
+        position: relative;
+        /* garante que seja o container dos filhos */
+        gap: 8px;
+    }
+
+    /* Logo: mantém o mesmo look, mas em posição normal (não absolute) */
+    .logo {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 56px !important;
+        height: auto !important;
+        flex: 0 0 auto;
+    }
+
+    /* Form passa a ser um flex inline, ocupando o espaço central */
+    form {
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        flex: 1 1 auto;
+        margin: 0 6px;
+        min-width: 0;
+        /* importante para truncar corretamente */
+    }
+
+    /* Input: fica responsivo dentro do form */
+    .input-header {
+        position: relative !important;
+        right: auto !important;
+        top: auto !important;
+        width: 100% !important;
+        max-width: none !important;
+        height: 32px !important;
+        padding-left: 10px !important;
+        font-size: 13px !important;
+        border-radius: 20px !important;
+        box-sizing: border-box;
+        flex: 1 1 auto;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    /* Botão: fica ao lado direito do input, sem sobreposição */
+    .header-btninput {
+        position: relative !important;
+        right: auto !important;
+        top: auto !important;
+        width: 38px !important;
+        height: 32px !important;
+        border-radius: 20px !important;
+        flex: 0 0 auto;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    /* reduz o svg do botão caso necessário */
+    .header-btninput svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    /* Avatar: minimal e clicável à direita */
+    .avatarheader {
+        position: relative !important;
+        right: 0 !important;
+        top: 0 !important;
+        width: 36px !important;
+        height: 36px !important;
+        flex: 0 0 auto;
+        display: block;
+        margin-left: 4px;
+    }
+
+    .avatarheader img {
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+    }
+
+    /* placeholder menor para não "quebrar" visual */
+    .input-header::placeholder {
+        font-size: 12px;
+    }
+
+    /* evita que elementos herdados por absolute fiquem sobrepostos */
+    header * {
+        z-index: 1;
+    }
+}
+
+
 
 :root {
     --preto-opaco: rgba(0, 0, 0, 0.304);
@@ -242,6 +351,56 @@ h1 {
     gap: 14px;
 }
 
+/* HEADER AQUI */
+
+header {
+    background-color: black;
+    display: flex;
+    height: 74px;
+}
+
+.logo {
+    width: 95px;
+    height: 95px;
+    position: absolute;
+    left: 50px;
+    top: -5px
+}
+
+.input-header {
+    width: 328px;
+    height: 38px;
+    border-radius: 25px;
+    background-color: white;
+    border: none;
+    color: #111111;
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 15px;
+    padding-left: 10px;
+    position: absolute;
+    right: 192px;
+    top: 16px;
+}
+
+.header-btninput {
+    height: 30px;
+    width: 61px;
+    border-radius: 25px;
+    position: absolute;
+    background-color: #008cff;
+    right: 195px;
+    top: 20px
+}
+
+.avatarheader {
+    width: 178px;
+    height: 30px;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+
 .produtos {
     margin-right: 75px;
     display: flex;
@@ -263,180 +422,4 @@ h1 {
 .preco {
     color: var(--azul-escuro);
     font-weight: bold
-}
-
-@media (max-width: 1440px) {
-    .banner img {
-        width: 1290px;
-    }
-
-    .botoes {
-        justify-content: center;
-        gap: 47px;
-    }
-}
-
-@media (max-width: 1024px) {
-    .banner img {
-        width: 875px;
-    }
-
-    .informacoes {
-        gap: 55px;
-    }
-
-    .botao-gerenciar {
-        font-size: 15px;
-    }
-
-    .botoes {
-        gap: 1px;
-    }
-
-    .info-vendas {
-        flex-direction: column;
-        gap: 30px;
-        align-items: center;
-    }
-
-    .vendedores {
-        width: 90%;
-        margin-left: 0px;
-    }
-
-    .produtos {
-        width: 90%;
-        margin-right: 0px;
-    }
-
-    .div-produtos {
-        justify-content: center;
-        gap: 40px;
-    }
-}
-
-@media (max-width: 768px) {
-    .informacoes {
-        flex-wrap: wrap;
-        gap: 62px;
-    }
-
-    .banner img {
-        width: 615px;
-    }
-
-    .botoes {
-        flex-wrap: wrap;
-        gap: 60px;
-    }
-
-    .botao-gerenciar {
-        font-size: 20px;
-    }
-
-    .cards-container {
-        display: flex;
-        gap: 0px;
-        align-items: center;
-        flex-direction: column;
-    }
-
-    .div-produtos {
-        gap: 20px;
-        flex-wrap: wrap;
-        justify-content: center;
-    }
-
-}
-
-@media (max-width: 426px) {
-    .container {
-        display: flex;
-        gap: 35px;
-        height: 5rem;
-        margin-right: 100px;
-        align-items: center;
-    }
-
-    .banner {
-        display: none;
-    }
-
-    h1 {
-        text-align: center;
-        margin-left: 50px;
-    }
-
-    .botoes {
-        gap: 20px;
-    }
-    
-    .container {
-        margin-right: 0px;
-    }
-
-    .barra-pesquisar {
-        width: 20rem;
-    }
-
-    header {
-        flex-direction: column;
-    }
-
-    .cards-container {
-        margin-left: 35px;
-        margin-right: 35px;
-    }
-
-    .botao-gerenciar {
-        padding: 15px 55px;
-    }    
-}
-
-@media (max-width: 376px) {
-    .barra-pesquisar {
-        width: 16rem;
-    }
-
-    h1 {
-        margin-left: -10px;
-    }
-
-    .cards-container {
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-}
-
-@media (max-width: 321px) {
-    .botao-pesquisar {
-        margin-left: -50px;
-        padding: 7px 10px;
-    }
-
-    .barra-pesquisar {
-        width: 15rem;
-    }
-
-    .container {
-        gap: 20px;
-    }
-
-    .usuario {
-        flex-direction: column;
-    }
-
-    .info {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .botao-gerenciar {
-        padding: 15px 30px;
-    }
-
-    h1 {
-        font-size: 25px;
-    }
 }

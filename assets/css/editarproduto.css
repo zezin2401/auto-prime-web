@@ -420,6 +420,7 @@ label {
     background-color: #FFD0DC;
     padding: 10px;
     width: 305px;
+    text-align: center;
     color: #E90039;
     font-family: 'Poppins', sans-serif;
     font-size: 20px;
@@ -427,6 +428,7 @@ label {
     border-radius: 5px;
     border: 2px solid #E90039;
     cursor: pointer;
+    text-decoration: none;
 }
 
 .btn-cancelar:hover {

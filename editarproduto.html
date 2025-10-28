@@ -258,7 +258,7 @@
 
                                 <div class="divbotoes">
                                     <button class="btn-enviar" type="submit">Salvar alterações</button>
-                                    <button class="btn-cancelar" type="reset">Cancelar</button>
+                                    <a href="produtos.html" class="btn-cancelar">Cancelar</a>
                                 </div>
 
                             </div>
@@ -313,7 +313,7 @@
 
         if (params.get('imagem')) {
             serverImageName = params.get('imagem');
-            renderPreview(`http://192.168.1.113:5000/static/imagens/${encodeURIComponent(serverImageName)}`);
+            renderPreview(`http://192.168.1.119:5000/static/imagens/${encodeURIComponent(serverImageName)}`);
         }
 
         // Upload de imagem
@@ -366,7 +366,7 @@
             }
 
             try {
-                const res = await fetch(`http://192.168.1.113:5000/produto/edit/${id}`, {
+                const res = await fetch(`http://192.168.1.119:5000/produto/edit/${id}`, {
                     method: "PUT",
                     body: formData,
                     headers: { "Authorization": "Bearer " + token }

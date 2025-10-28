@@ -450,9 +450,9 @@ h2 {
 }
 
 .pagination .pg-btn.active {
-    background: #0b84ff;
-    color: white;
-    border-color: #0b84ff;
+    background: var(--azul-principal);
+    color: var(--branco);
+    border-color: var(--azul-principal);
 }
 
 .pagination .pg-btn[disabled] {

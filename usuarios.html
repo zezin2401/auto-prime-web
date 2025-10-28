@@ -171,7 +171,7 @@
     function carregarUsuarios() {
         const requestOptions = { method: "GET", redirect: "follow" };
 
-        fetch("http://192.168.1.113:5000/cadastro", requestOptions)
+        fetch("http://192.168.1.119:5000/cadastro", requestOptions)
             .then((response) => response.json())
             .then((result) => {
                 // array com todos os cadastros
@@ -318,9 +318,5 @@
 
     document.addEventListener('DOMContentLoaded', carregarUsuarios);
 </script>
-
-
-
-
 
 </html>
