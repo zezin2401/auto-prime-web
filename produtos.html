@@ -119,12 +119,11 @@
         const endpoint = `${BASE}/produtos`;
 
         const container = document.querySelector('.div-produtos');
-        const paginationEl = document.getElementById('pagination-controls'); // ajuste se seu id for outro
+        const paginationEl = document.getElementById('pagination-controls');
         const searchInput = document.querySelector('.barra-pesquisar');
 
-        // estado
         let produtos = [];
-        const perPage = 8;  // produtos por página
+        const perPage = 8;
         let currentPage = 1;
         let totalPages = 1;
 

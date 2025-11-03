@@ -315,7 +315,6 @@
           return;
         }
 
-        // --- pega os dados do usuário ---
         const nome = usuario.nome || usuario.name || "";
         const email = usuario.email || usuario.login || "";
         const cargoRaw = (usuario.cargo || "").toString().toLowerCase();
@@ -333,22 +332,18 @@
 
         const statusFormatado = isAtivo ? "Ativo" : "Inativo";
 
-        // --- limpa os inputs (mantém pra edição futura) ---
         document.getElementById("nome").value = "";
         document.getElementById("email").value = "";
         document.getElementById("cargo").value = "";
         document.getElementById("status").value = "";
 
-        // --- mostra dados fora dos inputs ---
         document.getElementById("nome-texto").textContent = nome;
         document.getElementById("email-texto").textContent = email;
         document.getElementById("cargo-texto").textContent = cargoFormatado;
         document.getElementById("status-texto").textContent = statusFormatado;
 
-        // --- atualiza o cartão lateral ---
         updateLeftCard(usuario);
 
-        // --- guarda id no form ---
         const form = document.getElementById("form-editar");
         form.dataset.idCadastro = usuario.id_cadastro || usuario.id || usuario._id || id;
       }

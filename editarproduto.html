@@ -290,9 +290,10 @@
         const fotoPreview = document.getElementById('foto-preview');
         const cliqueProcurar = document.getElementById('clique-procurar');
         const form = document.getElementById('formEdicaoProduto');
+        const selectImagemServidor = document.getElementById('imagem-servidor');
 
         let selectedFile = null;
-        let serverImageName = null;
+        let serverImageName = null; 
 
         function renderPreview(src) {
             fotoPreview.innerHTML = '';
@@ -300,10 +301,14 @@
             img.src = src;
             img.style.maxWidth = '100%';
             img.style.maxHeight = '200px';
+            img.alt = 'Preview da imagem';
             fotoPreview.appendChild(img);
         }
 
-        // Carregar dados da URL
+        function resetPreviewBoxBorder() {
+            fotoPreview.style.border = '2px dashed #ccc';
+        }
+
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
         if (!id) {
@@ -319,75 +324,86 @@
 
         if (params.get('imagem')) {
             serverImageName = params.get('imagem');
-            renderPreview(`http://192.168.1.119:5000/static/imagens/${encodeURIComponent(serverImageName)}`);
+            const url = `http://192.168.1.119:5000/static/imagens/${encodeURIComponent(serverImageName)}`;
+            renderPreview(url);
         }
 
-        // Upload de imagem
+        async function carregarImagensDoServidor() {
+            const listaUrl = 'http://192.168.1.119:5000/api/imagens';
+            try {
+                const res = await fetch(listaUrl);
+                if (!res.ok) throw new Error('Sem lista de imagens');
+                const imagens = await res.json();
+
+                selectImagemServidor.innerHTML = '<option value="">-- Nenhuma --</option>';
+                imagens.forEach(item => {
+                    const name = typeof item === 'string' ? item : item.name;
+                    const opt = document.createElement('option');
+                    opt.value = name;
+                    opt.textContent = name;
+                    if (name === serverImageName) opt.selected = true;
+                    selectImagemServidor.appendChild(opt);
+                });
+            } catch (err) {
+            }
+        }
+        carregarImagensDoServidor();
+
         cliqueProcurar.addEventListener('click', (e) => {
             e.preventDefault();
             fotoInput.click();
         });
-
-        fotoInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (!file || !file.type.startsWith('image/')) return;
-            selectedFile = file;
-            renderPreview(URL.createObjectURL(file));
-        });
-
-        fotoPreview.addEventListener('dragover', (e) => {
-            e.preventDefault();
-            fotoPreview.style.border = '2px dashed #3085d6';
-        });
-        fotoPreview.addEventListener('dragleave', (e) => {
-            e.preventDefault();
-            fotoPreview.style.border = '2px dashed #ccc';
-        });
-        fotoPreview.addEventListener('drop', (e) => {
-            e.preventDefault();
-            fotoPreview.style.border = '2px dashed #ccc';
-            const file = e.dataTransfer.files[0];
-            if (!file || !file.type.startsWith('image/')) return;
-            selectedFile = file;
-            renderPreview(URL.createObjectURL(file));
-        });
-
-        const fotoInput = document.getElementById('foto-input');
-        const fotoPreview = document.getElementById('foto-preview');
-
-        // Clique em qualquer lugar da div abre o input
         fotoPreview.addEventListener('click', () => {
             fotoInput.click();
         });
-
-        // Upload de arquivo
-        fotoInput.addEventListener('change', (e) => {
-            const file = e.target.files[0];
-            if (!file || !file.type.startsWith('image/')) return;
-            selectedFile = file;
-            renderPreview(URL.createObjectURL(file));
+        selectImagemServidor.addEventListener('change', (e) => {
+            const val = e.target.value;
+            if (!val) {
+                serverImageName = null;
+                if (!selectedFile) {
+                    fotoPreview.innerHTML = '<i class="fa-solid fa-image"></i><span>Arraste a imagem até aqui ou clique</span><a class="clique-aqui" href="#" id="clique-procurar">aqui para procurar</a>';
+                }
+                return;
+            }
+            serverImageName = val;
+            selectedFile = null;
+            renderPreview(`http://192.168.1.119:5000/static/imagens/${encodeURIComponent(serverImageName)}`);
         });
 
-        // Mantém drag & drop
         fotoPreview.addEventListener('dragover', (e) => {
             e.preventDefault();
             fotoPreview.style.border = '2px dashed #3085d6';
         });
         fotoPreview.addEventListener('dragleave', (e) => {
             e.preventDefault();
-            fotoPreview.style.border = '2px dashed #ccc';
+            resetPreviewBoxBorder();
         });
         fotoPreview.addEventListener('drop', (e) => {
             e.preventDefault();
-            fotoPreview.style.border = '2px dashed #ccc';
+            resetPreviewBoxBorder();
             const file = e.dataTransfer.files[0];
-            if (!file || !file.type.startsWith('image/')) return;
+            if (!file || !file.type.startsWith('image/')) {
+                Swal.fire({ icon: 'error', title: 'Arquivo inválido', text: 'Por favor envie uma imagem.' });
+                return;
+            }
             selectedFile = file;
+            serverImageName = null;
             renderPreview(URL.createObjectURL(file));
         });
 
+        fotoInput.addEventListener('change', (e) => {
+            const file = e.target.files[0];
+            if (!file) return;
+            if (!file.type.startsWith('image/')) {
+                Swal.fire({ icon: 'error', title: 'Arquivo inválido', text: 'Por favor selecione um arquivo de imagem.' });
+                fotoInput.value = '';
+                return;
+            }
+            selectedFile = file;
+            serverImageName = null;
+            renderPreview(URL.createObjectURL(file));
+        });
 
-        // Submissão do formulário
         form.addEventListener('submit', async function (e) {
             e.preventDefault();
 
@@ -398,7 +414,11 @@
             formData.append("acabamento", form.acabamento.value);
             formData.append("marca", form.marca.value);
 
-            if (selectedFile) formData.append("imagem", selectedFile, selectedFile.name);
+            if (selectedFile) {
+                formData.append("imagem", selectedFile, selectedFile.name);
+            } else if (serverImageName) {
+                formData.append("imagemNome", serverImageName);
+            }
 
             const token = localStorage.getItem("token");
             if (!token) {
@@ -431,4 +451,5 @@
         });
     });
 </script>
+
 </html>

@@ -334,18 +334,15 @@
         const menuClose = document.getElementById('menuClose');
         const logoutBtn = document.getElementById('logoutBtn');
 
-        // Abre o menu ao clicar no avatar
         avatarToggle.addEventListener('click', function (e) {
             e.preventDefault();
             sideMenu.classList.add('active');
         });
 
-        // Fecha o menu ao clicar no X
         menuClose.addEventListener('click', function () {
             sideMenu.classList.remove('active');
         });
 
-        // Logout
         logoutBtn.addEventListener('click', function (e) {
             e.preventDefault();
             localStorage.clear();

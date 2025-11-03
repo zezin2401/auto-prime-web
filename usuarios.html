@@ -174,14 +174,13 @@
         fetch("http://192.168.1.119:5000/cadastro", requestOptions)
             .then((response) => response.json())
             .then((result) => {
-                // array com todos os cadastros
+
                 const cadastros = result.cadastro || result || [];
-                // variáveis de paginação
                 const perPage = 11;
+
                 let currentPage = 1;
                 const totalPages = Math.max(1, Math.ceil(cadastros.length / perPage));
 
-                // contadores por cargo (baseados na lista completa)
                 let clientes = 0, vendedores = 0, adms = 0;
                 cadastros.forEach(item => {
                     const cargo = (item.cargo || '').toString().toLowerCase().trim();
@@ -255,14 +254,13 @@
 
                     container.innerHTML = html;
                     renderPaginationControls();
-                    // rolar pro topo da lista quando trocar página (opcional)
+
                     container.scrollIntoView({ behavior: 'smooth', block: 'start' });
                 }
 
-                // Renderiza os botões de paginação
                 function renderPaginationControls() {
                     if (!paginationEl) return;
-                    // quando só 1 página, pode esconder os controles
+
                     if (totalPages <= 1) {
                         paginationEl.innerHTML = "";
                         return;
@@ -270,10 +268,8 @@
 
                     let controls = '';
 
-                    // botão Anterior
                     controls += `<button class="pg-btn" data-page="${Math.max(1, currentPage - 1)}" ${currentPage === 1 ? 'disabled' : ''}>‹ Anterior</button>`;
 
-                    // mostrar range de páginas; limitar para não poluir (ex.: mostrar 7 botões centrados)
                     const maxButtons = 7;
                     let startPage = Math.max(1, currentPage - Math.floor(maxButtons / 2));
                     let endPage = startPage + maxButtons - 1;

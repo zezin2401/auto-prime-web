@@ -223,22 +223,19 @@
         const emailEl = document.getElementById('email');
         const cargoEl = document.getElementById('cargo');
         const senhaEl = document.getElementById('senha');
-        const statusEl = document.getElementById('status'); // se for necessário enviar
+        const statusEl = document.getElementById('status');
 
-        // Ajuste a baseURL conforme seu backend
         const BASE = 'http://192.168.1.119:5000';
 
         form.addEventListener('submit', async (event) => {
             event.preventDefault();
 
-            // coleta dados
             const nome = nomeEl.value.trim();
             const email = emailEl.value.trim();
             const cargo = cargoEl.value.trim();
             const senha = senhaEl.value;
             const status = statusEl ? statusEl.value : null;
 
-            // validações simples (pode adaptar)
             if (!nome || !email || !senha) {
                 Swal.fire('Erro', 'Preencha nome, email e senha.', 'warning');
                 return;
@@ -247,10 +244,8 @@
             const url = `${BASE}/cadastro`;
             const method = 'POST';
 
-            // corpo (para editar, inclui id_cadastro)
             const bodyObj = { nome, email, cargo, senha };
 
-            // desabilita botão pra evitar double-submit
             const btn = form.querySelector('button[type="submit"]');
             btn.disabled = true;
             btn.textContent = 'Enviando...';
@@ -265,17 +260,15 @@
                 const json = await res.json().catch(() => ({}));
 
                 if (res.ok) {
-                    // sucesso
+
                     Swal.fire({
                         title: 'Sucesso!',
                         text: json.mensagem || 'Operação concluída.',
                         icon: 'success'
                     });
-                    // se quiser redirecionar ou limpar o form:
-                    // form.reset();
-                    // inputId.value = ''; // desmarca edição se era editar
+
                 } else {
-                    // erro: tenta mostrar a mensagem que o backend retornou
+
                     const msg = json.error || json.mensagem || `Erro ${res.status}`;
                     Swal.fire('Erro', msg, 'error');
                 }

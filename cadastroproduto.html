@@ -1,19 +1,22 @@
 <!DOCTYPE html>
 <html lang="pt-br" dir="ltr">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    
+
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap" rel="stylesheet">
-    
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+
     <link rel="stylesheet" href="assets/css/style.css">
     <script src="assets/js/seguranca.js"></script>
-    
+
     <title>Cadastro de Produto</title>
 
     <style>
@@ -30,20 +33,25 @@
             padding: 0;
             box-sizing: border-box;
             font-size: 0;
-            margin-left:22px;
+            margin-left: 22px;
         }
+
         .upload-box .upload-icon {
             width: 48px;
             height: 48px;
             display: block;
             flex-shrink: 0;
         }
-        input[type="file"] { display: none; }
+
+        input[type="file"] {
+            display: none;
+        }
 
         .password-container {
             position: relative;
             width: 100%;
         }
+
         .toggle-password {
             position: absolute;
             top: 20px;
@@ -57,75 +65,76 @@
     </style>
 
     <style>
-    #sideMenu {
-        position: fixed;
-        top: 0;
-        right: -250px;
-        width: 250px;
-        height: 100%;
-        background-color: #222;
-        color: #f0f0f0;
-        box-shadow: -3px 0 8px rgba(0, 0, 0, 0.6);
-        transition: right 0.3s ease, opacity 0.3s ease;
-        padding: 30px 25px;
-        font-family: 'Poppins', sans-serif;
-        z-index: 1000;
-        opacity: 0;
-        pointer-events: none;
-        display: flex;
-        flex-direction: column;
-    }
+        #sideMenu {
+            position: fixed;
+            top: 0;
+            right: -250px;
+            width: 250px;
+            height: 100%;
+            background-color: #222;
+            color: #f0f0f0;
+            box-shadow: -3px 0 8px rgba(0, 0, 0, 0.6);
+            transition: right 0.3s ease, opacity 0.3s ease;
+            padding: 30px 25px;
+            font-family: 'Poppins', sans-serif;
+            z-index: 1000;
+            opacity: 0;
+            pointer-events: none;
+            display: flex;
+            flex-direction: column;
+        }
 
-    #sideMenu.active {
-        right: 0;
-        opacity: 1;
-        pointer-events: auto;
-    }
+        #sideMenu.active {
+            right: 0;
+            opacity: 1;
+            pointer-events: auto;
+        }
 
-    #sideMenu .closeBtn {
-        font-size: 28px;
-        font-weight: 700;
-        cursor: pointer;
-        text-align: right;
-        margin-bottom: 40px;
-        color: #f0f0f0;
-        user-select: none;
-        transition: color 0.2s ease;
-    }
+        #sideMenu .closeBtn {
+            font-size: 28px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: right;
+            margin-bottom: 40px;
+            color: #f0f0f0;
+            user-select: none;
+            transition: color 0.2s ease;
+        }
 
-    #sideMenu .closeBtn:hover {
-        color: #ff4d4d;
-    }
+        #sideMenu .closeBtn:hover {
+            color: #ff4d4d;
+        }
 
-    #sideMenu ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
-    }
+        #sideMenu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
 
-    #sideMenu ul li a {
-        color: #f0f0f0;
-        text-decoration: none;
-        padding: 10px 15px;
-        border-radius: 8px;
-        display: block;
-        transition: color 0.3s ease, background-color 0.3s ease;
-    }
+        #sideMenu ul li a {
+            color: #f0f0f0;
+            text-decoration: none;
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: block;
+            transition: color 0.3s ease, background-color 0.3s ease;
+        }
 
-    #sideMenu ul li a:hover {
-        background-color: #444;
-        color: #ff4d4d;
-    }
+        #sideMenu ul li a:hover {
+            background-color: #444;
+            color: #ff4d4d;
+        }
 
-    .avatarheader img {
-        cursor: pointer;
-    }
-</style>
+        .avatarheader img {
+            cursor: pointer;
+        }
+    </style>
 </head>
+
 <body class="body-cadastroproduto">
 
     <a class="logo-cadastro" href="indexvendedor.html" src="assets/img/Ariel.png" alt="Logo AutoPrime"></a>
@@ -134,10 +143,14 @@
         <h1 class="tit-cadastro">Cadastrar Produto</h1>
 
         <form id="form-produto">
-            <input style=" margin-left: 22px;" id="nome" class="input-cadastro" type="text" name="nome" placeholder="Nome" required>
-            <input style=" margin-left: 22px;" id="descricao" class="input-cadastro" type="text" name="descricao" placeholder="Descrição" required>
-            <input style=" margin-left: 22px;" id="preco" class="input-cadastro" type="number" name="preco" placeholder="Preço" required>
-            <input style=" margin-left: 22px;" id="acabamento" class="input-cadastro" type="text" name="acabamento" placeholder="Acabamento" required>
+            <input style=" margin-left: 22px;" id="nome" class="input-cadastro" type="text" name="nome"
+                placeholder="Nome" required>
+            <input style=" margin-left: 22px;" id="descricao" class="input-cadastro" type="text" name="descricao"
+                placeholder="Descrição" required>
+            <input style=" margin-left: 22px;" id="preco" class="input-cadastro" type="number" name="preco"
+                placeholder="Preço" required>
+            <input style=" margin-left: 22px;" id="acabamento" class="input-cadastro" type="text" name="acabamento"
+                placeholder="Acabamento" required>
 
             <select style=" margin-left: 22px; width: 330px;" id="marca" class="input-cadastro" name="marca" required>
                 <option value="" disabled selected>Marca</option>
@@ -150,15 +163,20 @@
             </select>
 
             <!-- Input hidden para id_vendedor -->
-            <input  type="hidden" id="id_vendedor" name="id_vendedor" value="1">
+            <input type="hidden" id="id_vendedor" name="id_vendedor" value="1">
 
-            <p style=" margin-left: 22px; font-family: Poppins; font-size: 14px; color: #666666; font-weight: 500; " >Imagens (Apenas JPG/PNG)</p>
+            <p style=" margin-left: 22px; font-family: Poppins; font-size: 14px; color: #666666; font-weight: 500; ">
+                Imagens (Apenas JPG/PNG)</p>
             <div class="upload-container">
                 <label for="file-upload" class="upload-box" aria-label="Adicionar imagem">
-                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="upload-icon" role="img" aria-hidden="true">
-                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="black" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <polyline points="17 8 12 3 7 8" fill="none" stroke="black" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
-                        <line x1="12" y1="3" x2="12" y2="15" fill="none" stroke="black" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round"/>
+                    <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" class="upload-icon" role="img"
+                        aria-hidden="true">
+                        <path d="M21 15v4a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2v-4" fill="none" stroke="black"
+                            stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round" />
+                        <polyline points="17 8 12 3 7 8" fill="none" stroke="black" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round" />
+                        <line x1="12" y1="3" x2="12" y2="15" fill="none" stroke="black" stroke-width="2.2"
+                            stroke-linecap="round" stroke-linejoin="round" />
                     </svg>
                 </label>
                 <input id="file-upload" type="file" accept="image/*">
@@ -170,36 +188,29 @@
     </div>
 
     <p style="margin-top: 5px;" class="sub-p">
-        Não vai cadastrar um Produto? 
+        Não vai cadastrar um Produto?
         <a style="font-weight: 700; color: white;" href="indexvendedor.html">Voltar</a>
     </p>
 
-        <script>
-        /*
-        * Captura o evento de envio do formulário com id 'form-produto'
-        * e impede o comportamento padrão (recarregar a página)
-        */
-        $('#form-produto').on('submit', function(e) {
+    <script>
+        $('#form-produto').on('submit', function (e) {
             e.preventDefault();
 
-            // Captura os valores dos inputs do formulário e remove espaços extras
             const nome = $('#nome').val().trim();
             const descricao = $('#descricao').val().trim();
             const preco = $('#preco').val().trim();
             const acabamento = $('#acabamento').val().trim();
             const marca = $('#marca').val();
             const id_vendedor = $('#id_vendedor').val();
-            const imagemFile = $('#file-upload')[0].files[0]; // Pega o arquivo selecionado
+            const imagemFile = $('#file-upload')[0].files[0];
 
-            // Valida campos obrigatórios
             if (!nome || !preco || !id_vendedor || !imagemFile) {
-                // Mostra alerta de erro caso algum campo obrigatório não esteja preenchido
+
                 Swal.fire('Erro', 'Todos os campos obrigatórios devem ser preenchidos', 'error')
-                    .then(() => cleanupSwalIfStuck()); // Garante que o overlay do SweetAlert seja removido
-                return; // Sai da função se houver erro
+                    .then(() => cleanupSwalIfStuck());
+                return;
             }
 
-            // Cria um objeto FormData para enviar dados via POST, incluindo arquivo
             const formData = new FormData();
             formData.append('nome', nome);
             formData.append('descricao', descricao);
@@ -209,30 +220,27 @@
             formData.append('id_vendedor', id_vendedor);
             formData.append('imagem', imagemFile);
 
-            // Requisição AJAX usando jQuery
             $.ajax({
-                url: 'http://192.168.1.119:5000/produto', // Endpoint da API para cadastro
-                type: 'POST', // Método POST
-                data: formData, // Dados do formulário
-                processData: false, // Não processa os dados (necessário para FormData)
-                contentType: false, // Não define content-type (FormData já define)
-                success: function(response) {
-                    // Mostra alerta de sucesso ao cadastrar o produto
+                url: 'http://192.168.1.119:5000/produto',
+                type: 'POST',
+                data: formData,
+                processData: false,
+                contentType: false,
+                success: function (response) {
+  
                     Swal.fire('Sucesso', (response && response.mensagem) ? response.mensagem : 'Produto cadastrado', 'success')
                         .then(() => {
-                            cleanupSwalIfStuck(); // Remove qualquer overlay residual
-                            window.location.href = "indexvendedor.html"; // Redireciona para página principal
+                            cleanupSwalIfStuck();
+                            window.location.href = "indexvendedor.html";
                         });
                 },
-                error: function(xhr) {
-                    // Captura o erro retornado pelo servidor ou usa mensagem genérica
+                error: function (xhr) {
+
                     const err = xhr && xhr.responseJSON ? (xhr.responseJSON.error || JSON.stringify(xhr.responseJSON)) : 'Erro desconhecido';
 
-                    // Mostra alerta de erro
                     Swal.fire('Erro', err, 'error')
-                        .then(() => cleanupSwalIfStuck()); // Limpa overlay
+                        .then(() => cleanupSwalIfStuck());
 
-                    // Fallback: garante remoção de qualquer overlay após 1.5s
                     setTimeout(cleanupSwalIfStuck, 1500);
                 }
             });
@@ -244,23 +252,19 @@
          */
         function cleanupSwalIfStuck() {
             try {
-                // Fecha o SweetAlert se estiver aberto
+
                 if (typeof Swal !== 'undefined' && Swal.close) {
                     Swal.close();
                 }
 
-                // Remove containers e backdrops que podem ter sobrado
                 $('.swal2-container').remove();
                 $('.swal2-backdrop').remove();
 
-                // Remove classes adicionadas pelo SweetAlert
                 $('body').removeClass('swal2-shown swal2-height-auto');
 
-                // Restaura pointer-events do body e html para permitir interação
                 $('html').css('pointer-events', 'auto');
                 $('body').css('pointer-events', 'auto');
 
-                // Garantia extra: remove pointer-events inline caso tenha sido aplicado
                 if (document.documentElement.style.pointerEvents === 'none') {
                     document.documentElement.style.pointerEvents = 'auto';
                 }
@@ -268,11 +272,11 @@
                     document.body.style.pointerEvents = 'auto';
                 }
             } catch (e) {
-                // Em caso de erro, exibe aviso no console
+
                 console.warn('cleanupSwalIfStuck falhou:', e);
             }
         }
-        </script>
+    </script>
 
 
     <nav id="sideMenu">
@@ -282,38 +286,36 @@
             <li><a href="#" id="logoutBtn">Logout</a></li>
         </ul>
     </nav>
-<!-- Menu lateral JS -->
-<script>
-    const avatarToggle = document.getElementById('avatarToggle');
-    const sideMenu = document.getElementById('sideMenu');
-    const menuClose = document.getElementById('menuClose');
-    const logoutBtn = document.getElementById('logoutBtn');
+    <!-- Menu lateral JS -->
+    <script>
+        const avatarToggle = document.getElementById('avatarToggle');
+        const sideMenu = document.getElementById('sideMenu');
+        const menuClose = document.getElementById('menuClose');
+        const logoutBtn = document.getElementById('logoutBtn');
 
-    // Abre o menu ao clicar no avatar
-    avatarToggle.addEventListener('click', function (e) {
-        e.preventDefault();
-        sideMenu.classList.add('active');
-    });
-
-    // Fecha o menu ao clicar no X
-    menuClose.addEventListener('click', function () {
-        sideMenu.classList.remove('active');
-    });
-
-    // Logout
-    logoutBtn.addEventListener('click', function (e) {
-        e.preventDefault();
-        localStorage.clear();
-        Swal.fire({
-            icon: 'success',
-            title: 'Logout realizado!',
-            text: 'Você será redirecionado para a página de login.',
-            confirmButtonText: 'Ok'
-        }).then(() => {
-            window.location.href = 'login.html';
+        avatarToggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            sideMenu.classList.add('active');
         });
-    });
-</script>
+
+        menuClose.addEventListener('click', function () {
+            sideMenu.classList.remove('active');
+        });
+
+        logoutBtn.addEventListener('click', function (e) {
+            e.preventDefault();
+            localStorage.clear();
+            Swal.fire({
+                icon: 'success',
+                title: 'Logout realizado!',
+                text: 'Você será redirecionado para a página de login.',
+                confirmButtonText: 'Ok'
+            }).then(() => {
+                window.location.href = 'login.html';
+            });
+        });
+    </script>
 
 </body>
+
 </html>
