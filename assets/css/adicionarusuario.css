@@ -113,6 +113,7 @@ h1 {
     padding: 30px;
     border: 2px solid var(--preto-opaco);
     border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .usuario {
@@ -206,6 +207,7 @@ h1 {
     color: var(--preto);
     align-items: center;
     text-decoration: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .botao-gerenciar i {
@@ -440,12 +442,18 @@ label {
     font-family: 'Poppins', sans-serif;
     font-weight: 600;
     font-size: 17px;
+    padding: 15px;
 }
 
 .input-form {
-    font-family: 'Poppins', sans-serif;
+    border: 2px solid var(--preto-opaco);
+    font-family: "Poppins", sans-serif;
     font-weight: 600;
     font-size: 17px;
+    border-radius: 5px;
+    padding: 15px;
+    width: 350px;
+    height: 55px;
 }
 
 .div-senha {
@@ -463,7 +471,6 @@ label {
 .div-cargo {
     display: flex;
     flex-direction: column;
-    margin-bottom: 25px;
 }
 
 .div-status {
@@ -474,12 +481,12 @@ label {
 
 .btn-enviar {
     width: 730px;
-    height: 49px;
+    height: 55px;
     padding: 5px;
     color: var(--branco);
     font-family: 'Poppins', sans-serif;
-    font-size: 20px;
     font-weight: bold;
+    font-size: 25px;
     border: none;
     border-radius: 5px;
     background-color: var(--azul-principal);

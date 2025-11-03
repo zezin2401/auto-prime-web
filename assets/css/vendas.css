@@ -112,6 +112,7 @@ h1 {
     padding: 30px;
     border: 2px solid var(--preto-opaco);
     border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .usuario {
@@ -205,6 +206,7 @@ h1 {
     color: var(--preto);
     align-items: center;
     text-decoration: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .botao-gerenciar i {
@@ -240,6 +242,8 @@ h1 {
     justify-content: space-between;
     border: 2px solid var(--azul-principal);
     background-color: var(--azul-claro);
+    box-shadow: 0 10px 20px rgb(123, 168, 204);
+
 }
 
 .info-capital {
@@ -262,6 +266,7 @@ h1 {
     justify-content: space-between;
     border: 2px solid var(--verde);
     background-color: var(--verde-claro);
+    box-shadow: 0 10px 20px rgb(128, 200, 165);
 }
 
 .informacoes-vendas {
@@ -286,6 +291,7 @@ h1 {
     padding: 10px;
     width: 662px;
     height: 485px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .titulo-pizza {
@@ -308,6 +314,7 @@ h1 {
     width: 662px;
     height: 485px;
     padding: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 #Pizza {
@@ -333,6 +340,7 @@ h1 {
     padding: 30px;
     border: 2px solid var(--preto-opaco);
     border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .vendedor-detalhes {

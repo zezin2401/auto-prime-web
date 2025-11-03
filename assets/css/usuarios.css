@@ -113,6 +113,7 @@ h1 {
     padding: 30px;
     border: 2px solid var(--preto-opaco);
     border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .usuario {
@@ -172,6 +173,7 @@ h1 {
     color: var(--preto);
     align-items: center;
     text-decoration: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .botao-gerenciar i {
@@ -271,7 +273,7 @@ h1 {
 
 .card-adm:hover {
     transform: translateY(-5px);
-    box-shadow: 0 10px 20px rgb(0, 140, 255, 0.4);
+    box-shadow: 0 10px 20px rgb(123, 168, 204);
 }
 
 .card-adm i {
@@ -357,6 +359,7 @@ h2 {
     padding: 30px;
     border: 2px solid var(--preto-opaco);
     border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .info-usuario {

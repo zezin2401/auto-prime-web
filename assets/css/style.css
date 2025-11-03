@@ -4,6 +4,15 @@
     text-decoration: none;
 }
 
+:root {
+    --preto-opaco: rgba(0, 0, 0, 0.304);
+    --preto: #000000;
+    --branco: #FFFFFF;
+    --azul-principal: #008CFF;
+    --azul-claro: #E5F3FF;
+    --azul-escuro: #00447C;
+}
+
 /* Cadastro e login  */
 .card-cadastro {
     height: 527px;

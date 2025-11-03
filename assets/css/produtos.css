@@ -111,6 +111,7 @@ h1 {
     padding: 30px;
     border: 2px solid var(--preto-opaco);
     border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .usuario {
@@ -204,6 +205,7 @@ h1 {
     color: var(--preto);
     align-items: center;
     text-decoration: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .botao-gerenciar i {
@@ -220,6 +222,7 @@ h1 {
     border: 2px solid var(--preto-opaco);
     border-radius: 10px;
     margin-bottom: 40px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .div-produtos {
@@ -234,8 +237,48 @@ h1 {
     border: 2px solid var(--preto-opaco);
     border-radius: 10px;
     padding: 8.5px;
-    height: 515px;
+    height: 492px;
     width: 300px;
+}
+
+.total-produtos {
+    margin-left: 75px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 10px;
+    margin-bottom: 23px;
+}
+
+.sofie {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.todos-produtos {
+    font-size: 25px;
+    color: var(--preto-opaco);
+    font-weight: 500;
+}
+
+.botao-add {
+    background-color: var(--azul-principal);
+    padding: 5px;
+    margin-right: 75px;
+    width: 230px;
+    border-radius: 5px;
+    display: flex;
+    justify-content: space-evenly;
+    align-items: center;
+    color: var(--branco);
+    font-size: 20px;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.botao-add:hover {
+    background-color: var(--azul-escuro);
 }
 
 .preco-titulo {
@@ -252,7 +295,30 @@ h1 {
 }
 
 .ponteira-titulo {
-    font-size: 20px;
+    margin: 0 0 8px 0;
+    font-size: 1rem;
+    line-height: 1.2;
+}
+
+.ponteira-titulo .nome-produto {
+    display: -webkit-box;
+    -webkit-line-clamp: 1;
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: normal;
+    font-weight: 600;
+    color: #111;
+    font-size: 19px;
+}
+
+.small-desc {
+    display: -webkit-box;
+    color: var(--preto-opaco);
+    -webkit-line-clamp: 1;   /* Número de linhas */
+    -webkit-box-orient: vertical;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .preco {
@@ -271,6 +337,11 @@ h1 {
 .container-botoes-delete-edit {
     display: flex;
     justify-content: space-between;
+}
+
+.produto img {
+    width: -webkit-fill-available;
+    border-radius: 10px;
 }
 
 .marca {
@@ -542,6 +613,7 @@ h1 {
     display: flex;
     gap: 8px;
     align-items: center;
+    justify-content: center;
     margin-top: 18px;
     flex-wrap: wrap;
 }
@@ -549,21 +621,21 @@ h1 {
 .pagination button {
     padding: 6px 10px;
     border-radius: 6px;
-    border: 1px solid #ccc;
-    background: white;
+    border: 1px solid var(--preto-opaco);
+    background: var(--branco);
     cursor: pointer;
 }
 
 .pagination button.active {
-    background: #3085d6;
-    color: white;
-    border-color: #3085d6;
+    background: var(--azul-principal);
+    color: var(--branco);
+    border-color: var(--azul-principal);
 }
 
 .pagination .info-pages {
     margin-left: 8px;
     font-size: 0.95rem;
-    color: #333;
+    color: var(--preto);
 }
 
 .pagination .page-size {
@@ -573,8 +645,8 @@ h1 {
 .pagination .page-size select {
     padding: 6px;
     border-radius: 6px;
-    border: 1px solid #ccc;
-    background: white;
+    border: 1px solid var(--preto-opaco);
+    background: var(--branco);
 }
 
 .pagination .ellipsis {

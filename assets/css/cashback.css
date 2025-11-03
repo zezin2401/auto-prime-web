@@ -112,6 +112,7 @@ h1 {
     padding: 30px;
     border: 2px solid var(--preto-opaco);
     border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .usuario {
@@ -205,6 +206,7 @@ h1 {
     color: var(--preto);
     align-items: center;
     text-decoration: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .botao-gerenciar i {
@@ -231,8 +233,10 @@ h1 {
     flex-direction: row-reverse;
     align-items: flex-end;
     justify-content: space-between;
-    border: 2px solid var(--azul-principal);
     background-color: var(--azul-claro);
+    border: 2px solid var(--azul-principal);
+    box-shadow: 0 10px 20px rgb(123, 168, 204);
+
 }
 
 .graficos-container {
@@ -244,7 +248,6 @@ h1 {
 .grafico-pizza {
     margin-top: 40px;
     margin-left: 75px;
-    border: 2px solid var(--preto-opaco);
     border-radius: 10px;
     display: flex;
     padding: 10px;
@@ -252,6 +255,8 @@ h1 {
     height: 485px;
     flex-direction: column;
     align-items: center;
+    border: 2px solid var(--preto-opaco);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .titulo-pizza {
@@ -270,6 +275,7 @@ h1 {
     margin-top: 40px;
     margin-right: 75px;
     border: 2px solid var(--preto-opaco);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
     width: 662px;
     height: 485px;
@@ -294,6 +300,7 @@ h1 {
     gap: 12px;
     padding: 30px;
     border: 2px solid var(--preto-opaco);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
 

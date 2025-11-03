@@ -104,18 +104,33 @@
                 Cashback</a>
         </div>
 
+        <div class="total-produtos">
+
+            <div class="sofie">
+                <p class="todos-produtos">Todos os produtos:</p>
+                <h2 id="total-produtos">50.000</h2>
+            </div>
+
+            <a class="botao-add" href="adicionarprodutoadm.html">
+                <i class="fa-solid fa-plus"></i> Adicionar Produto
+            </a>
+
+        </div>
+
+
         <div class="container-produtos">
             <h2 class="titulo-1">Produtos cadastrados</h2>
             <div class="pai-produtos">
                 <div class="div-produtos"></div>
             </div>
+            <div id="pagination-controls" class="pagination"></div>
         </div>
     </section>
 </body>
 
 <script>
     (function () {
-        const BASE = 'http://192.168.1.125:5000';
+        const BASE = 'http://192.168.1.124:5000';
         const endpoint = `${BASE}/produtos`;
 
         const container = document.querySelector('.div-produtos');
@@ -136,20 +151,24 @@
 
         function buildImageSrc(p) {
             const rawImg = (p.imagem || '').trim();
-            let imgSrc = 'http://192.168.1.125:5000';
-            if (rawImg !== '') {
-                if (/^https?:\/\//i.test(rawImg)) {
-                    imgSrc = rawImg;
-                } else {
-                    const filename = rawImg.split('/').pop();
-                    if (filename) {
-                        imgSrc = `${BASE}/static/imagens/${encodeURIComponent(filename)}`;
-                    } else {
-                        imgSrc = `${BASE}/static/imagens/${encodeURIComponent(rawImg)}`;
-                    }
-                }
+            if (!rawImg) {
+                return 'assets/img/placeholder-produto.png';
             }
-            return imgSrc;
+
+            if (/^https?:\/\//i.test(rawImg)) {
+                return rawImg;
+            }
+
+            const filename = rawImg.split('/').pop();
+            try {
+                return `${BASE}/static/imagens/${encodeURIComponent(rawImg)}`;
+            } catch (e) {
+
+            }
+
+            const cleaned = rawImg.replace(/^\/+/, '');
+            return `${BASE}/${cleaned}`;
+
         }
 
         function criarCardProduto(p) {
@@ -169,7 +188,19 @@
 
             const titulo = document.createElement('p');
             titulo.className = 'ponteira-titulo';
-            titulo.innerHTML = (p.nome || 'Produto sem nome') + '<br><span class="small-desc">' + (p.descricao || '') + '</span>';
+
+            const nomeEl = document.createElement('span');
+            nomeEl.className = 'nome-produto';
+            nomeEl.textContent = (p.nome || 'Produto sem nome');
+
+            const descText = (p.descricao || '').replace(/\s+/g, ' ').trim();
+            const descEl = document.createElement('span');
+            descEl.className = 'small-desc';
+            descEl.textContent = descText;
+
+            titulo.appendChild(nomeEl);
+            titulo.appendChild(document.createElement('br'));
+            titulo.appendChild(descEl);
 
             const infoPreco = document.createElement('div');
             infoPreco.className = 'info-preco';
@@ -330,6 +361,9 @@
                 const data = await res.json();
                 produtos = data.produtos || data || [];
 
+                const totalEl = document.getElementById('total-produtos');
+                if (totalEl) totalEl.textContent = produtos.length.toLocaleString('pt-BR');
+
                 currentPage = 1;
                 container.innerHTML = '';
                 renderPage(1, produtos);
@@ -337,6 +371,9 @@
                 console.error('Erro ao carregar produtos:', err);
                 if (container) container.innerHTML = '<p>Não foi possível carregar os produtos.</p>';
                 if (paginationEl) paginationEl.innerHTML = '';
+
+                const totalEl = document.getElementById('total-produtos');
+                if (totalEl) totalEl.textContent = '0';
             }
         }
 
