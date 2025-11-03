@@ -14,33 +14,31 @@
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 </head>
 
 <body>
     <header>
-        <a href="home.html"><img src="assets/img/Ariel (1) 4.png" alt=""></a>
+        <a href="home.html"><img src="assets/img/Ariel (1) 4.png" alt="Logo AutoPrime"></a>
 
         <div class="container">
-            <search class="pesquisa">
+            <div class="pesquisa">
                 <input class="barra-pesquisar" type="text" placeholder="Pesquisar na AutoPrime">
                 <button class="botao-pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </search>
+            </div>
 
             <i class="fa-solid fa-circle-user"></i>
         </div>
     </header>
 
     <section class="banner">
-        <img src="assets/img/PONTEIRAS DE 1.png" alt="">
+        <img src="assets/img/PONTEIRAS DE 1.png" alt="Banner Promoção">
     </section>
 
     <section class="main">
         <h1>Gerenciar Vendas</h1>
         <div class="cards-container">
-
+            <!-- Usuário -->
             <div class="usuario">
-
                 <div class="icone">
                     <i class="fa-solid fa-user"></i>
                 </div>
@@ -48,13 +46,12 @@
                     <p>usuario@gmail.com</p>
                     <h2 class="criado-em">Criado em: 22/09/2025</h2>
                 </div>
-
             </div>
 
+            <!-- Informações -->
             <div class="informacoes">
-
+                <!-- Usuários -->
                 <div class="usuarios">
-
                     <div class="info-titulo">
                         <i class="fa-solid fa-user"></i>
                         <p>Usuários</p>
@@ -65,8 +62,8 @@
                     </div>
                 </div>
 
+                <!-- Vendas -->
                 <div class="usuarios">
-
                     <div class="info-titulo">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <p>Vendas</p>
@@ -77,8 +74,8 @@
                     </div>
                 </div>
 
+                <!-- Produtos -->
                 <div class="usuarios">
-
                     <div class="info-titulo">
                         <i class="fa-solid fa-bag-shopping"></i>
                         <p>Produtos</p>
@@ -89,8 +86,8 @@
                     </div>
                 </div>
 
+                <!-- Cashback -->
                 <div class="usuarios">
-
                     <div class="info-titulo">
                         <i class="fa-solid fa-dollar-sign"></i>
                         <p>Cashback</p>
@@ -100,29 +97,21 @@
                         <a class="gerenciar" href="cashback.html">Gerenciar</a>
                     </div>
                 </div>
-
             </div>
-
         </div>
 
+        <!-- Botões -->
         <div class="botoes">
-
             <a href="usuarios.html" class="botao-gerenciar"><i class="fa-solid fa-user"></i>Gerenciar Usuários</a>
-
             <a href="vendas.html" class="botao-gerenciar"><i class="fa-solid fa-cart-shopping"></i>Gerenciar Vendas</a>
-
             <a href="produtos.html" class="botao-gerenciar"><i class="fa-solid fa-bag-shopping"></i>Gerenciar
                 Produtos</a>
-
             <a href="cashback.html" class="botao-gerenciar"><i class="fa-solid fa-dollar-sign"></i>Gerenciar
                 Cashback</a>
-
         </div>
 
         <h2 class="titulo">Total vendido</h2>
-
         <div class="informacoes-vendas">
-
             <div class="div-azul">
                 <h2 class="capital">R$: 500.000,00</h2>
                 <h2 class="info-capital">Capital arrecadado</h2>
@@ -132,33 +121,27 @@
                 <h2 class="qtd">400.000</h2>
                 <h2 class="info-qtd">Vendas efetuadas</h2>
             </div>
-
         </div>
 
         <div class="graficos-container">
-
+            <!-- Gráficos -->
             <div class="grafico-pizza">
                 <h3 class="titulo-pizza">Marcas mais vendidas</h3>
-
                 <canvas id="Pizza"></canvas>
             </div>
 
             <div class="grafico-coluna">
                 <h3 class="titulo-coluna">Meta mensal</h3>
-
                 <canvas id="Coluna"></canvas>
             </div>
-
         </div>
 
         <div class="vendedores">
-
             <h3 class="maiores-compradores">Maiores compradores</h3>
 
+            <!-- Lista de vendedores -->
             <div class="vendedor-linha">
-
                 <div class="vendedor-detalhes">
-
                     <div class="icone">
                         <i class="fa-solid fa-user"></i>
                     </div>
@@ -168,183 +151,129 @@
                         </div>
                         <div class="info-vendedor">
                             <p class="criado-em"><span class="negrito">Total: </span>500</p>
-
                             <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
                         </div>
                     </div>
-
                 </div>
-
             </div>
 
-            <div class="vendedor-linha">
-
-                <div class="vendedor-detalhes">
-
-                    <div class="icone">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="separacao-nome-info">
-                        <div class="nome">
-                            <p>usuario@gmail.com</p>
-                        </div>
-                        <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>400</p>
-
-                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="vendedor-linha">
-
-                <div class="vendedor-detalhes">
-
-                    <div class="icone">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="separacao-nome-info">
-                        <div class="nome">
-                            <p>usuario@gmail.com</p>
-                        </div>
-                        <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>300</p>
-
-                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="vendedor-linha">
-
-                <div class="vendedor-detalhes">
-
-                    <div class="icone">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="separacao-nome-info">
-                        <div class="nome">
-                            <p>usuario@gmail.com</p>
-                        </div>
-                        <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>200</p>
-
-                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="vendedor-linha">
-
-                <div class="vendedor-detalhes">
-
-                    <div class="icone">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="separacao-nome-info">
-                        <div class="nome">
-                            <p>usuario@gmail.com</p>
-                        </div>
-                        <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>100</p>
-
-                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
+            <!-- Repetir divs para outros vendedores -->
+            <!-- Adicionar divs de vendedores similares aqui -->
 
         </div>
-
     </section>
+
 </body>
 
 <script>
-    const ctx = document.getElementById('Coluna');
+    async function carregarVendas() {
+        try {
+            const response = await fetch("http://192.168.1.125:5000/vendas", {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                redirect: "follow"
+            });
+            const vendas = await response.json();
 
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
-            datasets: [{
-                label: 'N de vendas',
-                data: [200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000],
-                borderWidth: 1,
-                backgroundColor: [
-                    '#008CFF'
-                ]
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+            const totalVendas = vendas.length;
+            const valorTotal = vendas.reduce((acc, venda) => acc + Number(venda.valor_total), 0);
 
-    const ptx = document.getElementById('Pizza').getContext('2d');
+            document.querySelector(".div-verde .qtd").textContent = totalVendas;
+            document.querySelector(".div-azul .capital").textContent = `R$ ${valorTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-    new Chart(ptx, {
-        type: 'pie',
-        data: {
-            labels: ['Chevrolet', 'RAM', 'Fiat', 'Nissan', 'Honda', 'Toyota', 'Peugeot', 'Citroen', 'Jeep', 'Ford', 'Volkswagen', 'BYD', 'BMW', 'MINI', 'Hyundai', 'KIA'],
-            datasets: [{
-                label: 'Vendedores mais populares',
-                data: [6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25, 6.25],
-                backgroundColor: [
-                    '#0073E6',
-                    '#1AAC5F',
-                    '#7D3AC1',
-                    '#F2C200',
-                    '#E90039',
-                    '#E96500',
-                    '#00E9E9',
-                    '#E9008C',
-                    '#7800E9',
-                    '#00E913',
-                    '#0090E9',
-                    '#E100E9',
-                    '#E9A300',
-                    '#C2E900',
-                    '#00E994',
-                    '#2F00E9'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            plugins: {
-                datalabels: {
-                    color: '#fff',          // cor do texto
-                    font: {
-                        weight: 'bold',
-                        size: 15,
-                        family: "Poppins, sans-serif"
-                    },
-                    formatter: (value, ctx) => {
-                        let total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                        let percentage = ((value / total) * 100).toFixed(0) + "%";
-                        return percentage;    // mostra a % dentro da fatia
+            const container = document.querySelector(".vendedores");
+            const linhasExistentes = container.querySelectorAll(".vendedor-linha");
+            linhasExistentes.forEach(v => v.remove());
+
+            const vendasPorCliente = {};
+            vendas.forEach(v => {
+                if (!vendasPorCliente[v.email_cliente]) vendasPorCliente[v.email_cliente] = 0;
+                vendasPorCliente[v.email_cliente] += Number(v.valor_total);
+            });
+
+            const maiores = Object.entries(vendasPorCliente)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 5);
+
+            maiores.forEach(([email, total]) => {
+                const linha = document.createElement("div");
+                linha.classList.add("vendedor-linha");
+                linha.innerHTML = `
+                <div class="vendedor-detalhes">
+                    <div class="icone">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="separacao-nome-info">
+                        <div class="nome">
+                            <p>${email}</p>
+                        </div>
+                        <div class="info-vendedor">
+                            <p class="criado-em"><span class="negrito">Total: </span>${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                            <p class="criado-em"><span class="negrito">Criado em: </span>--/--/----</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+                container.appendChild(linha);
+            });
+
+            const ctx = document.getElementById('Coluna');
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+                    datasets: [{
+                        label: 'N de vendas',
+                        data: [200, 400, 600, 800, 1000, 1200],
+                        borderWidth: 1,
+                        backgroundColor: ['#008CFF']
+                    }]
+                },
+                options: {
+                    scales: {
+                        y: { beginAtZero: true }
                     }
                 }
-            }
-        },
-        plugins: [ChartDataLabels]
-    });
+            });
 
+            const ptx = document.getElementById('Pizza').getContext('2d');
+            new Chart(ptx, {
+                type: 'pie',
+                data: {
+                    labels: ['Chevrolet', 'RAM', 'Fiat', 'Nissan', 'Honda', 'Toyota', 'Peugeot', 'Citroen', 'Jeep', 'Ford', 'Volkswagen', 'BYD', 'BMW', 'MINI', 'Hyundai', 'KIA'],
+                    datasets: [{
+                        label: 'Vendedores mais populares',
+                        data: Array(16).fill(6.25),
+                        backgroundColor: [
+                            '#0073E6', '#1AAC5F', '#7D3AC1', '#F2C200', '#E90039', '#E96500', '#00E9E9', '#E9008C',
+                            '#7800E9', '#00E913', '#0090E9', '#E100E9', '#E9A300', '#C2E900', '#00E994', '#2F00E9'
+                        ],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        datalabels: {
+                            color: '#fff',
+                            font: { weight: 'bold', size: 15, family: "Poppins, sans-serif" },
+                            formatter: (value, ctx) => {
+                                let total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                return ((value / total) * 100).toFixed(0) + "%";
+                            }
+                        }
+                    }
+                },
+                plugins: [ChartDataLabels]
+            });
+
+        } catch (error) {
+            console.error("Erro ao carregar vendas:", error);
+        }
+    }
+
+    window.onload = carregarVendas;
 </script>
 
 </html>

@@ -290,6 +290,10 @@ h1 {
     flex-direction: column;
 }
 
+.foto:hover {
+    border: 2px solid var(--azul-principal);
+}
+
 .clique-aqui {
     color: var(--azul-principal);
     cursor: pointer;

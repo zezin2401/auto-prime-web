@@ -115,7 +115,7 @@
 
 <script>
     (function () {
-        const BASE = 'http://192.168.1.119:5000';
+        const BASE = 'http://192.168.1.125:5000';
         const endpoint = `${BASE}/produtos`;
 
         const container = document.querySelector('.div-produtos');
@@ -136,7 +136,7 @@
 
         function buildImageSrc(p) {
             const rawImg = (p.imagem || '').trim();
-            let imgSrc = 'http://192.168.1.119:5000';
+            let imgSrc = 'http://192.168.1.125:5000';
             if (rawImg !== '') {
                 if (/^https?:\/\//i.test(rawImg)) {
                     imgSrc = rawImg;

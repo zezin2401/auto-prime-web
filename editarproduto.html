@@ -228,13 +228,6 @@
                                         <input type="file" id="foto-input" accept="image/*" style="display:none">
                                         <a class="clique-aqui" href="#" id="clique-procurar">aqui para procurar</a>
                                     </div>
-
-                                    <div class="selecionar-servidor">
-                                        <label for="imagem-servidor">Ou escolha uma imagem do servidor:</label>
-                                        <select id="imagem-servidor">
-                                            <option value="">-- Nenhuma --</option>
-                                        </select>
-                                    </div>
                                 </div>
 
                             </div>
@@ -290,10 +283,8 @@
         const fotoPreview = document.getElementById('foto-preview');
         const cliqueProcurar = document.getElementById('clique-procurar');
         const form = document.getElementById('formEdicaoProduto');
-        const selectImagemServidor = document.getElementById('imagem-servidor');
 
         let selectedFile = null;
-        let serverImageName = null; 
 
         function renderPreview(src) {
             fotoPreview.innerHTML = '';
@@ -309,6 +300,7 @@
             fotoPreview.style.border = '2px dashed #ccc';
         }
 
+        // Pegar parâmetros da URL e preencher os campos
         const params = new URLSearchParams(window.location.search);
         const id = params.get('id');
         if (!id) {
@@ -323,32 +315,11 @@
         document.querySelector('select[name="marca"]').value = params.get('marca') || '';
 
         if (params.get('imagem')) {
-            serverImageName = params.get('imagem');
-            const url = `http://192.168.1.119:5000/static/imagens/${encodeURIComponent(serverImageName)}`;
-            renderPreview(url);
+            const serverImageName = params.get('imagem');
+            renderPreview(`http://192.168.1.125:5000/static/imagens/${encodeURIComponent(serverImageName)}`);
         }
 
-        async function carregarImagensDoServidor() {
-            const listaUrl = 'http://192.168.1.119:5000/api/imagens';
-            try {
-                const res = await fetch(listaUrl);
-                if (!res.ok) throw new Error('Sem lista de imagens');
-                const imagens = await res.json();
-
-                selectImagemServidor.innerHTML = '<option value="">-- Nenhuma --</option>';
-                imagens.forEach(item => {
-                    const name = typeof item === 'string' ? item : item.name;
-                    const opt = document.createElement('option');
-                    opt.value = name;
-                    opt.textContent = name;
-                    if (name === serverImageName) opt.selected = true;
-                    selectImagemServidor.appendChild(opt);
-                });
-            } catch (err) {
-            }
-        }
-        carregarImagensDoServidor();
-
+        // Clique no texto “aqui para procurar” ou na área de preview
         cliqueProcurar.addEventListener('click', (e) => {
             e.preventDefault();
             fotoInput.click();
@@ -356,20 +327,8 @@
         fotoPreview.addEventListener('click', () => {
             fotoInput.click();
         });
-        selectImagemServidor.addEventListener('change', (e) => {
-            const val = e.target.value;
-            if (!val) {
-                serverImageName = null;
-                if (!selectedFile) {
-                    fotoPreview.innerHTML = '<i class="fa-solid fa-image"></i><span>Arraste a imagem até aqui ou clique</span><a class="clique-aqui" href="#" id="clique-procurar">aqui para procurar</a>';
-                }
-                return;
-            }
-            serverImageName = val;
-            selectedFile = null;
-            renderPreview(`http://192.168.1.119:5000/static/imagens/${encodeURIComponent(serverImageName)}`);
-        });
 
+        // Arrastar e soltar imagem
         fotoPreview.addEventListener('dragover', (e) => {
             e.preventDefault();
             fotoPreview.style.border = '2px dashed #3085d6';
@@ -383,27 +342,27 @@
             resetPreviewBoxBorder();
             const file = e.dataTransfer.files[0];
             if (!file || !file.type.startsWith('image/')) {
-                Swal.fire({ icon: 'error', title: 'Arquivo inválido', text: 'Por favor envie uma imagem.' });
+                Swal.fire({ icon: 'error', title: 'Arquivo inválido', text: 'Envie uma imagem válida.' });
                 return;
             }
             selectedFile = file;
-            serverImageName = null;
             renderPreview(URL.createObjectURL(file));
         });
 
+        // Seleção normal de arquivo
         fotoInput.addEventListener('change', (e) => {
             const file = e.target.files[0];
             if (!file) return;
             if (!file.type.startsWith('image/')) {
-                Swal.fire({ icon: 'error', title: 'Arquivo inválido', text: 'Por favor selecione um arquivo de imagem.' });
+                Swal.fire({ icon: 'error', title: 'Arquivo inválido', text: 'Selecione um arquivo de imagem.' });
                 fotoInput.value = '';
                 return;
             }
             selectedFile = file;
-            serverImageName = null;
             renderPreview(URL.createObjectURL(file));
         });
 
+        // Envio do formulário
         form.addEventListener('submit', async function (e) {
             e.preventDefault();
 
@@ -416,8 +375,6 @@
 
             if (selectedFile) {
                 formData.append("imagem", selectedFile, selectedFile.name);
-            } else if (serverImageName) {
-                formData.append("imagemNome", serverImageName);
             }
 
             const token = localStorage.getItem("token");
@@ -427,7 +384,7 @@
             }
 
             try {
-                const res = await fetch(`http://192.168.1.119:5000/produto/edit/${id}`, {
+                const res = await fetch(`http://192.168.1.125:5000/produto/edit/${id}`, {
                     method: "PUT",
                     body: formData,
                     headers: { "Authorization": "Bearer " + token }

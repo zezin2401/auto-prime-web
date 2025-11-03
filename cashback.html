@@ -111,7 +111,8 @@
 
             <a href="vendas.html" class="botao-gerenciar"><i class="fa-solid fa-cart-shopping"></i>Gerenciar Vendas</a>
 
-            <a href="produtos.html" class="botao-gerenciar"><i class="fa-solid fa-bag-shopping"></i>Gerenciar Produtos</a>
+            <a href="produtos.html" class="botao-gerenciar"><i class="fa-solid fa-bag-shopping"></i>Gerenciar
+                Produtos</a>
 
             <a href="cashback.html" class="botao-gerenciar"><i class="fa-solid fa-dollar-sign"></i>Gerenciar
                 Cashback</a>
@@ -259,69 +260,109 @@
 </body>
 
 <script>
-    const ctx = document.getElementById('Coluna');
+    async function carregarCashbacks() {
+        try {
+            const response = await fetch("http://192.168.1.125:5000/cashbacks", {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+                redirect: "follow"
+            });
+            const cashbacks = await response.json();
 
-    new Chart(ctx, {
-        type: 'bar',
-        data: {
-            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
-            datasets: [{
-                label: 'N de vendas',
-                data: [200, 400, 600, 800, 1000, 1200, 1400, 1600, 1800, 2000],
-                borderWidth: 1,
-                backgroundColor: [
-                    '#008CFF'
-                ]
-            }]
-        },
-        options: {
-            scales: {
-                y: {
-                    beginAtZero: true
-                }
-            }
-        }
-    });
+            const totalCashback = cashbacks.reduce((acc, c) => acc + Number(c.valor_cashback), 0);
+            document.querySelector(".div-azul .capital").textContent = `R$ ${totalCashback.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-    const ptx = document.getElementById('Pizza').getContext('2d');
+            const container = document.querySelector(".vendedores");
+            const linhasExistentes = container.querySelectorAll(".vendedor-linha");
+            linhasExistentes.forEach(v => v.remove());
 
-    new Chart(ptx, {
-        type: 'pie',
-        data: {
-            labels: ['usuario@gmail.com', 'usuario@gmail.com', 'usuario@gmail.com', 'usuario@gmail.com', 'usuario@gmail.com'],
-            datasets: [{
-                label: 'Vendedores mais populares',
-                data: [30, 10, 10, 20, 30],
-                backgroundColor: [
-                    '#0073E6',
-                    '#1AAC5F',
-                    '#7D3AC1',
-                    '#F2C200',
-                    '#E90039'
-                ],
-                borderWidth: 1
-            }]
-        },
-        options: {
-            plugins: {
-                datalabels: {
-                    color: '#fff',          // cor do texto
-                    font: {
-                        weight: 'bold',
-                        size: 20,
-                        family: "Poppins, sans-serif"
-                    },
-                    formatter: (value, ctx) => {
-                        let total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                        let percentage = ((value / total) * 100).toFixed(0) + "%";
-                        return percentage;    // mostra a % dentro da fatia
+            const cashbackPorCliente = {};
+            cashbacks.forEach(c => {
+                if (!cashbackPorCliente[c.id_cliente]) cashbackPorCliente[c.id_cliente] = 0;
+                cashbackPorCliente[c.id_cliente] += Number(c.valor_cashback);
+            });
+
+            const maiores = Object.entries(cashbackPorCliente)
+                .sort((a, b) => b[1] - a[1])
+                .slice(0, 5);
+
+            maiores.forEach(([cliente, total]) => {
+                const linha = document.createElement("div");
+                linha.classList.add("vendedor-linha");
+                linha.innerHTML = `
+                <div class="vendedor-detalhes">
+                    <div class="icone">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="separacao-nome-info">
+                        <div class="nome">
+                            <p>${cliente}</p>
+                        </div>
+                        <div class="info-vendedor">
+                            <p class="criado-em"><span class="negrito">Total: </span>R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                            <p class="criado-em"><span class="negrito">Criado em: </span>--/--/----</p>
+                        </div>
+                    </div>
+                </div>
+            `;
+                container.appendChild(linha);
+            });
+
+            const ctx = document.getElementById('Coluna');
+            const cashbacksPorMes = [0, 0, 0, 0, 0, 0];
+            cashbacks.forEach(c => {
+                const mes = new Date(c.data_geracao).getMonth();
+                if (mes < 6) cashbacksPorMes[mes] += Number(c.valor_cashback);
+            });
+
+            new Chart(ctx, {
+                type: 'bar',
+                data: {
+                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+                    datasets: [{
+                        label: 'Cashback acumulado',
+                        data: cashbacksPorMes,
+                        borderWidth: 1,
+                        backgroundColor: ['#008CFF']
+                    }]
+                },
+                options: { scales: { y: { beginAtZero: true } } }
+            });
+
+            const ptx = document.getElementById('Pizza').getContext('2d');
+            new Chart(ptx, {
+                type: 'pie',
+                data: {
+                    labels: maiores.map(m => m[0]),
+                    datasets: [{
+                        label: 'Top clientes',
+                        data: maiores.map(m => m[1]),
+                        backgroundColor: ['#0073E6', '#1AAC5F', '#7D3AC1', '#F2C200', '#E90039'],
+                        borderWidth: 1
+                    }]
+                },
+                options: {
+                    plugins: {
+                        datalabels: {
+                            color: '#fff',
+                            font: { weight: 'bold', size: 20, family: "Poppins, sans-serif" },
+                            formatter: (value, ctx) => {
+                                let total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                return ((value / total) * 100).toFixed(0) + "%";
+                            }
+                        }
                     }
-                }
-            }
-        },
-        plugins: [ChartDataLabels]
-    });
+                },
+                plugins: [ChartDataLabels]
+            });
 
+        } catch (error) {
+            console.error("Erro ao carregar cashbacks:", error);
+        }
+    }
+
+    window.onload = carregarCashbacks;
 </script>
+
 
 </html>
