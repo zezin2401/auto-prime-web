@@ -619,6 +619,18 @@ div.swal2-container .swal2-popup {
     background-color: #c0c0c0;
 }
 
+.swal2-confirm {
+    background-color: var(--azul-principal);
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    width: 85px;
+    border-radius: 5px;
+}
+
+.swal2-confirm:hover {
+    background-color: var(--azul-escuro);
+}
+
 /* Animação de scale */
 @keyframes scale-in {
     0% {

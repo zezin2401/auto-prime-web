@@ -10,6 +10,18 @@ body {
     font-style: normal;
 }
 
+.swal2-confirm {
+    background-color: var(--azul-principal);
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    width: 85px;
+    border-radius: 5px;
+}
+
+.swal2-confirm:hover {
+    background-color: var(--azul-escuro);
+}
+
 /* ---------- Mantém seu CSS original (assumo que já existe acima) ---------- */
 /* ---------- Regras só para telas muito pequenas (<= 322px) ---------- */
 @media (max-width: 322px) {

@@ -4,329 +4,222 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Comprar</title>
+    <title>Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="assets/css/comprar.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-
 </head>
+
+<style>
+    /* Menu lateral oculto */
+    #sideMenu {
+        position: fixed;
+        top: 0;
+        right: -250px;
+        width: 250px;
+        height: 100%;
+        background-color: #222;
+        color: #f0f0f0;
+        box-shadow: -3px 0 8px rgba(0, 0, 0, 0.6);
+        transition: right 0.3s ease, opacity 0.3s ease;
+        padding: 30px 25px;
+        font-family: 'Poppins', sans-serif;
+        z-index: 1000;
+        opacity: 0;
+        pointer-events: none;
+        display: flex;
+        flex-direction: column;
+    }
+
+    #sideMenu.active {
+        right: 0;
+        opacity: 1;
+        pointer-events: auto;
+    }
+
+    #sideMenu .closeBtn {
+        font-size: 28px;
+        font-weight: 700;
+        cursor: pointer;
+        text-align: right;
+        margin-bottom: 40px;
+        color: #f0f0f0;
+        user-select: none;
+        transition: color 0.2s ease;
+    }
+
+    #sideMenu .closeBtn:hover {
+        color: #ff4d4d;
+    }
+
+    #sideMenu ul {
+        list-style: none;
+        padding: 0;
+        margin: 0;
+        flex-grow: 1;
+        display: flex;
+        flex-direction: column;
+        gap: 25px;
+    }
+
+    #sideMenu ul li {
+        font-weight: 600;
+        font-size: 20px;
+    }
+
+    #sideMenu ul li a {
+        color: #f0f0f0;
+        text-decoration: none;
+        transition: color 0.3s ease;
+        padding: 10px 15px;
+        border-radius: 8px;
+        display: block;
+    }
+
+    #sideMenu ul li a:hover {
+        background-color: #444;
+        color: #ff4d4d;
+    }
+
+    .avatarheader img {
+        cursor: pointer;
+    }
+</style>
 
 <body>
     <header>
         <a href="home.html"><img src="assets/img/Ariel (1) 4.png" alt=""></a>
 
         <div class="container">
-            <search class="pesquisa">
+            <div class="pesquisa">
                 <input class="barra-pesquisar" type="text" placeholder="Pesquisar na AutoPrime">
-                <button class="botao-pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </search>
-
-            <i class="fa-solid fa-circle-user"></i>
+                <a class="avatarheader" href="#" id="avatarToggle"><img src="assets/img/login 3.png" alt="Avatar"></a>
+            </div>
         </div>
     </header>
 
     <main>
-
         <section class="compra-1">
-
             <div class="imagem">
-                <img src="assets/img/ponta 9.png" alt="">
+                <img id="produto-imagem" src="assets/img/placeholder.png" alt="Produto">
             </div>
 
             <div class="compra-2">
-
                 <div class="descricao">
-
-                    <h1>Ponteira de Escapamento Tracker 1.2 Turbo - Ponteira de Bocal Único</h1>
-
-                    <h2 class="preco"><span class="sifrao">R$</span> <span class="dinhero">69,69</span></h2>
-
+                    <h1 id="produto-nome">Carregando...</h1>
+                    <h2 class="preco"><span class="sifrao">R$</span> <span class="dinhero"
+                            id="produto-preco">0,00</span></h2>
                 </div>
 
                 <div class="vendendo">
-
-                    <p class="vendido-por">Vendidor por:</p>
-
-                    <p class="samuel-silva">Samuel Silva</p>
-
+                    <p class="vendido-por">Vendido por:</p>
+                    <p id="produto-vendedor">Carregando...</p>
                 </div>
 
                 <div class="categoria">
-
-                    <div class="acabamento">
-
-                        <h3 class="acabamento-titulo">Acabamento:</h3>
-
-                        <div class="opcoes">
-
-                            <div class="troco">Aço Preto</div>
-
-                            <div class="troco">Inox Polido</div>
-
-                        </div>
-
-                    </div>
+                    <p><b>Acabamento:</b> <span id="produto-acabamento">-</span></p>
 
                     <div class="qtd">
-
                         <h3 class="titulo-qtd">Quantidade:</h3>
-
                         <div class="quantidade">
-
                             <button class="add"><i class="fa-solid fa-plus"></i></button>
-
-                            <div class="numero">5</div>
-
-
+                            <div class="numero">1</div>
                             <button class="menos"><i class="fa-solid fa-minus"></i></button>
-
                         </div>
 
-                        <button class="botao-compra"><i class="fa-solid fa-plus"></i>Adicionar ao carrinho</button>
-
+                        <button class="botao-compra"><i class="fa-solid fa-cart-shopping"></i> Comprar agora</button>
                     </div>
-
                 </div>
-
             </div>
-
         </section>
 
         <section class="detalhes">
-
-            <div class="imagens-e-vendedor">
-
-                <div class="vendedor-linha">
-
-                    <div class="vendedor-detalhes">
-
-                        <div class="icone">
-                            <i class="fa-solid fa-user"></i>
-                        </div>
-                        <div class="separacao-nome-info">
-                            <div class="nome">
-                                <p>Samuel Silva</p>
-                            </div>
-                            <div class="info-vendedor">
-                                <p class="criado-em"><span class="negrito">Criado em: </span>10/07/2024</p>
-                            </div>
-                        </div>
-
-                    </div>
-
-                </div>
-
-            </div>
-
             <div class="descricao">
-
                 <hr>
-
                 <h2 class="descricao-titulo">Descrição</h2>
-
-                <p class="descricao-1">Com a Ponteira de Escapamento para Tracker seu carro ganha mais robustez e
-                    estilo, garantindo um
-                    visual único e exclusivo.
-                    Fabricada pela Soamer Ponteiras Automotivas, a Ponteira para a Tracker é um acessório para ser
-                    acoplado ao final do escapamento, e foi projetada exclusivamente para esse modelo de carro.</p>
-                <br>
-                <p class="descricao-2">É produzida em AÇO INOX 304 com espessura de 1,2mm. Com acabamento Polido
-                    (cromado) ou Black Piano
-                    (preto brilhante), com a opção de bocal único e bocal duplo.</p>
-                <br>
-                <p class="descricao-3">Marca: Soamer
-                    Aplicação: Chevrolet Tracker
-                    <br>
-                    Motor: 1.2 Turbo
-                    <br>
-                    Ano: 2020-2021-2022-2023-2024-2025
-                    <br>
-                    Referência: SO-GM23
-                    <br>
-                    Bocal: Ø 76,2 mm
-                    <br>
-                    Dimensões: 8 X 8 X 30 cm
-                </p>
-                <br>
-
+                <p id="produto-descricao">Carregando descrição...</p>
             </div>
-
         </section>
 
+        <nav id="sideMenu">
+            <div class="closeBtn" id="menuClose">&times;</div>
+            <ul>
+                <li><a href="#">Minha Conta</a></li>
+                <li><a href="#" id="logoutBtn">Logout</a></li>
+            </ul>
+        </nav>
     </main>
 
     <script>
-        document.addEventListener('DOMContentLoaded', () => {
-            // Config
-            const API_BASE = 'http://192.168.1.121:5000';
-            const ADD_CART_ENDPOINT = `${API_BASE}/carrinho/adicionar`;
-            const FALLBACK_PRODUCT_ID = 1; // altere se quiser outro default
+        window.addEventListener("DOMContentLoaded", () => {
+            const params = new URLSearchParams(window.location.search);
 
-            // Elementos
-            const btnPlus = document.querySelector('.add');
-            const btnMinus = document.querySelector('.menos');
-            const qtyEl = document.querySelector('.numero');
-            const btnAddCart = document.querySelector('.botao-compra');
-            const priceEl = document.querySelector('.dinhero');
-            const cartCountEl = document.getElementById('cart-count'); // opcional
+            const id_produto = params.get("id") || 0;
+            const nome = params.get("nome") || "Produto sem nome";
+            const preco = params.get("preco") || "0,00";
+            const vendedor = params.get("vendedor") || "vendedor@gmail.com";
+            const acabamento = params.get("acabamento") || "-";
+            const descricao = params.get("descricao") || "Sem descrição";
+            const imagem = params.get("imagem") || "assets/img/placeholder.png";
 
-            // Pega preço como número (converte vírgula para ponto)
-            function getPriceNumber() {
-                if (!priceEl) return 0;
-                const raw = priceEl.textContent.trim().replace(/\./g, '').replace(',', '.');
-                const n = parseFloat(raw);
-                return isNaN(n) ? 0 : n;
-            }
+            // Seleciona elementos
+            const nomeEl = document.querySelector("#produto-nome");
+            const precoEl = document.querySelector("#produto-preco");
+            const vendedorEl = document.querySelector("#produto-vendedor");
+            const acabamentoEl = document.querySelector("#produto-acabamento");
+            const descricaoEl = document.querySelector("#produto-descricao");
+            const imagemEl = document.querySelector("#produto-imagem");
 
-            // Lê email do localStorage — tenta várias chaves comuns
-            function getClientEmailFromStorage() {
-                const keys = ['email', 'userEmail', 'cliente_email', 'email_cliente'];
-                for (const k of keys) {
-                    const v = localStorage.getItem(k);
-                    if (v && v.trim()) return v.trim();
-                }
-                // talvez você grave o user em JSON, tenta parse
-                const maybeUser = localStorage.getItem('user') || localStorage.getItem('usuario');
-                if (maybeUser) {
-                    try {
-                        const obj = JSON.parse(maybeUser);
-                        if (obj && (obj.email || obj.email_cliente || obj.userEmail)) {
-                            return obj.email || obj.email_cliente || obj.userEmail;
-                        }
-                    } catch (e) { /* ignore */ }
-                }
-                return null;
-            }
+            nomeEl.textContent = nome;
+            precoEl.textContent = parseFloat(preco).toFixed(2).replace(".", ",");
+            vendedorEl.textContent = vendedor;
+            acabamentoEl.textContent = acabamento;
+            descricaoEl.textContent = descricao;
 
-            // Atualiza contador de carrinho (se existir)
-            function incrementCartCount(by = 1) {
-                if (!cartCountEl) return;
-                const cur = parseInt(cartCountEl.textContent || '0') || 0;
-                cartCountEl.textContent = cur + by;
-            }
+            // Fallback automático para imagem
+            imagemEl.src = imagem;
+            imagemEl.onerror = () => { imagemEl.src = "assets/img/placeholder.png"; };
 
-            // Controle de quantidade
-            function setQty(val) {
-                const n = Math.max(1, Math.floor(val));
-                qtyEl.textContent = n;
-            }
-            function getQty() {
-                return parseInt(qtyEl.textContent || '1', 10) || 1;
-            }
+            // Quantidade
+            let quantidade = 1;
+            const numeroEl = document.querySelector(".numero");
+            document.querySelector(".add").addEventListener("click", () => {
+                quantidade++;
+                numeroEl.textContent = quantidade;
+            });
+            document.querySelector(".menos").addEventListener("click", () => {
+                if (quantidade > 1) quantidade--;
+                numeroEl.textContent = quantidade;
+            });
 
-            if (btnPlus) {
-                btnPlus.addEventListener('click', () => setQty(getQty() + 1));
-            }
-            if (btnMinus) {
-                btnMinus.addEventListener('click', () => setQty(Math.max(1, getQty() - 1)));
-            }
-
-            // Função principal de adicionar ao carrinho
-            async function adicionarAoCarrinho() {
-                // tenta obter o email do cliente
-                const email_cliente = getClientEmailFromStorage();
-                if (!email_cliente) {
-                    // pede pra logar
-                    await Swal.fire({
-                        icon: 'warning',
-                        title: 'Faça login',
-                        text: 'Você precisa estar logado como cliente para adicionar ao carrinho.',
-                        confirmButtonColor: '#3085d6'
-                    });
-                    return;
-                }
-
-                // pega id do produto (data attribute preferível)
-                let id_produto = FALLBACK_PRODUCT_ID;
-                if (btnAddCart) {
-                    const ds = btnAddCart.dataset;
-                    id_produto = ds.idProduto || ds.id_produto || ds.id || btnAddCart.getAttribute('data-id-produto') || id_produto;
-                }
-
-                // quantidade e preço
-                const quantidade = getQty();
-                const valor_unitario = getPriceNumber();
-
-                // payload
-                const payload = {
-                    email_cliente,
-                    id_produto: Number(id_produto),
-                    quantidade: Number(quantidade),
-                    valor_unitario: Number(valor_unitario)
-                };
-
-                // confirma com o usuário (opcional)
-                const conf = await Swal.fire({
-                    title: 'Adicionar ao carrinho?',
-                    html: `Produto: <b>${document.querySelector('h1')?.textContent || 'Produto'}</b><br>
-             Quantidade: <b>${quantidade}</b><br>
-             Total: <b>R$ ${(valor_unitario * quantidade).toFixed(2)}</b>`,
-                    icon: 'question',
-                    showCancelButton: true,
-                    confirmButtonText: 'Sim, adicionar',
-                    cancelButtonText: 'Cancelar',
-                    confirmButtonColor: '#3085d6'
-                });
-                if (!conf.isConfirmed) return;
-
-                // mostra loading
-                Swal.fire({
-                    title: 'Adicionando...',
-                    text: 'Aguarde enquanto adicionamos ao carrinho.',
-                    allowOutsideClick: false,
-                    didOpen: () => Swal.showLoading()
+            // Comprar
+            document.querySelector(".botao-compra").addEventListener("click", () => {
+                const precoUnit = parseFloat(preco);
+                const raw = JSON.stringify({
+                    email_cliente: "cliente@gmail.com",
+                    email_vendedor: vendedor,
+                    id_produto: parseInt(id_produto),
+                    quantidade: quantidade,
+                    valor_unitario: precoUnit
                 });
 
-                try {
-                    const res = await fetch(ADD_CART_ENDPOINT, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify(payload)
-                    });
-
-                    const text = await res.text();
-                    let json;
-                    try { json = JSON.parse(text); } catch (e) { json = null; }
-
-                    Swal.close();
-
-                    if (!res.ok) {
-                        // tenta mostrar mensagem do servidor, se existir
-                        const errMsg = (json && (json.erro || json.message)) || text || `Erro ${res.status}`;
-                        return Swal.fire({ icon: 'error', title: 'Erro', text: errMsg, confirmButtonColor: '#d33' });
-                    }
-
-                    // sucesso
-                    Swal.fire({
-                        icon: 'success',
-                        title: 'Adicionado',
-                        text: (json && (json.mensagem || 'Produto adicionado ao carrinho!')) || 'Produto adicionado ao carrinho!',
-                        confirmButtonColor: '#3085d6'
-                    });
-
-                    // atualiza contador se existir
-                    incrementCartCount(quantidade);
-
-                } catch (err) {
-                    Swal.close();
-                    console.error('Erro ao adicionar ao carrinho:', err);
-                    Swal.fire({ icon: 'error', title: 'Erro', text: 'Não foi possível adicionar ao carrinho.' });
-                }
-            }
-
-            // evento do botão
-            if (btnAddCart) {
-                btnAddCart.addEventListener('click', () => {
-                    adicionarAoCarrinho();
-                });
-            }
+                fetch("http://192.168.1.131:5000/venda", {
+                    method: "POST",
+                    headers: { "Content-Type": "application/json" },
+                    body: raw,
+                    redirect: "follow"
+                })
+                    .then(res => res.text())
+                    .then(result => Swal.fire({ icon: "success", title: "Compra realizada!", text: "Venda registrada com sucesso." }))
+                    .catch(err => Swal.fire({ icon: "error", title: "Erro ao comprar", text: "Não foi possível realizar a compra." }));
+            });
         });
     </script>
-
 </body>
 
 </html>

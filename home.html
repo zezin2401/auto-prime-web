@@ -7,6 +7,7 @@
     <title>Home</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
@@ -17,31 +18,41 @@
 </head>
 
 <style>
+    /* Menu lateral oculto */
     #sideMenu {
         position: fixed;
+        /* Fixa na tela */
         top: 0;
         right: -250px;
+        /* Inicialmente fora da tela */
         width: 250px;
         height: 100%;
         background-color: #222;
         color: #f0f0f0;
         box-shadow: -3px 0 8px rgba(0, 0, 0, 0.6);
         transition: right 0.3s ease, opacity 0.3s ease;
+        /* Animação */
         padding: 30px 25px;
         font-family: 'Poppins', sans-serif;
         z-index: 1000;
         opacity: 0;
+        /* Invisível */
         pointer-events: none;
+        /* Não clicável */
         display: flex;
         flex-direction: column;
     }
 
+    /* Menu ativo */
     #sideMenu.active {
         right: 0;
+        /* Mostra o menu */
         opacity: 1;
         pointer-events: auto;
+        /* Clicável */
     }
 
+    /* Botão de fechar */
     #sideMenu .closeBtn {
         font-size: 28px;
         font-weight: 700;
@@ -50,13 +61,16 @@
         margin-bottom: 40px;
         color: #f0f0f0;
         user-select: none;
+        /* Não selecionável */
         transition: color 0.2s ease;
     }
 
     #sideMenu .closeBtn:hover {
         color: #ff4d4d;
+        /* Muda cor ao passar mouse */
     }
 
+    /* Lista dentro do menu */
     #sideMenu ul {
         list-style: none;
         padding: 0;
@@ -67,13 +81,18 @@
         gap: 25px;
     }
 
+    #sideMenu ul li {
+        font-weight: 600;
+        font-size: 20px;
+    }
+
     #sideMenu ul li a {
         color: #f0f0f0;
         text-decoration: none;
+        transition: color 0.3s ease;
         padding: 10px 15px;
         border-radius: 8px;
         display: block;
-        transition: color 0.3s ease, background-color 0.3s ease;
     }
 
     #sideMenu ul li a:hover {
@@ -81,6 +100,7 @@
         color: #ff4d4d;
     }
 
+    /* Cursor pointer no avatar */
     .avatarheader img {
         cursor: pointer;
     }
@@ -329,30 +349,41 @@
     </nav>
     <!-- Menu lateral JS -->
     <script>
+        // Seleciona elementos do menu lateral
         const avatarToggle = document.getElementById('avatarToggle');
         const sideMenu = document.getElementById('sideMenu');
         const menuClose = document.getElementById('menuClose');
-        const logoutBtn = document.getElementById('logoutBtn');
 
+        // Abre menu lateral ao clicar no avatar
         avatarToggle.addEventListener('click', function (e) {
             e.preventDefault();
             sideMenu.classList.add('active');
         });
 
+        // Fecha menu lateral ao clicar no X
         menuClose.addEventListener('click', function () {
             sideMenu.classList.remove('active');
         });
 
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Função de logout
         logoutBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-            localStorage.clear();
+            e.preventDefault(); // Evita navegação do link
+
+            localStorage.clear(); // Limpa localStorage
+
+            // Mostra alerta de sucesso do logout
             Swal.fire({
                 icon: 'success',
+
+
+
                 title: 'Logout realizado!',
                 text: 'Você será redirecionado para a página de login.',
                 confirmButtonText: 'Ok'
             }).then(() => {
-                window.location.href = 'login.html';
+                window.location.href = 'login.html'; // Redireciona para login
             });
         });
     </script>
