@@ -120,8 +120,8 @@
         </div>
 
         <div class="div-azul">
-            <h2 class="capital">R$: 5000,00</h2>
             <h2 class="titulo">Total acumulado</h2>
+            <h2 class="capital">R$: 5000,00</h2>
         </div>
 
         <div class="graficos-container">
@@ -262,7 +262,7 @@
 <script>
     async function carregarCashbacks() {
         try {
-            const response = await fetch("http://192.168.1.124:5000/cashbacks", {
+            const response = await fetch("http://192.168.1.121:5000/cashbacks", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 redirect: "follow"

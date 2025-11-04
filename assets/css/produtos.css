@@ -611,19 +611,24 @@ h1 {
 
 .pagination {
     display: flex;
-    gap: 8px;
+    gap: 6px;
     align-items: center;
     justify-content: center;
-    margin-top: 18px;
+    margin: 18px 12px;
     flex-wrap: wrap;
 }
 
 .pagination button {
+    background: #fff;
+    border: 1px solid #d0d0d0;
     padding: 6px 10px;
     border-radius: 6px;
-    border: 1px solid var(--preto-opaco);
-    background: var(--branco);
     cursor: pointer;
+    font-weight: 600;
+}
+
+.pagination button:hover {
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
 }
 
 .pagination button.active {

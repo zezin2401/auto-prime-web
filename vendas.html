@@ -113,13 +113,13 @@
         <h2 class="titulo">Total vendido</h2>
         <div class="informacoes-vendas">
             <div class="div-azul">
-                <h2 class="capital">R$: 500.000,00</h2>
                 <h2 class="info-capital">Capital arrecadado</h2>
+                <h2 class="capital">R$: 500.000,00</h2>
             </div>
 
             <div class="div-verde">
-                <h2 class="qtd">400.000</h2>
                 <h2 class="info-qtd">Vendas efetuadas</h2>
+                <h2 class="qtd">400.000</h2>
             </div>
         </div>
 
@@ -168,7 +168,7 @@
 <script>
     async function carregarVendas() {
         try {
-            const response = await fetch("http://192.168.1.124:5000/vendas", {
+            const response = await fetch("http://192.168.1.121:5000/vendas", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
