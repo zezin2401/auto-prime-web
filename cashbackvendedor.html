@@ -4,41 +4,43 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciar Vendas</title>
+    <title>Gerenciar Cashback</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/vendas.css">
+    <link rel="stylesheet" href="assets/css/cashback.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
 </head>
 
 <body>
     <header>
-        <a href="home.html"><img src="assets/img/Ariel (1) 4.png" alt="Logo AutoPrime"></a>
+        <a href="indexvendedor.html"><img src="assets/img/Ariel (1) 4.png" alt=""></a>
 
         <div class="container">
-            <div class="pesquisa">
+            <search class="pesquisa">
                 <input class="barra-pesquisar" type="text" placeholder="Pesquisar na AutoPrime">
                 <button class="botao-pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </div>
+            </search>
 
             <i class="fa-solid fa-circle-user"></i>
         </div>
     </header>
 
     <section class="banner">
-        <img src="assets/img/PONTEIRAS DE 1.png" alt="Banner Promoção">
+        <img src="assets/img/PONTEIRAS DE 1.png" alt="">
     </section>
 
     <section class="main">
-        <h1>Gerenciar Vendas</h1>
+        <h1>Gerenciar Cashback</h1>
         <div class="cards-container">
-            <!-- Usuário -->
+
             <div class="usuario">
+
                 <div class="icone">
                     <i class="fa-solid fa-user"></i>
                 </div>
@@ -46,12 +48,13 @@
                     <p>usuario@gmail.com</p>
                     <h2 class="criado-em">Criado em: 22/09/2025</h2>
                 </div>
+
             </div>
 
-            <!-- Informações -->
             <div class="informacoes">
-                <!-- Usuários -->
+
                 <div class="usuarios">
+
                     <div class="info-titulo">
                         <i class="fa-solid fa-user"></i>
                         <p>Usuários</p>
@@ -62,8 +65,8 @@
                     </div>
                 </div>
 
-                <!-- Vendas -->
                 <div class="usuarios">
+
                     <div class="info-titulo">
                         <i class="fa-solid fa-cart-shopping"></i>
                         <p>Vendas</p>
@@ -74,8 +77,8 @@
                     </div>
                 </div>
 
-                <!-- Produtos -->
                 <div class="usuarios">
+
                     <div class="info-titulo">
                         <i class="fa-solid fa-bag-shopping"></i>
                         <p>Produtos</p>
@@ -86,8 +89,8 @@
                     </div>
                 </div>
 
-                <!-- Cashback -->
                 <div class="usuarios">
+
                     <div class="info-titulo">
                         <i class="fa-solid fa-dollar-sign"></i>
                         <p>Cashback</p>
@@ -97,51 +100,52 @@
                         <a class="gerenciar" href="cashback.html">Gerenciar</a>
                     </div>
                 </div>
+
             </div>
+
         </div>
 
-        <!-- Botões -->
         <div class="botoes">
+
             <a href="usuarios.html" class="botao-gerenciar"><i class="fa-solid fa-user"></i>Gerenciar Usuários</a>
+
             <a href="vendas.html" class="botao-gerenciar"><i class="fa-solid fa-cart-shopping"></i>Gerenciar Vendas</a>
+
             <a href="produtos.html" class="botao-gerenciar"><i class="fa-solid fa-bag-shopping"></i>Gerenciar
                 Produtos</a>
+
             <a href="cashback.html" class="botao-gerenciar"><i class="fa-solid fa-dollar-sign"></i>Gerenciar
                 Cashback</a>
+
         </div>
 
-        <h2 class="titulo">Total vendido</h2>
-        <div class="informacoes-vendas">
-            <div class="div-azul">
-                <h2 class="info-capital">Capital arrecadado</h2>
-                <h2 class="capital">R$: 500.000,00</h2>
-            </div>
-
-            <div class="div-verde">
-                <h2 class="info-qtd">Vendas efetuadas</h2>
-                <h2 class="qtd">400.000</h2>
-            </div>
+        <div class="div-azul">
+            <h2 class="titulo">Total acumulado</h2>
+            <h2 class="capital">R$: 5000,00</h2>
         </div>
 
         <div class="graficos-container">
-            <!-- Gráficos -->
+
             <div class="grafico-pizza">
-                <h3 class="titulo-pizza">Marcas mais vendidas</h3>
+                <h3 class="titulo-pizza">Total de cashback acumulado pelos vendedores</h3>
+
                 <canvas id="Pizza"></canvas>
             </div>
 
             <div class="grafico-coluna">
-                <h3 class="titulo-coluna">Vendas mensais</h3>
+                <h3 class="titulo-coluna">Total de cashback acumulado mensalmente</h3>
+
                 <canvas id="Coluna"></canvas>
             </div>
+
         </div>
 
         <div class="vendedores">
-            <h3 class="maiores-compradores">Maiores compradores</h3>
 
-            <!-- Lista de vendedores -->
             <div class="vendedor-linha">
+
                 <div class="vendedor-detalhes">
+
                     <div class="icone">
                         <i class="fa-solid fa-user"></i>
                     </div>
@@ -150,54 +154,139 @@
                             <p>usuario@gmail.com</p>
                         </div>
                         <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>500</p>
+                            <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
+
                             <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
                         </div>
                     </div>
+
                 </div>
+
             </div>
 
-            <!-- Repetir divs para outros vendedores -->
-            <!-- Adicionar divs de vendedores similares aqui -->
+            <div class="vendedor-linha">
+
+                <div class="vendedor-detalhes">
+
+                    <div class="icone">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="separacao-nome-info">
+                        <div class="nome">
+                            <p>usuario@gmail.com</p>
+                        </div>
+                        <div class="info-vendedor">
+                            <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
+
+                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="vendedor-linha">
+
+                <div class="vendedor-detalhes">
+
+                    <div class="icone">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="separacao-nome-info">
+                        <div class="nome">
+                            <p>usuario@gmail.com</p>
+                        </div>
+                        <div class="info-vendedor">
+                            <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
+
+                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="vendedor-linha">
+
+                <div class="vendedor-detalhes">
+
+                    <div class="icone">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="separacao-nome-info">
+                        <div class="nome">
+                            <p>usuario@gmail.com</p>
+                        </div>
+                        <div class="info-vendedor">
+                            <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
+
+                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
+
+            <div class="vendedor-linha">
+
+                <div class="vendedor-detalhes">
+
+                    <div class="icone">
+                        <i class="fa-solid fa-user"></i>
+                    </div>
+                    <div class="separacao-nome-info">
+                        <div class="nome">
+                            <p>usuario@gmail.com</p>
+                        </div>
+                        <div class="info-vendedor">
+                            <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
+
+                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
+                        </div>
+                    </div>
+
+                </div>
+
+            </div>
 
         </div>
+
     </section>
+
 
 </body>
 
 <script>
-    async function carregarVendas() {
+    async function carregarCashbacks() {
         try {
-            const response = await fetch("http://10.92.3.173:5000/vendas", {
+            const response = await fetch("http://10.92.3.173:5000/cashbacks", {
                 method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                },
+                headers: { "Content-Type": "application/json" },
                 redirect: "follow"
             });
-            const vendas = await response.json();
+            const cashbacks = await response.json();
 
-            const totalVendas = vendas.length;
-            const valorTotal = vendas.reduce((acc, venda) => acc + Number(venda.valor_total), 0);
-
-            document.querySelector(".div-verde .qtd").textContent = totalVendas;
-            document.querySelector(".div-azul .capital").textContent = `R$ ${valorTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+            const totalCashback = cashbacks.reduce((acc, c) => acc + Number(c.valor_cashback), 0);
+            document.querySelector(".div-azul .capital").textContent = `R$ ${totalCashback.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
             const container = document.querySelector(".vendedores");
             const linhasExistentes = container.querySelectorAll(".vendedor-linha");
             linhasExistentes.forEach(v => v.remove());
 
-            const vendasPorCliente = {};
-            vendas.forEach(v => {
-                if (!vendasPorCliente[v.email_cliente]) vendasPorCliente[v.email_cliente] = 0;
-                vendasPorCliente[v.email_cliente] += Number(v.valor_total);
+            const cashbackPorCliente = {};
+            cashbacks.forEach(c => {
+                if (!cashbackPorCliente[c.id_cliente]) cashbackPorCliente[c.id_cliente] = 0;
+                cashbackPorCliente[c.id_cliente] += Number(c.valor_cashback);
             });
 
-            const maiores = Object.entries(vendasPorCliente)
+            const maiores = Object.entries(cashbackPorCliente)
                 .sort((a, b) => b[1] - a[1])
                 .slice(0, 5);
 
-            maiores.forEach(([email, total]) => {
+            maiores.forEach(([cliente, total]) => {
                 const linha = document.createElement("div");
                 linha.classList.add("vendedor-linha");
                 linha.innerHTML = `
@@ -207,10 +296,10 @@
                     </div>
                     <div class="separacao-nome-info">
                         <div class="nome">
-                            <p>${email}</p>
+                            <p>${cliente}</p>
                         </div>
                         <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                            <p class="criado-em"><span class="negrito">Total: </span>R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                             <p class="criado-em"><span class="negrito">Criado em: </span>--/--/----</p>
                         </div>
                     </div>
@@ -220,36 +309,35 @@
             });
 
             const ctx = document.getElementById('Coluna');
+            const cashbacksPorMes = [0, 0, 0, 0, 0, 0];
+            cashbacks.forEach(c => {
+                const mes = new Date(c.data_geracao).getMonth();
+                if (mes < 6) cashbacksPorMes[mes] += Number(c.valor_cashback);
+            });
+
             new Chart(ctx, {
                 type: 'bar',
                 data: {
                     labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
                     datasets: [{
-                        label: 'N de vendas',
-                        data: [200, 400, 600, 800, 1000, 1200],
+                        label: 'Cashback acumulado',
+                        data: cashbacksPorMes,
                         borderWidth: 1,
                         backgroundColor: ['#008CFF']
                     }]
                 },
-                options: {
-                    scales: {
-                        y: { beginAtZero: true }
-                    }
-                }
+                options: { scales: { y: { beginAtZero: true } } }
             });
 
             const ptx = document.getElementById('Pizza').getContext('2d');
             new Chart(ptx, {
                 type: 'doughnut',
                 data: {
-                    labels: ['Chevrolet', 'RAM', 'Fiat', 'Nissan', 'Honda', 'Toyota', 'Peugeot', 'Citroen', 'Jeep', 'Ford', 'Volkswagen', 'BYD', 'BMW', 'MINI', 'Hyundai', 'KIA'],
+                    labels: maiores.map(m => m[0]),
                     datasets: [{
-                        label: 'Vendedores mais populares',
-                        data: Array(16).fill(6.25),
-                        backgroundColor: [
-                            '#0073E6', '#1AAC5F', '#7D3AC1', '#F2C200', '#E90039', '#E96500', '#00E9E9', '#E9008C',
-                            '#7800E9', '#00E913', '#0090E9', '#E100E9', '#E9A300', '#C2E900', '#00E994', '#2F00E9'
-                        ],
+                        label: 'Top clientes',
+                        data: maiores.map(m => m[1]),
+                        backgroundColor: ['#0073E6', '#1AAC5F', '#7D3AC1', '#F2C200', '#E90039'],
                         borderWidth: 1
                     }]
                 },
@@ -257,7 +345,7 @@
                     plugins: {
                         datalabels: {
                             color: '#fff',
-                            font: { weight: 'bold', size: 15, family: "Poppins, sans-serif" },
+                            font: { weight: 'bold', size: 20, family: "Poppins, sans-serif" },
                             formatter: (value, ctx) => {
                                 let total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
                                 return ((value / total) * 100).toFixed(0) + "%";
@@ -269,11 +357,12 @@
             });
 
         } catch (error) {
-            console.error("Erro ao carregar vendas:", error);
+            console.error("Erro ao carregar cashbacks:", error);
         }
     }
 
-    window.onload = carregarVendas;
+    window.onload = carregarCashbacks;
 </script>
+
 
 </html>

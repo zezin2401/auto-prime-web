@@ -661,7 +661,6 @@ div.swal2-container .swal2-popup {
     align-items: center;
     text-align: center;
     justify-content: center;
-    margin: 0 auto;
 
 }
 
@@ -707,7 +706,7 @@ div.swal2-container .swal2-popup {
 
 /* CSS: cole no seu stylesheet */
 .card-container {
-    display: flex;
+    display: none;
     gap: 18px;
     align-items: center;
     justify-content: space-between;

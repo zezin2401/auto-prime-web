@@ -262,7 +262,7 @@
 <script>
     async function carregarCashbacks() {
         try {
-            const response = await fetch("http://192.168.1.131:5000/cashbacks", {
+            const response = await fetch("http://10.92.3.173:5000/cashbacks", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 redirect: "follow"
@@ -331,7 +331,7 @@
 
             const ptx = document.getElementById('Pizza').getContext('2d');
             new Chart(ptx, {
-                type: 'pie',
+                type: 'doughnut',
                 data: {
                     labels: maiores.map(m => m[0]),
                     datasets: [{

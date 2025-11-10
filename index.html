@@ -388,7 +388,7 @@
                 headers.append("Content-Type", "application/json");
                 if (token) headers.append("Authorization", `Bearer ${token}`);
 
-                const urlBase = "http://192.168.1.131:5000/produtos";
+                const urlBase = "http://10.92.3.173:5000/produtos";
                 const url = busca ? `${urlBase}?q=${encodeURIComponent(busca)}` : urlBase;
 
                 try {
@@ -440,7 +440,7 @@
                     const img = document.createElement('img');
                     img.className = 'img-produto';
                     img.alt = produto.nome || 'Produto';
-                    img.src = produto.imagem ? `http://192.168.1.131:5000/static/imagens/${produto.imagem}` : 'assets/img/ponta 5.png';
+                    img.src = produto.imagem ? `http://10.92.3.173:5000/static/imagens/${produto.imagem}` : 'assets/img/ponta 5.png';
                     img.onerror = () => { img.src = 'assets/img/ponta 5.png'; };
 
                     // conteúdo

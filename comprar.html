@@ -2,98 +2,113 @@
 <html lang="pt-br" dir="ltr">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Home</title>
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <meta charset="UTF-8"> <!-- Define a codificação de caracteres -->
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade -->
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <!-- Importa SweetAlert2 para alertas bonitos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Pré-carregamento de fonte Google -->
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- Pré-carregamento de fonte com CORS -->
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+        rel="stylesheet"> <!-- Fonte Poppins importada -->
+
+    <title>Home AutoPrime</title>
+    <script src="assets/js/seguranca.js"></script>
     <link rel="stylesheet" href="assets/css/comprar.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        /* Menu lateral oculto */
+        #sideMenu {
+            position: fixed;
+            /* Fixa na tela */
+            top: 0;
+            right: -250px;
+            /* Inicialmente fora da tela */
+            width: 250px;
+            height: 100%;
+            background-color: #222;
+            color: #f0f0f0;
+            box-shadow: -3px 0 8px rgba(0, 0, 0, 0.6);
+            transition: right 0.3s ease, opacity 0.3s ease;
+            /* Animação */
+            padding: 30px 25px;
+            font-family: 'Poppins', sans-serif;
+            z-index: 1000;
+            opacity: 0;
+            /* Invisível */
+            pointer-events: none;
+            /* Não clicável */
+            display: flex;
+            flex-direction: column;
+        }
+
+        /* Menu ativo */
+        #sideMenu.active {
+            right: 0;
+            /* Mostra o menu */
+            opacity: 1;
+            pointer-events: auto;
+            /* Clicável */
+        }
+
+        /* Botão de fechar */
+        #sideMenu .closeBtn {
+            font-size: 28px;
+            font-weight: 700;
+            cursor: pointer;
+            text-align: right;
+            margin-bottom: 40px;
+            color: #f0f0f0;
+            user-select: none;
+            /* Não selecionável */
+            transition: color 0.2s ease;
+        }
+
+        #sideMenu .closeBtn:hover {
+            color: #ff4d4d;
+            /* Muda cor ao passar mouse */
+        }
+
+        /* Lista dentro do menu */
+        #sideMenu ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+            gap: 25px;
+        }
+
+        #sideMenu ul li {
+            font-weight: 600;
+            font-size: 20px;
+        }
+
+        #sideMenu ul li a {
+            color: #f0f0f0;
+            text-decoration: none;
+            transition: color 0.3s ease;
+            padding: 10px 15px;
+            border-radius: 8px;
+            display: block;
+        }
+
+        #sideMenu ul li a:hover {
+            background-color: #444;
+            color: #ff4d4d;
+        }
+
+        /* Cursor pointer no avatar */
+        .avatarheader img {
+            cursor: pointer;
+        }
+    </style>
 </head>
-
-<style>
-    /* Menu lateral oculto */
-    #sideMenu {
-        position: fixed;
-        top: 0;
-        right: -250px;
-        width: 250px;
-        height: 100%;
-        background-color: #222;
-        color: #f0f0f0;
-        box-shadow: -3px 0 8px rgba(0, 0, 0, 0.6);
-        transition: right 0.3s ease, opacity 0.3s ease;
-        padding: 30px 25px;
-        font-family: 'Poppins', sans-serif;
-        z-index: 1000;
-        opacity: 0;
-        pointer-events: none;
-        display: flex;
-        flex-direction: column;
-    }
-
-    #sideMenu.active {
-        right: 0;
-        opacity: 1;
-        pointer-events: auto;
-    }
-
-    #sideMenu .closeBtn {
-        font-size: 28px;
-        font-weight: 700;
-        cursor: pointer;
-        text-align: right;
-        margin-bottom: 40px;
-        color: #f0f0f0;
-        user-select: none;
-        transition: color 0.2s ease;
-    }
-
-    #sideMenu .closeBtn:hover {
-        color: #ff4d4d;
-    }
-
-    #sideMenu ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
-        flex-grow: 1;
-        display: flex;
-        flex-direction: column;
-        gap: 25px;
-    }
-
-    #sideMenu ul li {
-        font-weight: 600;
-        font-size: 20px;
-    }
-
-    #sideMenu ul li a {
-        color: #f0f0f0;
-        text-decoration: none;
-        transition: color 0.3s ease;
-        padding: 10px 15px;
-        border-radius: 8px;
-        display: block;
-    }
-
-    #sideMenu ul li a:hover {
-        background-color: #444;
-        color: #ff4d4d;
-    }
-
-    .avatarheader img {
-        cursor: pointer;
-    }
-</style>
 
 <body>
     <header>
-        <a href="home.html"><img src="assets/img/Ariel (1) 4.png" alt=""></a>
+        <a href="index.html"><img src="assets/img/Ariel (1) 4.png" alt=""></a>
 
         <div class="container">
             <div class="pesquisa">
@@ -127,12 +142,14 @@
                     <div class="qtd">
                         <h3 class="titulo-qtd">Quantidade:</h3>
                         <div class="quantidade">
-                            <button class="add"><i class="fa-solid fa-plus"></i></button>
+                            <button class="add" type="button"><i class="fa-solid fa-plus"></i></button>
                             <div class="numero">1</div>
-                            <button class="menos"><i class="fa-solid fa-minus"></i></button>
+                            <button class="menos" type="button"><i class="fa-solid fa-minus"></i></button>
                         </div>
 
-                        <button class="botao-compra"><i class="fa-solid fa-cart-shopping"></i> Comprar agora</button>
+                        <!-- add data-id-produto here or the script will read ?id= from URL -->
+                        <button class="botao-compra" data-id-produto="103"><i class="fa-solid fa-cart-shopping"></i>
+                            Adicionar ao carrinho</button>
                     </div>
                 </div>
             </div>
@@ -156,70 +173,142 @@
     </main>
 
     <script>
-        window.addEventListener("DOMContentLoaded", () => {
-            const params = new URLSearchParams(window.location.search);
+        // Seleciona elementos do menu lateral
+        const avatarToggle = document.getElementById('avatarToggle');
+        const sideMenu = document.getElementById('sideMenu');
+        const menuClose = document.getElementById('menuClose');
 
-            const id_produto = params.get("id") || 0;
-            const nome = params.get("nome") || "Produto sem nome";
-            const preco = params.get("preco") || "0,00";
-            const vendedor = params.get("vendedor") || "vendedor@gmail.com";
-            const acabamento = params.get("acabamento") || "-";
-            const descricao = params.get("descricao") || "Sem descrição";
-            const imagem = params.get("imagem") || "assets/img/placeholder.png";
+        avatarToggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            sideMenu.classList.add('active');
+        });
 
-            // Seleciona elementos
-            const nomeEl = document.querySelector("#produto-nome");
-            const precoEl = document.querySelector("#produto-preco");
-            const vendedorEl = document.querySelector("#produto-vendedor");
-            const acabamentoEl = document.querySelector("#produto-acabamento");
-            const descricaoEl = document.querySelector("#produto-descricao");
-            const imagemEl = document.querySelector("#produto-imagem");
+        menuClose.addEventListener('click', function () {
+            sideMenu.classList.remove('active');
+        });
 
-            nomeEl.textContent = nome;
-            precoEl.textContent = parseFloat(preco).toFixed(2).replace(".", ",");
-            vendedorEl.textContent = vendedor;
-            acabamentoEl.textContent = acabamento;
-            descricaoEl.textContent = descricao;
+        const logoutBtn = document.getElementById('logoutBtn');
 
-            // Fallback automático para imagem
-            imagemEl.src = imagem;
-            imagemEl.onerror = () => { imagemEl.src = "assets/img/placeholder.png"; };
+        logoutBtn.addEventListener('click', function (e) {
+            e.preventDefault();
 
-            // Quantidade
-            let quantidade = 1;
-            const numeroEl = document.querySelector(".numero");
-            document.querySelector(".add").addEventListener("click", () => {
-                quantidade++;
-                numeroEl.textContent = quantidade;
-            });
-            document.querySelector(".menos").addEventListener("click", () => {
-                if (quantidade > 1) quantidade--;
-                numeroEl.textContent = quantidade;
-            });
-
-            // Comprar
-            document.querySelector(".botao-compra").addEventListener("click", () => {
-                const precoUnit = parseFloat(preco);
-                const raw = JSON.stringify({
-                    email_cliente: "cliente@gmail.com",
-                    email_vendedor: vendedor,
-                    id_produto: parseInt(id_produto),
-                    quantidade: quantidade,
-                    valor_unitario: precoUnit
-                });
-
-                fetch("http://192.168.1.131:5000/venda", {
-                    method: "POST",
-                    headers: { "Content-Type": "application/json" },
-                    body: raw,
-                    redirect: "follow"
-                })
-                    .then(res => res.text())
-                    .then(result => Swal.fire({ icon: "success", title: "Compra realizada!", text: "Venda registrada com sucesso." }))
-                    .catch(err => Swal.fire({ icon: "error", title: "Erro ao comprar", text: "Não foi possível realizar a compra." }));
+            Swal.fire({
+                icon: 'success',
+                title: 'Logout realizado!',
+                text: 'Você será redirecionado para a página de login.',
+                confirmButtonText: 'Ok'
+            }).then(() => {
+                window.location.href = 'login.html';
             });
         });
     </script>
+
+    <script>
+        (function () {
+
+            const btnAdd = document.querySelector('.quantidade .add');
+            const btnMinus = document.querySelector('.quantidade .menos');
+            const numeroEl = document.querySelector('.quantidade .numero');
+
+            const botaoCompra = document.querySelector('.botao-compra');
+
+            let quantidade = parseInt(numeroEl.textContent) || 1;
+            if (quantidade < 1) quantidade = 1;
+            numeroEl.textContent = quantidade;
+
+            function atualizaDisplay() {
+                numeroEl.textContent = quantidade;
+            }
+
+            btnAdd.addEventListener('click', function () {
+                quantidade++;
+                atualizaDisplay();
+            });
+
+            btnMinus.addEventListener('click', function () {
+                if (quantidade > 1) {
+                    quantidade--;
+                    atualizaDisplay();
+                }
+            });
+
+            function getEmailCliente() {
+
+                const possibleKeys = ['email', 'email_cliente', 'usuario_email', 'userEmail'];
+                for (const k of possibleKeys) {
+                    const v = localStorage.getItem(k);
+                    if (v) return v;
+                }
+
+                return 'cliente@gmail.com';
+            }
+
+            botaoCompra.addEventListener('click', function (e) {
+                e.preventDefault();
+
+                botaoCompra.disabled = true;
+                const originalText = botaoCompra.innerHTML;
+                botaoCompra.innerHTML = 'Adicionando...';
+
+                const idProduto = botaoCompra.getAttribute('data-id-produto') || 103;
+                const emailCliente = getEmailCliente();
+                const quantidadeEnviada = quantidade;
+
+                const myHeaders = new Headers();
+                myHeaders.append("Content-Type", "application/json");
+
+                const raw = JSON.stringify({
+                    "email_cliente": emailCliente,
+                    "id_produto": Number(idProduto),
+                    "quantidade": Number(quantidadeEnviada)
+                });
+
+                const requestOptions = {
+                    method: "POST",
+                    headers: myHeaders,
+                    body: raw,
+                    redirect: "follow"
+                };
+
+                fetch("http://10.92.3.173:5000/carrinho/adicionar", requestOptions)
+                    .then(async (response) => {
+                        const text = await response.text();
+                        if (response.ok) {
+                            // Sucesso
+                            Swal.fire({
+                                icon: 'success',
+                                title: 'Adicionado ao carrinho',
+                                text: typeof text === 'string' && text.length ? text : 'Produto adicionado com sucesso.',
+                                confirmButtonText: 'Ok'
+                            });
+                        } else {
+                            // Erro retornado pelo servidor
+                            Swal.fire({
+                                icon: 'error',
+                                title: 'Erro ao adicionar',
+                                text: text || `Status ${response.status}`,
+                                confirmButtonText: 'Ok'
+                            });
+                        }
+                    })
+                    .catch((error) => {
+                        console.error('Fetch error:', error);
+                        Swal.fire({
+                            icon: 'error',
+                            title: 'Falha na requisição',
+                            text: 'Não foi possível conectar ao servidor. Verifique a rede e o endereço.',
+                            confirmButtonText: 'Ok'
+                        });
+                    })
+                    .finally(() => {
+                        botaoCompra.disabled = false;
+                        botaoCompra.innerHTML = originalText;
+                    });
+            });
+        })();
+    </script>
+    <!-- === FIM DO SCRIPT DE INTEGRAÇÃO === -->
+
 </body>
 
 </html>
