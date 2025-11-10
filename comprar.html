@@ -2,16 +2,15 @@
 <html lang="pt-br" dir="ltr">
 
 <head>
-    <meta charset="UTF-8"> <!-- Define a codificação de caracteres -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
-    <!-- Importa SweetAlert2 para alertas bonitos -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Pré-carregamento de fonte Google -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- Pré-carregamento de fonte com CORS -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet"> <!-- Fonte Poppins importada -->
-
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <title>Home AutoPrime</title>
     <script src="assets/js/seguranca.js"></script>
     <link rel="stylesheet" href="assets/css/comprar.css">
@@ -204,109 +203,172 @@
     </script>
 
     <script>
-        (function () {
-
-            const btnAdd = document.querySelector('.quantidade .add');
-            const btnMinus = document.querySelector('.quantidade .menos');
-            const numeroEl = document.querySelector('.quantidade .numero');
-
-            const botaoCompra = document.querySelector('.botao-compra');
-
-            let quantidade = parseInt(numeroEl.textContent) || 1;
-            if (quantidade < 1) quantidade = 1;
-            numeroEl.textContent = quantidade;
-
-            function atualizaDisplay() {
-                numeroEl.textContent = quantidade;
-            }
-
-            btnAdd.addEventListener('click', function () {
-                quantidade++;
-                atualizaDisplay();
-            });
-
-            btnMinus.addEventListener('click', function () {
-                if (quantidade > 1) {
-                    quantidade--;
-                    atualizaDisplay();
-                }
-            });
-
+        document.addEventListener('DOMContentLoaded', function () {
+            // helpers
+            function qs(name) { return new URLSearchParams(window.location.search).get(name); }
             function getEmailCliente() {
-
                 const possibleKeys = ['email', 'email_cliente', 'usuario_email', 'userEmail'];
                 for (const k of possibleKeys) {
                     const v = localStorage.getItem(k);
                     if (v) return v;
                 }
-
                 return 'cliente@gmail.com';
             }
 
-            botaoCompra.addEventListener('click', function (e) {
-                e.preventDefault();
+            // elementos da página
+            const elNome = document.getElementById('produto-nome');
+            const elPreco = document.getElementById('produto-preco');
+            const elDescricao = document.getElementById('produto-descricao');
+            const elAcabamento = document.getElementById('produto-acabamento');
+            const elImagem = document.getElementById('produto-imagem');
+            const elVendedor = document.getElementById('produto-vendedor');
+            const btnComprar = document.querySelector('.botao-compra');
+            const qtdNumEl = document.querySelector('.quantidade .numero');
 
-                botaoCompra.disabled = true;
-                const originalText = botaoCompra.innerHTML;
-                botaoCompra.innerHTML = 'Adicionando...';
+            // pega dados da URL (setados pelo index)
+            const params = new URLSearchParams(window.location.search);
+            const produtoFromParams = {
+                id: params.get('id') || '',
+                nome: params.get('nome') || '',
+                descricao: params.get('descricao') || '',
+                preco: params.get('preco') || '',
+                acabamento: params.get('acabamento') || '',
+                marca: params.get('marca') || '',
+                imagem: params.get('imagem') || ''
+            };
 
-                const idProduto = botaoCompra.getAttribute('data-id-produto') || 103;
-                const emailCliente = getEmailCliente();
-                const quantidadeEnviada = quantidade;
+            // popula com os params (se houver)
+            if (elNome) elNome.textContent = produtoFromParams.nome || 'Produto';
+            if (elDescricao) elDescricao.textContent = produtoFromParams.descricao || 'Sem descrição';
+            if (elAcabamento) elAcabamento.textContent = produtoFromParams.acabamento || '-';
+            if (elPreco) {
+                let p = produtoFromParams.preco || '0,00';
+                if (!p.includes(',')) p = String(p).replace('.', ',');
+                elPreco.textContent = p;
+            }
+            if (elImagem) {
+                if (produtoFromParams.imagem) {
+                    // se imagem for só filename, monta URL do servidor, senão usa como veio
+                    if (!/^https?:\/\//i.test(produtoFromParams.imagem)) {
+                        elImagem.src = `http://10.92.3.173:5000/static/imagens/${produtoFromParams.imagem}`;
+                    } else {
+                        elImagem.src = produtoFromParams.imagem;
+                    }
+                } else {
+                    // fallback
+                    elImagem.src = 'assets/img/placeholder.png';
+                }
+            }
 
-                const myHeaders = new Headers();
-                myHeaders.append("Content-Type", "application/json");
+            // opcional: buscar dados atualizados do servidor por id (descomente se quiser)
+            async function fetchProdutoPorId(id) {
+                if (!id) return;
+                try {
+                    const resp = await fetch(`http://10.92.3.173:5000/produtos/${encodeURIComponent(id)}`);
+                    if (!resp.ok) throw new Error('Produto não encontrado');
+                    const data = await resp.json();
+                    // adapta conforme formato da sua API
+                    const p = data.produto || data || (Array.isArray(data) ? data[0] : null);
+                    if (!p) return;
+                    if (elNome && (p.nome || p.title)) elNome.textContent = p.nome || p.title;
+                    if (elDescricao && (p.descricao || p.description)) elDescricao.textContent = p.descricao || p.description;
+                    if (elAcabamento && (p.acabamento || p.finish)) elAcabamento.textContent = p.acabamento || p.finish;
+                    if (elPreco && (p.preco || p.valor || p.price)) {
+                        let v = p.preco ?? p.valor ?? p.price;
+                        if (typeof v === 'number') v = v.toFixed(2).replace('.', ',');
+                        elPreco.textContent = String(v);
+                    }
+                    if (elImagem && (p.imagem || p.image || p.foto)) {
+                        const img = p.imagem || p.image || p.foto;
+                        elImagem.src = /^https?:\/\//i.test(img) ? img : `http://10.92.3.173:5000/static/imagens/${img}`;
+                    }
+                    if (elVendedor && (p.vendedor || p.vendedor_nome || p.seller)) {
+                        elVendedor.textContent = p.vendedor || p.vendedor_nome || p.seller;
+                    }
+                } catch (err) {
+                    console.warn('Não foi possível buscar produto por id:', err);
+                }
+            }
 
-                const raw = JSON.stringify({
-                    "email_cliente": emailCliente,
-                    "id_produto": Number(idProduto),
-                    "quantidade": Number(quantidadeEnviada)
-                });
+            // se quiser buscar do servidor, descomente a linha abaixo:
+            // fetchProdutoPorId(produtoFromParams.id);
 
-                const requestOptions = {
-                    method: "POST",
-                    headers: myHeaders,
-                    body: raw,
-                    redirect: "follow"
-                };
+            // controla quantidade
+            let quantidade = parseInt(qtdNumEl?.textContent) || 1;
+            function atualizaDisplayQtd() { if (qtdNumEl) qtdNumEl.textContent = quantidade; }
+            document.querySelectorAll('.quantidade .add').forEach(btn => btn.addEventListener('click', () => { quantidade++; atualizaDisplayQtd(); }));
+            document.querySelectorAll('.quantidade .menos').forEach(btn => btn.addEventListener('click', () => { if (quantidade > 1) quantidade--; atualizaDisplayQtd(); }));
 
-                fetch("http://10.92.3.173:5000/carrinho/adicionar", requestOptions)
-                    .then(async (response) => {
-                        const text = await response.text();
-                        if (response.ok) {
-                            // Sucesso
-                            Swal.fire({
+            // Adicionar ao carrinho - usa o POST do Postman
+            <!-- Substitua o listener antigo por este -->
+            if (btnComprar) {
+                btnComprar.addEventListener('click', async function (e) {
+                    e.preventDefault();
+                    btnComprar.disabled = true;
+                    const originalText = btnComprar.innerHTML;
+                    btnComprar.innerHTML = 'Adicionando...';
+
+                    const emailCliente = getEmailCliente();
+                    const idProduto = produtoFromParams.id || btnComprar.getAttribute('data-id-produto') || 0;
+
+                    const body = {
+                        email_cliente: emailCliente,
+                        id_produto: Number(idProduto),
+                        quantidade: Number(quantidade)
+                    };
+
+                    try {
+                        const resp = await fetch("http://10.92.3.173:5000/carrinho/adicionar", {
+                            method: "POST",
+                            headers: { "Content-Type": "application/json" },
+                            body: JSON.stringify(body),
+                            redirect: 'follow'
+                        });
+
+                        const data = await resp.json();
+
+                        if (resp.ok) {
+                            // garante que qualquer modal anterior seja fechado
+                            try { Swal.close(); } catch (e) { /* ignore */ }
+
+                            // mostra sucesso e aguarda o usuário fechar o modal (await evita overlay preso)
+                            await Swal.fire({
                                 icon: 'success',
                                 title: 'Adicionado ao carrinho',
-                                text: typeof text === 'string' && text.length ? text : 'Produto adicionado com sucesso.',
-                                confirmButtonText: 'Ok'
+                                text: data.mensagem || 'Produto adicionado com sucesso.',
+                                confirmButtonText: 'Ir para o carrinho'
                             });
+
+                            // redireciona para a página do carrinho (após o usuário fechar o alerta)
+                            window.location.href = 'carrinho.html';
+                            return;
                         } else {
-                            // Erro retornado pelo servidor
-                            Swal.fire({
+                            // mensagem de erro (await também garante que o modal seja exibido corretamente)
+                            await Swal.fire({
                                 icon: 'error',
                                 title: 'Erro ao adicionar',
-                                text: text || `Status ${response.status}`,
+                                text: text || `Status ${resp.status}`,
                                 confirmButtonText: 'Ok'
                             });
                         }
-                    })
-                    .catch((error) => {
-                        console.error('Fetch error:', error);
-                        Swal.fire({
+                    } catch (err) {
+                        console.error('Erro ao adicionar:', err);
+                        await Swal.fire({
                             icon: 'error',
-                            title: 'Falha na requisição',
-                            text: 'Não foi possível conectar ao servidor. Verifique a rede e o endereço.',
+                            title: 'Falha',
+                            text: 'Não foi possível conectar ao servidor.',
                             confirmButtonText: 'Ok'
                         });
-                    })
-                    .finally(() => {
-                        botaoCompra.disabled = false;
-                        botaoCompra.innerHTML = originalText;
-                    });
-            });
-        })();
+                    } finally {
+                        // caso permaneça na página por algum motivo, reabilita o botão
+                        btnComprar.disabled = false;
+                        btnComprar.innerHTML = originalText;
+                    }
+                });
+            }
+        });
     </script>
+
     <!-- === FIM DO SCRIPT DE INTEGRAÇÃO === -->
 
 </body>

@@ -1,0 +1,151 @@
+body {
+    font-family: 'Poppins', sans-serif;
+    font-weight: 400;
+    margin: 0;
+    padding: 0
+}
+
+header {
+    background: #111;
+    color: #fff;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 12px 28px
+}
+
+header img {
+    height: 42px
+}
+
+main {
+    max-width: 980px;
+    margin: 28px auto;
+    padding: 20px
+}
+
+h1 {
+    text-align: center;
+    margin-bottom: 18px
+}
+
+.carrinho-wrap {
+    display: flex;
+    flex-direction: column;
+    gap: 16px
+}
+
+.item {
+    background: #fff;
+    border-radius: 10px;
+    padding: 16px;
+    display: flex;
+    gap: 12px;
+    align-items: center;
+    justify-content: space-between;
+    box-shadow: 0 6px 20px rgba(12, 23, 40, 0.06)
+}
+
+.info {
+    flex: 1
+}
+
+.info h3 {
+    margin: 0 0 6px;
+    font-size: 18px
+}
+
+.info p {
+    margin: 2px 0;
+    color: #555;
+    font-size: 14px
+}
+
+.preco {
+    min-width: 190px;
+    text-align: right
+}
+
+.btn {
+    padding: 8px 12px;
+    border-radius: 10px;
+    border: none;
+    cursor: pointer;
+    font-weight: 600
+}
+
+.remover {
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    background: #E90039;
+    color: #ffd9de;
+}
+
+.remover:hover {
+    background: #870626
+}
+
+.finalizar {
+    height: 55px;
+    padding: 5px;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    border: none;
+    background: #1AAC5F;
+    color: #d7fee9;
+}
+
+.finalizar[disabled] {
+    opacity: 0.6;
+    cursor: not-allowed
+}
+
+.display-coisas {
+    gap: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.total {
+    display: flex;
+    justify-content: flex-end;
+    align-items: center;
+    gap: 18px;
+    margin-top: 10px;
+    font-size: 20px;
+    font-weight: 700
+}
+
+.vazio {
+    text-align: center;
+    color: #777;
+    padding: 36px;
+    background: #fff;
+    border-radius: 10px
+}
+
+.swal2-confirm {
+    background-color: #008CFF;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    width: 180px;
+    border-radius: 5px;
+}
+
+.swal2-confirm:hover {
+    background-color: #00447C;
+}
+
+.swal2-cancel {
+    background-color: #e90039;
+    ;
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    width: 140px;
+    border-radius: 5px;
+}
+
+.swal2-cancel:hover {
+    background-color: #870626;
+}

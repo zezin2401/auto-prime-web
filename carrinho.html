@@ -1,0 +1,281 @@
+<!DOCTYPE html>
+<html lang="pt-br" dir="ltr">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+        rel="stylesheet">
+    <title>Seu carrinho</title>
+    <link rel="stylesheet" href="assets/css/carrinho.css">
+</head>
+
+<body>
+    <header>
+        <a href="index.html"><img src="assets/img/Ariel (1) 4.png" alt="AutoPrime"></a>
+        <h2>Seu Carrinho</h2>
+    </header>
+
+    <main>
+        <h1>Itens no Carrinho</h1>
+
+        <div id="carrinhoContainer" class="carrinho-wrap"></div>
+
+        <div class="display-coisas">
+
+            <div class="total">
+
+                <div id="totalText">Total Geral: R$ 0,00</div>
+                <button id="limparBtn" class="btn remover">Limpar Carrinho</button>
+            </div>
+
+            <button id="finalizarBtn" class="btn finalizar">Finalizar Compra</button>
+
+        </div>
+    </main>
+
+    <script>
+        // CONFIG
+        const API_BASE = "http://10.92.3.173:5000";
+        // email: tenta localStorage primeiro, senão fallback para cliente@gmail.com
+        function getEmailCliente() {
+            return localStorage.getItem('email') || localStorage.getItem('email_cliente') || 'cliente@gmail.com';
+        }
+
+        // estado local
+        let carrinhoData = null; // o JSON retornado pela API
+        const carrinhoContainer = document.getElementById('carrinhoContainer');
+        const totalText = document.getElementById('totalText');
+        const finalizarBtn = document.getElementById('finalizarBtn');
+        const limparBtn = document.getElementById('limparBtn');
+
+        // carrega e renderiza o carrinho
+        async function carregarCarrinho() {
+            const email = getEmailCliente();
+            try {
+                const resp = await fetch(`${API_BASE}/carrinho/${encodeURIComponent(email)}`, { method: 'GET', redirect: 'follow' });
+                const text = await resp.text();
+                // tenta parse JSON
+                let data;
+                try { data = JSON.parse(text); } catch (e) { throw new Error('Resposta inválida do servidor: ' + text); }
+                carrinhoData = data;
+                renderCarrinho();
+            } catch (err) {
+                console.error('Erro carregarCarrinho:', err);
+                carrinhoContainer.innerHTML = `<div class="vazio">Não foi possível carregar o carrinho. Verifique o servidor.</div>`;
+                totalText.textContent = '';
+                await Swal.fire('Erro', 'Não foi possível carregar o carrinho.', 'error');
+            }
+        }
+
+        // renderiza itens
+        function renderCarrinho() {
+            carrinhoContainer.innerHTML = '';
+            if (!carrinhoData || !Array.isArray(carrinhoData.carrinho) || carrinhoData.carrinho.length === 0) {
+                carrinhoContainer.innerHTML = `<div class="vazio">Seu carrinho está vazio 🛒</div>`;
+                totalText.textContent = 'Total Geral: R$ 0,00';
+                return;
+            }
+
+            let totalGeral = 0;
+            carrinhoData.carrinho.forEach(item => {
+                // formata valores
+                const valor_unit = Number(item.valor_unitario ?? 0);
+                const valor_total = Number(item.valor_total ?? (valor_unit * (item.quantidade ?? 1)));
+
+                totalGeral += valor_total;
+
+                const itemDiv = document.createElement('div');
+                itemDiv.className = 'item';
+                itemDiv.dataset.id_item = item.id_item;
+
+                // se quiser imagem no futuro, aqui daria pra montar <img src="...">
+                itemDiv.innerHTML = `
+          <div class="info">
+            <h3>${escapeHtml(item.nome_produto ?? 'Produto')}</h3>
+            <p><b>Marca:</b> ${escapeHtml(item.marca ?? '-')}</p>
+            <p><b>Adicionado em:</b> ${escapeHtml(item.data_adicao ?? '')}</p>
+            <p><b>Qtd:</b> ${Number(item.quantidade ?? 0)}</p>
+          </div>
+          <div class="preco">
+            <p><b>Unit:</b> R$ ${valor_unit.toFixed(2)}</p>
+            <p><b>Subtotal:</b> R$ ${valor_total.toFixed(2)}</p>
+            <div style="margin-top:10px">
+              <button class="btn remover" data-id="${item.id_item}">Remover</button>
+            </div>
+          </div>
+        `;
+                carrinhoContainer.appendChild(itemDiv);
+            });
+
+            totalText.textContent = `Total Geral: R$ ${totalGeral.toFixed(2)}`;
+
+            // attach listeners para remover (delegation simples)
+            document.querySelectorAll('.btn.remover[data-id]').forEach(btn => {
+                btn.addEventListener('click', (e) => {
+                    const idItem = btn.getAttribute('data-id');
+                    confirmarRemoverItem(Number(idItem));
+                });
+            });
+        }
+
+        // escape básico para evitar injeção no innerHTML
+        function escapeHtml(str) {
+            if (str === undefined || str === null) return '';
+            return String(str).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;');
+        }
+
+        // Confirmar e remover um item (DELETE)
+        async function confirmarRemoverItem(idItem) {
+            const result = await Swal.fire({
+                title: 'Remover item?',
+                text: 'Deseja remover este item do carrinho?',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sim, remover',
+                cancelButtonText: 'Cancelar'
+            });
+            if (!result.isConfirmed) return;
+
+            try {
+                const resp = await fetch(`${API_BASE}/carrinho/remover/${encodeURIComponent(idItem)}`, { method: 'DELETE', redirect: 'follow' });
+                const text = await resp.text();
+                if (resp.ok) {
+                    await Swal.fire('Removido', 'Item removido do carrinho.', 'success');
+                    await carregarCarrinho();
+                } else {
+                    console.error('Erro ao remover:', resp.status, text);
+                    await Swal.fire('Erro', 'Não foi possível remover o item.', 'error');
+                }
+            } catch (err) {
+                console.error('Erro confirmarRemoverItem:', err);
+                await Swal.fire('Erro', 'Falha ao conectar com o servidor.', 'error');
+            }
+        }
+
+        // Limpar carrinho: remove todos os itens sequencialmente
+        async function limparCarrinho() {
+            if (!carrinhoData || !Array.isArray(carrinhoData.carrinho) || carrinhoData.carrinho.length === 0) {
+                await Swal.fire('Info', 'Carrinho já está vazio.', 'info');
+                return;
+            }
+            const confirmed = await Swal.fire({
+                title: 'Limpar carrinho?',
+                text: 'Isto removerá todos os itens do seu carrinho.',
+                icon: 'warning',
+                showCancelButton: true,
+                confirmButtonText: 'Sim, limpar',
+                cancelButtonText: 'Cancelar'
+            });
+            if (!confirmed.isConfirmed) return;
+
+            // remove sequencialmente
+            for (const item of carrinhoData.carrinho.slice()) {
+                try {
+                    await fetch(`${API_BASE}/carrinho/remover/${encodeURIComponent(item.id_item)}`, { method: 'DELETE', redirect: 'follow' });
+                } catch (e) {
+                    console.warn('Falha ao remover item', item.id_item, e);
+                }
+            }
+            await Swal.fire('Pronto', 'Carrinho limpo.', 'success');
+            await carregarCarrinho();
+        }
+
+        // Finalizar compra: para cada item faz POST /venda com { email_cliente, id_produto, quantidade, valor_unitario }
+        async function finalizarCompra() {
+            if (!carrinhoData || !Array.isArray(carrinhoData.carrinho) || carrinhoData.carrinho.length === 0) {
+                await Swal.fire('Carrinho vazio', 'Adicione produtos antes de finalizar a compra.', 'info');
+                return;
+            }
+
+            const confirmed = await Swal.fire({
+                title: 'Finalizar compra?',
+                text: 'Os itens serão comprados e removidos do carrinho. Deseja continuar?',
+                icon: 'question',
+                showCancelButton: true,
+                confirmButtonText: 'Sim, finalizar',
+                cancelButtonText: 'Cancelar'
+            });
+            if (!confirmed.isConfirmed) return;
+
+            finalizarBtn.disabled = true;
+            finalizarBtn.textContent = 'Processando...';
+
+            const email = getEmailCliente();
+            const resultados = { sucesso: [], falha: [] };
+
+            // processa itens sequencialmente (pode paralelizar se preferir)
+            for (const item of carrinhoData.carrinho.slice()) {
+                // Determina id_produto: usa item.id_produto se existir, senão tenta id_item (fallback).
+                // Se sua API exige outro campo, me avisa e eu mudo aqui.
+                const idProduto = item.id_produto ?? item.id ?? item.id_item;
+                const quantidade = Number(item.quantidade ?? 1);
+                const valor_unitario = Number(item.valor_unitario ?? (item.valor_total ? item.valor_total / quantidade : 0));
+
+                const payload = {
+                    email_cliente: email,
+                    id_produto: Number(idProduto),
+                    quantidade: quantidade,
+                    valor_unitario: valor_unitario
+                };
+
+                try {
+                    const resp = await fetch(`${API_BASE}/venda`, {
+                        method: 'POST',
+                        headers: { 'Content-Type': 'application/json' },
+                        body: JSON.stringify(payload),
+                        redirect: 'follow'
+                    });
+
+                    const text = await resp.text();
+                    if (resp.ok) {
+                        resultados.sucesso.push({ item: item, resposta: text });
+                        // opcional: remover automaticamente item do carrinho após venda
+                        try {
+                            await fetch(`${API_BASE}/carrinho/remover/${encodeURIComponent(item.id_item)}`, { method: 'DELETE', redirect: 'follow' });
+                        } catch (e) {
+                            console.warn('Erro ao remover item depois da venda', item.id_item, e);
+                        }
+                    } else {
+                        resultados.falha.push({ item: item, status: resp.status, resposta: text });
+                    }
+                } catch (err) {
+                    resultados.falha.push({ item: item, erro: String(err) });
+                }
+            }
+
+            finalizarBtn.disabled = false;
+            finalizarBtn.textContent = 'Finalizar Compra';
+
+            // mostra resumo
+            let mensagem = `🎉 Itens comprados: ${resultados.sucesso.length}\n`;
+            if (resultados.falha.length) {
+                mensagem += `⚠️ Falhas: ${resultados.falha.length}\nConfira o console para mais detalhes.`;
+            }
+
+            await Swal.fire({
+                title: 'Compra finalizada',
+                text: mensagem,
+                icon: resultados.falha.length ? 'warning' : 'success',
+                confirmButtonText: 'Ok'
+            });
+
+            console.log('Resumo da finalização:', resultados);
+            // atualiza carrinho na UI
+            await carregarCarrinho();
+        }
+
+        // eventos
+        finalizarBtn.addEventListener('click', finalizarCompra);
+        limparBtn.addEventListener('click', limparCarrinho);
+
+        // inicializa
+        carregarCarrinho();
+    </script>
+</body>
+
+</html>

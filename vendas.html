@@ -7,9 +7,7 @@
     <title>Gerenciar Vendas</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="assets/css/vendas.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
@@ -37,7 +35,6 @@
     <section class="main">
         <h1>Gerenciar Vendas</h1>
         <div class="cards-container">
-            <!-- Usuário -->
             <div class="usuario">
                 <div class="icone">
                     <i class="fa-solid fa-user"></i>
@@ -48,9 +45,7 @@
                 </div>
             </div>
 
-            <!-- Informações -->
             <div class="informacoes">
-                <!-- Usuários -->
                 <div class="usuarios">
                     <div class="info-titulo">
                         <i class="fa-solid fa-user"></i>
@@ -62,7 +57,6 @@
                     </div>
                 </div>
 
-                <!-- Vendas -->
                 <div class="usuarios">
                     <div class="info-titulo">
                         <i class="fa-solid fa-cart-shopping"></i>
@@ -74,7 +68,6 @@
                     </div>
                 </div>
 
-                <!-- Produtos -->
                 <div class="usuarios">
                     <div class="info-titulo">
                         <i class="fa-solid fa-bag-shopping"></i>
@@ -86,7 +79,6 @@
                     </div>
                 </div>
 
-                <!-- Cashback -->
                 <div class="usuarios">
                     <div class="info-titulo">
                         <i class="fa-solid fa-dollar-sign"></i>
@@ -100,7 +92,6 @@
             </div>
         </div>
 
-        <!-- Botões -->
         <div class="botoes">
             <a href="usuarios.html" class="botao-gerenciar"><i class="fa-solid fa-user"></i>Gerenciar Usuários</a>
             <a href="vendas.html" class="botao-gerenciar"><i class="fa-solid fa-cart-shopping"></i>Gerenciar Vendas</a>
@@ -124,7 +115,6 @@
         </div>
 
         <div class="graficos-container">
-            <!-- Gráficos -->
             <div class="grafico-pizza">
                 <h3 class="titulo-pizza">Marcas mais vendidas</h3>
                 <canvas id="Pizza"></canvas>
@@ -138,142 +128,126 @@
 
         <div class="vendedores">
             <h3 class="maiores-compradores">Maiores compradores</h3>
-
-            <!-- Lista de vendedores -->
-            <div class="vendedor-linha">
-                <div class="vendedor-detalhes">
-                    <div class="icone">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="separacao-nome-info">
-                        <div class="nome">
-                            <p>usuario@gmail.com</p>
-                        </div>
-                        <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>500</p>
-                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
-                        </div>
-                    </div>
-                </div>
-            </div>
-
-            <!-- Repetir divs para outros vendedores -->
-            <!-- Adicionar divs de vendedores similares aqui -->
-
+            <!-- lista preenchida dinamicamente -->
         </div>
     </section>
 
-</body>
+    <script>
+        async function carregarVendas() {
+            try {
+                // ---- VENDAS GERAIS ----
+                const response = await fetch("http://10.92.3.173:5000/vendas");
+                const vendas = await response.json();
 
-<script>
-    async function carregarVendas() {
-        try {
-            const response = await fetch("http://10.92.3.173:5000/vendas", {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                },
-                redirect: "follow"
-            });
-            const vendas = await response.json();
+                const totalVendas = vendas.length;
+                const valorTotal = vendas.reduce((acc, venda) => acc + Number(venda.valor_total), 0);
 
-            const totalVendas = vendas.length;
-            const valorTotal = vendas.reduce((acc, venda) => acc + Number(venda.valor_total), 0);
+                document.querySelector(".div-verde .qtd").textContent = totalVendas;
+                document.querySelector(".div-azul .capital").textContent =
+                    `R$ ${valorTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-            document.querySelector(".div-verde .qtd").textContent = totalVendas;
-            document.querySelector(".div-azul .capital").textContent = `R$ ${valorTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+                // ---- MAIORES COMPRADORES ----
+                const container = document.querySelector(".vendedores");
+                container.innerHTML = `<h3 class="maiores-compradores">Maiores compradores</h3>`;
+                const vendasPorCliente = {};
 
-            const container = document.querySelector(".vendedores");
-            const linhasExistentes = container.querySelectorAll(".vendedor-linha");
-            linhasExistentes.forEach(v => v.remove());
+                vendas.forEach(v => {
+                    if (!vendasPorCliente[v.email_cliente]) vendasPorCliente[v.email_cliente] = 0;
+                    vendasPorCliente[v.email_cliente] += Number(v.valor_total);
+                });
 
-            const vendasPorCliente = {};
-            vendas.forEach(v => {
-                if (!vendasPorCliente[v.email_cliente]) vendasPorCliente[v.email_cliente] = 0;
-                vendasPorCliente[v.email_cliente] += Number(v.valor_total);
-            });
+                const maiores = Object.entries(vendasPorCliente)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 5);
 
-            const maiores = Object.entries(vendasPorCliente)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, 5);
-
-            maiores.forEach(([email, total]) => {
-                const linha = document.createElement("div");
-                linha.classList.add("vendedor-linha");
-                linha.innerHTML = `
-                <div class="vendedor-detalhes">
-                    <div class="icone">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="separacao-nome-info">
-                        <div class="nome">
-                            <p>${email}</p>
-                        </div>
-                        <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-                            <p class="criado-em"><span class="negrito">Criado em: </span>--/--/----</p>
-                        </div>
-                    </div>
+                maiores.forEach(([email, total]) => {
+                    const linha = document.createElement("div");
+                    linha.classList.add("vendedor-linha");
+                    linha.innerHTML = `
+            <div class="vendedor-detalhes">
+              <div class="icone"><i class="fa-solid fa-user"></i></div>
+              <div class="separacao-nome-info">
+                <div class="nome"><p>${email}</p></div>
+                <div class="info-vendedor">
+                  <p class="criado-em"><span class="negrito">Total: </span>R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
                 </div>
-            `;
-                container.appendChild(linha);
-            });
+              </div>
+            </div>
+          `;
+                    container.appendChild(linha);
+                });
 
-            const ctx = document.getElementById('Coluna');
-            new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
-                    datasets: [{
-                        label: 'N de vendas',
-                        data: [200, 400, 600, 800, 1000, 1200],
-                        borderWidth: 1,
-                        backgroundColor: ['#008CFF']
-                    }]
-                },
-                options: {
-                    scales: {
-                        y: { beginAtZero: true }
-                    }
-                }
-            });
+                // ---- MARCAS MAIS VENDIDAS (DOUGHNUT) ----
+                const marcasResponse = await fetch("http://10.92.3.173:5000/marcas_mais_vendidas");
+                const dadosMarcas = await marcasResponse.json();
+                const marcas = dadosMarcas.marcas;
 
-            const ptx = document.getElementById('Pizza').getContext('2d');
-            new Chart(ptx, {
-                type: 'doughnut',
-                data: {
-                    labels: ['Chevrolet', 'RAM', 'Fiat', 'Nissan', 'Honda', 'Toyota', 'Peugeot', 'Citroen', 'Jeep', 'Ford', 'Volkswagen', 'BYD', 'BMW', 'MINI', 'Hyundai', 'KIA'],
-                    datasets: [{
-                        label: 'Vendedores mais populares',
-                        data: Array(16).fill(6.25),
-                        backgroundColor: [
-                            '#0073E6', '#1AAC5F', '#7D3AC1', '#F2C200', '#E90039', '#E96500', '#00E9E9', '#E9008C',
-                            '#7800E9', '#00E913', '#0090E9', '#E100E9', '#E9A300', '#C2E900', '#00E994', '#2F00E9'
-                        ],
-                        borderWidth: 1
-                    }]
-                },
-                options: {
-                    plugins: {
-                        datalabels: {
-                            color: '#fff',
-                            font: { weight: 'bold', size: 15, family: "Poppins, sans-serif" },
-                            formatter: (value, ctx) => {
-                                let total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                                return ((value / total) * 100).toFixed(0) + "%";
+                const nomesMarcas = marcas.map(m => m.marca);
+                const numerosVendas = marcas.map(m => m.numero_de_vendas);
+
+                const ptx = document.getElementById('Pizza').getContext('2d');
+                new Chart(ptx, {
+                    type: 'doughnut',
+                    data: {
+                        labels: nomesMarcas,
+                        datasets: [{
+                            label: 'Marcas mais vendidas',
+                            data: numerosVendas,
+                            backgroundColor: [
+                                '#0073E6', '#1AAC5F', '#7D3AC1', '#F2C200', '#E90039', '#E96500',
+                                '#00E9E9', '#E9008C', '#7800E9', '#00E913', '#0090E9', '#E100E9',
+                                '#E9A300', '#C2E900', '#00E994', '#2F00E9'
+                            ],
+                            borderWidth: 1
+                        }]
+                    },
+                    options: {
+                        plugins: {
+                            datalabels: {
+                                color: '#fff',
+                                font: { weight: 'bold', size: 15, family: "Poppins, sans-serif" },
+                                formatter: (value, ctx) => {
+                                    let total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
+                                    return ((value / total) * 100).toFixed(0) + "%";
+                                }
                             }
                         }
+                    },
+                    plugins: [ChartDataLabels]
+                });
+
+                // ---- VENDAS POR MÊS (BARRAS) ----
+                const mesesResponse = await fetch("http://10.92.3.173:5000/vendas_por_mes");
+                const dadosMeses = await mesesResponse.json();
+                const vendasMeses = dadosMeses.vendas_por_mes || [];
+
+                const labelsMeses = vendasMeses.map(v => v.mes);
+                const valoresMeses = vendasMeses.map(v => v.total_vendas);
+
+                const ctx = document.getElementById('Coluna');
+                new Chart(ctx, {
+                    type: 'bar',
+                    data: {
+                        labels: labelsMeses,
+                        datasets: [{
+                            label: 'Nº de vendas',
+                            data: valoresMeses,
+                            borderWidth: 1,
+                            backgroundColor: '#008CFF'
+                        }]
+                    },
+                    options: {
+                        scales: { y: { beginAtZero: true } }
                     }
-                },
-                plugins: [ChartDataLabels]
-            });
+                });
 
-        } catch (error) {
-            console.error("Erro ao carregar vendas:", error);
+            } catch (error) {
+                console.error("Erro ao carregar vendas:", error);
+            }
         }
-    }
 
-    window.onload = carregarVendas;
-</script>
+        window.onload = carregarVendas;
+    </script>
+</body>
 
 </html>
