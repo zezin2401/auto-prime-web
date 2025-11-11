@@ -238,7 +238,7 @@
       }
 
       async function fetchUsuarioPorId(id) {
-        const base = "http://10.92.3.173:5000";
+        const base = "http://10.92.3.118:5000";
 
         try {
           const res1 = await fetch(`${base}/cadastro/${id}`);
@@ -382,7 +382,7 @@
         };
 
         try {
-          const res = await fetch("http://10.92.3.173:5000/edit_cadastro", {
+          const res = await fetch("http://10.92.3.118:5000/edit_cadastro", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),

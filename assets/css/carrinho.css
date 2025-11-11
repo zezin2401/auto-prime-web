@@ -1,8 +1,16 @@
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    transition: 0.3s;
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
     margin: 0;
-    padding: 0
+    padding: 0;
+    transition: 0.3s;
 }
 
 header {
@@ -20,8 +28,10 @@ header img {
 
 main {
     max-width: 980px;
+    border-radius: 10px;
     margin: 28px auto;
-    padding: 20px
+    padding: 20px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 h1 {
@@ -43,7 +53,7 @@ h1 {
     gap: 12px;
     align-items: center;
     justify-content: space-between;
-    box-shadow: 0 6px 20px rgba(12, 23, 40, 0.06)
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .info {
@@ -92,8 +102,13 @@ h1 {
     font-weight: bold;
     font-size: 25px;
     border: none;
-    background: #1AAC5F;
-    color: #d7fee9;
+    background: #008CFF;
+    color: white;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+}
+
+.finalizar:hover {
+    background: #00447C
 }
 
 .finalizar[disabled] {
