@@ -39,27 +39,22 @@
     </main>
 
     <script>
-        // CONFIG
-        const API_BASE = "http://10.92.3.118:5000";
-        // email: tenta localStorage primeiro, senão fallback para cliente@gmail.com
+        const API_BASE = "http://10.92.3.135:5000";
         function getEmailCliente() {
             return localStorage.getItem('email') || localStorage.getItem('email_cliente') || 'cliente@gmail.com';
         }
 
-        // estado local
-        let carrinhoData = null; // o JSON retornado pela API
+        let carrinhoData = null;
         const carrinhoContainer = document.getElementById('carrinhoContainer');
         const totalText = document.getElementById('totalText');
         const finalizarBtn = document.getElementById('finalizarBtn');
         const limparBtn = document.getElementById('limparBtn');
 
-        // carrega e renderiza o carrinho
         async function carregarCarrinho() {
             const email = getEmailCliente();
             try {
                 const resp = await fetch(`${API_BASE}/carrinho/${encodeURIComponent(email)}`, { method: 'GET', redirect: 'follow' });
                 const text = await resp.text();
-                // tenta parse JSON
                 let data;
                 try { data = JSON.parse(text); } catch (e) { throw new Error('Resposta inválida do servidor: ' + text); }
                 carrinhoData = data;
@@ -72,7 +67,6 @@
             }
         }
 
-        // renderiza itens
         function renderCarrinho() {
             carrinhoContainer.innerHTML = '';
             if (!carrinhoData || !Array.isArray(carrinhoData.carrinho) || carrinhoData.carrinho.length === 0) {
@@ -83,7 +77,6 @@
 
             let totalGeral = 0;
             carrinhoData.carrinho.forEach(item => {
-                // formata valores
                 const valor_unit = Number(item.valor_unitario ?? 0);
                 const valor_total = Number(item.valor_total ?? (valor_unit * (item.quantidade ?? 1)));
 
@@ -93,7 +86,6 @@
                 itemDiv.className = 'item';
                 itemDiv.dataset.id_item = item.id_item;
 
-                // se quiser imagem no futuro, aqui daria pra montar <img src="...">
                 itemDiv.innerHTML = `
           <div class="info">
             <h3>${escapeHtml(item.nome_produto ?? 'Produto')}</h3>
@@ -114,7 +106,6 @@
 
             totalText.textContent = `Total Geral: R$ ${totalGeral.toFixed(2)}`;
 
-            // attach listeners para remover (delegation simples)
             document.querySelectorAll('.btn.remover[data-id]').forEach(btn => {
                 btn.addEventListener('click', (e) => {
                     const idItem = btn.getAttribute('data-id');
@@ -123,13 +114,11 @@
             });
         }
 
-        // escape básico para evitar injeção no innerHTML
         function escapeHtml(str) {
             if (str === undefined || str === null) return '';
             return String(str).replaceAll('&', '&amp;').replaceAll('<', '&lt;').replaceAll('>', '&gt;').replaceAll('"', '&quot;').replaceAll("'", '&#039;');
         }
 
-        // Confirmar e remover um item (DELETE)
         async function confirmarRemoverItem(idItem) {
             const result = await Swal.fire({
                 title: 'Remover item?',
@@ -157,7 +146,6 @@
             }
         }
 
-        // Limpar carrinho: remove todos os itens sequencialmente
         async function limparCarrinho() {
             if (!carrinhoData || !Array.isArray(carrinhoData.carrinho) || carrinhoData.carrinho.length === 0) {
                 await Swal.fire('Info', 'Carrinho já está vazio.', 'info');
@@ -173,7 +161,6 @@
             });
             if (!confirmed.isConfirmed) return;
 
-            // remove sequencialmente
             for (const item of carrinhoData.carrinho.slice()) {
                 try {
                     await fetch(`${API_BASE}/carrinho/remover/${encodeURIComponent(item.id_item)}`, { method: 'DELETE', redirect: 'follow' });
@@ -181,11 +168,10 @@
                     console.warn('Falha ao remover item', item.id_item, e);
                 }
             }
-            await Swal.fire('Pronto', 'Carrinho limpo.', 'success');
+            await Swal.fire('Pronto!', 'Seu carrinho está limpo.', 'success');
             await carregarCarrinho();
         }
 
-        // Finalizar compra: para cada item faz POST /venda com { email_cliente, id_produto, quantidade, valor_unitario }
         async function finalizarCompra() {
             if (!carrinhoData || !Array.isArray(carrinhoData.carrinho) || carrinhoData.carrinho.length === 0) {
                 await Swal.fire('Carrinho vazio', 'Adicione produtos antes de finalizar a compra.', 'info');
@@ -208,10 +194,8 @@
             const email = getEmailCliente();
             const resultados = { sucesso: [], falha: [] };
 
-            // processa itens sequencialmente (pode paralelizar se preferir)
             for (const item of carrinhoData.carrinho.slice()) {
-                // Determina id_produto: usa item.id_produto se existir, senão tenta id_item (fallback).
-                // Se sua API exige outro campo, me avisa e eu mudo aqui.
+                
                 const idProduto = item.id_produto ?? item.id ?? item.id_item;
                 const quantidade = Number(item.quantidade ?? 1);
                 const valor_unitario = Number(item.valor_unitario ?? (item.valor_total ? item.valor_total / quantidade : 0));
@@ -234,7 +218,6 @@
                     const text = await resp.text();
                     if (resp.ok) {
                         resultados.sucesso.push({ item: item, resposta: text });
-                        // opcional: remover automaticamente item do carrinho após venda
                         try {
                             await fetch(`${API_BASE}/carrinho/remover/${encodeURIComponent(item.id_item)}`, { method: 'DELETE', redirect: 'follow' });
                         } catch (e) {
@@ -251,10 +234,9 @@
             finalizarBtn.disabled = false;
             finalizarBtn.textContent = 'Finalizar Compra';
 
-            // mostra resumo
-            let mensagem = `🎉 Itens comprados: ${resultados.sucesso.length}\n`;
+            let mensagem = `Produtos comprados: ${resultados.sucesso.length}\n`;
             if (resultados.falha.length) {
-                mensagem += `⚠️ Falhas: ${resultados.falha.length}\nConfira o console para mais detalhes.`;
+                mensagem += `Falhas: ${resultados.falha.length}\nConfira o console para mais detalhes.`;
             }
 
             await Swal.fire({
@@ -265,15 +247,12 @@
             });
 
             console.log('Resumo da finalização:', resultados);
-            // atualiza carrinho na UI
             await carregarCarrinho();
         }
 
-        // eventos
         finalizarBtn.addEventListener('click', finalizarCompra);
         limparBtn.addEventListener('click', limparCarrinho);
 
-        // inicializa
         carregarCarrinho();
     </script>
 </body>

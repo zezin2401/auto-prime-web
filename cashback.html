@@ -36,7 +36,7 @@
     </section>
 
     <section class="main">
-        <h1>Gerenciar Cashback</h1>
+        <h1>Gerenciar seu cashback</h1>
         <div class="cards-container">
 
             <div class="usuario">
@@ -154,9 +154,9 @@
                             <p>usuario@gmail.com</p>
                         </div>
                         <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
+                            <p class="total"><span class="negrito">Total: </span>R$: 500,00</p>
 
-                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
+
                         </div>
                     </div>
 
@@ -178,7 +178,6 @@
                         <div class="info-vendedor">
                             <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
 
-                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
                         </div>
                     </div>
 
@@ -200,7 +199,6 @@
                         <div class="info-vendedor">
                             <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
 
-                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
                         </div>
                     </div>
 
@@ -222,7 +220,6 @@
                         <div class="info-vendedor">
                             <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
 
-                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
                         </div>
                     </div>
 
@@ -244,7 +241,6 @@
                         <div class="info-vendedor">
                             <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
 
-                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
                         </div>
                     </div>
 
@@ -262,30 +258,37 @@
 <script>
     async function carregarCashbacks() {
         try {
-            const response = await fetch("http://10.92.3.118:5000/cashbacks", {
+            // 1️⃣ Busca todos os cashbacks detalhados
+            const response = await fetch("http://10.92.3.135:5000/cashbacks", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 redirect: "follow"
             });
             const cashbacks = await response.json();
 
+            // 2️⃣ Atualiza o total acumulado
             const totalCashback = cashbacks.reduce((acc, c) => acc + Number(c.valor_cashback), 0);
             document.querySelector(".div-azul .capital").textContent = `R$ ${totalCashback.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
+            // 3️⃣ Limpa a lista de vendedores
             const container = document.querySelector(".vendedores");
             const linhasExistentes = container.querySelectorAll(".vendedor-linha");
             linhasExistentes.forEach(v => v.remove());
 
+            // 4️⃣ Agrupa cashback por nome do cliente
             const cashbackPorCliente = {};
             cashbacks.forEach(c => {
-                if (!cashbackPorCliente[c.id_cliente]) cashbackPorCliente[c.id_cliente] = 0;
-                cashbackPorCliente[c.id_cliente] += Number(c.valor_cashback);
+                const nome = c.nome_cliente || c.id_cliente; // usa o nome se existir, senão id
+                if (!cashbackPorCliente[nome]) cashbackPorCliente[nome] = 0;
+                cashbackPorCliente[nome] += Number(c.valor_cashback);
             });
 
+            // 5️⃣ Pega os 5 maiores
             const maiores = Object.entries(cashbackPorCliente)
                 .sort((a, b) => b[1] - a[1])
                 .slice(0, 5);
 
+            // 6️⃣ Cria as linhas de vendedores
             maiores.forEach(([cliente, total]) => {
                 const linha = document.createElement("div");
                 linha.classList.add("vendedor-linha");
@@ -299,8 +302,7 @@
                             <p>${cliente}</p>
                         </div>
                         <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-                            <p class="criado-em"><span class="negrito">Criado em: </span>--/--/----</p>
+                            <p class="total"><span class="negrito">Total: </span>R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
                         </div>
                     </div>
                 </div>
@@ -308,27 +310,39 @@
                 container.appendChild(linha);
             });
 
-            const ctx = document.getElementById('Coluna');
-            const cashbacksPorMes = [0, 0, 0, 0, 0, 0];
-            cashbacks.forEach(c => {
-                const mes = new Date(c.data_geracao).getMonth();
-                if (mes < 6) cashbacksPorMes[mes] += Number(c.valor_cashback);
+            // 7️⃣ Gráfico de cashback mensal
+            const ctx = document.getElementById('Coluna').getContext('2d');
+            const responseMes = await fetch("http://10.92.3.135:5000/cashback_por_mes", {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+                redirect: "follow"
+            });
+            const dadosMes = await responseMes.json();
+            const cashbacksPorMesBackend = dadosMes.cashback_por_mes;
+
+            const cashbacksPorMes = new Array(12).fill(0);
+            cashbacksPorMesBackend.forEach(c => {
+                const mesIndex = c.mes - 1;
+                cashbacksPorMes[mesIndex] = c.total_cashback;
             });
 
-            new Chart(ctx, {
+            window.colunaChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
                     datasets: [{
                         label: 'Cashback acumulado',
                         data: cashbacksPorMes,
                         borderWidth: 1,
-                        backgroundColor: ['#008CFF']
+                        backgroundColor: '#008CFF'
                     }]
                 },
-                options: { scales: { y: { beginAtZero: true } } }
+                options: {
+                    scales: { y: { beginAtZero: true } }
+                }
             });
 
+            // 8️⃣ Gráfico de pizza dos top 5 clientes
             const ptx = document.getElementById('Pizza').getContext('2d');
             new Chart(ptx, {
                 type: 'doughnut',

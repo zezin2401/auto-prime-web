@@ -10,7 +10,7 @@
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
-    <link rel="stylesheet" href="assets/css/cashback.css">
+    <link rel="stylesheet" href="assets/css/cashbackvendedor.css">
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
@@ -19,7 +19,7 @@
 
 <body>
     <header>
-        <a href="indexvendedor.html"><img src="assets/img/Ariel (1) 4.png" alt=""></a>
+        <a href="home.html"><img src="assets/img/Ariel (1) 4.png" alt=""></a>
 
         <div class="container">
             <search class="pesquisa">
@@ -36,7 +36,7 @@
     </section>
 
     <section class="main">
-        <h1>Gerenciar Cashback</h1>
+        <h1>Gerenciar seu cashback</h1>
         <div class="cards-container">
 
             <div class="usuario">
@@ -154,9 +154,9 @@
                             <p>usuario@gmail.com</p>
                         </div>
                         <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
+                            <p class="total"><span class="negrito">Total: </span>R$: 500,00</p>
 
-                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
+                            
                         </div>
                     </div>
 
@@ -178,7 +178,6 @@
                         <div class="info-vendedor">
                             <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
 
-                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
                         </div>
                     </div>
 
@@ -200,7 +199,6 @@
                         <div class="info-vendedor">
                             <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
 
-                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
                         </div>
                     </div>
 
@@ -222,7 +220,6 @@
                         <div class="info-vendedor">
                             <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
 
-                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
                         </div>
                     </div>
 
@@ -244,7 +241,6 @@
                         <div class="info-vendedor">
                             <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
 
-                            <p class="criado-em"><span class="negrito">Criado em: </span>__/__/__</p>
                         </div>
                     </div>
 
@@ -262,7 +258,7 @@
 <script>
     async function carregarCashbacks() {
         try {
-            const response = await fetch("http://10.92.3.118:5000/cashbacks", {
+            const response = await fetch("http://10.92.3.135:5000/cashbacks", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 redirect: "follow"
@@ -299,8 +295,8 @@
                             <p>${cliente}</p>
                         </div>
                         <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-                            <p class="criado-em"><span class="negrito">Criado em: </span>--/--/----</p>
+                            <p class="total"><span class="negrito">Total: </span>R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+
                         </div>
                     </div>
                 </div>
@@ -308,26 +304,45 @@
                 container.appendChild(linha);
             });
 
-            const ctx = document.getElementById('Coluna');
-            const cashbacksPorMes = [0, 0, 0, 0, 0, 0];
-            cashbacks.forEach(c => {
-                const mes = new Date(c.data_geracao).getMonth();
-                if (mes < 6) cashbacksPorMes[mes] += Number(c.valor_cashback);
+            const ctx = document.getElementById('Coluna').getContext('2d');
+
+            // Busca dados agrupados pelo backend
+            const responseMes = await fetch("http://10.92.3.135:5000/cashback_por_mes", {
+                method: "GET",
+                headers: { "Content-Type": "application/json" },
+                redirect: "follow"
+            });
+            const dadosMes = await responseMes.json();
+            const cashbacksPorMesBackend = dadosMes.cashback_por_mes;
+
+            // Cria array com 12 meses zerados
+            const cashbacksPorMes = new Array(12).fill(0);
+            cashbacksPorMesBackend.forEach(c => {
+                const mesIndex = c.mes - 1; // mês vem de 1-12
+                cashbacksPorMes[mesIndex] = c.total_cashback;
             });
 
-            new Chart(ctx, {
+            console.log("Cashback por mês:", cashbacksPorMes);
+
+
+            console.log("Cashback por mês:", cashbacksPorMes);
+
+            window.colunaChart = new Chart(ctx, {
                 type: 'bar',
                 data: {
-                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho'],
+                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
                     datasets: [{
                         label: 'Cashback acumulado',
                         data: cashbacksPorMes,
                         borderWidth: 1,
-                        backgroundColor: ['#008CFF']
+                        backgroundColor: '#008CFF'
                     }]
                 },
-                options: { scales: { y: { beginAtZero: true } } }
+                options: {
+                    scales: { y: { beginAtZero: true } }
+                }
             });
+
 
             const ptx = document.getElementById('Pizza').getContext('2d');
             new Chart(ptx, {
