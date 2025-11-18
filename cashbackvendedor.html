@@ -258,7 +258,7 @@
 <script>
     async function carregarCashbacks() {
         try {
-            const response = await fetch("http://10.92.3.135:5000/cashbacks", {
+            const response = await fetch("http://10.92.3.198:5000/cashbacks", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 redirect: "follow"
@@ -307,7 +307,7 @@
             const ctx = document.getElementById('Coluna').getContext('2d');
 
             // Busca dados agrupados pelo backend
-            const responseMes = await fetch("http://10.92.3.135:5000/cashback_por_mes", {
+            const responseMes = await fetch("http://10.92.3.198:5000/cashback_por_mes", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 redirect: "follow"

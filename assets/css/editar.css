@@ -100,20 +100,29 @@ header img {
     justify-content: center;
 }
 
+
+.banner img {
+    width: 1460px;
+}
+
+.main {
+    background-color: #ededed;
+    margin-top: 30px;
+    padding: 1px;
+}
+
 h1 {
-    margin-top: 55px;
+    margin-top: 25px;
     margin-bottom: 10px;
-    margin-left: 75px;
+    margin-left: 30px;
 }
 
 .cards-container {
-    margin-right: 75px;
-    margin-left: 75px;
-    gap: 30px;
-    padding: 30px;
-    border: 2px solid var(--preto-opaco);
+    background-color: var(--branco);
+    margin-right: 30px;
+    margin-left: 30px;
+    padding: 10px;
     border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .usuario {
@@ -130,6 +139,7 @@ h1 {
 
 .numero-info {
     font-weight: bold;
+    font-size: 40px;
 }
 
 .icone {
@@ -143,10 +153,9 @@ h1 {
 }
 
 .informacoes {
-    margin-top: 60px;
+    margin-top: 30px;
     display: flex;
-    justify-content: space-around;
-    gap: 160px;
+    justify-content: space-evenly;
 }
 
 .negrito {
@@ -155,19 +164,28 @@ h1 {
 }
 
 .info-segmento-usuarios {
-    margin-left: 40px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
 }
 
 .info-segmento-vendas {
-    margin-left: 50px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
 }
 
 .info-segmento-produtos {
-    margin-left: 39px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
 }
 
 .info-segmento-cashback {
-    margin-left: 32px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    ;
 }
 
 .info-titulo {
@@ -178,6 +196,39 @@ h1 {
 
 .info-titulo p {
     font-size: 25px;
+    color: var(--preto-opaco);
+}
+
+.ideiagenial {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.detalhes-card {
+    padding: 10px;
+    width: 340px;
+    display: flex;
+    height: 220px;
+    background-color: var(--branco);
+    border-radius: 10px;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.incone i {
+    font-size: 60px;
+}
+
+.incone {
+    margin-left: 10px;
+}
+
+.dado-e-link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .gerenciar {
@@ -198,16 +249,16 @@ h1 {
     font-size: 22px;
     font-weight: bold;
     background-color: var(--branco);
-    display: flex;
-    gap: 10px;
     border: 2px solid var(--preto-opaco);
+    display: flex;
+    gap: 20px;
     padding: 15px 14px;
     cursor: pointer;
     border-radius: 5px;
     color: var(--preto);
     align-items: center;
+    justify-content: center;
     text-decoration: none;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .botao-gerenciar i {
@@ -215,8 +266,8 @@ h1 {
 }
 
 .container-edicao {
-    margin-right: 75px;
-    margin-left: 75px;
+    margin-right: 30px;
+    margin-left: 30px;
     margin-bottom: 40px;
     gap: 145px;
     display: flex;
@@ -224,8 +275,7 @@ h1 {
     align-items: center;
     padding: 30px;
     border-radius: 10px;
-    background-color: rgb(241, 241, 241);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background-color: var(--branco);
 }
 
 .usuario-foto {
@@ -428,7 +478,7 @@ h4 {
 .div-email:focus-within .label-coisa,
 .div-cargo:focus-within .label-coisa,
 .div-status:focus-within .label-coisa {
-  color: var(--azul-principal);
+    color: var(--azul-principal);
 }
 
 .div-nome:focus-within .input-form,
@@ -436,7 +486,7 @@ h4 {
 .div-email:focus-within .input-form,
 .div-cargo:focus-within .input-form,
 .div-status:focus-within .input-form {
-  border-color: var(--azul-principal);
+    border-color: var(--azul-principal);
 }
 
 label {
@@ -500,7 +550,7 @@ label {
 
 .maisumcontainer {
     display: flex;
-    gap: 90px;
+    gap: 40px;
 }
 
 .btn-enviar {

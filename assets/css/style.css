@@ -48,6 +48,11 @@
     text-align: center;
 }
 
+body.swal2-shown .div-mae-login {
+    pointer-events: none !important;
+}
+
+
 .tit-cadastro {
     font-family: Poppins;
     color: #111111;
@@ -75,7 +80,7 @@
     font-family: Poppins;
     font-size: 14px;
     margin-top: -18px;
-    color:#444444;
+    color: #444444;
     font-weight: 500;
     margin-bottom: 19px;
 
@@ -90,7 +95,7 @@
 
 }
 
-footer{
+footer {
     background-color: black;
     height: 230px;
 }
@@ -167,82 +172,99 @@ footer{
    Cole ESTE BLOCO ao final do style.css
    =========================== */
 @media (max-width: 325px) {
-  /* Esconder completamente o bloco de cima (logo + frases) */
-  .div-mae-login > div:first-child {
-    display: none;
-    visibility: hidden;
-    height: 0;
-    margin: 0;
-    padding: 0;
-  }
 
-  /* Centralizar somente o card e remover gaps enormes */
-  .div-mae-login {
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;            /* reduzido para não criar espaço extra */
-    padding: 12px;       /* evita que encoste na borda da tela */
-    height: 100vh;
-    box-sizing: border-box;
-    overflow-y: auto;
-  }
+    /* Esconder completamente o bloco de cima (logo + frases) */
+    .div-mae-login>div:first-child {
+        display: none;
+        visibility: hidden;
+        height: 0;
+        margin: 0;
+        padding: 0;
+    }
 
-  /* Ajustes do card para caber certinho */
-  .card-login,
-  .card-cadastro {
-    width: 100%;
-    max-width: 320px;    /* cabe bem em 325px */
-    margin-top: 0;
-    height: auto;        /* permite que o conteúdo quebre linhas naturalmente */
-    padding: 18px;
-    box-sizing: border-box;
-    border-radius: 14px;
-  }
+    /* Centralizar somente o card e remover gaps enormes */
+    .div-mae-login {
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+        gap: 8px;
+        /* reduzido para não criar espaço extra */
+        padding: 12px;
+        /* evita que encoste na borda da tela */
+        height: 100vh;
+        box-sizing: border-box;
+        overflow-y: auto;
+    }
 
-  /* Inputs ocupando largura total do card */
-  .input-cadastro {
-    width: 100%;
-    max-width: 100%;
-    box-sizing: border-box;
-    margin-bottom: 16px;
-    padding-left: 12px;
-    height: 40px;
-  }
+    /* Ajustes do card para caber certinho */
+    .card-login,
+    .card-cadastro {
+        width: 100%;
+        max-width: 320px;
+        /* cabe bem em 325px */
+        margin-top: 0;
+        height: auto;
+        /* permite que o conteúdo quebre linhas naturalmente */
+        padding: 18px;
+        box-sizing: border-box;
+        border-radius: 14px;
+    }
 
-  /* Botão mais largo e fácil de clicar em mobile */
-  .btn-cadastro {
-    width: 100%;
-    max-width: 100%;
-    height: 44px;
-  }
+    /* Inputs ocupando largura total do card */
+    .input-cadastro {
+        width: 100%;
+        max-width: 100%;
+        box-sizing: border-box;
+        margin-bottom: 16px;
+        padding-left: 12px;
+        height: 40px;
+    }
 
-  /* Pequenos ajustes tipográficos para caber melhor */
-  .tit-cadastro { padding-top: 8px; font-size: 18px; }
-  .p-cadastro { margin-top: 6px; margin-bottom: 12px; font-size: 13px; }
-  .sub-p { margin-top: 12px; font-size: 13px; }
+    /* Botão mais largo e fácil de clicar em mobile */
+    .btn-cadastro {
+        width: 100%;
+        max-width: 100%;
+        height: 44px;
+    }
 
-  /* Esconder logo absoluto que quebra layout e garantir que não influencie */
-  .logo-cadastro {
-    display: none;
-    position: static;
-    bottom: auto;
-    right: auto;
-    width: auto;
-    height: auto;
-  }
+    /* Pequenos ajustes tipográficos para caber melhor */
+    .tit-cadastro {
+        padding-top: 8px;
+        font-size: 18px;
+    }
 
-        /* Esconder logo absoluto que quebra layout e garantir que não influencie */
+    .p-cadastro {
+        margin-top: 6px;
+        margin-bottom: 12px;
+        font-size: 13px;
+    }
+
+    .sub-p {
+        margin-top: 12px;
+        font-size: 13px;
+    }
+
+    /* Esconder logo absoluto que quebra layout e garantir que não influencie */
+    .logo-cadastro {
+        display: none;
+        position: static;
+        bottom: auto;
+        right: auto;
+        width: auto;
+        height: auto;
+    }
+
+    /* Esconder logo absoluto que quebra layout e garantir que não influencie */
 
 
-  /* Ajuste do ícone de olho (de dentro do input) */
-  .password-container .toggle-password {
-    top: 20px;
-    right: 12px;
-    transform: translateY(-50%);
-    width: 20px;
-    height: 20px;
-  }
+    /* Ajuste do ícone de olho (de dentro do input) */
+    .password-container .toggle-password {
+        top: 20px;
+        right: 12px;
+        transform: translateY(-50%);
+        width: 20px;
+        height: 20px;
+    }
 }
 
 
@@ -251,14 +273,15 @@ footer{
    Responsivo específico p/ 325px - Cadastro
    =========================== */
 @media (max-width: 325px) {
+
     /* Esconder apenas os textos do topo */
-    .div-mae-cadastro > div:first-child h2.frase-cadastro,
-    .div-mae-cadastro > div:first-child h2.frase2-cadastro {
+    .div-mae-cadastro>div:first-child h2.frase-cadastro,
+    .div-mae-cadastro>div:first-child h2.frase2-cadastro {
         display: none;
     }
 
     /* Centralizar logo acima do card */
-    .div-mae-cadastro > div:first-child img.logo-cadastro {
+    .div-mae-cadastro>div:first-child img.logo-cadastro {
         display: block;
         margin: 0 auto 12px auto;
         width: 70px;
@@ -275,13 +298,16 @@ footer{
         height: 100vh;
         box-sizing: border-box;
         overflow-y: auto;
-        margin: 0 auto; /* centraliza horizontalmente */
+        margin: 0 auto;
+        /* centraliza horizontalmente */
     }
 
     /* Card ajustado para caber na tela */
     .card-cadastro {
-        width: 90%;       /* diminuiu um pouco para dar mais margem */
-        max-width: 300px; /* menor ainda que antes */
+        width: 90%;
+        /* diminuiu um pouco para dar mais margem */
+        max-width: 300px;
+        /* menor ainda que antes */
         margin-top: 0;
         height: auto;
         padding: 18px;
@@ -309,9 +335,22 @@ footer{
     }
 
     /* Ajustes tipográficos */
-    .tit-cadastro { padding-top: 8px; font-size: 18px; }
-    .p-cadastro { margin-top: 6px; margin-bottom: 12px; font-size: 13px; }
-    .sub-p { margin-top: 12px; font-size: 13px; text-align: center; }
+    .tit-cadastro {
+        padding-top: 8px;
+        font-size: 18px;
+    }
+
+    .p-cadastro {
+        margin-top: 6px;
+        margin-bottom: 12px;
+        font-size: 13px;
+    }
+
+    .sub-p {
+        margin-top: 12px;
+        font-size: 13px;
+        text-align: center;
+    }
 
     /* Ajuste do ícone de olho dentro do input */
     .password-container .toggle-password {
@@ -356,7 +395,7 @@ header {
     top: 16px;
 }
 
-.header-btninput{
+.header-btninput {
     height: 30px;
     width: 61px;
     border-radius: 25px;
@@ -364,7 +403,6 @@ header {
     background-color: #008cff;
     right: 195px;
     top: 20px
-
 }
 
 .avatarheader {
@@ -455,7 +493,7 @@ header {
     padding-top: 37px;
 }
 
-.catalogo-section{
+.catalogo-section {
     width: 100%;
     height: 650px;
     background-color: #CCCCCC;
@@ -575,7 +613,8 @@ div.swal2-container .swal2-popup {
     display: grid;
     place-self: center;
     grid-template-columns: minmax(0, 100%);
-    width: var(--swal2-width, 400px); /* Largura padrão */
+    width: var(--swal2-width, 400px);
+    /* Largura padrão */
     max-width: 90%;
     padding: var(--swal2-padding, 2rem);
     border: var(--swal2-border, none);
@@ -584,7 +623,7 @@ div.swal2-container .swal2-popup {
     color: var(--swal2-color, #333333);
     font-family: 'Poppins', sans-serif;
     font-size: 1rem;
-    box-shadow: 0 10px 25px rgba(0,0,0,0.2);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.2);
     text-align: center;
     animation: var(--swal2-show-animation, scale-in 0.3s ease-in-out);
 }
@@ -637,6 +676,7 @@ div.swal2-container .swal2-popup {
         transform: scale(0.7);
         opacity: 0;
     }
+
     100% {
         transform: scale(1);
         opacity: 1;

@@ -97,20 +97,28 @@ header img {
     justify-content: center;
 }
 
+.banner img {
+    width: 1460px;
+}
+
+.main {
+    background-color: #ededed;
+    margin-top: 30px;
+    padding: 1px;
+}
+
 h1 {
-    margin-top: 55px;
+    margin-top: 25px;
     margin-bottom: 10px;
-    margin-left: 75px;
+    margin-left: 30px;
 }
 
 .cards-container {
-    margin-right: 75px;
-    margin-left: 75px;
-    gap: 30px;
-    padding: 30px;
-    border: 2px solid var(--preto-opaco);
+    background-color: var(--branco);
+    margin-right: 30px;
+    margin-left: 30px;
+    padding: 10px;
     border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .usuario {
@@ -127,6 +135,7 @@ h1 {
 
 .numero-info {
     font-weight: bold;
+    font-size: 40px;
 }
 
 .icone {
@@ -140,10 +149,9 @@ h1 {
 }
 
 .informacoes {
-    margin-top: 60px;
+    margin-top: 30px;
     display: flex;
-    justify-content: space-around;
-    gap: 160px;
+    justify-content: space-evenly;
 }
 
 .negrito {
@@ -152,19 +160,28 @@ h1 {
 }
 
 .info-segmento-usuarios {
-    margin-left: 40px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
 }
 
 .info-segmento-vendas {
-    margin-left: 50px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
 }
 
 .info-segmento-produtos {
-    margin-left: 39px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
 }
 
 .info-segmento-cashback {
-    margin-left: 32px;
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+    ;
 }
 
 .info-titulo {
@@ -175,6 +192,39 @@ h1 {
 
 .info-titulo p {
     font-size: 25px;
+    color: var(--preto-opaco);
+}
+
+.ideiagenial {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.detalhes-card {
+    padding: 10px;
+    width: 340px;
+    display: flex;
+    height: 220px;
+    background-color: var(--branco);
+    border-radius: 10px;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.incone i {
+    font-size: 60px;
+}
+
+.incone {
+    margin-left: 10px;
+}
+
+.dado-e-link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
 }
 
 .gerenciar {
@@ -195,16 +245,16 @@ h1 {
     font-size: 22px;
     font-weight: bold;
     background-color: var(--branco);
-    display: flex;
-    gap: 10px;
     border: 2px solid var(--preto-opaco);
+    display: flex;
+    gap: 20px;
     padding: 15px 14px;
     cursor: pointer;
     border-radius: 5px;
     color: var(--preto);
     align-items: center;
+    justify-content: center;
     text-decoration: none;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .botao-gerenciar i {
@@ -212,16 +262,15 @@ h1 {
 }
 
 .container-edicao {
-    margin-right: 75px;
-    margin-left: 75px;
+    margin-right: 30px;
+    margin-left: 30px;
     display: flex;
     justify-content: center;
     gap: 30px;
     padding: 30px;
-    border: 2px solid var(--preto-opaco);
+    background-color: var(--branco);
     border-radius: 10px;
     margin-bottom: 40px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .div-container {
@@ -274,7 +323,8 @@ h1 {
     font-size: 17px;
     width: 600px;
     height: 355px;
-    padding: 15px;;
+    padding: 15px;
+    ;
     border-radius: 5px;
     border: 2px solid var(--preto-opaco);
 }
@@ -366,6 +416,7 @@ h1 {
     border: 2px solid var(--azul-principal);
     outline: none;
 }
+
 .input-form-preco:focus {
     border: 2px solid var(--azul-principal);
     outline: none;

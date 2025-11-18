@@ -52,71 +52,102 @@
 
             </div>
 
-            <div class="informacoes">
+        </div>
 
-                <div class="usuarios">
+        <div class="informacoes">
+
+            <div class="ideiagenial">
+
+                <div class="detalhes-card">
 
                     <div class="info-titulo">
-                        <i class="fa-solid fa-user"></i>
                         <p>Usuários</p>
                     </div>
                     <div class="info-segmento-usuarios">
-                        <p class="numero-info">500</p>
-                        <a class="gerenciar" href="usuarios.html">Gerenciar</a>
+                        <div class="incone">
+                            <i class="fa-solid fa-user"></i>
+                        </div>
+                        <div class="dado-e-link">
+                            <p class="numero-info">500</p>
+                            <a class="gerenciar" href="usuarios.html">Gerenciar</a>
+                        </div>
                     </div>
                 </div>
 
-                <div class="usuarios">
-
-                    <div class="info-titulo">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <p>Vendas</p>
-                    </div>
-                    <div class="info-segmento-vendas">
-                        <p class="numero-info">400.000</p>
-                        <a class="gerenciar" href="vendas.html">Gerenciar</a>
-                    </div>
-                </div>
-
-                <div class="usuarios">
-
-                    <div class="info-titulo">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                        <p>Produtos</p>
-                    </div>
-                    <div class="info-segmento-produtos">
-                        <p class="numero-info">50.000</p>
-                        <a class="gerenciar" href="produtos.html">Gerenciar</a>
-                    </div>
-                </div>
-
-                <div class="usuarios">
-
-                    <div class="info-titulo">
-                        <i class="fa-solid fa-dollar-sign"></i>
-                        <p>Cashback</p>
-                    </div>
-                    <div class="info-segmento-cashback">
-                        <p class="numero-info">R$600,00</p>
-                        <a class="gerenciar" href="cashback.html">Gerenciar</a>
-                    </div>
-                </div>
+                <a href="usuarios.html" class="botao-gerenciar"><i class="fa-solid fa-user"></i>Gerenciar Usuários</a>
 
             </div>
 
-        </div>
+            <div class="ideiagenial">
 
-        <div class="botoes">
+                <div class="detalhes-card">
 
-            <a href="usuarios.html" class="botao-gerenciar"><i class="fa-solid fa-user"></i>Gerenciar Usuários</a>
+                    <div class="info-titulo">
+                        <p>Vendas</p>
+                    </div>
+                    <div class="info-segmento-vendas">
+                        <div class="incone">
+                            <i class="fa-solid fa-cart-shopping"></i>
+                        </div>
+                        <div class="dado-e-link">
+                            <p class="numero-info">400.000</p>
+                            <a class="gerenciar" href="vendas.html">Gerenciar</a>
+                        </div>
+                    </div>
+                </div>
 
-            <a href="vendas.html" class="botao-gerenciar"><i class="fa-solid fa-cart-shopping"></i>Gerenciar Vendas</a>
+                <a href="vendas.html" class="botao-gerenciar"><i class="fa-solid fa-cart-shopping"></i>Gerenciar
+                    Vendas</a>
 
-            <a href="produtos.html" class="botao-gerenciar"><i class="fa-solid fa-bag-shopping"></i>Gerenciar
-                Produtos</a>
+            </div>
 
-            <a href="cashback.html" class="botao-gerenciar"><i class="fa-solid fa-dollar-sign"></i>Gerenciar
-                Cashback</a>
+            <div class="ideiagenial">
+
+                <div class="detalhes-card">
+
+                    <div class="info-titulo">
+                        <p>Produtos</p>
+                    </div>
+                    <div class="info-segmento-produtos">
+                        <div class="incone">
+                            <i class="fa-solid fa-bag-shopping"></i>
+                        </div>
+                        <div class="dado-e-link">
+                            <p class="numero-info">50.000</p>
+                            <a class="gerenciar" href="produtos.html">Gerenciar</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <a href="produtos.html" class="botao-gerenciar"><i class="fa-solid fa-bag-shopping"></i>Gerenciar
+                    Produtos</a>
+
+            </div>
+
+            <div class="ideiagenial">
+
+                <div class="detalhes-card">
+
+                    <div class="info-titulo">
+                        <p>Cashback</p>
+                    </div>
+                    <div class="info-segmento-cashback">
+                        <div class="incone">
+                            <i class="fa-solid fa-dollar-sign"></i>
+                        </div>
+                        <div class="dado-e-link">
+                            <p class="numero-info">R$:600,00</p>
+                            <a class="gerenciar" href="cashback.html">Gerenciar</a>
+                        </div>
+                    </div>
+
+                </div>
+
+                <a href="cashback.html" class="botao-gerenciar"><i class="fa-solid fa-dollar-sign"></i>Gerenciar
+                    Cashback</a>
+
+            </div>
 
         </div>
 
@@ -225,7 +256,7 @@
         const senhaEl = document.getElementById('senha');
         const statusEl = document.getElementById('status');
 
-        const BASE = 'http://10.92.3.135:5000';
+        const BASE = 'http://10.92.3.198:5000';
 
         form.addEventListener('submit', async (event) => {
             event.preventDefault();

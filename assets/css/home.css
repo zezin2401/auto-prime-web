@@ -22,11 +22,10 @@ body {
     background-color: var(--azul-escuro);
 }
 
-/* ---------- Mantém seu CSS original (assumo que já existe acima) ---------- */
-/* ---------- Regras só para telas muito pequenas (<= 322px) ---------- */
+/* CSS LOGOUT */
+
 @media (max-width: 322px) {
 
-    /* usamos flex no header APENAS aqui para reorganizar sem quebrar o design original */
     header {
         display: flex !important;
         align-items: center;
@@ -38,7 +37,6 @@ body {
         gap: 8px;
     }
 
-    /* Logo: mantém o mesmo look, mas em posição normal (não absolute) */
     .logo {
         position: relative !important;
         left: 0 !important;
@@ -48,7 +46,6 @@ body {
         flex: 0 0 auto;
     }
 
-    /* Form passa a ser um flex inline, ocupando o espaço central */
     form {
         position: relative !important;
         display: flex !important;
@@ -57,10 +54,8 @@ body {
         flex: 1 1 auto;
         margin: 0 6px;
         min-width: 0;
-        /* importante para truncar corretamente */
     }
 
-    /* Input: fica responsivo dentro do form */
     .input-header {
         position: relative !important;
         right: auto !important;
@@ -78,7 +73,6 @@ body {
         text-overflow: ellipsis;
     }
 
-    /* Botão: fica ao lado direito do input, sem sobreposição */
     .header-btninput {
         position: relative !important;
         right: auto !important;
@@ -93,13 +87,11 @@ body {
         justify-content: center;
     }
 
-    /* reduz o svg do botão caso necessário */
     .header-btninput svg {
         width: 16px;
         height: 16px;
     }
 
-    /* Avatar: minimal e clicável à direita */
     .avatarheader {
         position: relative !important;
         right: 0 !important;
@@ -119,12 +111,10 @@ body {
         display: block;
     }
 
-    /* placeholder menor para não "quebrar" visual */
     .input-header::placeholder {
         font-size: 12px;
     }
 
-    /* evita que elementos herdados por absolute fiquem sobrepostos */
     header * {
         z-index: 1;
     }
@@ -224,19 +214,24 @@ header img {
     width: 1460px;
 }
 
+.main {
+    background-color: #ededed;
+    margin-top: 30px;
+    padding: 1px;
+}
+
 h1 {
-    margin-top: 55px;
+    margin-top: 25px;
     margin-bottom: 10px;
     margin-left: 30px;
 }
 
 .cards-container {
+    background-color: var(--branco);
     margin-right: 30px;
     margin-left: 30px;
     padding: 10px;
-    border: 2px solid var(--preto-opaco);
     border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .usuario {
@@ -298,7 +293,8 @@ h1 {
 .info-segmento-cashback {
     align-items: center;
     display: flex;
-    justify-content: space-between;;
+    justify-content: space-between;
+    ;
 }
 
 .info-titulo {
@@ -324,11 +320,10 @@ h1 {
     width: 340px;
     display: flex;
     height: 220px;
-    border: 2px solid var(--preto-opaco);
+    background-color: var(--branco);
     border-radius: 10px;
     flex-direction: column;
     justify-content: space-between;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .incone i {
@@ -363,9 +358,9 @@ h1 {
     font-size: 22px;
     font-weight: bold;
     background-color: var(--branco);
+    border: 2px solid var(--preto-opaco);
     display: flex;
     gap: 20px;
-    border: 2px solid var(--preto-opaco);
     padding: 15px 14px;
     cursor: pointer;
     border-radius: 5px;
@@ -373,7 +368,6 @@ h1 {
     align-items: center;
     justify-content: center;
     text-decoration: none;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .botao-gerenciar i {
@@ -390,12 +384,11 @@ h1 {
     margin-left: 30px;
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    justify-content: space-between;
     padding: 20px;
     width: 530px;
-    border: 2px solid var(--preto-opaco);
     border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    background-color: var(--branco);
 }
 
 .vendedor {
@@ -409,7 +402,7 @@ h1 {
 
 .div-produtos {
     display: flex;
-    gap: 14px;
+    justify-content: space-around;
 }
 
 /* HEADER AQUI */
@@ -469,9 +462,8 @@ header {
     gap: 10px;
     padding: 20px;
     width: 900px;
-    border: 2px solid var(--preto-opaco);
+    background-color: var(--branco);
     border-radius: 10px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .produto {

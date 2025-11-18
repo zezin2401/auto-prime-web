@@ -206,3 +206,192 @@ h1 {
 .botao-gerenciar i {
     color: var(--azul-principal);
 }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+.banner img {
+    width: 1460px;
+}
+
+.main {
+    background-color: #ededed;
+    margin-top: 30px;
+    padding: 1px;
+}
+
+h1 {
+    margin-top: 25px;
+    margin-bottom: 10px;
+    margin-left: 30px;
+}
+
+.cards-container {
+    background-color: var(--branco);
+    margin-right: 30px;
+    margin-left: 30px;
+    padding: 10px;
+    border-radius: 10px;
+}
+
+.usuario {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.criado-em {
+    color: var(--preto-opaco);
+    font-weight: normal;
+    font-size: 18px;
+}
+
+.numero-info {
+    font-weight: bold;
+    font-size: 40px;
+}
+
+.icone {
+    display: flex;
+    width: 60px;
+    height: 60px;
+    border: 2px solid var(--preto-opaco);
+    border-radius: 50px;
+    justify-content: center;
+    align-items: center;
+}
+
+.informacoes {
+    margin-top: 30px;
+    display: flex;
+    justify-content: space-evenly;
+}
+
+.negrito {
+    font-weight: bold;
+    color: var(--preto);
+}
+
+.info-segmento-usuarios {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-segmento-vendas {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-segmento-produtos {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;
+}
+
+.info-segmento-cashback {
+    align-items: center;
+    display: flex;
+    justify-content: space-between;;
+}
+
+.info-titulo {
+    display: flex;
+    gap: 10px;
+    align-items: center;
+}
+
+.info-titulo p {
+    font-size: 25px;
+    color: var(--preto-opaco);
+}
+
+.ideiagenial {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+    margin-bottom: 25px;
+}
+
+.detalhes-card {
+    padding: 10px;
+    width: 340px;
+    display: flex;
+    height: 220px;
+    background-color: var(--branco);
+    border-radius: 10px;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.incone i {
+    font-size: 60px;
+}
+
+.incone {
+    margin-left: 10px;
+}
+
+.dado-e-link {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+}
+
+.gerenciar {
+    color: var(--azul-principal);
+    font-weight: bold;
+    cursor: pointer;
+}
+
+.botoes {
+    display: flex;
+    margin-top: 23px;
+    margin-bottom: 23px;
+    justify-content: space-evenly;
+}
+
+.botao-gerenciar {
+    font-family: 'Poppins', sans-serif;
+    font-size: 22px;
+    font-weight: bold;
+    background-color: var(--branco);
+    display: flex;
+    gap: 20px;
+    padding: 15px 14px;
+    cursor: pointer;
+    border-radius: 5px;
+    color: var(--preto);
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.botao-gerenciar i {
+    color: var(--azul-principal);
+}
