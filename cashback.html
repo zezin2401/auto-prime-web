@@ -175,6 +175,8 @@
 
         <div class="vendedores">
 
+            <h3 style="font-size: 25px;">Clientes com maior cashback gerado</h3>
+
             <div class="vendedor-linha">
 
                 <div class="vendedor-detalhes">
@@ -292,7 +294,7 @@
     async function carregarCashbacks() {
         try {
             // 1️⃣ Busca todos os cashbacks detalhados
-            const response = await fetch("http://10.92.3.198:5000/cashbacks", {
+            const response = await fetch("http://10.92.3.194:5000/cashbacks", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 redirect: "follow"
@@ -345,7 +347,7 @@
 
             // 7️⃣ Gráfico de cashback mensal
             const ctx = document.getElementById('Coluna').getContext('2d');
-            const responseMes = await fetch("http://10.92.3.198:5000/cashback_por_mes", {
+            const responseMes = await fetch("http://10.92.3.194:5000/cashback_por_mes", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 redirect: "follow"
@@ -385,10 +387,11 @@
                         label: 'Top clientes',
                         data: maiores.map(m => m[1]),
                         backgroundColor: ['#0073E6', '#1AAC5F', '#7D3AC1', '#F2C200', '#E90039'],
-                        borderWidth: 1
                     }]
                 },
                 options: {
+                    borderWidth: 10,
+                    borderRadius: 10,
                     plugins: {
                         datalabels: {
                             color: '#fff',

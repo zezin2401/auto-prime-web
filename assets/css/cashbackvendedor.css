@@ -4,6 +4,57 @@
     padding: 0;
 }
 
+/* HEADER AQUI */
+
+header {
+    background-color: black;
+    display: flex;
+    height: 74px;
+}
+
+.logo {
+    width: 95px;
+    height: 95px;
+    position: absolute;
+    left: 30px;
+    top: -5px
+}
+
+.input-header {
+    width: 328px;
+    height: 38px;
+    border-radius: 25px;
+    background-color: white;
+    border: none;
+    color: #111111;
+    font-family: Poppins;
+    font-weight: 400;
+    font-size: 15px;
+    padding-left: 10px;
+    position: absolute;
+    right: 192px;
+    top: 16px;
+}
+
+.header-btninput {
+    height: 30px;
+    width: 61px;
+    border-radius: 25px;
+    position: absolute;
+    background-color: #008cff;
+    right: 195px;
+    top: 20px
+}
+
+.avatarheader {
+    width: 178px;
+    height: 30px;
+    position: absolute;
+    right: 20px;
+    top: 10px;
+}
+
+
 body {
     font-family: "Poppins", sans-serif;
     font-weight: 400;
@@ -81,17 +132,6 @@ body {
     margin-right: 100px;
 }
 
-header {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    background-color: var(--preto);
-}
-
-header img {
-    max-width: 100%;
-    height: auto;
-}
 
 .banner {
     margin-top: 26px;
@@ -437,9 +477,7 @@ h1 {
         width: 20rem;
     }
 
-    header {
-        flex-direction: column;
-    }
+
 
     .cards-container {
         margin-left: 35px;

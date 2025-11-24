@@ -233,6 +233,7 @@ h1 {
     margin-left: 30px;
     padding: 10px;
     border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .usuario {
@@ -249,7 +250,7 @@ h1 {
 
 .numero-info {
     font-weight: bold;
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .icone {
@@ -325,6 +326,7 @@ h1 {
     border-radius: 10px;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .incone i {
@@ -369,6 +371,7 @@ h1 {
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .botao-gerenciar i {
@@ -381,6 +384,7 @@ h1 {
     margin-bottom: 40px;
 }
 
+
 .vendedores {
     margin-left: 30px;
     display: flex;
@@ -390,12 +394,34 @@ h1 {
     width: 530px;
     border-radius: 10px;
     background-color: var(--branco);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .vendedor {
     padding: 10px;
     border: 2px solid var(--preto-opaco);
     border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.vendedores-populares {
+    padding: 10px;
+    border: 2px solid var(--preto-opaco);
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.total {
+    color: var(--preto-opaco);
+    font-weight: normal;
+    font-size: 18px;
+}
+
+.vendedor-detalhes {
     display: flex;
     align-items: center;
     gap: 10px;
@@ -465,16 +491,191 @@ header {
     width: 900px;
     background-color: var(--branco);
     border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .produto {
+    display: flex;
     border: 2px solid var(--preto-opaco);
     border-radius: 10px;
     padding: 8.5px;
     height: 363px;
+    width: 30%;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .preco {
     color: var(--azul-escuro);
     font-weight: bold
+}
+
+@media (max-width: 1440px) {
+    .banner img {
+        width: 1290px;
+    }
+
+    .botoes {
+        justify-content: center;
+        gap: 47px;
+    }
+}
+
+@media (max-width: 1024px) {
+    .banner img {
+        width: 875px;
+    }
+
+    .informacoes {
+        gap: 55px;
+    }
+
+    .botao-gerenciar {
+        font-size: 15px;
+    }
+
+    .botoes {
+        gap: 1px;
+    }
+}
+
+@media (max-width: 768px) {
+    .informacoes {
+        flex-wrap: wrap;
+        gap: 62px;
+    }
+
+    .banner img {
+        width: 615px;
+    }
+
+    .botoes {
+        flex-wrap: wrap;
+        gap: 60px;
+    }
+
+    .botao-gerenciar {
+        font-size: 20px;
+    }
+
+    .cards-container {
+        display: flex;
+        gap: 0px;
+        align-items: center;
+        flex-direction: column;
+    }
+
+    .info-vendas {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .div-produtos {
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+    }
+
+    .produtos {
+        width: 95%;
+        margin: 0;
+    }
+
+    .vendedores {
+        gap: 10px;
+        width: 95%;
+        margin: 0;
+    }
+}
+
+@media (max-width: 426px) {
+    .container {
+        display: flex;
+        gap: 35px;
+        height: 5rem;
+        margin-right: 100px;
+        align-items: center;
+    }
+
+    .banner {
+        display: none;
+    }
+
+    h1 {
+        margin-left: 50px;
+    }
+
+    .botoes {
+        gap: 20px;
+    }
+
+    .container {
+        margin-right: 0px;
+    }
+
+    .barra-pesquisar {
+        width: 20rem;
+    }
+
+    header {
+        flex-direction: column;
+    }
+
+    .cards-container {
+        margin-left: 35px;
+        margin-right: 35px;
+    }
+
+    .botao-gerenciar {
+        padding: 15px 55px;
+    }
+}
+
+@media (max-width: 376px) {
+    .barra-pesquisar {
+        width: 16rem;
+    }
+
+    h1 {
+        margin-left: -10px;
+    }
+
+    .cards-container {
+        margin-left: 10px;
+        margin-right: 10px;
+    }
+}
+
+@media (max-width: 321px) {
+    .botao-pesquisar {
+        margin-left: -50px;
+        padding: 7px 10px;
+    }
+
+    .barra-pesquisar {
+        width: 15rem;
+    }
+
+    .container {
+        gap: 20px;
+    }
+
+    .usuario {
+        flex-direction: column;
+    }
+
+    .info {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .botao-gerenciar {
+        padding: 15px 30px;
+    }
+
+    h1 {
+        font-size: 25px;
+    }
 }

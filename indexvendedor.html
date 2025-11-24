@@ -2,412 +2,391 @@
 <html lang="pt-br" dir="ltr">
 
 <head>
-    <meta charset="UTF-8"> <!-- Define a codificação de caracteres -->
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"> <!-- Responsividade -->
-    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> <!-- Importa SweetAlert2 para alertas bonitos -->
-    <link rel="preconnect" href="https://fonts.googleapis.com"> <!-- Pré-carregamento de fonte Google -->
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin> <!-- Pré-carregamento de fonte com CORS -->
-    <link
-        href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
-        rel="stylesheet"> <!-- Fonte Poppins importada -->
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-    <title>Home AutoPrime</title>
-    <link rel="stylesheet" href="assets/css/style.css"> <!-- Estilo principal externo -->
-    <script src="assets/js/seguranca.js"></script>
+  <!-- SweetAlert2 -->
+  <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 
-    <style>
-        /* Menu lateral oculto */
-        #sideMenu {
-            position: fixed; /* Fixa na tela */
-            top: 0;
-            right: -250px; /* Inicialmente fora da tela */
-            width: 250px;
-            height: 100%;
-            background-color: #222;
-            color: #f0f0f0;
-            box-shadow: -3px 0 8px rgba(0, 0, 0, 0.6);
-            transition: right 0.3s ease, opacity 0.3s ease; /* Animação */
-            padding: 30px 25px;
-            font-family: 'Poppins', sans-serif;
-            z-index: 1000;
-            opacity: 0; /* Invisível */
-            pointer-events: none; /* Não clicável */
-            display: flex;
-            flex-direction: column;
-        }
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
+    rel="stylesheet">
 
-        /* Menu ativo */
-        #sideMenu.active {
-            right: 0; /* Mostra o menu */
-            opacity: 1;
-            pointer-events: auto; /* Clicável */
-        }
+  <title>Home AutoPrime</title>
 
-        /* Botão de fechar */
-        #sideMenu .closeBtn {
-            font-size: 28px;
-            font-weight: 700;
-            cursor: pointer;
-            text-align: right;
-            margin-bottom: 40px;
-            color: #f0f0f0;
-            user-select: none; /* Não selecionável */
-            transition: color 0.2s ease;
-        }
+  <!-- teu script de segurança -->
+  <script src="assets/js/seguranca.js"></script>
 
-        #sideMenu .closeBtn:hover {
-            color: #ff4d4d; /* Muda cor ao passar mouse */
-        }
+  <!-- CSS -->
+  <link rel="stylesheet" href="assets/css/indexvendedor.css">
 
-        /* Lista dentro do menu */
-        #sideMenu ul {
-            list-style: none;
-            padding: 0;
-            margin: 0;
-            flex-grow: 1;
-            display: flex;
-            flex-direction: column;
-            gap: 25px;
-        }
+  <style>
+    /* Menu lateral oculto */
+    #sideMenu {
+      position: fixed;
+      top: 0;
+      right: -250px;
+      width: 250px;
+      height: 100%;
+      background-color: #222;
+      color: #f0f0f0;
+      box-shadow: -3px 0 8px rgba(0, 0, 0, 0.6);
+      transition: right 0.3s ease, opacity 0.3s ease;
+      padding: 30px 25px;
+      font-family: 'Poppins', sans-serif;
+      z-index: 1000;
+      opacity: 0;
+      pointer-events: none;
+      display: flex;
+      flex-direction: column;
+    }
 
-        #sideMenu ul li {
-            font-weight: 600;
-            font-size: 20px;
-        }
+    #sideMenu.active {
+      right: 0;
+      opacity: 1;
+      pointer-events: auto;
+    }
 
-        #sideMenu ul li a {
-            color: #f0f0f0;
-            text-decoration: none;
-            transition: color 0.3s ease;
-            padding: 10px 15px;
-            border-radius: 8px;
-            display: block;
-        }
+    #sideMenu .closeBtn {
+      font-size: 28px;
+      font-weight: 700;
+      cursor: pointer;
+      text-align: right;
+      margin-bottom: 40px;
+      color: #f0f0f0;
+      user-select: none;
+      transition: color 0.2s ease;
+    }
 
-        #sideMenu ul li a:hover {
-            background-color: #444;
-            color: #ff4d4d;
-        }
+    #sideMenu .closeBtn:hover {
+      color: #ff4d4d;
+    }
 
-        /* Cursor pointer no avatar */
-        .avatarheader img {
-            cursor: pointer;
-        }
-    </style>
+    #sideMenu ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+      flex-grow: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 25px;
+    }
+
+    #sideMenu ul li {
+      font-weight: 600;
+      font-size: 20px;
+    }
+
+    #sideMenu ul li a {
+      color: #f0f0f0;
+      text-decoration: none;
+      transition: color 0.3s ease;
+      padding: 10px 15px;
+      border-radius: 8px;
+      display: block;
+    }
+
+    #sideMenu ul li a:hover {
+      background-color: #444;
+      color: #ff4d4d;
+    }
+
+    .avatarheader img {
+      cursor: pointer;
+    }
+  </style>
 </head>
 
-<body onload="listarProdutos()"> <!-- Chama a função listarProdutos ao carregar a página -->
-    <header>
-        <img class="logo" src="assets/img/Ariel.png"> <!-- Logo -->
-        <form>
-            <input class="input-header" type="text" placeholder="Buscar na AutoPrime"> <!-- Campo de busca -->
-            <button class="header-btninput" type="submit" style="padding:8px; border:none; cursor:pointer;">
-                <!-- Ícone de lupa -->
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 
-                    1.415-1.414l-3.85-3.85zm-5.242.656a5 
+<body onload="listarProdutos()">
+  <header>
+    <img class="logo" src="assets/img/Ariel.png" alt="Logo">
+    <form>
+      <input class="input-header" type="text" placeholder="Buscar na AutoPrime">
+      <button class="header-btninput" type="submit" style="padding:8px; border:none; cursor:pointer;">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
+          <path
+            d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0
+                    1.415-1.414l-3.85-3.85zm-5.242.656a5
                     5 0 1 1 0-10 5 5 0 0 1 0 10z" />
-                </svg>
-            </button>
-        </form>
+        </svg>
+      </button>
+    </form>
 
-        <a class="avatarheader" href="#" id="avatarToggle"><img src="assets/img/login 3.png" alt="Avatar"></a> <!-- Avatar clicável -->
-    </header>
+    <a class="avatarheader" href="#" id="avatarToggle"><img src="assets/img/login 3.png" alt="Avatar"></a>
+  </header>
 
-    <!-- Menu lateral -->
-    <nav id="sideMenu">
-        <div class="closeBtn" id="menuClose">&times;</div> <!-- Botão fechar -->
-        <ul>
-            <li><a href="#">Minha Conta</a></li>
-            <li><a href="#" id="logoutBtn">Logout</a></li> <!-- Botão logout -->
-        </ul>
-    </nav>
+  <!-- Menu lateral -->
+  <nav id="sideMenu">
+    <div class="closeBtn" id="menuClose">&times;</div>
+    <ul>
+      <li><a href="#">Minha Conta</a></li>
+      <li><a href="#" id="logoutBtn">Logout</a></li>
+    </ul>
+  </nav>
 
-    <section>
-        <div class="center" style="margin-top: 60px; margin-bottom: 30px;">
-            <img class="banner1" src="assets/img/BANNERVEND.png" alt="Banner"> <!-- Banner principal -->
+  <section>
+    <div class="center" style="margin-top: 60px; margin-bottom: 30px;">
+      <img class="banner1" src="assets/img/BANNERVEND.png" alt="Banner">
+    </div>
+
+    <!-- Cards informativos -->
+    <div class="card-container">
+      <div class="card">
+        <div class="card-top">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="12" cy="7" r="4"></circle>
+            <path d="M5.5 21a6.5 6.5 0 0 1 13 0"></path>
+          </svg>
+          <h4 style="font-family: Poppins;">Usuários</h4>
+        </div>
+        <div style="font-family: Poppins;" class="value">500</div>
+        <a style="font-family: Poppins; color: #008CFF;" href="#">Gerenciar</a>
+      </div>
+
+      <div class="card vendas">
+        <div class="card-top">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <circle cx="9" cy="20" r="1"></circle>
+            <circle cx="20" cy="20" r="1"></circle>
+            <path d="M1 1h5l2.5 13h11.5l2-9H6"></path>
+          </svg>
+          <h4 style="font-family: Poppins;">Vendas</h4>
         </div>
 
-        <!-- Cards informativos -->
-        <div class="card-container">
-            <div class="card">
-                <div class="card-top">
-                    <!-- Ícone Usuário -->
-                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <circle cx="12" cy="7" r="4"></circle>
-                        <path d="M5.5 21a6.5 6.5 0 0 1 13 0"></path>
-                    </svg>
-                    <h4 style="font-family: Poppins;">Usuários</h4>
-                </div>
-                <div style="font-family: Poppins;" class="value">500</div> <!-- Valor de usuários -->
-                <a style="font-family: Poppins; color: #008CFF;" href="#">Gerenciar</a>
-            </div>
+        <div style="font-family: Poppins;" class="value">400.000</div>
+        <a style="font-family: Poppins; color: #008CFF;" href="#">Gerenciar</a>
+      </div>
 
-            
-            <div class="card vendas">
-                <div class="card-top">
-                    <!-- Ícone Carrinho -->
-                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <circle cx="9" cy="20" r="1"></circle>
-                        <circle cx="20" cy="20" r="1"></circle>
-                        <path d="M1 1h5l2.5 13h11.5l2-9H6"></path>
-                    </svg>
-                    <h4 style="font-family: Poppins;">Vendas</h4>
-                </div>
-
-                <div style="font-family: Poppins;" class="value">400.000</div> <!-- Valor de vendas -->
-                <a style="font-family: Poppins; color: #008CFF;" href="#">Gerenciar</a>
-            </div>
-
-            <div class="card">
-                <div class="card-top">
-                    <!-- Ícone Sacola -->
-                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M6 2h12l1 4v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6l1-4z"></path>
-                        <path d="M9 10a3 3 0 0 1 6 0"></path>
-                    </svg>
-                    <h4 style="font-family: Poppins;">Compras</h4>
-                </div>
-                <div style="font-family: Poppins;" class="value">100</div> <!-- Valor de compras -->
-                <a style="font-family: Poppins; color: #008CFF;" href="#">Gerenciar</a>
-            </div>
-
-            <div class="card cashback">
-                <div class="card-top">
-                    <!-- Ícone Cifrão -->
-                    <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
-                        stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
-                        <path d="M12 1v22"></path>
-                        <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"></path>
-                    </svg>
-                    <h5 style="font-family: Poppins;">Cashback acumulado</h5>
-                </div>
-                <div style="font-family: Poppins;" class="value">R$300,00</div>
-                <a style="font-family: Poppins; color: #008CFF;" href="#">Gerenciar</a>
-            </div>
+      <div class="card">
+        <div class="card-top">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M6 2h12l1 4v12a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6l1-4z"></path>
+            <path d="M9 10a3 3 0 0 1 6 0"></path>
+          </svg>
+          <h4 style="font-family: Poppins;">Compras</h4>
         </div>
+        <div style="font-family: Poppins;" class="value">100</div>
+        <a style="font-family: Poppins; color: #008CFF;" href="#">Gerenciar</a>
+      </div>
 
-        <!-- Botão para cadastrar produto -->
-        <div class="div-btnproduto" style="margin-top: 80px; display: flex; gap: 10px; justify-content: center;">
-            <a href="cadastroproduto.html" class="btn-produto">Cadastrar Produto</a>
-            <a href="cashbackvendedor.html" class="btn-produto">Meu cashback</a>
+      <div class="card cashback">
+        <div class="card-top">
+          <svg class="icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.6"
+            stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+            <path d="M12 1v22"></path>
+            <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7H14a3.5 3.5 0 0 1 0 7H6"></path>
+          </svg>
+          <h5 style="font-family: Poppins;">Cashback acumulado</h5>
         </div>
+        <div style="font-family: Poppins;" class="value">R$300,00</div>
+        <a style="font-family: Poppins; color: #008CFF;" href="#">Gerenciar</a>
+      </div>
+    </div>
 
-    </section>
+    <div class="div-btnproduto" style="margin-top: 80px; display: flex; gap: 10px; justify-content: center;">
+      <a href="cadastroproduto.html" class="btn-produto">Cadastrar Produto</a>
+      <a href="cashbackvendedor.html" class="btn-produto">Meu cashback</a>
+    </div>
+  </section>
 
-    <!-- Seção "Meu produtos" -->
-    <section class="explorecatalogo-section">
-        <h4 class="center txt-catalogo">Meu produtos</h4>
-    </section>
+  <section class="explorecatalogo-section">
+    <h4 class="center txt-catalogo">Meu produtos</h4>
+  </section>
 
-    <!-- Catálogo de produtos -->
-    <section class="background-cinza">
-        <div class="catalogo-section d-flex" style="flex-wrap: wrap;;" id="meusprodutos">
+  <section class="background-cinza">
+    <div class="catalogo-section d-flex" style="flex-wrap: wrap;" id="meusprodutos">
+      <!-- Produtos serão injetados aqui -->
+    </div>
+  </section>
 
-        </div>
-    </section>
+  <section class="banner2" style="margin-top: -40px;">
+    <img class="banner2" src="assets/img/PONTEIRAS DE.png" alt="Banner 2">
+  </section>
 
-    <!-- Banner inferior -->
-    <section class="banner2" style="margin-top: -40px;">
-        <img class="banner2" src="assets/img/PONTEIRAS DE.png" alt="Banner 2">
-    </section>
+  <footer class="center" style="background-color: black;">
+    <img class="logo-footer" src="assets/img/Ariel.png" alt="Logo Footer">
+    <p class="p-cadastro2">AutoPrime © 2025 - Todos os direitos reservados</p>
+  </footer>
 
-    <!-- Rodapé -->
-    <footer class="center" style="background-color: black;">
-        <img class="logo-footer" src="assets/img/Ariel.png" alt="Logo Footer">
-        <p class="p-cadastro2">AutoPrime © 2025 - Todos os direitos reservados</p>
-    </footer>
-
-<script>
+  <script>
     // Seleciona elementos do menu lateral
     const avatarToggle = document.getElementById('avatarToggle');
     const sideMenu = document.getElementById('sideMenu');
     const menuClose = document.getElementById('menuClose');
 
-    // Abre menu lateral ao clicar no avatar
-    avatarToggle.addEventListener('click', function (e) {
+    if (avatarToggle) {
+      avatarToggle.addEventListener('click', function (e) {
         e.preventDefault();
         sideMenu.classList.add('active');
-    });
+      });
+    }
 
-    // Fecha menu lateral ao clicar no X
-    menuClose.addEventListener('click', function () {
+    if (menuClose) {
+      menuClose.addEventListener('click', function () {
         sideMenu.classList.remove('active');
-    });
+      });
+    }
 
     const logoutBtn = document.getElementById('logoutBtn');
 
-    // Função de logout
-    logoutBtn.addEventListener('click', function (e) {
-        e.preventDefault(); // Evita navegação do link
-
-        localStorage.clear(); // Limpa localStorage
-
-        // Mostra alerta de sucesso do logout
+    if (logoutBtn) {
+      logoutBtn.addEventListener('click', function (e) {
+        e.preventDefault();
+        localStorage.clear();
         Swal.fire({
-            icon: 'success',
-
-
-
-            title: 'Logout realizado!',
-            text: 'Você será redirecionado para a página de login.',
-            confirmButtonText: 'Ok'
+          icon: 'success',
+          title: 'Logout realizado!',
+          text: 'Você será redirecionado para a página de login.',
+          confirmButtonText: 'Ok'
         }).then(() => {
-            window.location.href = 'login.html'; // Redireciona para login
+          window.location.href = 'login.html';
         });
-    });
+      });
+    }
 
     // Função para listar produtos
     function listarProdutos() {
-        const token = localStorage.getItem("token"); // Pega token do localStorage
+      const token = localStorage.getItem("token");
 
-        const myHeaders = new Headers();
-        if (token) {
-            myHeaders.append("Authorization", `Bearer ${token}`); // Adiciona token no header
-        } else {
-            console.warn("Nenhum token encontrado no localStorage!");
-        }
+      const myHeaders = new Headers();
+      if (token) {
+        myHeaders.append("Authorization", `Bearer ${token}`);
+      } else {
+        console.warn("Nenhum token encontrado no localStorage!");
+      }
 
-        const requestOptions = {
-            method: "GET",
-            headers: myHeaders,
-            redirect: "follow"
-        };
+      const requestOptions = {
+        method: "GET",
+        headers: myHeaders,
+        redirect: "follow"
+      };
 
-        fetch("http://10.92.3.118:5000/produtos", requestOptions)
-            .then((response) => {
-                if (!response.ok) throw new Error("Erro ao buscar produtos");
-                return response.json(); // Converte resposta para JSON
-            })
-            .then((result) => {
-                const produos = result.produtos; // Array de produtos
-                const container = document.getElementById("meusprodutos");
-                container.innerHTML = ""; // Limpa container
+      // CORREÇÃO: aspas normais e URL sem entidades
+      fetch("http://10.92.3.194:5000/produtos", requestOptions)
+        .then((response) => {
+          if (!response.ok) throw new Error("Erro ao buscar produtos");
+          return response.json();
+        })
+        .then((result) => {
+          const produos = result.produtos || []; // fallback vazio
+          const container = document.getElementById("meusprodutos");
+          if (!container) return console.error("Container #meusprodutos não encontrado");
+          container.innerHTML = "";
 
-                let produtosHTML = "";
+          let produtosHTML = "";
 
-                // Monta HTML dos produtos
-                produos.forEach((produto) => {
-                    console.log(produto);
-                    produtosHTML += `
-                        <div class="meus-produtos" data-id="${produto.id}">
-                            <img class="img-produto" src="http://10.92.3.118:5000/static/imagens/${produto.imagem}" alt="Produto 1">
-                            <h5 class="nome-produto">${produto.nome}</h5>
-                            <p class="preco-produto">R$ ${produto.preco}</p>
+          produos.forEach((produto) => {
+            console.log(produto);
+            produtosHTML += `
+              <div class="meus-produtos" data-id="${produto.id}">
+                <img class="img-produto" src="http://10.92.3.194:5000/static/imagens/${produto.imagem}" alt="${produto.nome}">
+                <h5 class="nome-produto">${produto.nome}</h5>
+                <p class="preco-produto">R$ ${produto.preco}</p>
 
-                            <div style="display: flex; gap: 10px;">
-                                <a href='editproduto.html?id=${produto.id}&nome=${produto.nome}&descricao=${produto.descricao}&preco=${produto.preco}&acabamento=${produto.acabamento}&marca=${produto.marca}&imagem=${produto.imagem}'
-                                class="btneditar-produto btnedit-produto" style="border: none;" >Editar Produto</a>
-                                <button class="btnexcluir-produto btnedit-produto" style="background-color: red;  border: none;">Excluir</button>
-                            </div>
-                        </div>
-                    `;
-                });
+                <div style="display: flex; gap: 10px;">
+                  <a href="editarprodutovendedor.html?id=${encodeURIComponent(produto.id)}&nome=${encodeURIComponent(produto.nome)}&descricao=${encodeURIComponent(produto.descricao)}&preco=${encodeURIComponent(produto.preco)}&acabamento=${encodeURIComponent(produto.acabamento)}&marca=${encodeURIComponent(produto.marca)}&imagem=${encodeURIComponent(produto.imagem)}"
+                    class="btneditar-produto btnedit-produto" style="border: none;">Editar Produto</a>
+                  <button class="btnexcluir-produto btnedit-produto" style="background-color: red; border: none;">Excluir</button>
+                </div>
+              </div>
+            `;
+          });
 
-                container.innerHTML = produtosHTML; // Adiciona produtos ao DOM
-
-            })
-            .catch((error) => console.error("Erro ao listar produtos:", error));
+          container.innerHTML = produtosHTML;
+        })
+        .catch((error) => console.error("Erro ao listar produtos:", error));
     }
 
-    // Evento para excluir produtos (mantido como estava)
+    // Evento para excluir produtos
     document.addEventListener("DOMContentLoaded", () => {
-        document.addEventListener("click", async (e) => {
-            if (!e.target.classList.contains("btnexcluir-produto")) return;
+      document.addEventListener("click", async (e) => {
+        if (!e.target.classList.contains("btnexcluir-produto")) return;
 
-            const divProduto = e.target.closest(".meus-produtos");
-            const produtoId = divProduto.dataset.id;
+        const divProduto = e.target.closest(".meus-produtos");
+        const produtoId = divProduto ? divProduto.dataset.id : null;
+        if (!produtoId) return console.error("Produto sem id");
 
-            // Confirmação de exclusão
-            const confirmacao = await Swal.fire({
-                title: "Tem certeza?",
-                text: "Essa ação não poderá ser desfeita!",
-                icon: "warning",
-                showCancelButton: true,
-                confirmButtonColor: "#d33",
-                cancelButtonColor: "#3085d6",
-                confirmButtonText: "Sim, excluir!",
-                cancelButtonText: "Cancelar"
+        const confirmacao = await Swal.fire({
+          title: "Tem certeza?",
+          text: "Essa ação não poderá ser desfeita!",
+          icon: "warning",
+          showCancelButton: true,
+          confirmButtonColor: "#d33",
+          cancelButtonColor: "#3085d6",
+          confirmButtonText: "Sim, excluir!",
+          cancelButtonText: "Cancelar"
+        });
+
+        if (!confirmacao.isConfirmed) return;
+
+        try {
+          Swal.fire({
+            title: 'Excluindo produto...',
+            allowOutsideClick: false,
+            allowEscapeKey: false,
+            didOpen: () => {
+              Swal.showLoading();
+            }
+          });
+
+          const response = await fetch(`http://10.92.3.194:5000/produto/${produtoId}`, {
+            method: "DELETE",
+            headers: {
+              "Content-Type": "application/json",
+              "Authorization": `Bearer ${localStorage.getItem("token")}`
+            }
+          });
+
+          Swal.close();
+          const result = await response.json();
+
+          if (response.ok) {
+            await Swal.fire({
+              icon: "success",
+              title: "Produto excluído!",
+              text: result.mensagem || "O produto foi removido com sucesso.",
+              confirmButtonText: "OK",
+              confirmButtonColor: "#3085d6",
+              allowOutsideClick: false
             });
 
-            if (!confirmacao.isConfirmed) return;
-
-            try {
-                // Mostra modal de carregamento
-                Swal.fire({
-                    title: 'Excluindo produto...',
-                    allowOutsideClick: false,
-                    allowEscapeKey: false,
-                    didOpen: () => {
-                        Swal.showLoading();
-                    }
-                });
-
-                const response = await fetch(`http://10.92.3.118:5000/produto/${produtoId}`, {
-                    method: "DELETE",
-                    headers: {
-                        "Content-Type": "application/json",
-                        "Authorization": `Bearer ${localStorage.getItem("token")}`
-                    }
-                });
-
-                Swal.close(); // Fecha modal de carregamento
-
-                const result = await response.json();
-
-                if (response.ok) {
-                    // Sucesso
-                    await Swal.fire({
-                        icon: "success",
-                        title: "Produto excluído!",
-                        text: result.mensagem || "O produto foi removido com sucesso.",
-                        confirmButtonText: "OK",
-                        confirmButtonColor: "#3085d6",
-                        allowOutsideClick: false
-                    });
-
-                    divProduto.remove(); // Remove produto do DOM
-
-                } else {
-                    // Erro do backend
-                    await Swal.fire({
-                        icon: "error",
-                        title: "Erro!",
-                        text: result.error || "Erro ao excluir produto",
-                        confirmButtonText: "OK",
-                        confirmButtonColor: "#3085d6",
-                        allowOutsideClick: true
-                    });
-                }
-            } catch (err) {
-                console.error(err);
-                try { Swal.close(); } catch (e) { /* ignore */ }
-
-                await Swal.fire({
-                    icon: "error",
-                    title: "Erro de conexão",
-                    text: "Não foi possível conectar ao servidor.",
-                    confirmButtonText: "OK",
-                    confirmButtonColor: "#3085d6",
-                    allowOutsideClick: true
-                });
-            } finally {
-                // Remove qualquer modal residual
-                const leftover = document.querySelectorAll('.swal2-container');
-                if (leftover && leftover.length > 0) {
-                    leftover.forEach(el => el.remove());
-                }
-                document.body.style.overflow = ''; // Habilita scroll
-            }
-        });
+            divProduto.remove();
+          } else {
+            await Swal.fire({
+              icon: "error",
+              title: "Erro!",
+              text: result.error || "Erro ao excluir produto",
+              confirmButtonText: "OK",
+              confirmButtonColor: "#3085d6",
+              allowOutsideClick: true
+            });
+          }
+        } catch (err) {
+          console.error(err);
+          try { Swal.close(); } catch (e) {}
+          await Swal.fire({
+            icon: "error",
+            title: "Erro de conexão",
+            text: "Não foi possível conectar ao servidor.",
+            confirmButtonText: "OK",
+            confirmButtonColor: "#3085d6",
+            allowOutsideClick: true
+          });
+        } finally {
+          const leftover = document.querySelectorAll('.swal2-container');
+          if (leftover && leftover.length > 0) {
+            leftover.forEach(el => el.remove());
+          }
+          document.body.style.overflow = '';
+        }
+      });
     });
-
-
-</script>
-
+  </script>
 </body>
 
 </html>

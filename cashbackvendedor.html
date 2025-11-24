@@ -7,6 +7,8 @@
     <title>Gerenciar Cashback</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
     <link
         href="https://fonts.googleapis.com/css2?family=Poppins:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&display=swap"
         rel="stylesheet">
@@ -15,21 +17,47 @@
     <script src="https://cdn.jsdelivr.net/npm/chartjs-plugin-datalabels"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
+
+
+    <style>
+        #sideMenu { position: fixed; top: 0;
+         right: -250px;
+          width: 250px;
+           height: 100%;
+            background-color: #222;
+             color: #f0f0f0;
+              box-shadow: -3px 0 8px rgba(0, 0, 0, 0.6); transition: right .3s ease, opacity .3s ease; padding: 30px 25px; font-family: 'Poppins', sans-serif; z-index: 1000; opacity: 0; pointer-events: none; display: flex; flex-direction: column; } #sideMenu.active { right: 0; opacity: 1; pointer-events: auto; } #sideMenu .closeBtn { font-size: 28px; font-weight: 700; cursor: pointer; text-align: right; margin-bottom: 40px; color: #f0f0f0; user-select: none; transition: color .2s; } #sideMenu .closeBtn:hover { color: #ff4d4d; } #sideMenu ul { list-style: none; padding: 0; margin: 0; flex-grow: 1; display: flex; flex-direction: column; gap: 25px; } #sideMenu ul li { font-weight: 600; font-size: 20px; } #sideMenu ul li a { color: #f0f0f0; text-decoration: none; padding: 10px 15px; border-radius: 8px; display: block; } #sideMenu ul li a:hover { background: #444; color: #ff4d4d; }
+</style>
 </head>
 
 <body>
     <header>
-        <a href="home.html"><img src="assets/img/Ariel (1) 4.png" alt=""></a>
+        <a href="indexvendedor.html" ><img class="logo" src="assets/img/Ariel.png" alt="Logo"></a>
+        <form onsubmit="event.preventDefault(); listarProdutos();">
+            <input class="input-header" id="buscaInput" type="text" placeholder="Buscar na AutoPrime" />
+            <button class="header-btninput" type="submit" style="padding:8px; border:none; cursor:pointer;">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
+                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 
+                    1.415-1.414l-3.85-3.85zm-5.242.656a5 
+                    5 0 1 1 0-10 5 5 0 0 1 0 10z" />
+                </svg>
+            </button>
+        </form>
 
-        <div class="container">
-            <search class="pesquisa">
-                <input class="barra-pesquisar" type="text" placeholder="Pesquisar na AutoPrime">
-                <button class="botao-pesquisar"><i class="fa-solid fa-magnifying-glass"></i></button>
-            </search>
-
-            <i class="fa-solid fa-circle-user"></i>
-        </div>
+        <a class="avatarheader" href="#" id="avatarToggle"><img src="assets/img/login 3.png" alt="Avatar" /></a>
     </header>
+
+    <div id="menuOverlay" class="menu-overlay" style="position:fixed;inset:0;background:rgba(0,0,0,0.45);z-index:999;opacity:0;pointer-events:none;transition:opacity .18s;"></div>
+
+<!-- ========== MENU LATERAL ========== -->
+<nav id="sideMenu">
+    <div class="closeBtn" id="menuClose">&times;</div>
+    <ul>
+        <li><a href="#">Minha Conta</a></li>
+        <li><a href="#" id="logoutBtn">Logout</a></li>
+    </ul>
+</nav>
+
 
     <section class="banner">
         <img src="assets/img/PONTEIRAS DE 1.png" alt="">
@@ -258,7 +286,7 @@
 <script>
     async function carregarCashbacks() {
         try {
-            const response = await fetch("http://10.92.3.198:5000/cashbacks", {
+            const response = await fetch("http://10.92.3.194:5000/cashbacks", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 redirect: "follow"
@@ -307,7 +335,7 @@
             const ctx = document.getElementById('Coluna').getContext('2d');
 
             // Busca dados agrupados pelo backend
-            const responseMes = await fetch("http://10.92.3.198:5000/cashback_por_mes", {
+            const responseMes = await fetch("http://10.92.3.194:5000/cashback_por_mes", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 redirect: "follow"
@@ -377,6 +405,40 @@
     }
 
     window.onload = carregarCashbacks;
+
+
+document.addEventListener('DOMContentLoaded', function () {
+    // menu lateral
+    const avatarToggle = document.getElementById('avatarToggle');
+    const sideMenu = document.getElementById('sideMenu');
+    const menuClose = document.getElementById('menuClose');
+
+    avatarToggle?.addEventListener('click', (e) => { 
+        e.preventDefault(); 
+        sideMenu.classList.add('active'); 
+    });
+    menuClose?.addEventListener('click', () => sideMenu.classList.remove('active'));
+
+    // logout
+    const logoutBtn = document.getElementById('logoutBtn');
+    logoutBtn?.addEventListener('click', function (e) {
+        e.preventDefault();
+        localStorage.clear();
+        if (typeof Swal !== 'undefined') {
+            Swal.fire({
+                icon: 'success',
+                title: 'Logout realizado!',
+                text: 'Você será redirecionado para a página de login.',
+                confirmButtonText: 'Ok'
+            }).then(() => window.location.href = 'login.html');
+        } else {
+            alert('Logout realizado! Redirecionando...');
+            window.location.href = 'login.html';
+        }
+    });
+});
+
+
 </script>
 
 

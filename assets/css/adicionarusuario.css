@@ -629,7 +629,7 @@ label {
 
     .container-chefe {
         flex-direction: column;
-        gap: 0;
+        gap: 30px;
     }
 
     .input-form {
@@ -697,8 +697,8 @@ label {
     }
 
     .container-edicao {
-        margin-left: 35px;
-        margin-right: 35px;
+        margin-left: 0px;
+        margin-right: 0px;
     }
 
     .btn-enviar {
@@ -726,11 +726,6 @@ label {
 
     .input-form {
         width: 325px;
-    }
-
-    .container-edicao {
-        margin-left: 10px;
-        margin-right: 10px;
     }
 
     .btn-enviar {

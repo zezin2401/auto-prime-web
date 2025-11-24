@@ -13,6 +13,8 @@
         rel="stylesheet">
     <link rel="stylesheet" href="assets/css/home.css">
     <script src="assets/js/segurancaadm.js"></script>
+    <script src="assets/js/dashboard.js"></script>
+    <script src="assets/js/vendedoresPopulares.js"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 </head>
@@ -132,7 +134,7 @@
     <h1>Dashboard</h1>
 
     <section class="main">
-        
+
         <div class="cards-container">
 
             <div class="usuario">
@@ -239,7 +241,8 @@
 
                 </div>
 
-                <a href="cashback.html" class="botao-gerenciar"><i class="fa-solid fa-dollar-sign"></i>Gerenciar Cashback</a>
+                <a href="cashback.html" class="botao-gerenciar"><i class="fa-solid fa-dollar-sign"></i>Gerenciar
+                    Cashback</a>
 
             </div>
 
@@ -251,7 +254,7 @@
 
                 <h2>Vendedores mais populares</h2>
 
-                <div class="vendedor">
+                <div class="vendedores-populares">
 
                     <div class="icone">
                         <i class="fa-solid fa-user"></i>
@@ -320,8 +323,6 @@
 
                             <p class="preco">R$79,99</p>
 
-                            <a class="gerenciar" href="comprar.html">Ver detalhes</a>
-
                         </div>
 
                     </div>
@@ -339,8 +340,6 @@
 
                             <p class="preco">R$79,99</p>
 
-                            <a class="gerenciar" href="comprar.html">Ver detalhes</a>
-
                         </div>
 
                     </div>
@@ -357,8 +356,6 @@
                             </p>
 
                             <p class="preco">R$79,99</p>
-
-                            <a class="gerenciar" href="comprar.html">Ver detalhes</a>
 
                         </div>
 
@@ -381,6 +378,7 @@
     </nav>
     <!-- Menu lateral JS -->
     <script>
+
         // Seleciona elementos do menu lateral
         const avatarToggle = document.getElementById('avatarToggle');
         const sideMenu = document.getElementById('sideMenu');
@@ -418,7 +416,96 @@
                 window.location.href = 'login.html'; // Redireciona para login
             });
         });
+
+        const BASE = "http://10.92.3.194:5000"; // ajusta se mudar o backend
+
+        async function carregarProdutosMaisVendidos(topN = 3) {
+            try {
+                const res = await fetch(`${BASE}/produto/mais_vendido`, { headers: { Accept: 'application/json' } });
+                if (!res.ok) {
+
+                    let txt = await res.text().catch(() => null);
+                    throw new Error(`API error ${res.status} ${txt ? '- ' + txt : ''}`);
+                }
+                const data = await res.json();
+
+                let items = [];
+                if (data.produto) items = [data.produto];
+                else if (Array.isArray(data.produtos)) items = data.produtos;
+                else {
+                    Swal.fire('Aviso', 'Nenhum produto mais vendido foi retornado pela API.', 'info');
+                    return;
+                }
+
+                items = items.slice(0, topN);
+
+                const container = document.querySelector('.div-produtos');
+                if (!container) {
+                    console.error('[carregarProdutosMaisVendidos] .div-produtos não encontrado');
+                    return;
+                }
+                container.innerHTML = '';
+                items.forEach(p => {
+
+                    let imagemUrl = 'assets/img/placeholder-produto.png';
+                    if (p.imagem) {
+                        const img = String(p.imagem).trim();
+                        if (/^https?:\/\//i.test(img)) {
+                            imagemUrl = img;
+                        } else if (img.startsWith('produto/')) {
+
+                            imagemUrl = `${BASE}/static/imagens/${img}`;
+                        } else if (img.includes('/')) {
+                            // tenta literal
+                            imagemUrl = `${BASE}/${img}`;
+                        } else {
+
+                            imagemUrl = `${BASE}/uploads/${img}`;
+                        }
+                    }
+
+                    const nome = p.nome || p.NOME || 'Produto sem nome';
+                    const precoVal = (p.preco ?? p.PRECO ?? 0);
+                    const preco = (Number(precoVal) && !isNaN(Number(precoVal)))
+                        ? Number(precoVal).toLocaleString('pt-BR', { style: 'currency', currency: 'BRL' })
+                        : String(precoVal);
+
+                    const id = p.id || p.ID || '';
+
+                    const card = document.createElement('div');
+                    card.className = 'produto';
+                    card.innerHTML = `
+                    <div class="imagem-produto">
+        <img src="${escapeHtml(imagemUrl)}" alt="${escapeHtml(nome)}" style="width:100%;height:auto;object-fit:cover;">
+        </div>
+        <div class="detalhes-produto">
+            <div class="info-produto">
+            <p>${escapeHtml(nome)}</p>
+            <p class="preco">${preco}</p>
+            </div>
+        </div>
+      `;
+                    container.appendChild(card);
+                });
+
+            } catch (err) {
+                console.error('[carregarProdutosMaisVendidos]', err);
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Erro',
+                    text: err.message || 'Não foi possível carregar os produtos mais vendidos.'
+                });
+            }
+        }
+
+        function escapeHtml(str = '') {
+            return String(str).replace(/[&<>"'`]/g, s => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;', '`': '&#96;' }[s]));
+        }
+
+        // chama ao carregar a página pedindo top 3
+        document.addEventListener('DOMContentLoaded', () => carregarProdutosMaisVendidos(3));
     </script>
+
 </body>
 
 </html>

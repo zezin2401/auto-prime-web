@@ -184,7 +184,7 @@
         async function carregarVendas() {
             try {
                 // ---- VENDAS GERAIS ----
-                const response = await fetch("http://10.92.3.198:5000/vendas");
+                const response = await fetch("http://10.92.3.194:5000/vendas");
                 const vendas = await response.json();
 
                 const totalVendas = vendas.length;
@@ -226,7 +226,7 @@
                 });
 
                 // ---- MARCAS MAIS VENDIDAS (DOUGHNUT) ----
-                const marcasResponse = await fetch("http://10.92.3.198:5000/marcas_mais_vendidas");
+                const marcasResponse = await fetch("http://10.92.3.194:5000/marcas_mais_vendidas");
                 const dadosMarcas = await marcasResponse.json();
                 const marcas = dadosMarcas.marcas;
 
@@ -265,7 +265,7 @@
                 });
 
                 // ---- VENDAS POR MÊS (BARRAS) ----
-                const mesesResponse = await fetch("http://10.92.3.198:5000/vendas_por_mes");
+                const mesesResponse = await fetch("http://10.92.3.194:5000/vendas_por_mes");
                 const dadosMeses = await mesesResponse.json();
                 const vendasMeses = dadosMeses.vendas_por_mes || [];
 

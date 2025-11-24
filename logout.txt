@@ -1,0 +1,37 @@
+ // Seleciona elementos do menu lateral
+        const avatarToggle = document.getElementById('avatarToggle');
+        const sideMenu = document.getElementById('sideMenu');
+        const menuClose = document.getElementById('menuClose');
+
+        // Abre menu lateral ao clicar no avatar
+        avatarToggle.addEventListener('click', function (e) {
+            e.preventDefault();
+            sideMenu.classList.add('active');
+        });
+
+        // Fecha menu lateral ao clicar no X
+        menuClose.addEventListener('click', function () {
+            sideMenu.classList.remove('active');
+        });
+
+        const logoutBtn = document.getElementById('logoutBtn');
+
+        // Função de logout
+        logoutBtn.addEventListener('click', function (e) {
+            e.preventDefault(); // Evita navegação do link
+
+            localStorage.clear(); // Limpa localStorage
+
+            // Mostra alerta de sucesso do logout
+            Swal.fire({
+                icon: 'success',
+
+
+
+                title: 'Logout realizado!',
+                text: 'Você será redirecionado para a página de login.',
+                confirmButtonText: 'Ok'
+            }).then(() => {
+                window.location.href = 'login.html'; // Redireciona para login
+            });
+        });
