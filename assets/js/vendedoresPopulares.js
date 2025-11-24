@@ -19,7 +19,7 @@ async function carregarVendedoresPopulares() {
 
         container.innerHTML = "";
 
-        vendedores.slice(0, 5).forEach((v) => {
+        vendedores.slice(0, 4).forEach((v) => {
             const linha = document.createElement("div");
             linha.classList.add("vendedor-linha");
 

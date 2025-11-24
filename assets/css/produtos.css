@@ -116,6 +116,7 @@ h1 {
 
 .cards-container {
     background-color: var(--branco);
+    display: none;
     margin-right: 30px;
     margin-top: 30px;
     margin-left: 30px;
@@ -138,7 +139,7 @@ h1 {
 
 .numero-info {
     font-weight: bold;
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .icone {
@@ -522,6 +523,7 @@ h1 {
     }
 
     .informacoes {
+        flex-wrap: wrap;
         gap: 55px;
     }
 
@@ -559,7 +561,6 @@ h1 {
     }
 
     .cards-container {
-        display: flex;
         gap: 0px;
         align-items: center;
         flex-direction: column;
@@ -581,6 +582,7 @@ h1 {
 
     h1 {
         margin-left: 50px;
+        text-align: center;
     }
 
     .botoes {
@@ -613,111 +615,136 @@ h1 {
     .botao-gerenciar {
         padding: 15px 55px;
     }
-}
 
-@media (max-width: 376px) {
-    .barra-pesquisar {
-        width: 16rem;
+    .detalhes-card {
+        width: 95%;
     }
 
-    h1 {
-        margin-left: -10px;
-    }
-
-    .cards-container {
-        margin-left: 10px;
-        margin-right: 10px;
-    }
-}
-
-@media (max-width: 321px) {
-    .botao-pesquisar {
-        margin-left: -50px;
-        padding: 7px 10px;
-    }
-
-    .barra-pesquisar {
-        width: 15rem;
-    }
-
-    .container {
-        gap: 20px;
-    }
-
-    .usuario {
-        flex-direction: column;
-    }
-
-    .info {
-        display: flex;
-        flex-direction: column;
+    .ideiagenial {
         align-items: center;
     }
 
-    .botao-gerenciar {
-        padding: 15px 30px;
+    .total-produtos {
+        flex-direction: column;
+        margin-left: 0;
     }
 
-    .container-produtos {
-        padding: 10px;
+    .botao-add {
+        margin-right: 0;
     }
 
-    h1 {
-        font-size: 25px;
-        text-align: center;
+    @media (max-width: 376px) {
+        .barra-pesquisar {
+            width: 16rem;
+        }
+
+        h1 {
+            margin-left: -10px;
+        }
+
+        .cards-container {
+            margin-left: 10px;
+            margin-right: 10px;
+        }
     }
-}
 
-/* PAGINAÇÃO */
+    @media (max-width: 321px) {
+        .botao-pesquisar {
+            margin-left: -50px;
+            padding: 7px 10px;
+        }
 
-.pagination {
-    display: flex;
-    gap: 6px;
-    align-items: center;
-    justify-content: center;
-    margin: 18px 12px;
-    flex-wrap: wrap;
-}
+        .barra-pesquisar {
+            width: 15rem;
+        }
 
-.pagination button {
-    background: #fff;
-    border: 1px solid #d0d0d0;
-    padding: 6px 10px;
-    border-radius: 6px;
-    cursor: pointer;
-    font-weight: 600;
-}
+        .container {
+            gap: 20px;
+        }
 
-.pagination button:hover {
-    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
-}
+        .usuario {
+            flex-direction: column;
+        }
 
-.pagination button.active {
-    background: var(--azul-principal);
-    color: var(--branco);
-    border-color: var(--azul-principal);
-}
+        .info {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
 
-.pagination .info-pages {
-    margin-left: 8px;
-    font-size: 0.95rem;
-    color: var(--preto);
-}
+        .botao-gerenciar {
+            padding: 15px 30px;
+        }
 
-.pagination .page-size {
-    margin-left: 12px;
-}
+        .container-produtos {
+            padding: 10px;
+        }
 
-.pagination .page-size select {
-    padding: 6px;
-    border-radius: 6px;
-    border: 1px solid var(--preto-opaco);
-    background: var(--branco);
-}
+        h1 {
+            font-size: 25px;
+            text-align: center;
+        }
 
-.pagination .ellipsis {
-    pointer-events: none;
-    opacity: 0.6;
+        .incone {
+            margin: 0;
+        }
+
+        .incone i {
+            font-size: 50px;
+        }
+    }
+
+    /* PAGINAÇÃO */
+
+    .pagination {
+        display: flex;
+        gap: 6px;
+        align-items: center;
+        justify-content: center;
+        margin: 18px 12px;
+        flex-wrap: wrap;
+    }
+
+    .pagination button {
+        background: #fff;
+        border: 1px solid #d0d0d0;
+        padding: 6px 10px;
+        border-radius: 6px;
+        cursor: pointer;
+        font-weight: 600;
+    }
+
+    .pagination button:hover {
+        box-shadow: 0 2px 6px rgba(0, 0, 0, 0.06);
+    }
+
+    .pagination button.active {
+        background: var(--azul-principal);
+        color: var(--branco);
+        border-color: var(--azul-principal);
+    }
+
+    .pagination .info-pages {
+        margin-left: 8px;
+        font-size: 0.95rem;
+        color: var(--preto);
+    }
+
+    .pagination .page-size {
+        margin-left: 12px;
+    }
+
+    .pagination .page-size select {
+        padding: 6px;
+        border-radius: 6px;
+        border: 1px solid var(--preto-opaco);
+        background: var(--branco);
+    }
+
+    .pagination .ellipsis {
+        pointer-events: none;
+        opacity: 0.6;
+    }
 }
 
 @media (max-width: 520px) {

@@ -119,10 +119,12 @@ h1 {
 .cards-container {
     background-color: var(--branco);
     margin-right: 30px;
+    display: none;
     margin-top: 30px;
     margin-left: 30px;
     padding: 10px;
     border-radius: 10px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .usuario {
@@ -139,7 +141,7 @@ h1 {
 
 .numero-info {
     font-weight: bold;
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .icone {
@@ -215,6 +217,7 @@ h1 {
     border-radius: 10px;
     flex-direction: column;
     justify-content: space-between;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .incone i {
@@ -259,6 +262,7 @@ h1 {
     align-items: center;
     justify-content: center;
     text-decoration: none;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .botao-gerenciar i {
@@ -276,6 +280,7 @@ h1 {
     padding: 30px;
     border-radius: 10px;
     background-color: var(--branco);
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .foto {
@@ -578,6 +583,7 @@ label {
     }
 
     .informacoes {
+        flex-wrap: wrap;
         gap: 55px;
     }
 
@@ -610,7 +616,6 @@ label {
     }
 
     .cards-container {
-        display: flex;
         gap: 0px;
         align-items: center;
         flex-direction: column;
@@ -661,6 +666,7 @@ label {
 
     h1 {
         margin-left: 50px;
+        text-align: center;
     }
 
     .botoes {
@@ -703,6 +709,14 @@ label {
 
     .btn-enviar {
         width: 325px;
+    }
+
+    .detalhes-card {
+        width: 95%;
+    }
+
+    .ideiagenial {
+        align-items: center;
     }
 }
 
@@ -763,6 +777,7 @@ label {
 
     h1 {
         font-size: 25px;
+        margin: 0;
         text-align: center;
     }
 
@@ -776,5 +791,13 @@ label {
 
     .btn-enviar {
         width: 275px;
+    }
+
+    .incone {
+        margin: 0;
+    }
+
+    .incone i {
+        font-size: 50px;
     }
 }

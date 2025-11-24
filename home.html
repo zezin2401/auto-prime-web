@@ -15,6 +15,7 @@
     <script src="assets/js/segurancaadm.js"></script>
     <script src="assets/js/dashboard.js"></script>
     <script src="assets/js/vendedoresPopulares.js"></script>
+    
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
 </head>
@@ -256,49 +257,6 @@
 
                 <div class="vendedores-populares">
 
-                    <div class="icone">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="info">
-                        <p>usuario@gmail.com</p>
-                        <p class="criado-em">Vendas: <span class="negrito">500</span></p>
-                    </div>
-
-                </div>
-
-                <div class="vendedor">
-
-                    <div class="icone">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="info">
-                        <p>usuario@gmail.com</p>
-                        <p class="criado-em">Vendas: <span class="negrito">500</span></p>
-                    </div>
-
-                </div>
-
-                <div class="vendedor">
-
-                    <div class="icone">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="info">
-                        <p>usuario@gmail.com</p>
-                        <p class="criado-em">Vendas: <span class="negrito">500</span></p>
-                    </div>
-
-                </div>
-
-                <div class="vendedor">
-
-                    <div class="icone">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="info">
-                        <p>usuario@gmail.com</p>
-                        <p class="criado-em">Vendas: <span class="negrito">500</span></p>
-                    </div>
 
                 </div>
 
@@ -362,7 +320,6 @@
                     </div>
 
                 </div>
-
             </div>
 
         </div>
@@ -475,17 +432,18 @@
                     const card = document.createElement('div');
                     card.className = 'produto';
                     card.innerHTML = `
-                    <div class="imagem-produto">
-        <img src="${escapeHtml(imagemUrl)}" alt="${escapeHtml(nome)}" style="width:100%;height:auto;object-fit:cover;">
-        </div>
-        <div class="detalhes-produto">
-            <div class="info-produto">
-            <p>${escapeHtml(nome)}</p>
-            <p class="preco">${preco}</p>
-            </div>
-        </div>
-      `;
+                        <div class="imagem-produto">
+                            <img src="${escapeHtml(imagemUrl)}" alt="${escapeHtml(nome)}">
+                        </div>
+                        <div class="detalhes-produto">
+                            <div class="info-produto">
+                            <p>${escapeHtml(nome)}</p>
+                            <p class="preco">${preco}</p>
+                            </div>
+                        </div>
+                        `;
                     container.appendChild(card);
+
                 });
 
             } catch (err) {

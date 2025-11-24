@@ -115,6 +115,7 @@ h1 {
 
 .cards-container {
     background-color: var(--branco);
+    display: none;
     margin-right: 30px;
     margin-top: 30px;
     margin-left: 30px;
@@ -137,7 +138,7 @@ h1 {
 
 .numero-info {
     font-weight: bold;
-    font-size: 40px;
+    font-size: 30px;
 }
 
 .icone {
@@ -529,6 +530,7 @@ label {
     }
 
     .informacoes {
+        flex-wrap: wrap;
         gap: 55px;
     }
 
@@ -609,7 +611,6 @@ label {
     }
 
     .cards-container {
-        display: flex;
         gap: 0px;
         align-items: center;
         flex-direction: column;
@@ -651,6 +652,7 @@ label {
 
     h1 {
         margin-left: 50px;
+        text-align: center;
     }
 
     .botoes {
@@ -672,6 +674,18 @@ label {
     .cards-container {
         margin-left: 35px;
         margin-right: 35px;
+    }
+
+    .detalhes-card {
+        width: 95%;
+    }
+
+    .ideiagenial {
+        align-items: center;
+    }
+
+    .ideiagenial {
+        align-items: center;
     }
 
     .botao-gerenciar {
@@ -732,7 +746,7 @@ label {
     }
 
     h1 {
-        margin-left: 65px;
+        margin: 0;
     }
 
     .cards-container {
@@ -853,6 +867,14 @@ label {
 
     .btn-cancelar {
         width: 240px;
+    }
+
+    .incone {
+        margin: 0;
+    }
+
+    .incone i {
+        font-size: 50px;
     }
 
 }

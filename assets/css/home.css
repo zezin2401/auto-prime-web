@@ -24,101 +24,6 @@ body {
 
 /* CSS LOGOUT */
 
-@media (max-width: 322px) {
-
-    header {
-        display: flex !important;
-        align-items: center;
-        justify-content: space-between;
-        padding: 6px 8px;
-        height: 56px;
-        position: relative;
-        /* garante que seja o container dos filhos */
-        gap: 8px;
-    }
-
-    .logo {
-        position: relative !important;
-        left: 0 !important;
-        top: 0 !important;
-        width: 56px !important;
-        height: auto !important;
-        flex: 0 0 auto;
-    }
-
-    form {
-        position: relative !important;
-        display: flex !important;
-        align-items: center !important;
-        gap: 6px !important;
-        flex: 1 1 auto;
-        margin: 0 6px;
-        min-width: 0;
-    }
-
-    .input-header {
-        position: relative !important;
-        right: auto !important;
-        top: auto !important;
-        width: 100% !important;
-        max-width: none !important;
-        height: 32px !important;
-        padding-left: 10px !important;
-        font-size: 13px !important;
-        border-radius: 20px !important;
-        box-sizing: border-box;
-        flex: 1 1 auto;
-        overflow: hidden;
-        white-space: nowrap;
-        text-overflow: ellipsis;
-    }
-
-    .header-btninput {
-        position: relative !important;
-        right: auto !important;
-        top: auto !important;
-        width: 38px !important;
-        height: 32px !important;
-        border-radius: 20px !important;
-        flex: 0 0 auto;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-    }
-
-    .header-btninput svg {
-        width: 16px;
-        height: 16px;
-    }
-
-    .avatarheader {
-        position: relative !important;
-        right: 0 !important;
-        top: 0 !important;
-        width: 36px !important;
-        height: 36px !important;
-        flex: 0 0 auto;
-        display: block;
-        margin-left: 4px;
-    }
-
-    .avatarheader img {
-        width: 100% !important;
-        height: 100% !important;
-        border-radius: 50%;
-        object-fit: cover;
-        display: block;
-    }
-
-    .input-header::placeholder {
-        font-size: 12px;
-    }
-
-    header * {
-        z-index: 1;
-    }
-}
 
 
 
@@ -228,6 +133,7 @@ h1 {
 
 .cards-container {
     background-color: var(--branco);
+    display: none;
     margin-right: 30px;
     margin-top: 30px;
     margin-left: 30px;
@@ -407,12 +313,30 @@ h1 {
 }
 
 .vendedores-populares {
-    padding: 10px;
-    border: 2px solid var(--preto-opaco);
-    border-radius: 10px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.vendedor-linha {
     display: flex;
     align-items: center;
-    gap: 10px;
+    background: var(--branco);
+    border: 2px solid var(--preto-opaco);
+    padding: 10px;
+    border-radius: 8px;
+}
+
+/* Ícone */
+.vendedor-linha .icone {
+    font-size: 28px;
+    margin-right: 15px;
+}
+
+/* Nome + vendas alinhados */
+.separacao-nome-info {
+    display: flex;
+    flex-direction: column;
 }
 
 .total {
@@ -429,8 +353,47 @@ h1 {
 
 .div-produtos {
     display: flex;
-    justify-content: space-around;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    align-items: stretch;
 }
+
+.div-produtos .produto {
+    width: 32%;
+    display: flex;
+    flex-direction: column;
+    background: #fff;
+    border-radius: 8px;
+    overflow: hidden;
+    box-shadow: 0 6px 18px rgba(0, 0, 0, 0.08);
+}
+
+.div-produtos .produto .imagem-produto {
+    width: 100%;
+    height: 180px;
+    overflow: hidden;
+    display: block;
+    background: #f4f4f4;
+}
+
+.div-produtos .produto .imagem-produto img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    display: block;
+}
+
+.div-produtos .produto .detalhes-produto {
+    padding: 12px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.div-produtos .produto .info-produto p {
+    margin: 0;
+}
+
 
 /* HEADER AQUI */
 
@@ -441,11 +404,9 @@ header {
 }
 
 .logo {
-    width: 95px;
-    height: 95px;
+    width: 120px;
+    height: 120px;
     position: absolute;
-    left: 50px;
-    top: -5px
 }
 
 .input-header {
@@ -522,12 +483,14 @@ header {
 }
 
 @media (max-width: 1024px) {
+
     .banner img {
         width: 875px;
     }
 
     .informacoes {
         gap: 55px;
+        flex-wrap: wrap;
     }
 
     .botao-gerenciar {
@@ -536,6 +499,24 @@ header {
 
     .botoes {
         gap: 1px;
+    }
+
+    .info-vendas {
+        display: flex;
+        gap: 30px;
+        margin-bottom: 40px;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .vendedores {
+        margin: 0;
+        width: 95%;
+    }
+
+    .produtos {
+        margin: 0;
+        width: 95%;
     }
 }
 
@@ -550,7 +531,6 @@ header {
     }
 
     .botoes {
-        flex-wrap: wrap;
         gap: 60px;
     }
 
@@ -559,7 +539,6 @@ header {
     }
 
     .cards-container {
-        display: flex;
         gap: 0px;
         align-items: center;
         flex-direction: column;
@@ -572,9 +551,8 @@ header {
     }
 
     .div-produtos {
-        flex-direction: column;
         align-items: center;
-        gap: 20px;
+        gap: 10px;
     }
 
     .produtos {
@@ -587,9 +565,15 @@ header {
         width: 95%;
         margin: 0;
     }
+
+    .produto {
+        width: 80%;
+        height: auto;
+    }
 }
 
 @media (max-width: 426px) {
+
     .container {
         display: flex;
         gap: 35px;
@@ -604,6 +588,7 @@ header {
 
     h1 {
         margin-left: 50px;
+        text-align: center;
     }
 
     .botoes {
@@ -628,9 +613,124 @@ header {
     }
 
     .botao-gerenciar {
-        padding: 15px 55px;
+        padding: 15px 25px;
     }
+
+    .ideiagenial {
+        align-items: center;
+    }
+
+    .div-produtos {
+        flex-direction: column;
+    }
+
+    .div-produtos .produto {
+        width: 80%;
+    }
+
+    header {
+        display: flex !important;
+        align-items: center;
+        justify-content: space-between;
+        padding: 6px 8px;
+        height: 146px;
+        position: relative;
+        /* garante que seja o container dos filhos */
+        gap: 8px;
+    }
+
+    .logo {
+        position: relative !important;
+        left: 0 !important;
+        top: 0 !important;
+        width: 56px !important;
+        height: auto !important;
+        flex: 0 0 auto;
+    }
+
+    form {
+        position: relative !important;
+        display: flex !important;
+        align-items: center !important;
+        gap: 6px !important;
+        flex: 1 1 auto;
+        margin: 0 6px;
+        min-width: 0;
+    }
+
+    .input-header {
+        position: relative !important;
+        right: auto !important;
+        top: auto !important;
+        width: 100% !important;
+        max-width: none !important;
+        height: 32px !important;
+        padding-left: 10px !important;
+        font-size: 13px !important;
+        border-radius: 20px !important;
+        box-sizing: border-box;
+        flex: 1 1 auto;
+        overflow: hidden;
+        white-space: nowrap;
+        text-overflow: ellipsis;
+    }
+
+    .header-btninput {
+        position: relative !important;
+        right: auto !important;
+        top: auto !important;
+        width: 38px !important;
+        height: 32px !important;
+        border-radius: 20px !important;
+        flex: 0 0 auto;
+        padding: 0;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .header-btninput svg {
+        width: 16px;
+        height: 16px;
+    }
+
+    .avatarheader {
+        position: absolute !important;
+        right: 0 !important;
+        top: 0 !important;
+        width: 36px !important;
+        height: 36px !important;
+        flex: 0 0 auto;
+        display: block;
+        margin-left: 4px;
+
+    }
+
+    .detalhes-card {
+        width: 95%;
+    }
+
+    .avatarheader img {
+        width: 100% !important;
+        height: 100% !important;
+        border-radius: 50%;
+        object-fit: cover;
+        display: block;
+        position: absolute;
+        top: 10px;
+        right: 31px;
+    }
+
+    .input-header::placeholder {
+        font-size: 12px;
+    }
+
+    header * {
+        z-index: 1;
+    }
+
 }
+
 
 @media (max-width: 376px) {
     .barra-pesquisar {
@@ -639,6 +739,7 @@ header {
 
     h1 {
         margin-left: -10px;
+        text-align: center;
     }
 
     .cards-container {
@@ -647,35 +748,13 @@ header {
     }
 }
 
-@media (max-width: 321px) {
-    .botao-pesquisar {
-        margin-left: -50px;
-        padding: 7px 10px;
+@media (max-width: 322px) {
+
+    .incone {
+        margin: 0;
     }
 
-    .barra-pesquisar {
-        width: 15rem;
-    }
-
-    .container {
-        gap: 20px;
-    }
-
-    .usuario {
-        flex-direction: column;
-    }
-
-    .info {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-    }
-
-    .botao-gerenciar {
-        padding: 15px 30px;
-    }
-
-    h1 {
-        font-size: 25px;
+    .incone i {
+        font-size: 50px;
     }
 }
