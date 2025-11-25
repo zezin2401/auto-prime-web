@@ -68,7 +68,6 @@
                         </div>
                         <div class="dado-e-link">
                             <p class="numero-info">500</p>
-                            <a class="gerenciar" href="usuarios.html">Gerenciar</a>
                         </div>
                     </div>
                 </div>
@@ -91,7 +90,6 @@
                         </div>
                         <div class="dado-e-link">
                             <p class="numero-info">400.000</p>
-                            <a class="gerenciar" href="vendas.html">Gerenciar</a>
                         </div>
                     </div>
                 </div>
@@ -114,7 +112,6 @@
                         </div>
                         <div class="dado-e-link">
                             <p class="numero-info">50.000</p>
-                            <a class="gerenciar" href="produtos.html">Gerenciar</a>
                         </div>
                     </div>
 
@@ -138,7 +135,6 @@
                         </div>
                         <div class="dado-e-link">
                             <p class="numero-info">R$:600,00</p>
-                            <a class="gerenciar" href="cashback.html">Gerenciar</a>
                         </div>
                     </div>
 
@@ -186,7 +182,7 @@
         async function carregarVendas() {
             try {
                 // ---- VENDAS GERAIS ----
-                const response = await fetch("http://10.92.3.194:5000/vendas");
+                const response = await fetch("http://10.92.3.210:5000/vendas");
                 const vendas = await response.json();
 
                 const totalVendas = vendas.length;
@@ -228,7 +224,7 @@
                 });
 
                 // ---- MARCAS MAIS VENDIDAS (DOUGHNUT) ----
-                const marcasResponse = await fetch("http://10.92.3.194:5000/marcas_mais_vendidas");
+                const marcasResponse = await fetch("http://10.92.3.210:5000/marcas_mais_vendidas");
                 const dadosMarcas = await marcasResponse.json();
                 const marcas = dadosMarcas.marcas;
 
@@ -248,14 +244,15 @@
                                 '#00E9E9', '#E9008C', '#7800E9', '#00E913', '#0090E9', '#E100E9',
                                 '#E9A300', '#C2E900', '#00E994', '#2F00E9'
                             ],
-                            borderWidth: 1
                         }]
                     },
                     options: {
+                        borderWidth: 5,
+                        borderRadius: 10,
                         plugins: {
                             datalabels: {
                                 color: '#fff',
-                                font: { weight: 'bold', size: 15, family: "Poppins, sans-serif" },
+                                font: { weight: 'bold', size: 20, family: "Poppins, sans-serif" },
                                 formatter: (value, ctx) => {
                                     let total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
                                     return ((value / total) * 100).toFixed(0) + "%";
@@ -267,7 +264,7 @@
                 });
 
                 // ---- VENDAS POR MÊS (BARRAS) ----
-                const mesesResponse = await fetch("http://10.92.3.194:5000/vendas_por_mes");
+                const mesesResponse = await fetch("http://10.92.3.210:5000/vendas_por_mes");
                 const dadosMeses = await mesesResponse.json();
                 const vendasMeses = dadosMeses.vendas_por_mes || [];
 

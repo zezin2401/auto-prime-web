@@ -209,7 +209,7 @@ h1 {
     padding: 10px;
     width: 340px;
     display: flex;
-    height: 220px;
+    height: 150px;
     background-color: var(--branco);
     border-radius: 10px;
     flex-direction: column;

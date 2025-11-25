@@ -1,6 +1,6 @@
 async function carregarVendedoresPopulares() {
     try {
-        const response = await fetch("http://10.92.3.194:5000/vendedores/populares", {
+        const response = await fetch("http://10.92.3.210:5000/vendedores/populares", {
             method: "GET",
             headers: { "Content-Type": "application/json" }
         });

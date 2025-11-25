@@ -5,6 +5,15 @@
     transition: 0.3s;
 }
 
+:root {
+    --preto-opaco: rgba(0, 0, 0, 0.304);
+    --preto: #000000;
+    --branco: #FFFFFF;
+    --azul-principal: #008CFF;
+    --azul-claro: #E5F3FF;
+    --azul-escuro: #00447C; 
+}
+
 body {
     font-family: 'Poppins', sans-serif;
     font-weight: 400;
@@ -124,7 +133,7 @@ h1 {
 
 .total {
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     align-items: center;
     gap: 18px;
     margin-top: 10px;
@@ -138,6 +147,13 @@ h1 {
     padding: 36px;
     background: #fff;
     border-radius: 10px
+}
+
+.input-cadastro {
+    padding: 5px;
+    border-radius: 5px;
+    font-size: 16px;
+    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
 }
 
 .swal2-confirm {

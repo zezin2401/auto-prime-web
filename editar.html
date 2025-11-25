@@ -15,8 +15,6 @@
 
   <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
   <script src="assets/js/dashboard.js"></script>
-
-
 </head>
 
 <body>
@@ -40,7 +38,7 @@
   <h1>Editar Usuário</h1>
 
   <section class="main">
-    
+
     <div class="cards-container">
 
       <div class="usuario">
@@ -49,7 +47,7 @@
           <i class="fa-solid fa-user"></i>
         </div>
         <div class="info">
-          <p>usuario@gmail.com</p>
+          <p class="left-email">usuario@gmail.com</p>
           <h2 class="criado-em">Criado em: 22/09/2025</h2>
         </div>
 
@@ -72,7 +70,6 @@
             </div>
             <div class="dado-e-link">
               <p class="numero-info">500</p>
-              <a class="gerenciar" href="usuarios.html">Gerenciar</a>
             </div>
           </div>
         </div>
@@ -94,7 +91,6 @@
             </div>
             <div class="dado-e-link">
               <p class="numero-info">400.000</p>
-              <a class="gerenciar" href="vendas.html">Gerenciar</a>
             </div>
           </div>
         </div>
@@ -117,7 +113,6 @@
             </div>
             <div class="dado-e-link">
               <p class="numero-info">50.000</p>
-              <a class="gerenciar" href="produtos.html">Gerenciar</a>
             </div>
           </div>
 
@@ -141,7 +136,6 @@
             </div>
             <div class="dado-e-link">
               <p class="numero-info">R$:600,00</p>
-              <a class="gerenciar" href="cashback.html">Gerenciar</a>
             </div>
           </div>
 
@@ -153,7 +147,7 @@
       </div>
 
     </div>
-    
+
     <div class="container-edicao">
 
       <div class="container-formulario">
@@ -182,7 +176,8 @@
                 <div class="nome-e-dado">
                   <label class="label-coisa">Nome:</label>
                 </div>
-                <input class="input-form" name="nome" id="nome" type="text" required />
+                <!-- input com id correto -->
+                <input id="nome" class="input-form" name="nome" type="text" required />
               </div>
 
               <div class="container-chefe">
@@ -195,19 +190,16 @@
                   </div>
 
                   <div class="div-cargo">
-
-                    <div class="div-cargo">
-                      <div class="nome-e-dado">
-                        <label class="label-coisa">Cargo:</label>
-                      </div>
-                      <select class="input-form" id="cargo" name="cargo">
-                        <option value="cliente">Cliente</option>
-                        <option value="vendedor">Vendedor</option>
-                        <option value="adm">ADM</option>
-                      </select>
+                    <div class="nome-e-dado">
+                      <label class="label-coisa">Cargo:</label>
                     </div>
-
+                    <select id="cargo" class="input-form" name="cargo">
+                      <option value="cliente">Cliente</option>
+                      <option value="vendedor">Vendedor</option>
+                      <option value="adm">ADM</option>
+                    </select>
                   </div>
+
                 </div>
 
                 <div class="div-container-2">
@@ -216,14 +208,14 @@
                     <div class="nome-e-dado">
                       <label class="label-coisa">Email:</label>
                     </div>
-                    <input class="input-form" id="email" name="email" type="email" required>
+                    <input id="email" class="input-form" name="email" type="email" required>
                   </div>
 
                   <div class="div-status">
                     <div class="nome-e-dado">
                       <label class="label-coisa">Status:</label>
                     </div>
-                    <select class="input-form" name="selectstatus" id="status">
+                    <select id="status" class="input-form" name="selectstatus">
                       <option value="ativo">Ativo</option>
                       <option value="inativo">Inativo</option>
                     </select>
@@ -233,7 +225,13 @@
 
               </div>
 
-              <button type="submit" class="btn-enviar">Editar</button>
+              <div class="botoes">
+
+                <button type="submit" class="btn-enviar">Salvar alterações</button>
+
+                <a class="botao-voltar" href="usuarios.html">Voltar</a>
+
+              </div>
 
             </div>
 
@@ -243,17 +241,13 @@
 
             <h2 class="titulo-dados">Dados atuais do usuário:</h2>
 
-            <h4>Nome:<p id="nome-texto"></p>
-            </h4>
+            <h4>Nome: <span class="dados-nome"></span></h4>
 
-            <h4>Cargo:<p id="cargo-texto"></p>
-            </h4>
+            <h4>Cargo: <span class="dados-cargo"></span></h4>
 
-            <h4>Email:<p id="email-texto"></p>
-            </h4>
+            <h4>Email: <span class="dados-email"></span></h4>
 
-            <h4>Status:<p id="status-texto"></p>
-            </h4>
+            <h4>Status: <span class="dados-status"></span></h4>
 
           </div>
 
@@ -272,7 +266,7 @@
       }
 
       async function fetchUsuarioPorId(id) {
-        const base = "http://10.92.3.194:5000";
+        const base = "http://10.92.3.210:5000";
 
         try {
           const res1 = await fetch(`${base}/cadastro/${id}`);
@@ -281,7 +275,7 @@
             return j.cadastro || j.usuario || j || null;
           }
         } catch (e) {
-
+          console.warn("fetch /cadastro/:id falhou:", e);
         }
 
         try {
@@ -310,7 +304,6 @@
         const statusEl = document.querySelector('.usuario-foto .status');
 
         if (usuario.avatar) {
-
           fotoEl.innerHTML = `<img src="${usuario.avatar}" alt="${usuario.nome || 'avatar'}" class="avatar-img">`;
         } else {
           fotoEl.innerHTML = `<i class="fa-solid fa-user"></i>`;
@@ -349,6 +342,7 @@
           return;
         }
 
+        // valores do usuário (fallbacks)
         const nome = usuario.nome || usuario.name || "";
         const email = usuario.email || usuario.login || "";
         const cargoRaw = (usuario.cargo || "").toString().toLowerCase();
@@ -358,30 +352,47 @@
           String(ativoVal).toLowerCase() === "true" ||
           String(ativoVal).toLowerCase() === "ativo";
 
-        const cargoFormatado =
-          cargoRaw.includes("cliente") ? "Cliente" :
-            cargoRaw.includes("vend") ? "Vendedor" :
-              cargoRaw.includes("adm") || cargoRaw.includes("admin") ? "ADM" :
-                usuario.cargo || "Cliente";
+        // normaliza cargo para as opções do select
+        let cargoOption = "cliente";
+        if (cargoRaw.includes("vend")) cargoOption = "vendedor";
+        else if (cargoRaw.includes("adm") || cargoRaw.includes("admin")) cargoOption = "adm";
+        else if (usuario.cargo) {
+          // tenta casar valores já limpos
+          const low = usuario.cargo.toString().toLowerCase();
+          if (low === "cliente" || low === "vendedor" || low === "adm") cargoOption = low;
+        }
 
-        const statusFormatado = isAtivo ? "Ativo" : "Inativo";
+        const statusOption = isAtivo ? "ativo" : "inativo";
 
-        document.getElementById("nome").value = "";
-        document.getElementById("email").value = "";
-        document.getElementById("cargo").value = "";
-        document.getElementById("status").value = "";
+        // Preenche inputs (valores que form-editar usa)
+        const inNome = document.getElementById("nome");
+        const inEmail = document.getElementById("email");
+        const inCargo = document.getElementById("cargo");
+        const inStatus = document.getElementById("status");
 
-        document.getElementById("nome-texto").textContent = nome;
-        document.getElementById("email-texto").textContent = email;
-        document.getElementById("cargo-texto").textContent = cargoFormatado;
-        document.getElementById("status-texto").textContent = statusFormatado;
+        if (inNome) inNome.value = nome;
+        if (inEmail) inEmail.value = email;
+        if (inCargo) inCargo.value = cargoOption;
+        if (inStatus) inStatus.value = statusOption;
 
+        // Atualiza os campos visíveis (dados atuais)
+        const spanNome = document.querySelector(".dados-nome");
+        const spanCargo = document.querySelector(".dados-cargo");
+        const spanEmail = document.querySelector(".dados-email");
+        const spanStatus = document.querySelector(".dados-status");
+
+        if (spanNome) spanNome.textContent = nome || "-";
+        if (spanCargo) spanCargo.textContent = (cargoOption === "cliente" ? "Cliente" : cargoOption === "vendedor" ? "Vendedor" : "ADM");
+        if (spanEmail) spanEmail.textContent = email || "-";
+        if (spanStatus) spanStatus.textContent = (isAtivo ? "Ativo" : "Inativo");
+
+        // Atualiza o card lateral
         updateLeftCard(usuario);
 
+        // guarda id no form para o editarUsuario()
         const form = document.getElementById("form-editar");
         form.dataset.idCadastro = usuario.id_cadastro || usuario.id || usuario._id || id;
       }
-
 
       async function editarUsuario(event) {
         event.preventDefault();
@@ -416,7 +427,7 @@
         };
 
         try {
-          const res = await fetch("http://10.92.3.194:5000/edit_cadastro", {
+          const res = await fetch("http://10.92.3.210:5000/edit_cadastro", {
             method: "PUT",
             headers: { "Content-Type": "application/json" },
             body: JSON.stringify(payload),
@@ -440,6 +451,17 @@
           };
 
           updateLeftCard(usuarioAtualizado);
+
+          // Atualiza os spans visíveis
+          const spanNome = document.querySelector(".dados-nome");
+          const spanCargo = document.querySelector(".dados-cargo");
+          const spanEmail = document.querySelector(".dados-email");
+          const spanStatus = document.querySelector(".dados-status");
+
+          if (spanNome) spanNome.textContent = nome;
+          if (spanCargo) spanCargo.textContent = (cargo === "cliente" ? "Cliente" : cargo === "vendedor" ? "Vendedor" : "ADM");
+          if (spanEmail) spanEmail.textContent = email;
+          if (spanStatus) spanStatus.textContent = (ativo ? "Ativo" : "Inativo");
 
           alerta("Sucesso", data.mensagem || "Cadastro atualizado com sucesso!", "success");
 

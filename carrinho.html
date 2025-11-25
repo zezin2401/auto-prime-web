@@ -29,17 +29,22 @@
 
             <div class="total">
 
+                <div>
+                    <select class="input-cadastro" style="width: 200px;" name="id_cliente" id="id_cliente" required></select>
+                </div>
+
                 <div id="totalText">Total Geral: R$ 0,00</div>
                 <button id="limparBtn" class="btn remover">Limpar Carrinho</button>
             </div>
 
-            <button id="finalizarBtn" class="btn finalizar">Finalizar Compra</button>
+
+            <button id="finalizarBtn" class="btn finalizar">Finalizar Venda</button>
 
         </div>
     </main>
 
     <script>
-        const API_BASE = "http://10.92.3.194:5000";
+        const API_BASE = "http://10.92.3.210:5000";
         function getEmailCliente() {
             return localStorage.getItem('email') || localStorage.getItem('email_cliente') || 'cliente@gmail.com';
         }
@@ -65,6 +70,20 @@
                 totalText.textContent = '';
                 await Swal.fire('Erro', 'Não foi possível carregar o carrinho.', 'error');
             }
+
+            const emailSelect = document.getElementById('id_cliente');
+            const respEmails = await fetch(`${API_BASE}/usuarios`, { method: 'GET' });
+            const textoEmails = await respEmails.json();
+
+            emailSelect.innerHTML = '';
+            textoEmails.forEach(usuario => {
+                const option = document.createElement('option');
+                option.value = usuario.id;
+                option.textContent = usuario.nome + ' (' + usuario.email + ')';
+                emailSelect.appendChild(option);
+            });
+
+            emailSelect.value = email;
         }
 
         function renderCarrinho() {
@@ -174,13 +193,13 @@
 
         async function finalizarCompra() {
             if (!carrinhoData || !Array.isArray(carrinhoData.carrinho) || carrinhoData.carrinho.length === 0) {
-                await Swal.fire('Carrinho vazio', 'Adicione produtos antes de finalizar a compra.', 'info');
+                await Swal.fire('Carrinho vazio', 'Adicione produtos antes de finalizar a venda.', 'info');
                 return;
             }
 
             const confirmed = await Swal.fire({
-                title: 'Finalizar compra?',
-                text: 'Os itens serão comprados e removidos do carrinho. Deseja continuar?',
+                title: 'Finalizar venda?',
+                text: 'Os itens serão vendidos e removidos do carrinho. Deseja continuar?',
                 icon: 'question',
                 showCancelButton: true,
                 confirmButtonText: 'Sim, finalizar',
@@ -195,12 +214,13 @@
             const resultados = { sucesso: [], falha: [] };
 
             for (const item of carrinhoData.carrinho.slice()) {
-                
+
                 const idProduto = item.id_produto ?? item.id ?? item.id_item;
                 const quantidade = Number(item.quantidade ?? 1);
                 const valor_unitario = Number(item.valor_unitario ?? (item.valor_total ? item.valor_total / quantidade : 0));
 
                 const payload = {
+                    id_cliente: document.getElementById('id_cliente').value,
                     email_cliente: email,
                     id_produto: Number(idProduto),
                     quantidade: quantidade,
@@ -240,7 +260,7 @@
             }
 
             await Swal.fire({
-                title: 'Compra finalizada',
+                title: 'Venda finalizada',
                 text: mensagem,
                 icon: resultados.falha.length ? 'warning' : 'success',
                 confirmButtonText: 'Ok'

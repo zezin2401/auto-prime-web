@@ -329,6 +329,11 @@
         </div>
     </section>
 
+    <div class="div-btnproduto" style="margin-top: 80px; display: flex; gap: 10px; justify-content: center;">
+      <a href="cadastroproduto.html" class="btn-produto">Cadastrar Produto</a>
+      <a href="cashbackvendedor.html" class="btn-produto">Meu cashback</a>
+    </div>
+
     <section class="explorecatalogo-section">
         <h3 class="center txt-catalogo">Explore nosso catálogo</h3>
     </section>
@@ -403,7 +408,7 @@
                 headers.append("Accept", "application/json");
                 if (token) headers.append("Authorization", `Bearer ${token}`);
 
-                const urlBase = "http://10.92.3.194:5000/produtos";
+                const urlBase = "http://10.92.3.210:5000/produtos";
                 const url = busca ? `${urlBase}?q=${encodeURIComponent(busca)}` : urlBase;
 
                 try {
@@ -485,7 +490,7 @@
                     img.className = 'img-produto';
                     img.alt = produto.nome || 'Produto';
                     if (produto.imagem && String(produto.imagem).trim()) {
-                        img.src = `http://10.92.3.194:5000/static/imagens/${produto.imagem}`;
+                        img.src = `http://10.92.3.210:5000/static/imagens/${produto.imagem}`;
                     } else {
                         img.src = 'assets/img/ponta 5.png';
                     }
@@ -531,7 +536,7 @@
                         imagem: produto.imagem ?? ''
                     });
                     comprar.href = `comprar.html?${params.toString()}`;
-                    comprar.textContent = 'Comprar';
+                    comprar.textContent = 'Vender';
 
                     content.appendChild(nome);
                     content.appendChild(descricao);

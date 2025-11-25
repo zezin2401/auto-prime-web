@@ -213,7 +213,7 @@ h1 {
     padding: 10px;
     width: 340px;
     display: flex;
-    height: 220px;
+    height: 150px;
     background-color: var(--branco);
     border-radius: 10px;
     flex-direction: column;
@@ -239,13 +239,6 @@ h1 {
     color: var(--azul-principal);
     font-weight: bold;
     cursor: pointer;
-}
-
-.botoes {
-    display: flex;
-    margin-top: 23px;
-    margin-bottom: 23px;
-    justify-content: space-evenly;
 }
 
 .botao-gerenciar {
@@ -559,8 +552,14 @@ label {
     gap: 40px;
 }
 
+
+.botoes {
+    display: flex;
+    justify-content: space-between;
+}
+
 .btn-enviar {
-    width: 730px;
+    width: 350px;
     height: 55px;
     padding: 5px;
     color: var(--branco);
@@ -573,10 +572,32 @@ label {
     display: flex;
     align-items: center;
     justify-content: center;
+    text-decoration: none;
 }
 
 .btn-enviar:hover {
     background-color: var(--azul-escuro);
+}
+
+.botao-voltar {
+    width: 350px;
+    height: 55px;
+    padding: 5px;
+    color: var(--branco);
+    font-family: 'Poppins', sans-serif;
+    font-weight: bold;
+    font-size: 25px;
+    border: none;
+    border-radius: 5px;
+    background-color: #E90039;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+}
+
+.botao-voltar:hover {
+    background-color: #870626;
 }
 
 #nome-texto {
@@ -677,7 +698,7 @@ label {
     }
 
     h1 {
-        margin-left: 50px;
+        margin-left: 0;
     }
 
     .botoes {
@@ -721,10 +742,6 @@ label {
 @media (max-width: 376px) {
     .barra-pesquisar {
         width: 16rem;
-    }
-
-    h1 {
-        margin-left: -10px;
     }
 
     .cards-container {
@@ -792,7 +809,7 @@ label {
     }
 
     .botoes {
-        gap: 1px;
+        gap: 30px;
     }
 
     .maisumcontainer {
@@ -811,11 +828,6 @@ label {
         width: 615px;
     }
 
-    .botoes {
-        flex-wrap: wrap;
-        gap: 60px;
-    }
-
     .botao-gerenciar {
         font-size: 20px;
     }
@@ -828,7 +840,7 @@ label {
 
     .div-container {
         display: flex;
-        flex-wrap: wrap;
+        align-items: center;
         justify-content: center;
         margin-bottom: 10px;
     }
@@ -847,6 +859,10 @@ label {
     }
 
     .btn-enviar {
+        width: 550px;
+    }
+
+    .botao-voltar {
         width: 550px;
     }
 
@@ -875,7 +891,6 @@ label {
     }
 
     h1 {
-        margin-left: 50px;
         text-align: center;
     }
 
@@ -889,10 +904,6 @@ label {
 
     .barra-pesquisar {
         width: 20rem;
-    }
-
-    h1 {
-        text-align: center;
     }
 
     header {
@@ -925,6 +936,10 @@ label {
         width: 325px;
     }
 
+    .botao-voltar {
+        width: 325px;
+    }
+
     .maisumcontainer {
         align-items: center;
     }
@@ -940,7 +955,7 @@ label {
     }
 
     h1 {
-        margin: 0;
+        margin-top: 25px;
     }
 
     .cards-container {
@@ -962,6 +977,10 @@ label {
     }
 
     .btn-enviar {
+        width: 325px;
+    }
+
+    .botao-voltar {
         width: 325px;
     }
 
@@ -1012,6 +1031,11 @@ label {
     }
 
     .btn-enviar {
+        width: 230px;
+        font-size: 23px;
+    }
+
+    .botao-voltar {
         width: 230px;
     }
 

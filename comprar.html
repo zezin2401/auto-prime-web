@@ -250,7 +250,7 @@
                 if (produtoFromParams.imagem) {
                     // se imagem for só filename, monta URL do servidor, senão usa como veio
                     if (!/^https?:\/\//i.test(produtoFromParams.imagem)) {
-                        elImagem.src = `http://10.92.3.194:5000/static/imagens/${produtoFromParams.imagem}`;
+                        elImagem.src = `http://10.92.3.210:5000/static/imagens/${produtoFromParams.imagem}`;
                     } else {
                         elImagem.src = produtoFromParams.imagem;
                     }
@@ -264,7 +264,7 @@
             async function fetchProdutoPorId(id) {
                 if (!id) return;
                 try {
-                    const resp = await fetch(`http://10.92.3.194:5000/produtos/${encodeURIComponent(id)}`);
+                    const resp = await fetch(`http://10.92.3.210:5000/produtos/${encodeURIComponent(id)}`);
                     if (!resp.ok) throw new Error('Produto não encontrado');
                     const data = await resp.json();
                     // adapta conforme formato da sua API
@@ -280,7 +280,7 @@
                     }
                     if (elImagem && (p.imagem || p.image || p.foto)) {
                         const img = p.imagem || p.image || p.foto;
-                        elImagem.src = /^https?:\/\//i.test(img) ? img : `http://10.92.3.194:5000/static/imagens/${img}`;
+                        elImagem.src = /^https?:\/\//i.test(img) ? img : `http://10.92.3.210:5000/static/imagens/${img}`;
                     }
                     if (elVendedor && (p.vendedor || p.vendedor_nome || p.seller)) {
                         elVendedor.textContent = p.vendedor || p.vendedor_nome || p.seller;
@@ -318,7 +318,7 @@
                     };
 
                     try {
-                        const resp = await fetch("http://10.92.3.194:5000/carrinho/adicionar", {
+                        const resp = await fetch("http://10.92.3.210:5000/carrinho/adicionar", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
                             body: JSON.stringify(body),

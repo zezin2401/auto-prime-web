@@ -6,7 +6,7 @@ async function carregarVendas() {
             redirect: "follow"
         };
 
-        const response = await fetch("http://10.92.3.194:5000/vendas", requestOptions);
+        const response = await fetch("http://10.92.3.210:5000/vendas", requestOptions);
         const resultado = await response.text();
 
         console.log("Retorno da rota /vendas:");

@@ -71,7 +71,6 @@
                         </div>
                         <div class="dado-e-link">
                             <p class="numero-info">500</p>
-                            <a class="gerenciar" href="usuarios.html">Gerenciar</a>
                         </div>
                     </div>
                 </div>
@@ -93,7 +92,6 @@
                         </div>
                         <div class="dado-e-link">
                             <p class="numero-info">400.000</p>
-                            <a class="gerenciar" href="vendas.html">Gerenciar</a>
                         </div>
                     </div>
                 </div>
@@ -116,7 +114,6 @@
                         </div>
                         <div class="dado-e-link">
                             <p class="numero-info">50.000</p>
-                            <a class="gerenciar" href="produtos.html">Gerenciar</a>
                         </div>
                     </div>
 
@@ -140,7 +137,6 @@
                         </div>
                         <div class="dado-e-link">
                             <p class="numero-info">R$:600,00</p>
-                            <a class="gerenciar" href="cashback.html">Gerenciar</a>
                         </div>
                     </div>
 
@@ -351,7 +347,7 @@
 
         if (params.get('imagem')) {
             const serverImageName = params.get('imagem');
-            renderPreview(`http://10.92.3.194:5000/static/imagens/${encodeURIComponent(serverImageName)}`);
+            renderPreview(`http://10.92.3.210:5000/static/imagens/${encodeURIComponent(serverImageName)}`);
         }
 
         // Clique no texto “aqui para procurar” ou na área de preview
@@ -419,7 +415,7 @@
             }
 
             try {
-                const res = await fetch(`http://10.92.3.194:5000/produto/edit/${id}`, {
+                const res = await fetch(`http://10.92.3.210:5000/produto/edit/${id}`, {
                     method: "PUT",
                     body: formData,
                     headers: { "Authorization": "Bearer " + token }

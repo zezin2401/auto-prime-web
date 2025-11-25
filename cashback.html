@@ -71,7 +71,6 @@
                         </div>
                         <div class="dado-e-link">
                             <p class="numero-info">500</p>
-                            <a class="gerenciar" href="usuarios.html">Gerenciar</a>
                         </div>
                     </div>
                 </div>
@@ -94,7 +93,6 @@
                         </div>
                         <div class="dado-e-link">
                             <p class="numero-info">400.000</p>
-                            <a class="gerenciar" href="vendas.html">Gerenciar</a>
                         </div>
                     </div>
                 </div>
@@ -117,7 +115,6 @@
                         </div>
                         <div class="dado-e-link">
                             <p class="numero-info">50.000</p>
-                            <a class="gerenciar" href="produtos.html">Gerenciar</a>
                         </div>
                     </div>
 
@@ -141,7 +138,6 @@
                         </div>
                         <div class="dado-e-link">
                             <p class="numero-info">R$:600,00</p>
-                            <a class="gerenciar" href="cashback.html">Gerenciar</a>
                         </div>
                     </div>
 
@@ -294,37 +290,31 @@
 <script>
     async function carregarCashbacks() {
         try {
-            // 1️⃣ Busca todos os cashbacks detalhados
-            const response = await fetch("http://10.92.3.194:5000/cashbacks", {
+            const response = await fetch("http://10.92.3.210:5000/cashbacks", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 redirect: "follow"
             });
             const cashbacks = await response.json();
 
-            // 2️⃣ Atualiza o total acumulado
             const totalCashback = cashbacks.reduce((acc, c) => acc + Number(c.valor_cashback), 0);
             document.querySelector(".div-azul .capital").textContent = `R$ ${totalCashback.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-            // 3️⃣ Limpa a lista de vendedores
             const container = document.querySelector(".vendedores");
             const linhasExistentes = container.querySelectorAll(".vendedor-linha");
             linhasExistentes.forEach(v => v.remove());
 
-            // 4️⃣ Agrupa cashback por nome do cliente
             const cashbackPorCliente = {};
             cashbacks.forEach(c => {
-                const nome = c.nome_cliente || c.id_cliente; // usa o nome se existir, senão id
+                const nome = c.nome_cliente || c.id_cliente;
                 if (!cashbackPorCliente[nome]) cashbackPorCliente[nome] = 0;
                 cashbackPorCliente[nome] += Number(c.valor_cashback);
             });
 
-            // 5️⃣ Pega os 5 maiores
             const maiores = Object.entries(cashbackPorCliente)
                 .sort((a, b) => b[1] - a[1])
                 .slice(0, 5);
 
-            // 6️⃣ Cria as linhas de vendedores
             maiores.forEach(([cliente, total]) => {
                 const linha = document.createElement("div");
                 linha.classList.add("vendedor-linha");
@@ -346,9 +336,8 @@
                 container.appendChild(linha);
             });
 
-            // 7️⃣ Gráfico de cashback mensal
             const ctx = document.getElementById('Coluna').getContext('2d');
-            const responseMes = await fetch("http://10.92.3.194:5000/cashback_por_mes", {
+            const responseMes = await fetch("http://10.92.3.210:5000/cashback_por_mes", {
                 method: "GET",
                 headers: { "Content-Type": "application/json" },
                 redirect: "follow"
@@ -378,7 +367,6 @@
                 }
             });
 
-            // 8️⃣ Gráfico de pizza dos top 5 clientes
             const ptx = document.getElementById('Pizza').getContext('2d');
             new Chart(ptx, {
                 type: 'doughnut',
@@ -391,6 +379,8 @@
                     }]
                 },
                 options: {
+                    borderWidth: 5,
+                    borderRadius: 10,
                     plugins: {
                         datalabels: {
                             color: '#fff',
