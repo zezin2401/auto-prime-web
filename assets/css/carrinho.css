@@ -150,11 +150,19 @@ h1 {
 }
 
 .input-cadastro {
-    padding: 5px;
-    border-radius: 5px;
+    padding: 8px 12px;          /* Mais confortável para clicar */
+    border-radius: 8px;         /* Cantos arredondados suaves */
     font-size: 16px;
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    border: 1px solid #ccc;     /* Borda neutra */
+    box-shadow: 0 3px 6px rgba(0, 0, 0, 0.1); /* Sombra mais leve */
+    transition: all 0.3s ease;  /* Transição suave */
+    background-color: #fff;     /* Fundo branco */
+    color: #333;
+    margin-right: 110px;
+    font-family: Poppins;
+
 }
+
 
 .swal2-confirm {
     background-color: #008CFF;

@@ -71,10 +71,11 @@ body {
 
 .barra-pesquisar {
     display: flex;
+    font-family: 'Poppins', sans-serif;
     height: 2.5rem;
     padding: 15px;
     width: 22rem;
-    border-radius: 25px;
+    border-radius: 10px;
     border: none;
     align-items: center;
     gap: 10px;
