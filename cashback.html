@@ -36,10 +36,10 @@
         <img src="assets/img/PONTEIRAS DE 1.png" alt="">
     </section>
 
-    <h1>Gerenciar seu cashback</h1>
+    <h1>Gerenciar cashback</h1>
 
     <section class="main">
-        
+
         <div class="cards-container">
 
             <div class="usuario">
@@ -143,7 +143,8 @@
 
                 </div>
 
-                <a href="cashback.html" class="botao-gerenciar"><i class="fa-solid fa-dollar-sign"></i>Gerenciar Cashback</a>
+                <a href="cashback.html" class="botao-gerenciar"><i class="fa-solid fa-dollar-sign"></i>Gerenciar
+                    Cashback</a>
 
             </div>
 
@@ -172,7 +173,7 @@
 
         <div class="vendedores">
 
-            <h3 style="font-size: 25px;">Clientes com maior cashback gerado</h3>
+            <h3 style="font-size: 25px;">Vendedores com maior cashback gerado</h3>
 
             <div class="vendedor-linha">
 
@@ -288,120 +289,199 @@
 </body>
 
 <script>
-    async function carregarCashbacks() {
-        try {
-            const response = await fetch("http://10.92.3.210:5000/cashbacks", {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-                redirect: "follow"
-            });
-            const cashbacks = await response.json();
+    (async () => {
+        const API_BASE = "http://10.92.3.165:5000";
 
-            const totalCashback = cashbacks.reduce((acc, c) => acc + Number(c.valor_cashback), 0);
-            document.querySelector(".div-azul .capital").textContent = `R$ ${totalCashback.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+        // referencias aos charts para destruir se já existirem
+        let colunaChart = null;
+        let pizzaChart = null;
 
-            const container = document.querySelector(".vendedores");
-            const linhasExistentes = container.querySelectorAll(".vendedor-linha");
-            linhasExistentes.forEach(v => v.remove());
-
-            const cashbackPorCliente = {};
-            cashbacks.forEach(c => {
-                const nome = c.nome_cliente || c.id_cliente;
-                if (!cashbackPorCliente[nome]) cashbackPorCliente[nome] = 0;
-                cashbackPorCliente[nome] += Number(c.valor_cashback);
-            });
-
-            const maiores = Object.entries(cashbackPorCliente)
-                .sort((a, b) => b[1] - a[1])
-                .slice(0, 5);
-
-            maiores.forEach(([cliente, total]) => {
-                const linha = document.createElement("div");
-                linha.classList.add("vendedor-linha");
-                linha.innerHTML = `
-                <div class="vendedor-detalhes">
-                    <div class="icone">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="separacao-nome-info">
-                        <div class="nome">
-                            <p>${cliente}</p>
-                        </div>
-                        <div class="info-vendedor">
-                            <p class="total"><span class="negrito">Total: </span>R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
-                        </div>
-                    </div>
-                </div>
-            `;
-                container.appendChild(linha);
-            });
-
-            const ctx = document.getElementById('Coluna').getContext('2d');
-            const responseMes = await fetch("http://10.92.3.210:5000/cashback_por_mes", {
-                method: "GET",
-                headers: { "Content-Type": "application/json" },
-                redirect: "follow"
-            });
-            const dadosMes = await responseMes.json();
-            const cashbacksPorMesBackend = dadosMes.cashback_por_mes;
-
-            const cashbacksPorMes = new Array(12).fill(0);
-            cashbacksPorMesBackend.forEach(c => {
-                const mesIndex = c.mes - 1;
-                cashbacksPorMes[mesIndex] = c.total_cashback;
-            });
-
-            window.colunaChart = new Chart(ctx, {
-                type: 'bar',
-                data: {
-                    labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
-                    datasets: [{
-                        label: 'Cashback acumulado',
-                        data: cashbacksPorMes,
-                        borderWidth: 1,
-                        backgroundColor: '#008CFF'
-                    }]
-                },
-                options: {
-                    scales: { y: { beginAtZero: true } }
-                }
-            });
-
-            const ptx = document.getElementById('Pizza').getContext('2d');
-            new Chart(ptx, {
-                type: 'doughnut',
-                data: {
-                    labels: maiores.map(m => m[0]),
-                    datasets: [{
-                        label: 'Top clientes',
-                        data: maiores.map(m => m[1]),
-                        backgroundColor: ['#0073E6', '#1AAC5F', '#7D3AC1', '#F2C200', '#E90039'],
-                    }]
-                },
-                options: {
-                    borderWidth: 5,
-                    borderRadius: 10,
-                    plugins: {
-                        datalabels: {
-                            color: '#fff',
-                            font: { weight: 'bold', size: 20, family: "Poppins, sans-serif" },
-                            formatter: (value, ctx) => {
-                                let total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0);
-                                return ((value / total) * 100).toFixed(0) + "%";
-                            }
-                        }
-                    }
-                },
-                plugins: [ChartDataLabels]
-            });
-
-        } catch (error) {
-            console.error("Erro ao carregar cashbacks:", error);
+        function safeNumber(v) {
+            const n = Number(v);
+            return isNaN(n) ? 0 : n;
         }
-    }
 
-    window.onload = carregarCashbacks;
+        async function fetchJson(url, opts = {}) {
+            try {
+                const res = await fetch(url, { ...opts });
+                const text = await res.text();
+                try {
+                    return JSON.parse(text);
+                } catch (e) {
+                    // se não for JSON, retorna texto para debug
+                    console.warn("[fetchJson] resposta não-JSON de", url, text);
+                    return text;
+                }
+            } catch (err) {
+                console.error("[fetchJson] erro ao chamar", url, err);
+                throw err;
+            }
+        }
+
+        async function carregarUsuariosMap() {
+            // tenta buscar /usuarios pra mapear nomes (opcional)
+            try {
+                const data = await fetchJson(`${API_BASE}/usuarios`);
+                // espera um array
+                if (Array.isArray(data)) {
+                    const map = {};
+                    data.forEach(u => {
+                        const id = u.id ?? u.id_cadastro ?? u.ID;
+                        const nome = u.nome ?? u.NOME ?? u.nome_cadastro ?? (u.email ? u.email : `${id}`);
+                        if (id !== undefined && id !== null) map[id] = nome;
+                    });
+                    return map;
+                }
+            } catch (e) {
+                console.warn("não foi possível carregar /usuarios:", e);
+            }
+            return {};
+        }
+
+        function destroyChartInstance(instance) {
+            try {
+                if (instance && typeof instance.destroy === 'function') instance.destroy();
+            } catch (e) {
+                console.warn("Erro ao destruir chart:", e);
+            }
+        }
+
+        async function carregarCashbacks() {
+            try {
+                const usersMap = await carregarUsuariosMap();
+
+                const cashbacks = await fetchJson(`${API_BASE}/cashbacks`);
+                if (!Array.isArray(cashbacks)) {
+                    console.error("Resposta de /cashbacks não é array:", cashbacks);
+                    return;
+                }
+
+                const totalCashback = cashbacks.reduce((acc, c) => acc + safeNumber(c.valor_cashback), 0);
+                const capitalEl = document.querySelector(".div-azul .capital");
+                if (capitalEl) capitalEl.textContent = `R$ ${totalCashback.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
+
+                const cashbackPorCliente = {};
+                cashbacks.forEach(c => {
+                    const rawNome = c.nome_cliente ?? c.nome_vendedor ?? c.nome ?? null;
+                    let chave;
+                    if (rawNome) chave = rawNome;
+                    else {
+                        const id = c.id_vendedor ?? c.id_cliente ?? c.id ?? c.ID;
+                        chave = (id !== undefined && usersMap[id]) ? usersMap[id] : (id ?? 'Desconhecido');
+                    }
+
+                    if (!cashbackPorCliente[chave]) cashbackPorCliente[chave] = 0;
+                    cashbackPorCliente[chave] += safeNumber(c.valor_cashback);
+                });
+
+                const maiores = Object.entries(cashbackPorCliente)
+                    .sort((a, b) => b[1] - a[1])
+                    .slice(0, 5);
+
+                const container = document.querySelector(".vendedores");
+                if (!container) {
+                    console.error("Elemento .vendedores não encontrado no DOM.");
+                } else {
+                    const existentes = container.querySelectorAll(".vendedor-linha");
+                    existentes.forEach(n => n.remove());
+
+                    maiores.forEach(([cliente, total]) => {
+                        const linha = document.createElement("div");
+                        linha.classList.add("vendedor-linha");
+                        linha.innerHTML = `
+                        <div class="vendedor-detalhes">
+                            <div class="icone"><i class="fa-solid fa-user"></i></div>
+                            <div class="separacao-nome-info">
+                                <div class="nome"><p>${String(cliente)}</p></div>
+                                <div class="info-vendedor">
+                                    <p class="total"><span class="negrito">Total: </span>R$ ${Number(total).toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}</p>
+                                </div>
+                            </div>
+                        </div>
+                    `;
+                        container.appendChild(linha);
+                    });
+                }
+
+                const ctx = document.getElementById('Coluna');
+                if (!ctx) {
+                    console.warn("Canvas #Coluna não encontrado.");
+                } else {
+                    const dadosMes = await fetchJson(`${API_BASE}/cashback_por_mes`);
+                    const cashbacksPorMesBackend = (dadosMes && Array.isArray(dadosMes.cashback_por_mes)) ? dadosMes.cashback_por_mes : [];
+
+                    const cashbacksPorMes = new Array(12).fill(0);
+                    cashbacksPorMesBackend.forEach(c => {
+                        const mesIndex = (Number(c.mes) || 1) - 1;
+                        if (mesIndex >= 0 && mesIndex < 12) cashbacksPorMes[mesIndex] = safeNumber(c.total_cashback);
+                    });
+
+                    destroyChartInstance(window._colunaChartInstance);
+                    window._colunaChartInstance = new Chart(ctx.getContext ? ctx.getContext('2d') : ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Janeiro', 'Fevereiro', 'Março', 'Abril', 'Maio', 'Junho', 'Julho', 'Agosto', 'Setembro', 'Outubro', 'Novembro', 'Dezembro'],
+                            datasets: [{ 
+                                label: 'Cashback acumulado', 
+                                data: cashbacksPorMes, borderWidth: 1, 
+                                backgroundColor: '#008CFF' }]
+                        },
+                        options: {
+                            borderWidth: 5,
+                            borderRadius: 10,
+                            scales: { y: { beginAtZero: true } }
+                        }
+                    });
+                }
+
+                const ptx = document.getElementById('Pizza');
+                if (!ptx) {
+                    console.warn("Canvas #Pizza não encontrado.");
+                } else {
+                    destroyChartInstance(window._pizzaChartInstance);
+                    const labels = maiores.map(m => m[0]);
+                    const dataValues = maiores.map(m => m[1]);
+
+                    window._pizzaChartInstance = new Chart(ptx.getContext('2d'), {
+                        type: 'doughnut',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Top clientes',
+                                data: dataValues,
+                                backgroundColor: ['#0073E6', '#1AAC5F', '#7D3AC1', '#F2C200', '#E90039']
+                            }]
+                        },
+                        options: {
+                            borderWidth: 5,
+                            borderRadius: 10,
+                            plugins: {
+                                datalabels: {
+                                    color: '#fff',
+                                    font: { weight: 'bold', size: 14, family: "Poppins, sans-serif" },
+                                    formatter: (value, ctx) => {
+                                        const total = ctx.chart.data.datasets[0].data.reduce((a, b) => a + b, 0) || 1;
+                                        return ((value / total) * 100).toFixed(0) + "%";
+                                    }
+                                }
+                            }
+                        },
+                        plugins: (typeof ChartDataLabels !== 'undefined') ? [ChartDataLabels] : []
+                    });
+                }
+
+            } catch (error) {
+                console.error("Erro ao carregar cashbacks (geral):", error);
+            }
+        }
+
+        if (document.readyState === 'loading') {
+            window.addEventListener('load', carregarCashbacks);
+        } else {
+            carregarCashbacks();
+        }
+
+    })();
 </script>
-
 
 </html>

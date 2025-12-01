@@ -139,10 +139,14 @@ body {
     justify-content: center;
 }
 
+.banner img {
+    width: 1460px;
+}
+
 h1 {
     margin-top: 55px;
     margin-bottom: 10px;
-    margin-left: 75px;
+    margin-left: 30px;
 }
 
 .cards-container {
@@ -160,12 +164,6 @@ h1 {
     display: flex;
     align-items: center;
     gap: 10px;
-}
-
-.total{
-    color: var(--preto-opaco);
-    font-weight: normal;
-    font-size: 18px;
 }
 
 .numero-info {
@@ -265,8 +263,8 @@ h1 {
 }
 
 .div-azul {
-    margin-left: 75px;
-    margin-right: 75px;
+    margin-left: 30px;
+    margin-right: 30px;
     border-radius: 10px;
     height: 194px;
     padding: 25px;
@@ -274,88 +272,47 @@ h1 {
     align-items: flex-end;
     justify-content: space-between;
     background-color: var(--azul-claro);
-    border: 2px solid var(--azul-principal);
     box-shadow: 0 10px 20px rgb(123, 168, 204);
 
 }
 
-.graficos-container {
-    display: flex;
-    gap: 50px;
-    margin-bottom: 40px;
-}
-
-.grafico-pizza {
-    margin-top: 40px;
-    margin-left: 75px;
-    border-radius: 10px;
-    display: flex;
-    padding: 10px;
-    width: 662px;
-    height: 485px;
-    flex-direction: column;
-    align-items: center;
-    border: 2px solid var(--preto-opaco);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-}
-
-.titulo-pizza {
-    margin-top: 10px;
-    margin-left: 10px;
-    font-size: 25px;
-}
-
-.titulo-coluna {
-    margin-top: 10px;
-    margin-left: 10px;
-    font-size: 25px;
-}
-
-.grafico-coluna {
-    margin-top: 40px;
-    margin-right: 75px;
-    border: 2px solid var(--preto-opaco);
-    box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
-    border-radius: 10px;
-    width: 662px;
-    height: 485px;
-    padding: 10px;
-}
-
-#Pizza {
-    width: 410px !important;
-    height: auto !important;
-}
-
-#Coluna {
-    height: 410px !important;
+.titulo-historico {
+    font-size: 30px;
 }
 
 .vendedores {
     display: flex;
     flex-direction: column;
-    margin-right: 75px;
-    margin-left: 75px;
+    margin-right: 30px;
+    margin-left: 30px;
+    margin-top: 30px;
     margin-bottom: 40px;
     gap: 12px;
-    padding: 30px;
-    border: 2px solid var(--preto-opaco);
+    padding: 20px;
     box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
     border-radius: 10px;
 }
 
-.vendedor-detalhes {
+.tutorial {
+    font-size: 20px;
+    border-radius: 10px;
     padding: 10px;
     border: 2px solid var(--preto-opaco);
-    border-radius: 10px;
-    display: flex;
-    align-items: center;
-    gap: 10px;
 }
 
-.info-vendedor {
+.venda-linha {
+    font-size: 20px;
+    justify-content: space-between;
     display: flex;
-    gap: 865px;
+    padding: 10px;
+    border-bottom: 2px solid var(--preto-opaco);
+    border-top: 2px solid var(--preto-opaco);
+}
+
+td {
+    padding: 5px;
+    text-align: center;
+    border-top: 2px solid var(--preto-opaco);
 }
 
 @media (max-width: 1440px) {

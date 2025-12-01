@@ -181,8 +181,7 @@
     <script>
         async function carregarVendas() {
             try {
-                // ---- VENDAS GERAIS ----
-                const response = await fetch("http://10.92.3.210:5000/vendas");
+                const response = await fetch("http://10.92.3.165:5000/vendas");
                 const vendas = await response.json();
 
                 const totalVendas = vendas.length;
@@ -192,7 +191,6 @@
                 document.querySelector(".div-azul .capital").textContent =
                     `R$ ${valorTotal.toLocaleString('pt-BR', { minimumFractionDigits: 2, maximumFractionDigits: 2 })}`;
 
-                // ---- MAIORES COMPRADORES ----
                 const container = document.querySelector(".vendedores");
                 container.innerHTML = `<h3 class="maiores-compradores">Maiores compradores</h3>`;
                 const vendasPorCliente = {};
@@ -210,21 +208,20 @@
                     const linha = document.createElement("div");
                     linha.classList.add("vendedor-linha");
                     linha.innerHTML = `
-            <div class="vendedor-detalhes">
-              <div class="icone"><i class="fa-solid fa-user"></i></div>
-              <div class="separacao-nome-info">
-                <div class="nome"><p>${email}</p></div>
-                <div class="info-vendedor">
-                  <p class="criado-em"><span class="negrito">Total: </span>R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
-                </div>
-              </div>
-            </div>
-          `;
+                        <div class="vendedor-detalhes">
+                        <div class="icone"><i class="fa-solid fa-user"></i></div>
+                        <div class="separacao-nome-info">
+                            <div class="nome"><p>${email}</p></div>
+                            <div class="info-vendedor">
+                            <p class="criado-em"><span class="negrito">Total: </span>R$ ${total.toLocaleString('pt-BR', { minimumFractionDigits: 2 })}</p>
+                            </div>
+                        </div>
+                        </div>
+                    `;
                     container.appendChild(linha);
                 });
 
-                // ---- MARCAS MAIS VENDIDAS (DOUGHNUT) ----
-                const marcasResponse = await fetch("http://10.92.3.210:5000/marcas_mais_vendidas");
+                const marcasResponse = await fetch("http://10.92.3.165:5000/marcas_mais_vendidas");
                 const dadosMarcas = await marcasResponse.json();
                 const marcas = dadosMarcas.marcas;
 
@@ -263,8 +260,7 @@
                     plugins: [ChartDataLabels]
                 });
 
-                // ---- VENDAS POR MÊS (BARRAS) ----
-                const mesesResponse = await fetch("http://10.92.3.210:5000/vendas_por_mes");
+                const mesesResponse = await fetch("http://10.92.3.165:5000/vendas_por_mes");
                 const dadosMeses = await mesesResponse.json();
                 const vendasMeses = dadosMeses.vendas_por_mes || [];
 
@@ -284,6 +280,8 @@
                         }]
                     },
                     options: {
+                        borderWidth: 5,
+                        borderRadius: 10,
                         scales: { y: { beginAtZero: true } }
                     }
                 });

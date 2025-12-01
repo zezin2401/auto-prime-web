@@ -239,7 +239,7 @@
 
         if (params.get('imagem')) {
             const serverImageName = params.get('imagem');
-            renderPreview(`http://10.92.3.210:5000/static/imagens/${encodeURIComponent(serverImageName)}`);
+            renderPreview(`http://10.92.3.165:5000/static/imagens/${encodeURIComponent(serverImageName)}`);
         }
 
         // Clique no texto “aqui para procurar” ou na área de preview
@@ -307,7 +307,7 @@
             }
 
             try {
-                const res = await fetch(`http://10.92.3.210:5000/produto/edit/${id}`, {
+                const res = await fetch(`http://10.92.3.165:5000/produto/edit/${id}`, {
                     method: "PUT",
                     body: formData,
                     headers: { "Authorization": "Bearer " + token }

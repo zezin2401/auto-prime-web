@@ -408,7 +408,7 @@
                 headers.append("Accept", "application/json");
                 if (token) headers.append("Authorization", `Bearer ${token}`);
 
-                const urlBase = "http://10.92.3.210:5000/produtos";
+                const urlBase = "http://10.92.3.165:5000/produtos";
                 const url = busca ? `${urlBase}?q=${encodeURIComponent(busca)}` : urlBase;
 
                 try {
@@ -490,7 +490,7 @@
                     img.className = 'img-produto';
                     img.alt = produto.nome || 'Produto';
                     if (produto.imagem && String(produto.imagem).trim()) {
-                        img.src = `http://10.92.3.210:5000/static/imagens/${produto.imagem}`;
+                        img.src = `http://10.92.3.165:5000/static/imagens/${produto.imagem}`;
                     } else {
                         img.src = 'assets/img/ponta 5.png';
                     }

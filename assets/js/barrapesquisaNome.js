@@ -1,5 +1,5 @@
 (() => {
-    const BASE = "http://10.92.3.210:5000";
+    const BASE = "http://10.92.3.165:5000";
     const inputSelector = ".barra-pesquisar";
     const minChars = 2;
     const debounceMs = 350;

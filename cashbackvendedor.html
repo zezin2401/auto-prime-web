@@ -4,7 +4,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciar Cashback</title>
+    <title>Seu Cashback</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
@@ -93,16 +93,6 @@
 <body>
     <header>
         <a href="indexvendedor.html"><img class="logo" src="assets/img/Ariel.png" alt="Logo"></a>
-        <form onsubmit="event.preventDefault(); listarProdutos();">
-            <input class="input-header" id="buscaInput" type="text" placeholder="Buscar na AutoPrime" />
-            <button class="header-btninput" type="submit" style="padding:8px; border:none; cursor:pointer;">
-                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" fill="white" viewBox="0 0 16 16">
-                    <path d="M11.742 10.344a6.5 6.5 0 1 0-1.397 1.398h-.001l3.85 3.85a1 1 0 0 0 
-                    1.415-1.414l-3.85-3.85zm-5.242.656a5 
-                    5 0 1 1 0-10 5 5 0 0 1 0 10z" />
-                </svg>
-            </button>
-        </form>
 
         <a class="avatarheader" href="#" id="avatarToggle"><img src="assets/img/login 3.png" alt="Avatar" /></a>
     </header>
@@ -126,74 +116,8 @@
     </section>
 
     <section class="main">
-        <h1>Gerenciar seu cashback</h1>
-        <div class="cards-container">
 
-            <div class="usuario">
-
-                <div class="icone">
-                    <i class="fa-solid fa-user"></i>
-                </div>
-                <div class="info">
-                    <p>usuario@gmail.com</p>
-                    <h2 class="criado-em">Criado em: 22/09/2025</h2>
-                </div>
-
-            </div>
-
-            <div class="informacoes">
-
-                <div class="usuarios">
-
-                    <div class="info-titulo">
-                        <i class="fa-solid fa-user"></i>
-                        <p>Usuários</p>
-                    </div>
-                    <div class="info-segmento-usuarios">
-                        <p class="numero-info">500</p>
-                        <a class="gerenciar" href="usuarios.html">Gerenciar</a>
-                    </div>
-                </div>
-
-                <div class="usuarios">
-
-                    <div class="info-titulo">
-                        <i class="fa-solid fa-cart-shopping"></i>
-                        <p>Vendas</p>
-                    </div>
-                    <div class="info-segmento-vendas">
-                        <p class="numero-info">400.000</p>
-                        <a class="gerenciar" href="vendas.html">Gerenciar</a>
-                    </div>
-                </div>
-
-                <div class="usuarios">
-
-                    <div class="info-titulo">
-                        <i class="fa-solid fa-bag-shopping"></i>
-                        <p>Produtos</p>
-                    </div>
-                    <div class="info-segmento-produtos">
-                        <p class="numero-info">50.000</p>
-                        <a class="gerenciar" href="produtos.html">Gerenciar</a>
-                    </div>
-                </div>
-
-                <div class="usuarios">
-
-                    <div class="info-titulo">
-                        <i class="fa-solid fa-dollar-sign"></i>
-                        <p>Cashback</p>
-                    </div>
-                    <div class="info-segmento-cashback">
-                        <p class="numero-info">R$600,00</p>
-                        <a class="gerenciar" href="cashback.html">Gerenciar</a>
-                    </div>
-                </div>
-
-            </div>
-
-        </div>
+        <h1>Gerenciar seu cashback e vendas</h1>
 
         <div class="botoes">
 
@@ -210,134 +134,20 @@
         </div>
 
         <div class="div-azul">
-            <h2 class="titulo">Total acumulado</h2>
+            <h2 class="titulo">Seu cashback acumulado</h2>
             <h2 class="capital" id="cashbackValor">R$: 0,00</h2>
 
         </div>
 
-        <div class="graficos-container">
+        <div class="vendedores" id="listaVendas">
 
-            <div class="grafico-pizza">
-                <h3 class="titulo-pizza">Total de cashback acumulado pelos vendedores</h3>
+            <h3 class="titulo-historico">Seu Histórico de Vendas</h3>
 
-                <canvas id="Pizza"></canvas>
-            </div>
-
-            <div class="grafico-coluna">
-                <h3 class="titulo-coluna">Total de cashback acumulado mensalmente</h3>
-
-                <canvas id="Coluna"></canvas>
-            </div>
-
-        </div>
-
-        <div class="vendedores">
-
-            <div class="vendedor-linha">
-
-                <div class="vendedor-detalhes">
-
-                    <div class="icone">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="separacao-nome-info">
-                        <div class="nome">
-                            <p>usuario@gmail.com</p>
-                        </div>
-                        <div class="info-vendedor">
-                            <p class="total"><span class="negrito">Total: </span>R$: 500,00</p>
-
-
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="vendedor-linha">
-
-                <div class="vendedor-detalhes">
-
-                    <div class="icone">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="separacao-nome-info">
-                        <div class="nome">
-                            <p>usuario@gmail.com</p>
-                        </div>
-                        <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
-
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="vendedor-linha">
-
-                <div class="vendedor-detalhes">
-
-                    <div class="icone">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="separacao-nome-info">
-                        <div class="nome">
-                            <p>usuario@gmail.com</p>
-                        </div>
-                        <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
-
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="vendedor-linha">
-
-                <div class="vendedor-detalhes">
-
-                    <div class="icone">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="separacao-nome-info">
-                        <div class="nome">
-                            <p>usuario@gmail.com</p>
-                        </div>
-                        <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
-
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
-
-            <div class="vendedor-linha">
-
-                <div class="vendedor-detalhes">
-
-                    <div class="icone">
-                        <i class="fa-solid fa-user"></i>
-                    </div>
-                    <div class="separacao-nome-info">
-                        <div class="nome">
-                            <p>usuario@gmail.com</p>
-                        </div>
-                        <div class="info-vendedor">
-                            <p class="criado-em"><span class="negrito">Total: </span>R$: 500,00</p>
-
-                        </div>
-                    </div>
-
-                </div>
-
-            </div>
+            <table class="tutorial">
+                <tbody id="tabelaVendas">
+                    <!-- As linhas serão inseridas aqui via innerHTML -->
+                </tbody>
+            </table>
 
         </div>
 
@@ -346,7 +156,16 @@
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
 
-            const resp = await fetch("http://10.92.3.210:5000/cashback/total/68", {
+            const id = localStorage.getItem("id_cadastro");
+
+            const resp = await fetch("http://10.92.3.165:5000/cashback/total/" + id, {
+                method: "GET",
+                headers: {
+                    "Content-Type": "application/json"
+                }
+            })
+
+            const rasp = await fetch("http://10.92.3.165:5000/historico_vendas/" + id, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json"
@@ -355,6 +174,51 @@
 
             const dados = await resp.json();
             console.log(dados);
+
+            const vendas = await rasp.json();
+            console.log(vendas);
+
+            fetch("http://10.92.3.165:5000/historico_vendas/" + id, {
+                method: "GET",})
+                .then(res => res.json())
+                .then(data => {
+                    const historico = data.historico;
+                    const tbody = document.getElementById("tabelaVendas");
+
+                    let html = `
+                            <tr>
+                                <th class="tutorial_id_venda"><p class="id">Cod.</p></th>
+                                <th class="tutorial_data_venda"><p class="data">Data da venda</p></th>
+                                <th class="tutorial_cliente"><p class="nome_cliente">Nome do Cliente</p></th>
+                                <th class="tutorial_produto_comprado"><p class="produto">Produto Comprado</p></th>
+                                <th class="tutorial_quantidade"><p class="qtd">Quantidade</p></th>
+                                <th class="tutorial_valor_total"><p class="total">Subtotal</p></th>
+                            </tr>
+                        `;
+
+                    historico.forEach(venda => {
+
+                        const dataFormatada = new Date(venda.data_venda).toLocaleDateString("pt-BR");
+
+                        const nomeCliente = "Cliente " + venda.id_cliente;
+                        const nomeProduto = "Produto " + venda.id_produto;
+
+                        html += `
+                                <tr>
+                                    <td class="id_venda"><p class="id">#${venda.id_venda}</p></td>
+                                    <td class="data_venda"><p class="data">${dataFormatada}</p></td>
+                                    <td class="cliente"><p class="nome_cliente">${nomeCliente}</p></td>
+                                    <td class="produto_comprado"><p class="produto">${nomeProduto}</p></td>
+                                    <td class="quantidade"><p class="qtd">${venda.quantidade}</p></td>
+                                    <td class="valor_total"><p class="total">R$ ${venda.valor_total.toFixed(2)}</p></td>
+                                </tr>
+                            `;
+                    });
+
+                    tbody.innerHTML = html;
+                })
+                .catch(err => console.error("Erro ao carregar histórico:", err));
+
 
             document.getElementById("cashbackValor").innerText = `R$: ${dados.total_cashback.toFixed(2)}`;
 
