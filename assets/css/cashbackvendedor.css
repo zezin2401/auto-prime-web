@@ -315,6 +315,25 @@ td {
     border-top: 2px solid var(--preto-opaco);
 }
 
+#tutorialHeader tr {
+    background: #008CFF;  
+    color: white;
+}
+
+#tutorialHeader th p {
+    color: white;
+    font-weight: bold;
+}
+
+
+#tabelaVendas tr:nth-child(even) {
+    background: var(--branco);
+}
+
+#tabelaVendas tr:nth-child(odd) {
+    background: var(--azul-claro);
+}
+
 @media (max-width: 1440px) {
     .banner img {
         width: 1290px;

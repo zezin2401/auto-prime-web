@@ -380,13 +380,13 @@ h1 {
     width: 100%;
     height: 100%;
     object-fit: cover;
+    border-radius: 10px;
     display: block;
 }
 
 .div-produtos .produto .detalhes-produto {
     display: flex;
     flex-direction: column;
-    gap: 8px;
 }
 
 .div-produtos .produto .info-produto p {

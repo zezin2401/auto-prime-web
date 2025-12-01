@@ -172,50 +172,35 @@
     </main>
 
     <script>
-        // Seleciona elementos do menu lateral
-        const avatarToggle = document.getElementById('avatarToggle');
-        const sideMenu = document.getElementById('sideMenu');
-        const menuClose = document.getElementById('menuClose');
-
-        avatarToggle.addEventListener('click', function (e) {
-            e.preventDefault();
-            sideMenu.classList.add('active');
-        });
-
-        menuClose.addEventListener('click', function () {
-            sideMenu.classList.remove('active');
-        });
-
-        const logoutBtn = document.getElementById('logoutBtn');
-
-        logoutBtn.addEventListener('click', function (e) {
-            e.preventDefault();
-
-            Swal.fire({
-                icon: 'success',
-                title: 'Logout realizado!',
-                text: 'Você será redirecionado para a página de login.',
-                confirmButtonText: 'Ok'
-            }).then(() => {
-                window.location.href = 'login.html';
-            });
-        });
-    </script>
-
-    <script>
         document.addEventListener('DOMContentLoaded', function () {
-            // helpers
-            function qs(name) { return new URLSearchParams(window.location.search).get(name); }
+
+            // Helpers ---------------------------------------
+            function qs(name) {
+                return new URLSearchParams(window.location.search).get(name);
+            }
+
             function getEmailCliente() {
-                const possibleKeys = ['email', 'email_cliente', 'usuario_email', 'userEmail'];
-                for (const k of possibleKeys) {
+                // tenta JSON salvo
+                const json = localStorage.getItem("dadosUsuario");
+                if (json) {
+                    try {
+                        const obj = JSON.parse(json);
+                        if (obj.email) return obj.email;
+                        if (obj.email_cliente) return obj.email_cliente;
+                    } catch (e) { }
+                }
+
+                // tenta chaves diretas
+                const keys = ['email', 'email_cliente', 'usuario_email', 'userEmail'];
+                for (const k of keys) {
                     const v = localStorage.getItem(k);
                     if (v) return v;
                 }
-                return 'cliente@gmail.com';
+
+                return null; // se não tiver login salvo
             }
 
-            // elementos da página
+            // Elementos ---------------------------------------
             const elNome = document.getElementById('produto-nome');
             const elPreco = document.getElementById('produto-preco');
             const elDescricao = document.getElementById('produto-descricao');
@@ -225,7 +210,7 @@
             const btnComprar = document.querySelector('.botao-compra');
             const qtdNumEl = document.querySelector('.quantidade .numero');
 
-            // pega dados da URL (setados pelo index)
+            // Dados da URL (vindos do index) ------------------
             const params = new URLSearchParams(window.location.search);
             const produtoFromParams = {
                 id: params.get('id') || '',
@@ -237,78 +222,65 @@
                 imagem: params.get('imagem') || ''
             };
 
-            // popula com os params (se houver)
+            // Preenche a página --------------------------------
             if (elNome) elNome.textContent = produtoFromParams.nome || 'Produto';
             if (elDescricao) elDescricao.textContent = produtoFromParams.descricao || 'Sem descrição';
             if (elAcabamento) elAcabamento.textContent = produtoFromParams.acabamento || '-';
+
             if (elPreco) {
                 let p = produtoFromParams.preco || '0,00';
                 if (!p.includes(',')) p = String(p).replace('.', ',');
                 elPreco.textContent = p;
             }
+
             if (elImagem) {
                 if (produtoFromParams.imagem) {
-                    // se imagem for só filename, monta URL do servidor, senão usa como veio
                     if (!/^https?:\/\//i.test(produtoFromParams.imagem)) {
                         elImagem.src = `http://10.92.3.165:5000/static/imagens/${produtoFromParams.imagem}`;
                     } else {
                         elImagem.src = produtoFromParams.imagem;
                     }
                 } else {
-                    // fallback
                     elImagem.src = 'assets/img/placeholder.png';
                 }
             }
 
-            // opcional: buscar dados atualizados do servidor por id (descomente se quiser)
-            async function fetchProdutoPorId(id) {
-                if (!id) return;
-                try {
-                    const resp = await fetch(`http://10.92.3.165:5000/produtos/${encodeURIComponent(id)}`);
-                    if (!resp.ok) throw new Error('Produto não encontrado');
-                    const data = await resp.json();
-                    // adapta conforme formato da sua API
-                    const p = data.produto || data || (Array.isArray(data) ? data[0] : null);
-                    if (!p) return;
-                    if (elNome && (p.nome || p.title)) elNome.textContent = p.nome || p.title;
-                    if (elDescricao && (p.descricao || p.description)) elDescricao.textContent = p.descricao || p.description;
-                    if (elAcabamento && (p.acabamento || p.finish)) elAcabamento.textContent = p.acabamento || p.finish;
-                    if (elPreco && (p.preco || p.valor || p.price)) {
-                        let v = p.preco ?? p.valor ?? p.price;
-                        if (typeof v === 'number') v = v.toFixed(2).replace('.', ',');
-                        elPreco.textContent = String(v);
-                    }
-                    if (elImagem && (p.imagem || p.image || p.foto)) {
-                        const img = p.imagem || p.image || p.foto;
-                        elImagem.src = /^https?:\/\//i.test(img) ? img : `http://10.92.3.165:5000/static/imagens/${img}`;
-                    }
-                    if (elVendedor && (p.vendedor || p.vendedor_nome || p.seller)) {
-                        elVendedor.textContent = p.vendedor || p.vendedor_nome || p.seller;
-                    }
-                } catch (err) {
-                    console.warn('Não foi possível buscar produto por id:', err);
-                }
+            // Controle de quantidade ----------------------------
+            let quantidade = parseInt(qtdNumEl?.textContent) || 1;
+
+            function atualizaDisplayQtd() {
+                if (qtdNumEl) qtdNumEl.textContent = quantidade;
             }
 
-            // se quiser buscar do servidor, descomente a linha abaixo:
-            // fetchProdutoPorId(produtoFromParams.id);
+            document.querySelector('.quantidade .add').addEventListener('click', () => {
+                quantidade++;
+                atualizaDisplayQtd();
+            });
 
-            // controla quantidade
-            let quantidade = parseInt(qtdNumEl?.textContent) || 1;
-            function atualizaDisplayQtd() { if (qtdNumEl) qtdNumEl.textContent = quantidade; }
-            document.querySelectorAll('.quantidade .add').forEach(btn => btn.addEventListener('click', () => { quantidade++; atualizaDisplayQtd(); }));
-            document.querySelectorAll('.quantidade .menos').forEach(btn => btn.addEventListener('click', () => { if (quantidade > 1) quantidade--; atualizaDisplayQtd(); }));
+            document.querySelector('.quantidade .menos').addEventListener('click', () => {
+                if (quantidade > 1) quantidade--;
+                atualizaDisplayQtd();
+            });
 
-            // Adicionar ao carrinho - usa o POST do Postman
-            <!-- Substitua o listener antigo por este -->
+            // Adicionar ao carrinho ------------------------------
             if (btnComprar) {
                 btnComprar.addEventListener('click', async function (e) {
                     e.preventDefault();
+
+                    const emailCliente = getEmailCliente();
+                    if (!emailCliente) {
+                        await Swal.fire({
+                            icon: 'error',
+                            title: 'Nenhum usuário logado',
+                            text: 'Faça login antes de adicionar ao carrinho.',
+                        });
+                        return;
+                    }
+
                     btnComprar.disabled = true;
                     const originalText = btnComprar.innerHTML;
                     btnComprar.innerHTML = 'Adicionando...';
 
-                    const emailCliente = getEmailCliente();
                     const idProduto = produtoFromParams.id || btnComprar.getAttribute('data-id-produto') || 0;
 
                     const body = {
@@ -321,19 +293,16 @@
                         const resp = await fetch("http://10.92.3.165:5000/carrinho/adicionar", {
                             method: "POST",
                             headers: { "Content-Type": "application/json" },
-                            body: JSON.stringify(body),
-                            redirect: 'follow'
+                            body: JSON.stringify(body)
                         });
 
                         const data = await resp.json();
 
                         if (resp.ok) {
-                            try { Swal.close(); } catch (e) { /* ignore */ }
-
                             await Swal.fire({
                                 icon: 'success',
                                 title: 'Adicionado ao carrinho',
-                                text: data.mensagem || 'Produto adicionado com sucesso.',
+                                text: data.mensagem || 'Produto adicionado!',
                                 confirmButtonText: 'Ir para o carrinho'
                             });
 
@@ -343,20 +312,16 @@
                             await Swal.fire({
                                 icon: 'error',
                                 title: 'Erro ao adicionar',
-                                text: data?.mensagem || `Status ${resp.status}`,
-                                confirmButtonText: 'Ok'
+                                text: data.erro || data.mensagem || 'Falha inesperada.'
                             });
                         }
                     } catch (err) {
-                        console.error('Erro ao adicionar:', err);
                         await Swal.fire({
                             icon: 'error',
-                            title: 'Falha',
-                            text: 'Não foi possível conectar ao servidor.',
-                            confirmButtonText: 'Ok'
+                            title: 'Erro',
+                            text: 'Não foi possível conectar ao servidor.'
                         });
                     } finally {
-                        // caso permaneça na página por algum motivo, reabilita o botão
                         btnComprar.disabled = false;
                         btnComprar.innerHTML = originalText;
                     }
@@ -364,8 +329,6 @@
             }
         });
     </script>
-
-    <!-- === FIM DO SCRIPT DE INTEGRAÇÃO === -->
 
 </body>
 

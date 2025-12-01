@@ -155,76 +155,110 @@
 
     <script>
         document.addEventListener("DOMContentLoaded", async () => {
+            const BASE = "http://10.92.3.165:5000";
 
-            const id = localStorage.getItem("id_cadastro");
+            // pega id do vendedor/usuário
+            const id = localStorage.getItem("id_cadastro") ||
+                localStorage.getItem("id_vendedor") ||
+                "50";
 
-            const resp = await fetch("http://10.92.3.165:5000/cashback/total/" + id, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
+            /* ================= CASHBACK ================= */
+            try {
+                const resp = await fetch(`${BASE}/cashback/total/${id}`);
+                const dados = await resp.json();
 
-            const rasp = await fetch("http://10.92.3.165:5000/historico_vendas/" + id, {
-                method: "GET",
-                headers: {
-                    "Content-Type": "application/json"
-                }
-            })
+                document.getElementById("cashbackValor").innerText =
+                    `R$: ${dados.total_cashback.toFixed(2)}`;
+            } catch (e) {
+                console.error("Erro ao pegar cashback:", e);
+                document.getElementById("cashbackValor").innerText = "Erro";
+            }
 
-            const dados = await resp.json();
-            console.log(dados);
+            /* ============= FUNÇÕES AUXILIARES ============= */
+            function esc(s = "") {
+                return String(s === null || s === undefined ? "" : s)
+                    .replaceAll("&", "&amp;")
+                    .replaceAll("<", "&lt;")
+                    .replaceAll(">", "&gt;")
+                    .replaceAll('"', "&quot;")
+                    .replaceAll("'", "&#039;");
+            }
 
-            const vendas = await rasp.json();
-            console.log(vendas);
-
-            fetch("http://10.92.3.165:5000/historico_vendas/" + id, {
-                method: "GET",})
-                .then(res => res.json())
-                .then(data => {
-                    const historico = data.historico;
-                    const tbody = document.getElementById("tabelaVendas");
-
-                    let html = `
-                            <tr>
-                                <th class="tutorial_id_venda"><p class="id">Cod.</p></th>
-                                <th class="tutorial_data_venda"><p class="data">Data da venda</p></th>
-                                <th class="tutorial_cliente"><p class="nome_cliente">Nome do Cliente</p></th>
-                                <th class="tutorial_produto_comprado"><p class="produto">Produto Comprado</p></th>
-                                <th class="tutorial_quantidade"><p class="qtd">Quantidade</p></th>
-                                <th class="tutorial_valor_total"><p class="total">Subtotal</p></th>
-                            </tr>
-                        `;
-
-                    historico.forEach(venda => {
-
-                        const dataFormatada = new Date(venda.data_venda).toLocaleDateString("pt-BR");
-
-                        const nomeCliente = "Cliente " + venda.id_cliente;
-                        const nomeProduto = "Produto " + venda.id_produto;
-
-                        html += `
-                                <tr>
-                                    <td class="id_venda"><p class="id">#${venda.id_venda}</p></td>
-                                    <td class="data_venda"><p class="data">${dataFormatada}</p></td>
-                                    <td class="cliente"><p class="nome_cliente">${nomeCliente}</p></td>
-                                    <td class="produto_comprado"><p class="produto">${nomeProduto}</p></td>
-                                    <td class="quantidade"><p class="qtd">${venda.quantidade}</p></td>
-                                    <td class="valor_total"><p class="total">R$ ${venda.valor_total.toFixed(2)}</p></td>
-                                </tr>
-                            `;
+            function fmtDate(iso) {
+                try {
+                    const d = new Date(iso);
+                    if (isNaN(d)) return esc(iso);
+                    return d.toLocaleString("pt-BR", {
+                        day: "2-digit",
+                        month: "2-digit",
+                        year: "numeric",
+                        hour: "2-digit",
+                        minute: "2-digit"
                     });
+                } catch (e) {
+                    return esc(String(iso));
+                }
+            }
 
-                    tbody.innerHTML = html;
-                })
-                .catch(err => console.error("Erro ao carregar histórico:", err));
+            function fmtMoney(n) {
+                const v = Number(n || 0);
+                return v.toLocaleString("pt-BR", {
+                    style: "currency",
+                    currency: "BRL"
+                });
+            }
 
+            /* =========== HISTÓRICO DE VENDAS (VERSÃO CORRETA) =========== */
+            try {
+                const res = await fetch(`${BASE}/historico_vendas/${id}`);
+                const data = await res.json();
 
-            document.getElementById("cashbackValor").innerText = `R$: ${dados.total_cashback.toFixed(2)}`;
+                const historico = Array.isArray(data.historico) ? data.historico : [];
 
+                const tbody = document.getElementById("tabelaVendas");
+
+                let html = `
+            <tr>
+                <th class="tutorial_id_venda"><p class="id">Cod.</p></th>
+                <th class="tutorial_data_venda"><p class="data">Data da venda</p></th>
+                <th class="tutorial_cliente"><p class="nome_cliente">Nome do Cliente</p></th>
+                <th class="tutorial_produto_comprado"><p class="produto">Produto Comprado</p></th>
+                <th class="tutorial_quantidade"><p class="qtd">Quantidade</p></th>
+                <th class="tutorial_valor_total"><p class="total">Subtotal</p></th>
+            </tr>
+        `;
+
+                if (historico.length === 0) {
+                    html += `
+                <tr>
+                    <td colspan="6" style="padding:12px;text-align:center;color:#666">
+                        Nenhuma venda encontrada.
+                    </td>
+                </tr>
+            `;
+                } else {
+                    historico.forEach(v => {
+                        html += `
+                    <tr>
+                        <td class="id_venda"><p class="id">#${esc(v.id_venda)}</p></td>
+                        <td class="data_venda"><p class="data">${fmtDate(v.data_venda)}</p></td>
+                        <td class="cliente"><p class="nome_cliente">${esc(v.nome_cliente ?? "Cliente " + v.id_cliente)}</p></td>
+                        <td class="produto_comprado"><p class="produto">${esc(v.nome_produto ?? "Produto " + v.id_produto)}</p></td>
+                        <td class="quantidade"><p class="qtd">${esc(v.quantidade)}</p></td>
+                        <td class="valor_total"><p class="total">${fmtMoney(v.valor_total)}</p></td>
+                    </tr>
+                `;
+                    });
+                }
+
+                tbody.innerHTML = html;
+            } catch (err) {
+                console.error("Erro ao carregar histórico:", err);
+                document.getElementById("tabelaVendas").innerHTML =
+                    `<tr><td colspan="6" style="padding:12px;color:#c00">Erro ao carregar histórico.</td></tr>`;
+            }
         });
     </script>
-
 </body>
 
 </html>

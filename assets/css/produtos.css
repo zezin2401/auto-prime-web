@@ -342,6 +342,7 @@ h1 {
 }
 
 .preco-titulo {
+    font-weight: bold;
     font-size: 20px;
 }
 
@@ -430,7 +431,7 @@ h1 {
     font-family: "Poppins", sans-serif;
     font-weight: bold;
     font-size: 25px;
-    width: 190px;
+    width: 215px;
     cursor: pointer;
     text-decoration: none;
     display: flex;
